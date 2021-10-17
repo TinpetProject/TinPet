@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  db:
+    build: 
+      context: database_service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data: {}
