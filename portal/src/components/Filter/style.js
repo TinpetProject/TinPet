@@ -13,7 +13,7 @@ export const FilterList = styled.ul`
   list-style: none;
   border: 1px solid #ccc;
   border-radius: 8px;
-  ${"" /* overflow: hidden; */}
+  z-index: 10;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 20px;

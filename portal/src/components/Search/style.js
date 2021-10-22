@@ -5,7 +5,7 @@ export const SearchWrapper = styled.div`
   align-items: center;
   width: 675px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid #ccc;
   margin: auto;
   position: relative;
