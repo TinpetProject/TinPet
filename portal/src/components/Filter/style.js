@@ -42,10 +42,9 @@ export const FilterItem = styled.li`
 export const FilterWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 300px;
+  width: 120px;
   position: relative;
   cursor: pointer;
-  border-left: 1px solid #ccc;
   &::after {
     content: "";
     position: absolute;
@@ -66,7 +65,7 @@ export const IconWrapper2 = styled.div`
 `;
 export const FilterTitle = styled.div`
   line-height: 28px;
-  font-size: 20px;
+  font-size: 16px;
   padding-left: 16px;
   color: #555;
 `;

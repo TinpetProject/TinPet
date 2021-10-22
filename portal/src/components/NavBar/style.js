@@ -13,7 +13,7 @@ export const NavBarWrapper = styled.nav`
 
 export const LogoWrapper = styled.div`
   width: 250px;
-  font-size: 40px;
+  font-size: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,6 +26,7 @@ export const LogoWrapper = styled.div`
 
 export const AppTitle = styled.div`
   margin: 8px;
+  font-weight: 700;
 `;
 
 export const UserWrapper = styled.div`

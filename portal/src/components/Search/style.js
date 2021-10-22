@@ -9,6 +9,7 @@ export const SearchWrapper = styled.div`
   border: 1px solid #ccc;
   margin: auto;
   position: relative;
+  background-color: #efefef;
 `;
 
 export const IconWrapper1 = styled.div`
@@ -22,13 +23,14 @@ export const InputSearch = styled.input`
   border: none;
   outline: none;
   width: 100%;
+  background-color: #efefef;
   margin-left: 40px;
   margin-right: 16px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 20px;
   &::placeholder {
-    color: #ccc;
+    color: #555;
     font-size: 16px;
   }
 `;

@@ -7,7 +7,7 @@ const Search = () => {
   return (
     <SearchWrapper>
       <IconWrapper1>
-        <SearchIcon></SearchIcon>
+        <SearchIcon sx={{ opacity: 0.5 }}></SearchIcon>
       </IconWrapper1>
       <InputSearch
         placeholder="Search things"

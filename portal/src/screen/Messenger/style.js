@@ -5,10 +5,10 @@ export const ChatWrapper = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  top: 40px;
-  left: 40px;
-  right: 40px;
-  bottom: 40px;
+  top: 30px;
+  left: 30px;
+  right: 0;
+  bottom: 30px;
 `;
 
 // Chat window screen
@@ -16,7 +16,7 @@ export const ChatWindowWrapper = styled.div`
   background-color: #fff;
   border-radius: 15px;
   height: 100%;
-  width: 1200px;
+  width: 840px;
   position: relative;
 `;
 
@@ -26,7 +26,56 @@ export const ChatBar = styled.div`
   border-radius: 15px;
   background-color: #fff;
   height: 100%;
-  width: 320px;
+  width: 280px;
+`;
+
+export const ChatBarStatus = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const ChatBarStatusTitle = styled.div`
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #000;
+`;
+
+export const ChatBarList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+export const ChatBarItem = styled.li`
+  display: flex;
+  align-items: center;
+`;
+
+export const ChatBarItemAvatar = styled.div`
+  width: 40px;
+  height: 40px;
+`;
+
+export const ChatBarItemContent = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const ChatBarItemUser = styled.div`
+  font-size: 12px;
+  font-weight: 700;
+`;
+
+export const ChatBarItemMessage = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 400;
+`;
+
+export const ChatBarItemUnread = styled.div`
+  opacity: 0.5;
 `;
 
 // Input Bar
@@ -69,6 +118,7 @@ export const ChatWindow = styled.div`
   position: absolute;
   bottom: 76px;
   right: 20px;
+  left: 20px;
 `;
 
 // Messages from one user at a time
@@ -93,10 +143,10 @@ export const ChatMessage = styled.div`
   padding: 10px 12px;
   border-radius: 8px;
   margin-top: 10px;
+  color: #373737;
 `;
 
 // Chat User
 export const ChatUser = styled.div`
-  padding: 0 8px;
-  margin-left: 8px;
+  margin-left: 12px;
 `;

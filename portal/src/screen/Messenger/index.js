@@ -11,6 +11,12 @@ import {
   ChatUser,
   ChatBox,
   ChatWindow,
+  ChatBarStatus,
+  ChatBarStatusTitle,
+  ChatBarList,
+  ChatBarItem,
+  ChatBarItemAvatar,
+  ChatBarItemContent,
 } from "./style";
 import SendIcon from "@mui/icons-material/Send";
 import { Avatar } from "@mui/material";
@@ -35,7 +41,7 @@ const Messenger = () => {
               <ChatMessage>T la Phuong</ChatMessage>
               <ChatMessage>T la thang ngu</ChatMessage>
             </ChatBox>
-            <ChatUser>
+            <ChatUser style={{ marginLeft: 0, marginRight: 12 }}>
               <Avatar
                 alt="corgi"
                 src="https://media.travelmag.vn/files/quyensok/2021/02/19/151744159_1858284524329401_8015280447006743040_n-1629.jpg"
@@ -63,7 +69,20 @@ const Messenger = () => {
           </IconWrapper>
         </ChatInputWrapper>
       </ChatWindowWrapper>
-      <ChatBar></ChatBar>
+      <ChatBar>
+        <ChatBarStatus>
+          <ChatBarStatusTitle>Recent</ChatBarStatusTitle>
+          <ChatBarStatusTitle>Request</ChatBarStatusTitle>
+        </ChatBarStatus>
+        <ChatBarList>
+          <ChatBarItem>
+            <ChatBarItemAvatar>
+              <Avatar />
+            </ChatBarItemAvatar>
+            <ChatBarItemContent></ChatBarItemContent>
+          </ChatBarItem>
+        </ChatBarList>
+      </ChatBar>
     </ChatWrapper>
   );
 };
