@@ -13,7 +13,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/auth", authRoute); /auth/sign-up/abc
+app.use("/auth", authRoute);
 
 app.use((error, req, res, next) => {
   res.status(error.errorCode);
