@@ -11,7 +11,8 @@ RUN npm install
 
 COPY . /app
 
-RUN npm start
+# RUN npm start
+CMD ["npm", "start"]
 
 # # Stage 2: Run app with nginx
 # FROM nginx:1.17.1-alpine
