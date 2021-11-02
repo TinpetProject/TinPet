@@ -1,5 +1,5 @@
 const database = require("../util/database");
-const HttpError = require("../models/http-error");
+const HttpError = require("./http-error.js");
 const { isJSONType } = require("ajv/dist/compile/rules");
 module.exports = {
   validateEmail: async (email) => {

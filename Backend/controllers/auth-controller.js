@@ -2,7 +2,7 @@ const signUpSchema = require("../schemas/sign-up");
 const signInSchema = require("../schemas/sign-in");
 const User = require("../models/user");
 const authentication = require("../models/authentication");
-const HttpError = require("../models/http-error");
+const HttpError = require("../models/http-error.js");
 
 module.exports = {
   signUp: async (req, res, next) => {
