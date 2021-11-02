@@ -1,18 +1,25 @@
+const HttpError = require("../models/http-error");
+
 module.exports = {
-  tryCatchBlock: (validateFunc, next) => {
-    return (reqBody, controller) => {
-      const validRequest = validateFunc(req.body);
-      if (!validRequest) return next(new HttpError("GET_PROFILE_INVALID_SCHEMA", 400));
-
+  tryCatchBlockForModule: (passInFunc) => {
+    return async (...args) => {
       try {
-        const validUserId = await User.validateUserId(req.body.userId);
-        if (!validUserId) return next(new HttpError("GET_PROFILE_NOT_EXIST", 404));
-
-        const userProfile = await User.getProfile(req.body.userId);
-        console.log(userProfile);
-        return res.status(200).send({ message: "GET_PROFILE_SUCCESS", data: userProfile });
+        return await passInFunc(...args);
       } catch (error) {
-        next(error);
+        console.log("Error in tryCatchBlockForModule:::", error);
+        throw error;
+      }
+    };
+  },
+  tryCatchBlockForController: (validator, passInFunc) => {
+    return async (req, res, next) => {
+      const validRequest = validator(req.body);
+      if (!validRequest) return next(new HttpError("REQUEST_FAIL_INVALID_SCHEMA", 400));
+      try {
+        return await passInFunc(req, res, next);
+      } catch (error) {
+        console.log("Error in tryCatchBlockForController:::", error);
+        return next(new HttpError("SERVER_INTERNAL_ERROR", 500));
       }
     };
   },
