@@ -10,12 +10,15 @@
 // comment => socket.io
 // like => socket.io
 // edit => api
+// addfriend =>api
+// thả tim => api
 
 // trí authen - chat
 // chat => socket.io
 // signup,in - done
+// resetPassword => api
 
-??? - setting 
+??? - setting
 // navbar =>api by time clicking
 // quả chuông => socket.io
 // setting =>api

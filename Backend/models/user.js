@@ -1,36 +1,32 @@
 const database = require("../util/database");
+const tryCatchBlock = require("../util/function").tryCatchBlockForModule;
 const HttpError = require("../models/http-error");
-const { isJSONType } = require("ajv/dist/compile/rules");
-module.exports = {
-  validateEmail: async (email) => {
-    try {
-      const result = await database.execute(`SELECT * from User WHERE email LIKE '${email}'`);
-      return result[0].length === 0 ? true : false;
-    } catch (error) {
-      console.log("Error in User.signUp:::", error);
-      throw new HttpError("SERVER_INTERNAL_ERROR", 500);
-    }
-  },
-  signUp: async (email, password, name) => {
-    try {
-      await database.execute(
-        `INSERT INTO User(userId,email,password,name) VALUES(uuid(),'${email}','${password}','${name}')`
-      );
-    } catch (error) {
-      console.log("Error in User.signUp:::", error);
-      throw new HttpError("SERVER_INTERNAL_ERROR", 500);
-    }
-  },
-  signIn: async (email, password) => {
-    try {
-      const result = await database.execute(
-        `SELECT * from User WHERE email LIKE '${email}' AND password LIKE '${password}'`
-      );
 
-      return result[0].length === 0 ? null : result[0][0];
-    } catch (error) {
-      console.log("Error in User.signIn:::", error);
-      throw new HttpError("SERVER_INTERNAL_ERROR", 500);
-    }
-  },
+module.exports = {
+  validateEmail: tryCatchBlock(async (email) => {
+    const [resultSet] = await database.execute(`SELECT * from User WHERE email LIKE '${email}'`);
+    return resultSet.length === 0 ? true : false;
+  }),
+
+  validateUserId: tryCatchBlock(async (userId) => {
+    const [resultSet] = await database.execute(`SELECT * from User WHERE userId LIKE '${userId}'`);
+    return resultSet.length === 1 ? true : false;
+  }),
+
+  getUserIdByEmail: tryCatchBlock(async (email) => {
+    const [resultSet] = await database.execute(`SELECT userId from User WHERE email LIKE '${email}'`);
+    return resultSet.length === 1 ? resultSet[0].userId : null;
+  }),
+
+  signUp: tryCatchBlock(async (email, password, name) => {
+    await database.execute(`INSERT INTO User(userId,email,password,name,status) VALUES(uuid(),'${email}','${password}','${name}',0)`);
+  }),
+
+  signIn: tryCatchBlock(async (email, password) => {
+    const [resultSet] = await database.execute(`SELECT * FROM User WHERE email LIKE '${email}' AND password LIKE '${password}'`);
+    return resultSet.length === 0 ? null : { userId: resultSet[0].userID, avatar: resultSet[0].avatar };
+  }),
+  changePassword: tryCatchBlock(async (userId, password) => {
+    await database.execute(`UPDATE User SET password = '${password}' WHERE userId LIKE '${userId}'`);
+  }),
 };
