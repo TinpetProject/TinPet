@@ -19,3 +19,6 @@
 // navbar =>api by time clicking
 // quả chuông => socket.io
 // setting =>api
+
+
+Dùng lệnh npx sequelize-cli db:migrate để khởi chạy command tạo db
