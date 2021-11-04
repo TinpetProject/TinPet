@@ -23,4 +23,12 @@ code {
 html,
 body {
   font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
 }
+
+:root{
+    --main-bg-color: #efefef;
+    --main-content-color: #fff;
+}
+
+

@@ -1,0 +1,142 @@
+:root {
+    --content-bg-color: #fff;
+    --white-text-color: #fff;
+    --black-text-color: #373737;
+    --main-bg-color: #efefef;
+    --on-status-color: #59EB68;
+    --off-status-color: #9d9d9d;
+    --liked-heart-color: #FB6D6C;
+    --basic-icon-color: #aeaeae;
+}
+
+.card {
+    height: 344px;
+    width: 258px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    position: relative;
+
+}
+
+.card:nth-child(1){
+    margin-top: 20px;
+}
+
+.card:nth-child(2){
+    margin-top: 20px;
+}
+
+.card:nth-child(3){
+    margin-top: 20px;
+}
+
+.card__bg-img img{
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.card__bg-img {
+    z-index: 0;
+}
+
+.card__match {
+    height: 26px;
+    inset:  15px 0px 0px 15px;/* top right bottom left */
+    position: absolute;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(93.14deg, #FF7854 -3.57%, #FF23A5 173.23%);
+    z-index: 3;
+    border-radius: 8px;
+    padding: 0px 10px;
+    padding-bottom: 2px;
+}
+
+.card__match span {
+    font-size: 1rem;
+    color: var(--white-text-color);
+    line-height: 1rem;
+    font-weight: 600;
+}
+
+.card__info {
+    background: rgba(245, 245, 245, 0.8);
+    width: 228px;
+    height: 66px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 15px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.info__heart-btn {
+    position: absolute;
+    right: 10px;
+    top: 4px;
+    font-size: 30px;
+    color: var(--basic-icon-color);
+}
+
+.info__heart-btn:hover {
+    font-size: 34px;
+    transition: 0.1s;
+    transform: translate(2px, -2px);
+    color: var(--black-text-color);
+}
+
+.info__plus-btn {
+    position: absolute;
+    right: 13px;
+    bottom: 7px;
+    font-size: 24px;
+    color: var(--basic-icon-color);
+}
+
+.info__plus-btn:hover {
+    font-size: 28px;
+    transition: 0.1s;
+    transform: translate(2px, 1px);
+    color: var(--black-text-color);
+}
+
+.info__general {
+    position: absolute;
+    top: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.general__status-icon {
+    color: var(--on-status-color);
+    font-size: 1.1rem;
+    margin-top: 3px;
+    transform: translateY(-2px);
+}
+
+.info__location {
+    position: absolute;
+    bottom: 8px;
+    display: flex;
+    align-items: center;
+    transform: translateX(-7px);
+}
+
+.location__location-icon {
+    font-size: 1.5rem;
+}
+
+.info__general span{
+    margin-right: 8px;
+}
+
+.info__heart-btn-liked {
+    color: var(--liked-heart-color);
+}
+
