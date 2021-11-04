@@ -5,20 +5,20 @@ import Messenger from "./screen/Messenger";
 import Login from "./screen/Login";
 
 function App() {
-  return (
-    <>
-      <HomePage>
-        {/* <NavBar />
-        <ContentWrapper>
-          <SideBar />
-          <Content>
-            <Messenger />
-          </Content>
-        </ContentWrapper> */}
-        <Login />
-      </HomePage>
-    </>
-  );
+    return (
+        <>
+            <HomePage>
+                <NavBar />
+                <ContentWrapper>
+                    <SideBar />
+                    <Content>{/* <Messenger /> */}</Content>
+                </ContentWrapper>
+                {/* <Login /> */}
+
+                {/* Chua lam router an db ha tri ???*/}
+            </HomePage>
+        </>
+    );
 }
 
 export default App;
