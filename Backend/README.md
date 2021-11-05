@@ -10,15 +10,21 @@
 // comment => socket.io
 // like => socket.io
 // edit => api
+// addfriend =>api
+// thả tim => api
 
 // trí authen - chat
 // chat => socket.io
 // signup,in - done
+// resetPassword => api
 
-??? - setting 
+??? - setting
 // navbar =>api by time clicking
 // quả chuông => socket.io
 // setting =>api
+<<<<<<< HEAD
 
 
 Dùng lệnh npx sequelize-cli db:migrate để khởi chạy command tạo db
+=======
+>>>>>>> 689a9106b11758fc3d5585c247e28da2c69a1b8e

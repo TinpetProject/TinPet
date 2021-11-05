@@ -18,6 +18,14 @@ code {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+<<<<<<< HEAD
+=======
+}
+
+html,
+body {
+  font-family: "Source Sans Pro", sans-serif;
+>>>>>>> 689a9106b11758fc3d5585c247e28da2c69a1b8e
 }
 
 html,
