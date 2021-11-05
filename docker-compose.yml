@@ -8,6 +8,20 @@ services:
     restart: unless-stopped
     volumes:
       - db-data:/var/lib/mysql
+  fe:
+    build:
+      context: portal
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8888:3000"
+  be:
+    build:
+      context: Backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8889:3000"
 
 volumes:
   db-data: {}

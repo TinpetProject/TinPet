@@ -4,7 +4,7 @@ FROM mariadb:latest
 ENV MYSQL_DATABASE="Tinpet" \
     MYSQL_ROOT_PASSWORD="p" \
     MYSQL_USER="mysql_client" \
-    MYSQL_PASSWORD="p" \
+    MYSQL_PASSWORD="" \
     LANG=C.UTF-8
 
 # run all the script at the boosting up of the container
