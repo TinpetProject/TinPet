@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
     albumID: DataTypes.UUID,
     userID: DataTypes.UUID,
     name: DataTypes.STRING,
-    date: DataTypes.DATE
   }, {freezeTableName: true});
   Album.associate = function(models) {
     // associations can be defined here

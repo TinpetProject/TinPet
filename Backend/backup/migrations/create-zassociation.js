@@ -349,6 +349,26 @@ module.exports = {
       },
       onDelete: 'cascade',
     })
+    await queryInterface.addConstraint('PetFavorite',{
+      fields: ['petID'],
+      type: 'foreign key',
+      name: 'PetFavorite_Pet_FK',
+      references:{
+        table: 'Pet',
+        field: 'petID',
+      },
+      onDelete: 'cascade',
+    })
+    await queryInterface.addConstraint('PetFavorite',{
+      fields: ['favoriteID'],
+      type: 'foreign key',
+      name: 'PetFavorite_Favorite_FK',
+      references:{
+        table: 'Favorite',
+        field: 'favoriteID',
+      },
+      onDelete: 'cascade',
+    })
   },
 
   down: async (queryInterface, Sequelize) => {
