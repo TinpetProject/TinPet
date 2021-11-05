@@ -1,9 +1,6 @@
 import styled from "styled-components";
-import Grid from "@mui/material/Grid";
 // Folder style-component dùng tạm thời để test các component
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
 
 // Button
 export const ButtonRoot = styled.button`

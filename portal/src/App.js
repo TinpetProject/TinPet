@@ -2,7 +2,7 @@ import { HomePage, ContentWrapper, Content } from "./styled-component/style";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
 import Messenger from "./screen/Messenger";
-import Login from "./screen/Login";
+import AuthenticationForm from "./screen/AuthenticationForm";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
             <Messenger />
           </Content>
         </ContentWrapper> */}
-        <Login />
+        <AuthenticationForm />
       </HomePage>
     </>
   );
