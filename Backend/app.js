@@ -1,10 +1,13 @@
 const express = require("express");
 const authRoute = require("./routes/auth-router");
+
+const sequelize = require("./config/connectDB");
 require("dotenv").config();
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -19,5 +22,6 @@ app.use((error, req, res, next) => {
   res.status(error.errorCode);
   res.json({ message: error.message });
 });
-
-app.listen(process.env.LISTENING_PORT || 3000);
+sequelize.sync().then(()=>{
+  app.listen(process.env.LISTENING_PORT || 3000);
+})

@@ -3,11 +3,16 @@ const signInSchema = require("../schemas/sign-in");
 const getResetPasswordLinkSchema = require("../schemas/get-reset-password-link");
 const resetPasswordSchema = require("../schemas/reset-password");
 const User = require("../models/user");
+<<<<<<< HEAD
 const Authentication = require("../models/authentication");
 const nodemailer = require("nodemailer");
 const tryCatchBlock = require("../util/function").tryCatchBlockForController;
 const HttpError = require("../models/http-error");
 const { validateResetPwToken } = require("../models/authentication");
+=======
+const authentication = require("../models/authentication");
+const HttpError = require("../models/http-error.js");
+>>>>>>> e971ced26dae8e3e6f55b65484f43908df05f226
 
 module.exports = {
   signUp: tryCatchBlock(signUpSchema, async (req, res, next) => {

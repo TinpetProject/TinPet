@@ -1,7 +1,12 @@
 const database = require("../util/database");
+<<<<<<< HEAD
 const tryCatchBlock = require("../util/function").tryCatchBlockForModule;
 const HttpError = require("../models/http-error");
 
+=======
+const HttpError = require("./http-error.js");
+const { isJSONType } = require("ajv/dist/compile/rules");
+>>>>>>> e971ced26dae8e3e6f55b65484f43908df05f226
 module.exports = {
   validateEmail: tryCatchBlock(async (email) => {
     const [resultSet] = await database.execute(`SELECT * from User WHERE email LIKE '${email}'`);
