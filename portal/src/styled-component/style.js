@@ -23,7 +23,7 @@ export const ButtonRoot = styled.button`
 `;
 
 export const ButtonGoogle = styled(ButtonRoot)`
-    background-color: #efefef;
+    background-color: #e5e5e5;
     color: black;
 `;
 
@@ -45,11 +45,11 @@ export const HomePage = styled.div`
     position: relative;
     width: 100vw;
     height: 100vh;
-    background-color: #efefef;
+    background-color: #e5e5e5;
 `;
 
 export const ContentWrapper = styled(Box)`
-    background-color: #efefef;
+    background-color: #e5e5e5;
     width: 1440px;
     position: absolute;
     top: 70px;
@@ -60,7 +60,7 @@ export const ContentWrapper = styled(Box)`
 `;
 
 export const Content = styled(Box)`
-    background-color: #efefef;
+    background-color: #e5e5e5;
     position: absolute;
     top: 0px;
     left: 240px;
