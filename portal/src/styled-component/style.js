@@ -44,7 +44,7 @@ export const ButtonWrapper = styled.div`
 export const HomePage = styled.div`
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 200vh;
   background-color: #e5e5e5;
 `;
 
