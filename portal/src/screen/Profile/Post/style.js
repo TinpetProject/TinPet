@@ -2,29 +2,37 @@ import styled from "styled-components";
 
 // Post Layout
 export const PostWrapper = styled.div`
-    /* Post */
-
-
-    position: static;
+    position: absolute;
     width: 730px;
-    height: 916px;
-    left: 0px;
-    top: 264px;
+    height: 249px;
+    top: 840px;
+    left: 20px;
 
     background: #FFFFFF;
     border-radius: 15px;
-
-    /* Inside Auto Layout */
-
     flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 15px 0px;
 `;
 
 // Avatar, Username, Time
 export const PostTop = styled.div`
+
+`;
+export const Avatar = styled.img`
+    position: static;
+
+    width: 80px;
+    height: 80px;
+    border-radius: 10000px;
+    margin: 10px;
+    object-fit: cover;
 `;
 
 // Edit post
 export const Setting = styled.div`
+
 `;
 
 // Content
