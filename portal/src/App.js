@@ -8,7 +8,7 @@ import InputPost from "./screen/Profile/InputPost";
 import ProfileHead from "./screen/Profile/ProfileHead";
 import Pictures from "./screen/Profile/Picture";
 import AboutPet from "./screen/Profile/AboutPet";
-
+import Post from "./screen/Profile/Post";
 function App() {
   return (
     <>
@@ -27,6 +27,7 @@ function App() {
           <Content>
             <ProfileHead/>
             <InputPost/>
+            <Post/>
             <Pictures/>
             <AboutPet/>
           </Content>
