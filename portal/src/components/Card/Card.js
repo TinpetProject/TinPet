@@ -2,7 +2,7 @@ import React from "react";
 import "./Card.css";
 import { Icon } from "@iconify/react";
 
-export default function Card() {
+export default function Card(props) {
     return (
         <div className="card">
             <div className="card__match">
@@ -11,7 +11,7 @@ export default function Card() {
 
             <div className="card__info">
                 <div className="info__general">
-                    <span>A Dog, 2</span>
+                    <span>{props.name}, 2</span>
                     <Icon className="general__status-icon" icon="bi:circle-fill" />
                 </div>
                 <div className="info__location">

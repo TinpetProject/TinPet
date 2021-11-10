@@ -34,7 +34,7 @@
     display: flex;
     align-items: center;
     position: fixed;
-    transform: translateX(-10px);
+    transform: translateX(-7px);
     z-index: 3;
 
 }
@@ -69,6 +69,7 @@
     padding: 0px 20px;
     position: sticky;
     z-index: 0;
+    transform: translateX(-7px);
 }
 
 .best-match {
@@ -130,6 +131,7 @@
     position: absolute;
     right: 0;
     margin-right: 19px;
+    color: var(--blur-text-color);
 }
 
 .best-match__plus-btn {
@@ -137,6 +139,7 @@
     margin-top: 3px;
     font-weight: 300;
     position: absolute;
+    color: var(--blur-text-color);
 }
 
 .best-match__heart-btn {
@@ -145,4 +148,10 @@
     left: 50%;
     margin-top: 1.5rem ;
     transform: translateX(-50%);
+    color: var(--blur-text-color);
+}
+
+svg:hover {
+    cursor: pointer;
+    color: var(--black-text-color);
 }

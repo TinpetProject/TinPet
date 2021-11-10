@@ -14,27 +14,31 @@ export default function Dashboard() {
             </div>
             <div className="dashboard-content">
                 <div className="card-list">
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
+                    <Card name="A Dog" age="2" location="Hanoi" url="" />
                 </div>
                 <div className="best-match">
                     <h1>Best Match</h1>
@@ -51,7 +55,7 @@ export default function Dashboard() {
                         <span>Shiba</span>
                     </div>
                     <hr />
-                    <Icon className="best-match__plus-btn" icon="akar-icons:circle-plus" color="#373737" />
+                    <Icon className="best-match__plus-btn" icon="akar-icons:circle-plus" />
                     <Icon className="best-match__message-btn" icon="tabler:message-circle" />
                     <Icon className="best-match__heart-btn" icon="bx:bxs-heart-circle" />
                 </div>
