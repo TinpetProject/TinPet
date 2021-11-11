@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const SideBarWrapper = styled.div`
-    width: 240px;
+    width: 200px;
     background-color: #fff;
     position: fixed;
-    top: 70px;
-    left: calc((100% - 1440px) / 2);
+    top: 60px;
+    left: calc((100% - 1140px) / 2);
     bottom: 0;
     border-right: 2px solid #a7a7a7;
     z-index: 0;
@@ -20,7 +20,7 @@ export const SideBarList = styled.ul`
 export const SideBarElement = styled.li`
     display: flex;
     margin: 5px 0;
-    padding: 10px 16px;
+    padding: 8px 10px;
     justify-content: center;
     align-items: center;
     font-weight: 400;
