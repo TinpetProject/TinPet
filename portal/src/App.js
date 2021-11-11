@@ -8,6 +8,7 @@ import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import React from "react";
+import Signup from "./screen/Signup";
 
 function App() {
   const [user, setUser] = React.useState({});
@@ -21,6 +22,9 @@ function App() {
         <Switch>
           <Route exact path="/login">
             <Login getUserInfo={getUserInfo} />{" "}
+          </Route>{" "}
+          <Route exact path="/signup">
+            <Signup />{" "}
           </Route>{" "}
           <Route exact path="/dashboard">
             <DB />{" "}
