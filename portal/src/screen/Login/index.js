@@ -35,9 +35,11 @@ const Login = ({ getUserInfo }) => {
         password,
       })
       .then((response) => response.data.data)
-      .then((data) => getUserInfo(data))
+      .then((data) => {
+        getUserInfo(data);
+        history.push("/dashboard");
+      })
       .catch((err) => console.log(err));
-    // history.push("/dashboard");
   };
 
   return (
@@ -53,10 +55,9 @@ const Login = ({ getUserInfo }) => {
           <Form onSubmit={handleSubmit}>
             <FormTitle> Sign In </FormTitle>{" "}
             <FormSubScript>
-              <span> Don 't have an account?</span>{" "}
+              <span> Don 't have an account?</span>
               <FormLink onClick={() => history.push("/signup")}>
-                {" "}
-                Create an account{" "}
+                Create an account
               </FormLink>{" "}
             </FormSubScript>{" "}
             <FormControl>
