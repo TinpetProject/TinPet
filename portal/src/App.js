@@ -14,7 +14,7 @@ function App() {
                 <div className="main">
                     <div className="content-wrapper">
                         <SideBar />
-                        {/* <Dashboard /> */}
+                        <Dashboard />
                     </div>
                 </div>
 

@@ -10,25 +10,26 @@
 }
 
 .card {
-    height: 344px;
-    width: 258px;
+    height: 269px;
+    width: 202px;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 11px;
     position: relative;
     border-radius: 8px;
+    margin-left: 11px;
 
 }
 
 .card:nth-child(1){
-    margin-top: 20px;
+    margin-top: 11px;
 }
 
 .card:nth-child(2){
-    margin-top: 20px;
+    margin-top: 11px;
 }
 
 .card:nth-child(3){
-    margin-top: 20px;
+    margin-top: 11px;
 }
 
 .card__bg-img img{
@@ -65,7 +66,7 @@
 
 .card__info {
     background: rgba(245, 245, 245, 0.8);
-    width: 228px;
+    width: 184px;
     height: 66px;
     position: absolute;
     left: 50%;

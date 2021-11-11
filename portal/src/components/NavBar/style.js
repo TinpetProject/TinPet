@@ -36,7 +36,7 @@ export const UserWrapper = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0 24px;
-    margin-right: 2.2rem;
+    margin-right: 2.6rem;
 `;
 
 export const UserAvatarWrapper = styled.div`

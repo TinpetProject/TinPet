@@ -7,19 +7,21 @@
 }
 
 .dashboard-wrapper {
-    padding-left: 270px;
+    position: relative;
+    margin-left: 220px;
     color: var(--black-text-color);
 }
 
 .dashboard-content {
     display: flex;
-    margin-top: 140px;
+    margin-top: 110px;
+    transform: translateX(5px);
 }
 
 .dashboard-top__content {
     background-color: var(--content-bg-color);
-    width: 1170px;
-    height: 80px;
+    width: 920px;
+    height: 70px;
     border-radius: 14px;
     display: flex;
     justify-self: center;
@@ -29,8 +31,7 @@
 
 .dashboard-top {
     background-color: var(--main-bg-color);
-    height: 140px;
-    width: 1200px;
+    height: 110px;
     display: flex;
     align-items: center;
     position: fixed;
@@ -60,31 +61,28 @@
 
 .card-list {
     background-color: var(--content-bg-color);
-    width: 854px;
+    width: 650px;
     border-radius: 14px;
     display: flex;
     flex-flow: row wrap;
-    align-content: space-between;
-    justify-content: space-between;
-    padding: 0px 20px;
     position: sticky;
     z-index: 0;
-    transform: translateX(-7px);
 }
 
 .best-match {
     background-color: var(--content-bg-color);
-    width: 286px;
-    height: 572px;
+    width: 250px;
+    height: 535px;
     border-radius: 14px;
-    position: fixed;
-    right: calc((100% - 1440px)/2);
+    position: fixed !important;
+    right: calc((100% - 1140px)/2);
     padding: 20px;
+    top: 170px;
 }
 
 .best-match__card img {
-    width: 248px;
-    height: 248px;
+    width: 213px;
+    height: 213px;
     object-fit: cover;
     border-radius: 8px;
     position: absolute;
@@ -101,7 +99,7 @@
 }
 
 .best-match__info {
-    margin-top: 275px; 
+    margin-top: 240px; 
     line-height: 1.5rem;
 }
 
@@ -126,17 +124,19 @@
 }
 
 .best-match__message-btn {
-    font-size: 2.9rem;
-    margin-top: 0px;
+    font-size: 2.2rem;
+    margin-top: 2px;
     position: absolute;
-    right: 0;
+    right: 15px;
     margin-right: 19px;
     color: var(--blur-text-color);
+    
 }
 
 .best-match__plus-btn {
-    font-size: 2.6rem;
+    font-size: 2.3rem;
     margin-top: 3px;
+    left: 30px;
     font-weight: 300;
     position: absolute;
     color: var(--blur-text-color);
