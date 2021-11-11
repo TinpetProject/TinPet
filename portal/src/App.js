@@ -1,30 +1,35 @@
 import { HomePage, ContentWrapper, Content } from "./styled-component/style";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
-import Messenger from "./screen/Messenger";
-import Login from "./screen/Login";
 import Dashboard from "./screen/Dashboard/Dashboard";
+import Login from "./screen/Login";
+import DB from "./screen/DB";
 import "./App.css";
+import { Switch, Route, Redirect } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import React from "react";
 
 function App() {
-    return (
-        <>
-            <HomePage>
-                <NavBar />
-                <div className="main">
-                    <div className="content-wrapper">
-                        <SideBar />
-                        <Dashboard />
-                    </div>
-                </div>
+  const [user, setUser] = React.useState({});
 
-                {/* <Messenger /> */}
-                {/* <Login /> */}
-
-                {/* Chua lam router an db ha tri ???*/}
-            </HomePage>
-        </>
-    );
+  const getUserInfo = (token) => {
+    console.log(jwt_decode(token));
+  };
+  return (
+    <>
+      <HomePage>
+        <Switch>
+          <Route exact path="/login">
+            <Login getUserInfo={getUserInfo} />{" "}
+          </Route>{" "}
+          <Route exact path="/dashboard">
+            <DB />{" "}
+          </Route>{" "}
+          <Redirect from="/" to="/login" />
+        </Switch>{" "}
+      </HomePage>{" "}
+    </>
+  );
 }
 
 export default App;
