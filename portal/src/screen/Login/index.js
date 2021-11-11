@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   ButtonRoot,
   ContentBox,
@@ -18,10 +19,24 @@ import {
   WrapperApp,
 } from "./style";
 import PetsIcon from "@mui/icons-material/Pets";
+import { useHistory } from "react-router";
 
-const Login = () => {
+const Login = ({ getUserInfo }) => {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [rememberMe, setRememberMe] = React.useState("");
+  const history = useHistory();
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios
+      .post("/auth/sign-in", {
+        email: username,
+        password,
+      })
+      .then((response) => response.data.data)
+      .then((data) => getUserInfo(data))
+      .catch((err) => console.log(err));
+    // history.push("/dashboard");
   };
 
   return (
@@ -29,46 +44,49 @@ const Login = () => {
       <Wrapper>
         <WrapperApp>
           <LogoWrapper>
-            <PetsIcon sx={{ fontSize: "100px" }} />
-          </LogoWrapper>
-          <TextWrapper>Tinpet</TextWrapper>
-        </WrapperApp>
+            <PetsIcon sx={{ fontSize: "100px" }} />{" "}
+          </LogoWrapper>{" "}
+          <TextWrapper> Tinpet </TextWrapper>{" "}
+        </WrapperApp>{" "}
         <ContentBox>
           <Form onSubmit={handleSubmit}>
-            <FormTitle>Sign In</FormTitle>
+            <FormTitle> Sign In </FormTitle>{" "}
             <FormSubScript>
-              <span>Don't have an account?</span>
-              <FormLink>Create an account</FormLink>
-            </FormSubScript>
+              <span> Don 't have an account?</span>{" "}
+              <FormLink> Create an account </FormLink>{" "}
+            </FormSubScript>{" "}
             <FormControl>
-              <FormControlLabel htmlFor="username">Username</FormControlLabel>
+              <FormControlLabel htmlFor="username"> Username </FormControlLabel>{" "}
               <FormInput
                 type="text"
                 id="username"
                 placeholder="Enter your username"
-              ></FormInput>
-            </FormControl>
+                onChange={(e) => setUsername(e.target.value)}
+              ></FormInput>{" "}
+            </FormControl>{" "}
             <FormControl>
-              <FormControlLabel htmlFor="password">Password</FormControlLabel>
+              <FormControlLabel htmlFor="password"> Password </FormControlLabel>{" "}
               <FormInput
                 type="password"
                 id="password"
                 placeholder="Enter your password"
-              ></FormInput>
-            </FormControl>
+                onChange={(e) => setPassword(e.target.value)}
+              ></FormInput>{" "}
+            </FormControl>{" "}
             <FormControlCheckBox>
               <FormInputCheckBox
                 type="checkbox"
                 id="rememberMe"
-              ></FormInputCheckBox>
+                onChange={(e) => setRememberMe(e.currentTarget.checked)}
+              ></FormInputCheckBox>{" "}
               <FormControlLabelCheckBox htmlFor="rememberMe">
                 Keep me logged in
-              </FormControlLabelCheckBox>
-            </FormControlCheckBox>
-            <ButtonRoot>Sign in</ButtonRoot>
-          </Form>
-        </ContentBox>
-      </Wrapper>
+              </FormControlLabelCheckBox>{" "}
+            </FormControlCheckBox>{" "}
+            <ButtonRoot> Sign in </ButtonRoot>{" "}
+          </Form>{" "}
+        </ContentBox>{" "}
+      </Wrapper>{" "}
     </>
   );
 };
