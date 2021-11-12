@@ -10,6 +10,11 @@ import jwt_decode from "jwt-decode";
 import React from "react";
 import Signup from "./screen/Signup";
 
+import InputPost from "./screen/Profile/InputPost";
+import ProfileHead from "./screen/Profile/ProfileHead";
+import Pictures from "./screen/Profile/Picture";
+import AboutPet from "./screen/Profile/AboutPet";
+import Post from "./screen/Profile/Post";
 function App() {
   const [user, setUser] = React.useState({});
 
@@ -21,17 +26,17 @@ function App() {
       <HomePage>
         <Switch>
           <Route exact path="/login">
-            <Login getUserInfo={getUserInfo} />{" "}
-          </Route>{" "}
+            <Login getUserInfo={getUserInfo} />
+          </Route>
           <Route exact path="/signup">
-            <Signup />{" "}
-          </Route>{" "}
+            <Signup />
+          </Route>
           <Route exact path="/dashboard">
-            <DB />{" "}
-          </Route>{" "}
+            <DB />
+          </Route>
           <Redirect from="/" to="/login" />
-        </Switch>{" "}
-      </HomePage>{" "}
+        </Switch>
+      </HomePage>
     </>
   );
 }
