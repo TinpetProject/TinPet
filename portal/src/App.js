@@ -1,7 +1,5 @@
-import { HomePage, ContentWrapper, Content } from "./styled-component/style";
-import NavBar from "./components/NavBar";
-import SideBar from "./components/SideBar";
-import Dashboard from "./screen/Dashboard/Dashboard";
+import { HomePage } from "./styled-component/style";
+
 import Login from "./screen/Login";
 import DB from "./screen/DB";
 import "./App.css";
@@ -9,36 +7,35 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import React from "react";
 import Signup from "./screen/Signup";
+import Profile from "./screen/Profile";
 
-import InputPost from "./screen/Profile/InputPost";
-import ProfileHead from "./screen/Profile/ProfileHead";
-import Pictures from "./screen/Profile/Picture";
-import AboutPet from "./screen/Profile/AboutPet";
-import Post from "./screen/Profile/Post";
 function App() {
-  const [user, setUser] = React.useState({});
+    const [user, setUser] = React.useState({});
 
-  const getUserInfo = (token) => {
-    console.log(jwt_decode(token));
-  };
-  return (
-    <>
-      <HomePage>
-        <Switch>
-          <Route exact path="/login">
-            <Login getUserInfo={getUserInfo} />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/dashboard">
-            <DB />
-          </Route>
-          <Redirect from="/" to="/login" />
-        </Switch>
-      </HomePage>
-    </>
-  );
+    const getUserInfo = (token) => {
+        console.log(jwt_decode(token));
+    };
+    return (
+        <>
+            <HomePage>
+                <Switch>
+                    <Route exact path="/login">
+                        <Login getUserInfo={getUserInfo} />
+                    </Route>
+                    <Route exact path="/signup">
+                        <Signup />
+                    </Route>
+                    <Route exact path="/dashboard">
+                        <DB />
+                    </Route>
+                    <Route exact path="/profile]">
+                        <Profile />
+                    </Route>
+                    <Redirect from="/" to="/login" />
+                </Switch>
+            </HomePage>
+        </>
+    );
 }
 
 export default App;
