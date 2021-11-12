@@ -4,17 +4,15 @@ import SideBar from "../components/SideBar";
 import Dashboard from "../screen/Dashboard/Dashboard";
 
 const DB = () => {
-  return (
-    <>
-      <NavBar />
-      <div className="main">
-        <div className="content-wrapper">
-          <SideBar />
-          <Dashboard />
-        </div>{" "}
-      </div>{" "}
-    </>
-  );
+    return (
+        <>
+            <NavBar />
+            <SideBar />
+            <div className="main">
+                <Dashboard />
+            </div>{" "}
+        </>
+    );
 };
 
 export default DB;

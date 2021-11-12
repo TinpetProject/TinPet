@@ -5,7 +5,7 @@ export const SideBarWrapper = styled.div`
     background-color: #fff;
     position: fixed;
     top: 60px;
-    left: calc((100% - 1140px) / 2);
+    left: calc((100vw - 1140px) / 2);
     bottom: 0;
     border-right: 2px solid #a7a7a7;
     z-index: 0;

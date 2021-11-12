@@ -28,7 +28,7 @@ function App() {
                     <Route exact path="/dashboard">
                         <DB />
                     </Route>
-                    <Route exact path="/profile]">
+                    <Route exact path="/profile">
                         <Profile />
                     </Route>
                     <Redirect from="/" to="/login" />
