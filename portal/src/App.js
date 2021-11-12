@@ -11,11 +11,9 @@ function App() {
         <>
             <HomePage>
                 <NavBar />
+                <SideBar />
                 <div className="main">
-                    <div className="content-wrapper">
-                        <SideBar />
-                        <Dashboard />
-                    </div>
+                    <Dashboard />
                 </div>
 
                 {/* <Messenger /> */}
