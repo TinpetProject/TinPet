@@ -1,28 +1,29 @@
 import styled from "styled-components";
 
-export const NavBarWrapper = styled.nav `
-  width: 100vw;
-  height: 70px;
-  background-color: #fff;
-  position: fixed;
-  display: flex;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
+export const NavBarWrapper = styled.nav`
+    width: 100vw;
+    height: 60px;
+    background-color: #fff;
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
 `;
 
-export const LogoWrapper = styled.div `
-  width: 250px;
-  font-size: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border-radius: 50%;
-  &:hover {
-    opacity: 0.5;
-  }
+export const LogoWrapper = styled.div`
+    color: #373737;
+    width: 250px;
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    &:hover {
+        color: #fb6d6c;
+    }
 `;
 
 export const AppTitle = styled.div `
@@ -30,11 +31,13 @@ export const AppTitle = styled.div `
   font-weight: 700;
 `;
 
-export const UserWrapper = styled.div `
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 24px;
+
+export const UserWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 24px;
+    margin-right: 2.6rem;
 `;
 
 export const UserNotiWrapper = styled.div `

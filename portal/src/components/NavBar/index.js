@@ -1,4 +1,5 @@
 import React from "react";
+import { Icon } from "@iconify/react";
 import {
   LogoWrapper,
   AppTitle,
@@ -9,23 +10,24 @@ import {
   Menu,
   MenuItem,
 } from "./style";
-import PetsIcon from "@mui/icons-material/Pets";
 import Avatar from "@mui/material/Avatar";
 import Search from "../Search";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import "./style.css";
 import { useHistory } from "react-router";
+
 const NavBar = () => {
   const history = useHistory();
 
   return (
     <NavBarWrapper>
       <LogoWrapper>
-        <PetsIcon fontSize="large"> </PetsIcon> <AppTitle> Tinpet </AppTitle>{" "}
+        <Icon className="nav__logo-icon" icon="icons8:cat-footprint" />
+        <AppTitle>Tinpet</AppTitle>
       </LogoWrapper>{" "}
       <Search />
       <UserWrapper>
         <UserNotiWrapper>
-          <NotificationsNoneIcon fontSize="large"> </NotificationsNoneIcon>{" "}
+          <Icon className="nav__noti-icon" icon="bi:bell" />
         </UserNotiWrapper>{" "}
         <UserAvatarWrapper>
           <Avatar
