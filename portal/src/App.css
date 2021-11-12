@@ -1,13 +1,9 @@
-.content-wrapper {
-    display: flex;
-    width: 1140px;
-    position: relative;
-    margin: 0 auto;
-}
 
 .main {
-    width: 100vw;
+    width: 100%;
+    display: flex;
     margin-top: 60px;
     position: relative;
+    margin-left: calc((100vw - 1140px)/2 + 220px);
 }
 

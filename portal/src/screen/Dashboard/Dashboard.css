@@ -8,14 +8,14 @@
 
 .dashboard-wrapper {
     position: relative;
-    margin-left: 220px;
+    margin-left: 0px;
     color: var(--black-text-color);
 }
 
 .dashboard-content {
     display: flex;
     margin-top: 110px;
-    transform: translateX(5px);
+    margin-left: 0px;
 }
 
 .dashboard-top__content {
@@ -35,7 +35,6 @@
     display: flex;
     align-items: center;
     position: fixed;
-    transform: translateX(-7px);
     z-index: 3;
 
 }
@@ -65,7 +64,6 @@
     border-radius: 14px;
     display: flex;
     flex-flow: row wrap;
-    position: sticky;
     z-index: 0;
 }
 
@@ -75,7 +73,7 @@
     height: 535px;
     border-radius: 14px;
     position: fixed !important;
-    right: calc((100% - 1140px)/2);
+    left: calc((100vw - 1140px)/2 + 650px + 40px + 200px) ;
     padding: 20px;
     top: 170px;
 }

@@ -16,6 +16,9 @@ import Pictures from "./screen/Profile/Picture";
 import AboutPet from "./screen/Profile/AboutPet";
 import Post from "./screen/Profile/Post";
 function App() {
+
+    
+
   const [user, setUser] = React.useState({});
 
   const getUserInfo = (token) => {
