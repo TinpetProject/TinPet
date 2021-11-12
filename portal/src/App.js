@@ -16,29 +16,29 @@ import Pictures from "./screen/Profile/Picture";
 import AboutPet from "./screen/Profile/AboutPet";
 import Post from "./screen/Profile/Post";
 function App() {
-  const [user, setUser] = React.useState({});
+    const [user, setUser] = React.useState({});
 
-  const getUserInfo = (token) => {
-    console.log(jwt_decode(token));
-  };
-  return (
-    <>
-      <HomePage>
-        <Switch>
-          <Route exact path="/login">
-            <Login getUserInfo={getUserInfo} />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/dashboard">
-            <DB />
-          </Route>
-          <Redirect from="/" to="/login" />
-        </Switch>
-      </HomePage>
-    </>
-  );
+    const getUserInfo = (token) => {
+        console.log(jwt_decode(token));
+    };
+    return (
+        <>
+            <HomePage>
+                <Switch>
+                    <Route exact path="/login">
+                        <Login getUserInfo={getUserInfo} />
+                    </Route>
+                    <Route exact path="/signup">
+                        <Signup />
+                    </Route>
+                    <Route exact path="/dashboard">
+                        <DB />
+                    </Route>
+                    <Redirect from="/" to="/login" />
+                </Switch>
+            </HomePage>
+        </>
+    );
 }
 
 export default App;
