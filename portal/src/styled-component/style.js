@@ -41,7 +41,6 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const Main = styled.div`
-    width: 100%;
     display: flex;
     margin-top: 60px;
     position: relative;

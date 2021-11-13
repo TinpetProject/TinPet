@@ -21,8 +21,6 @@ import {
 import PetsIcon from "@mui/icons-material/Pets";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import { Icon } from "@iconify/react";
-import "./Login.css";
 
 const Login = ({ getUserInfo }) => {
     const [email, setEmail] = React.useState("");
@@ -48,7 +46,9 @@ const Login = ({ getUserInfo }) => {
         <>
             <Wrapper>
                 <WrapperApp>
-                    <Icon className="signin__logo-icon" icon="icons8:cat-footprint" />
+                    <LogoWrapper>
+                        <PetsIcon sx={{ fontSize: "100px" }} />{" "}
+                    </LogoWrapper>{" "}
                     <TextWrapper> Tinpet </TextWrapper>{" "}
                 </WrapperApp>{" "}
                 <ContentBox>
