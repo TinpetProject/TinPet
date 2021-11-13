@@ -3,7 +3,7 @@ import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
 import Dashboard from "./screen/Dashboard/Dashboard";
 import Login from "./screen/Login";
-import DB from "./screen/DB";
+
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -15,6 +15,7 @@ import ProfileHead from "./screen/Profile/ProfileHead";
 import Pictures from "./screen/Profile/Picture";
 import AboutPet from "./screen/Profile/AboutPet";
 import Post from "./screen/Profile/Post";
+import Matches from "./screen/Matches/Matches";
 function App() {
     const [user, setUser] = React.useState({});
 
@@ -32,7 +33,10 @@ function App() {
                         <Signup />
                     </Route>
                     <Route exact path="/dashboard">
-                        <DB />
+                        <Dashboard />
+                    </Route>
+                    <Route exact path="/matches">
+                        <Matches />
                     </Route>
                     <Redirect from="/" to="/login" />
                 </Switch>
