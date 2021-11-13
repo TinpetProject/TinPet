@@ -10,12 +10,22 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
+    &::before {
+        content: "";
+        height: 100vh;
+        width: 100vw;
+        background-color: black;
+        opacity: 50%;
+        position: absolute;
+        z-index: 0;
+    }
 `;
 
 export const WrapperApp = styled.div`
     display: flex;
     align-items: center;
     color: #fff;
+    transform: translateY(-3rem);
 `;
 
 export const LogoWrapper = styled.div``;
@@ -34,6 +44,7 @@ export const ContentBox = styled.div`
     width: 600px;
     height: 730px;
     border-radius: 15px;
+    z-index: 1;
 `;
 
 export const Form = styled.form`
