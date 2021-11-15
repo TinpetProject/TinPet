@@ -1,5 +1,7 @@
 const express = require("express");
 const authRoute = require("./routes/auth-router");
+const userRoute = require("./routes/user-router");
+const chatRoute = require("./routes/chat-router");
 require("dotenv").config();
 
 const app = express();
@@ -15,9 +17,15 @@ app.use((req, res, next) => {
 
 app.use("/auth", authRoute);
 
+app.use("/user", userRoute);
+
+app.use("/chat", chatRoute);
+
 app.use((error, req, res, next) => {
   res.status(error.errorCode);
   res.json({ message: error.message });
 });
 
-app.listen(process.env.LISTENING_PORT || 3000);
+const server = app.listen(process.env.LISTENING_PORT || 3000);
+
+const io = require("./util/socket").init(server);
