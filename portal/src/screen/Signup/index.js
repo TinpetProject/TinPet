@@ -13,7 +13,6 @@ import {
     FormLink,
     FormSubScript,
     FormTitle,
-    LogoWrapper,
     TextWrapper,
     Wrapper,
     WrapperApp,

@@ -7,8 +7,8 @@ import Signup from "./screen/Signup";
 import Profile from "./screen/Profile";
 import Matches from "./screen/Matches/Matches";
 import openSocket from "socket.io-client";
-import Dashboard from "./screen/Dashboard"
-import Messenger from "./screen/Messenger"
+import Dashboard from "./screen/Dashboard/Dashboard"
+import Messenger from "./pages/Messenger"
 
 function App() {
   const [userID, setUserID] = useState();
@@ -19,6 +19,7 @@ function App() {
   };
   const socket = useRef();
   socket.current = openSocket("http://localhost:8888");
+
   return (
     <>
       <HomePage>
