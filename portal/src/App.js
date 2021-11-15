@@ -2,25 +2,23 @@ import { HomePage } from "./styled-component/style";
 import Login from "./screen/Login";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 import React, { useState, useRef } from "react";
 import Signup from "./screen/Signup";
 import Profile from "./screen/Profile";
 import Matches from "./screen/Matches/Matches";
 import openSocket from "socket.io-client";
+import Dashboard from "./screen/Dashboard/Dashboard"
+import Messenger from "./pages/Messenger"
 
 function App() {
   const [userID, setUserID] = useState();
 
   const getUserInfo = (userInfo) => {
     setUserID(userInfo.userID);
+
   };
   const socket = useRef();
   socket.current = openSocket("http://localhost:8888");
-
-    const getUserInfo = (token) => {
-        console.log(jwt_decode(token));
-    };
 
   return (
     <>

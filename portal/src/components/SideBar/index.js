@@ -69,31 +69,29 @@ const other = [{
 
 const SideBar = () => {
     return ( 
-        <>  
-            <SideBarWrapper >
-                <SideBarList >
-                    <SideBarListTitle> Main menu </SideBarListTitle>  
-                    {
-                        mainMenu.map((item, index) => ( 
-                            <SideBarElement key = { index }> 
-                                { item.icon } 
-                                <SideBarElementTitle> { item.title } </SideBarElementTitle> <SideBarElementQuantity> { item.quantity } </SideBarElementQuantity> 
-                            </SideBarElement>
-                        ))
-                    } 
-                    <SideBarListTitle > Other </SideBarListTitle> 
-                    {
-                        other.map((item, index) => ( 
-                            <SideBarElement key = { index }> 
+        <SideBarWrapper >
+            <SideBarList >
+                <SideBarListTitle> Main menu </SideBarListTitle>  
+                {
+                    mainMenu.map((item, index) => ( 
+                        <SideBarElement key = { index }> 
                             { item.icon } 
-                                <SideBarElementTitle > { item.title } </SideBarElementTitle>  
-                            </SideBarElement>
-                         ))
-                    }       
-                </SideBarList>
-            </SideBarWrapper>
-        </>
-);
+                            <SideBarElementTitle> { item.title } </SideBarElementTitle> <SideBarElementQuantity> { item.quantity } </SideBarElementQuantity> 
+                        </SideBarElement>
+                    ))
+                } 
+                <SideBarListTitle > Other </SideBarListTitle> 
+                {
+                    other.map((item, index) => ( 
+                        <SideBarElement key = { index }> 
+                        { item.icon } 
+                            <SideBarElementTitle > { item.title } </SideBarElementTitle>  
+                        </SideBarElement>
+                        ))
+                }       
+            </SideBarList>
+        </SideBarWrapper>
+    );
 };
 
 export default SideBar;

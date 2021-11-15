@@ -12,16 +12,15 @@ const Profile = () => {
   return (
     <>
       <NavBar />
-      <ContentWrapper>
-        <SideBar />
-        <Content>
-          <ProfileHead />
-          <InputPost />
-          <Post />
-          <Pictures />
-          <AboutPet />
-        </Content>{" "}
-      </ContentWrapper>{" "}
+      <SideBar />
+      <div className="main">
+        <ProfileHead />
+        <InputPost />
+        <Post />
+        <Pictures />
+        <AboutPet />
+      </div>
+      
     </>
   );
 };
