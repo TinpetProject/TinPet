@@ -1,23 +1,12 @@
-import { HomePage, ContentWrapper, Content } from "./styled-component/style";
-import NavBar from "./components/NavBar";
-import SideBar from "./components/SideBar";
-import Messenger from "./pages/Messenger";
-import Dashboard from "./screen/Dashboard/Dashboard";
+import { HomePage } from "./styled-component/style";
 import Login from "./screen/Login";
-
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import React, { useState, useRef } from "react";
 import Signup from "./screen/Signup";
-
-import InputPost from "./screen/Profile/InputPost";
-import ProfileHead from "./screen/Profile/ProfileHead";
-import Pictures from "./screen/Profile/Picture";
-import AboutPet from "./screen/Profile/AboutPet";
-import Post from "./screen/Profile/Post";
+import Profile from "./screen/Profile";
 import Matches from "./screen/Matches/Matches";
-
 import openSocket from "socket.io-client";
 
 function App() {
@@ -28,6 +17,10 @@ function App() {
   };
   const socket = useRef();
   socket.current = openSocket("http://localhost:8888");
+
+    const getUserInfo = (token) => {
+        console.log(jwt_decode(token));
+    };
 
   return (
     <>
