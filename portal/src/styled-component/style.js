@@ -40,6 +40,13 @@ export const ButtonWrapper = styled.div`
     align-items: center;
 `;
 
+export const Main = styled.div`
+    display: flex;
+    margin-top: 60px;
+    position: relative;
+    margin-left: calc((100vw - 1140px) / 2 + 220px);
+`;
+
 // Home page wrapper
 export const HomePage = styled.div`
     position: relative;

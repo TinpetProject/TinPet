@@ -1,7 +1,16 @@
+﻿DROP DATABASE IF EXISTS Tinpet
+CREATE DATABASE Tinpet
+-- 
+-- Set character set the client will use to send SQL statements to the server
 --
+SET NAMES 'utf8';
+
+--
+-- Set default database
 --
 USE Tinpet;
 
+--
 -- Drop function `Func_CalculateAge`
 --
 DROP FUNCTION IF EXISTS Func_CalculateAge;
