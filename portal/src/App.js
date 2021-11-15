@@ -15,26 +15,36 @@ function App() {
     const getUserInfo = (token) => {
         console.log(jwt_decode(token));
     };
-    return (
-        <>
-            <HomePage>
-                <Switch>
-                    <Route exact path="/login">
-                        <Login getUserInfo={getUserInfo} />
-                    </Route>
-                    <Route exact path="/signup">
-                        <Signup />
-                    </Route>
-                    <Route exact path="/dashboard">
-                        <DB />
-                    </Route>
-                    <Route exact path="/profile]">
-                        <Profile />
-                    </Route>
-                    <Redirect from="/" to="/login" />
-                </Switch>
-            </HomePage>
-        </>
+    return ( <
+        HomePage >
+        <
+        Switch >
+        <
+        Route exact path = "/login" >
+        <
+        Login getUserInfo = { getUserInfo }
+        />{" "} <
+        /Route>{" "} <
+        Route exact path = "/signup" >
+        F <
+        Signup / >
+        <
+        /Route>{" "} <
+        Route exact path = "/dashboard" >
+        <
+        DB / >
+        <
+        /Route>{" "} <
+        Route exact path = "/profile" >
+        <
+        Profile / >
+        <
+        /Route>{" "} <
+        Redirect from = "/"
+        to = "/login" / >
+        <
+        /Switch>{" "} <
+        /HomePage>
     );
 }
 
