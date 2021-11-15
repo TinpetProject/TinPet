@@ -2,14 +2,17 @@ import ChatBarElement from "./ChatBarElement";
 import React, { useState, useEffect } from "react";
 import "./ChatBar.css";
 
-const ChatBar = React.memo(({ openConversation }) => {
+const ChatBar = React.memo(({ openConversation, userID }) => {
   const [conversationList, setConversationList] = useState([]);
 
   useEffect(() => {
     const fetchList = async () => {
-      const result = await fetch("http://localhost:8888/chat");
+      const token = localStorage.getItem(userID);
+      const result = await fetch(`http://localhost:8888/chat`, {
+        method: "GET",
+        headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
+      });
       const listOfConversations = (await result.json()).data;
-      console.log(listOfConversations);
       setConversationList(listOfConversations);
     };
     fetchList();

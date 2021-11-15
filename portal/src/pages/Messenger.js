@@ -1,12 +1,9 @@
 import React, { useRef, useState } from "react";
-import openSocket from "socket.io-client";
 import ChatWindow from "../components/chat/ChatWindow";
 import ChatBar from "../components/chat/ChatBar";
 import "./messenger.css";
 
-const Messenger = React.memo(() => {
-  const socket = useRef();
-  socket.current = openSocket("http://localhost:8888");
+const Messenger = React.memo(({ userID ,socket}) => {
 
   const [chosenUserID, setChosenUserID] = useState("");
 
@@ -16,8 +13,8 @@ const Messenger = React.memo(() => {
 
   return (
     <div className="messenger">
-      <ChatWindow chosenUserID={chosenUserID} socket={socket.current} />
-      <ChatBar openConversation={openConversation} />
+      <ChatWindow chosenUserID={chosenUserID} socket={socket} userID={userID} />
+      <ChatBar openConversation={openConversation} userID={userID} />
     </div>
   );
 });

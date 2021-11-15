@@ -2,14 +2,13 @@ import { HomePage, ContentWrapper, Content } from "./styled-component/style";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
 import Messenger from "./pages/Messenger";
-import Login from "./screen/Login";
 import Dashboard from "./screen/Dashboard/Dashboard";
 import Login from "./screen/Login";
 
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import React from "react";
+import React, { useState, useRef } from "react";
 import Signup from "./screen/Signup";
 
 import InputPost from "./screen/Profile/InputPost";
@@ -18,18 +17,24 @@ import Pictures from "./screen/Profile/Picture";
 import AboutPet from "./screen/Profile/AboutPet";
 import Post from "./screen/Profile/Post";
 import Matches from "./screen/Matches/Matches";
-function App() {
-  const [user, setUser] = React.useState({});
 
-  const getUserInfo = (token) => {
-    console.log(jwt_decode(token));
+import openSocket from "socket.io-client";
+
+function App() {
+  const [userID, setUserID] = useState();
+
+  const getUserInfo = (userInfo) => {
+    setUserID(userInfo.userID);
   };
+  const socket = useRef();
+  socket.current = openSocket("http://localhost:8888");
+
   return (
     <>
       <HomePage>
         <Switch>
           <Route exact path="/login">
-            <Login getUserInfo={getUserInfo} />
+            <Login getUserInfo={getUserInfo} socket={socket.current} />
           </Route>
           <Route exact path="/signup">
             <Signup />
@@ -39,6 +44,9 @@ function App() {
           </Route>
           <Route exact path="/matches">
             <Matches />
+          </Route>
+          <Route exact path="/messenger">
+            <Messenger userID={userID} socket={socket.current} />
           </Route>
           <Redirect from="/" to="/login" />
         </Switch>
