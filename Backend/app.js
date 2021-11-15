@@ -1,13 +1,12 @@
 const express = require("express");
 const authRoute = require("./routes/auth-router");
-
-const sequelize = require("./config/connectDB");
+const userRoute = require("./routes/user-router");
+const chatRoute = require("./routes/chat-router");
 require("dotenv").config();
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -18,10 +17,15 @@ app.use((req, res, next) => {
 
 app.use("/auth", authRoute);
 
+app.use("/user", userRoute);
+
+app.use("/chat", chatRoute);
+
 app.use((error, req, res, next) => {
   res.status(error.errorCode);
   res.json({ message: error.message });
 });
-sequelize.sync().then(()=>{
-  app.listen(process.env.LISTENING_PORT || 3000);
-})
+
+const server = app.listen(process.env.LISTENING_PORT || 3000);
+
+const io = require("./util/socket").init(server);
