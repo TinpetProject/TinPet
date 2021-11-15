@@ -17,28 +17,27 @@ import {
     TextWrapper,
     Wrapper,
     WrapperApp,
-} from "./style";
-import PetsIcon from "@mui/icons-material/Pets";
+} from "../Login/style";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+import { Icon } from "@iconify/react";
+import "./Signup.css";
 
-const Login = ({ getUserInfo }) => {
+const Signup = ({ getUserInfo }) => {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [passwordConfirm, setPasswordConfirm] = React.useState("");
     const [rememberMe, setRememberMe] = React.useState("");
+    const [name, setName] = React.useState("");
     const history = useHistory();
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post("/auth/sign-in", {
+            .post("/auth/sign-up", {
                 email,
                 password,
+                name,
             })
-            .then((response) => response.data.data)
-            .then((data) => {
-                getUserInfo(data);
-                history.push("/dashboard");
-            })
+            .then((response) => console.log(response))
             .catch((err) => console.log(err));
     };
 
@@ -46,25 +45,32 @@ const Login = ({ getUserInfo }) => {
         <>
             <Wrapper>
                 <WrapperApp>
-                    <LogoWrapper>
-                        <PetsIcon sx={{ fontSize: "100px" }} />{" "}
-                    </LogoWrapper>{" "}
+                    <Icon className="signup__logo-icon" icon="icons8:cat-footprint" />
                     <TextWrapper> Tinpet </TextWrapper>{" "}
                 </WrapperApp>{" "}
                 <ContentBox>
                     <Form onSubmit={handleSubmit}>
-                        <FormTitle> Sign In </FormTitle>{" "}
+                        <FormTitle> Sign up </FormTitle>{" "}
                         <FormSubScript>
-                            <span> Don 't have an account?</span>
-                            <FormLink onClick={() => history.push("/signup")}>Create an account</FormLink>{" "}
+                            <span> Already have an account ? </span>{" "}
+                            <FormLink onClick={() => history.push("/login")}> Go to login </FormLink>{" "}
                         </FormSubScript>{" "}
                         <FormControl>
-                            <FormControlLabel htmlFor="username"> Username </FormControlLabel>{" "}
+                            <FormControlLabel htmlFor="Email"> Email </FormControlLabel>{" "}
                             <FormInput
                                 type="text"
                                 id="username"
                                 placeholder="Enter your username"
                                 onChange={(e) => setEmail(e.target.value)}
+                            ></FormInput>{" "}
+                        </FormControl>{" "}
+                        <FormControl>
+                            <FormControlLabel htmlFor="Email"> Your name </FormControlLabel>{" "}
+                            <FormInput
+                                type="text"
+                                id="username"
+                                placeholder="Enter your username"
+                                onChange={(e) => setName(e.target.value)}
                             ></FormInput>{" "}
                         </FormControl>{" "}
                         <FormControl>
@@ -76,6 +82,15 @@ const Login = ({ getUserInfo }) => {
                                 onChange={(e) => setPassword(e.target.value)}
                             ></FormInput>{" "}
                         </FormControl>{" "}
+                        <FormControl>
+                            <FormControlLabel htmlFor="passwordConfirm"> Confirm password </FormControlLabel>{" "}
+                            <FormInput
+                                type="password"
+                                id="passwordConfirm"
+                                placeholder="Enter your password"
+                                onChange={(e) => setPasswordConfirm(e.target.value)}
+                            ></FormInput>{" "}
+                        </FormControl>{" "}
                         <FormControlCheckBox>
                             <FormInputCheckBox
                                 type="checkbox"
@@ -84,7 +99,7 @@ const Login = ({ getUserInfo }) => {
                             ></FormInputCheckBox>{" "}
                             <FormControlLabelCheckBox htmlFor="rememberMe">Keep me logged in</FormControlLabelCheckBox>{" "}
                         </FormControlCheckBox>{" "}
-                        <ButtonRoot> Sign in </ButtonRoot>{" "}
+                        <ButtonRoot> Sign up </ButtonRoot>{" "}
                     </Form>{" "}
                 </ContentBox>{" "}
             </Wrapper>{" "}
@@ -92,4 +107,4 @@ const Login = ({ getUserInfo }) => {
     );
 };
 
-export default Login;
+export default Signup;
