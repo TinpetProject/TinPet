@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
 export const InputPostWrapper = styled.div`
-    display: flex;
-    position: absolute;
-    width: 730px;
+    position: relative;
+    width: 600px;
     height: 203px;
-    left: 20px;
-    top: 630px;
+    top: 40px;
     background: #FFFFFF;
     border-radius: 15px;
 `;
@@ -14,8 +12,8 @@ export const InputPostWrapper = styled.div`
 export const InputPostContent = styled.div`
     display: flex;
     align-items: center;
-    position: absolute;
-    width: 680px;
+    position: relative;
+    width: 550px;
     height: 80px;
     left: 25px;
     top: 25px;
@@ -23,19 +21,19 @@ export const InputPostContent = styled.div`
     border-bottom: solid 2px gray;
 `;
 
-export const Img = styled.img`
-    position: static;
+export const Avatar = styled.img`
+    position: relative;
     width: 80px;
     height: 80px;
     background: url(.jpg);
     border-radius: 10000px;
-    margin: 10px;
+    margin-right: 10px;
     object-fit: cover;
 `;
 // Field Text
 export const InputFieldText = styled.input`
     position: static;
-    width: 600px;
+    width: 450px;
     height: 60px;
     border: none;
     outline: none;
@@ -60,46 +58,44 @@ export const InputFieldText = styled.input`
 export const InputPostAdd = styled.div`
     display: flex;
     flex-direction: row;
-    align-items: center;
-    position: absolute;
-    width: 450px;
-    height: 62px;
-    left: 28px;
-    top: 118px;
+    position: relative;
+    height: 60px;
+    left: 25px;
+    top: 40px;
 `;
 
 export const InputAdd = styled.button`
     border: none;
     border-radius: 10px;
-    height: 62px;
     margin-right: 10px;
     display: flex;
-    justify-content: left;
     align-items: center;
     cursor: pointer;
     &:hover {
-        opacity: 0.5;
+        opacity: 0.7;
+        color: #b648ff;
     }
-    
+    transition: 0.5s;
 `;
 export const IconInput = styled.div`
     transform: scale(1.3);
-    padding: 10px 0px 10px 12px;
+    margin-left: 15px;
+    
 `;
 export const ButtonInput = styled.div`
     font-size: 20px;
-    font-family: Source Sans Pro, sans-serif;
+    font-family: sans-serif;
     font-weight: 750;
     padding: 0px 10px 0px 15px;
 `;
 
 export const InputPostButton = styled.button`
-    position: absolute;
+    position: relative;
     background-color: #C0C0C0;
-    height: 62px;
+    height: 60px;
     width: 105px;
-    left: 600px;
-    top: 118px;
+    left: 470px;
+    top: -20px;
     border: none;
     border-radius: 10px;
     color: black; 
@@ -112,6 +108,6 @@ export const InputPostButton = styled.button`
         background-color: #fb6d6c;
         color: #fff;
     }
-    transition: 0.1s;
+    transition: 0.5s;
 `;
 
