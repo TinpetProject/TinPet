@@ -1,6 +1,4 @@
 const User = require("../models/user");
-const Authentication = require("../models/authentication");
-const nodemailer = require("nodemailer");
 const tryCatchBlock = require("../util/function").tryCatchBlockForController;
 const HttpError = require("../models/http-error");
 const sendMessageSchema = require("../schemas/schemas").sendMessage;
@@ -8,18 +6,20 @@ const ioUtil = require("../util/socket");
 
 module.exports = {
   sendMessage: tryCatchBlock(sendMessageSchema, async (req, res, next) => {
-    console.log("send message");
     const { content, targetUserID } = req.body;
     const userID = req.userData.userID;
-    const validTargetUserID = await User.validateUserID(targetUserID);
-    if (!validTargetUserID) return next(new HttpError("SEND_MESSAGE_FAIL_RECEIVER_NOT_EXIST", 404));
 
-    const messageID = await User.sendMessage(userID, targetUserID, content);
+    const userIDIsExist = await User.isUserIDExist(targetUserID);
+    if (!userIDIsExist) return next(new HttpError("SEND_MESSAGE_FAIL_RECEIVER_NOT_EXIST", 404));
+
+    const user = new User({ userID });
+    const messageID = await user.sendMessage(targetUserID, content);
 
     ioUtil.triggerEmit(targetUserID, "message", { content, userID, messageID });
 
     return res.status(200).send({ message: "SEND_MESSAGE_SUCCESS", data: { messageID } });
   }),
+
   getMessageList: tryCatchBlock(null, async (req, res, next) => {
     return res.status(200).send({
       message: "SEND_MESSAGE_SUCCESS",
@@ -43,6 +43,7 @@ module.exports = {
       ],
     });
   }),
+  
   getMessage: tryCatchBlock(null, async (req, res, next) => {
     let data;
     console.log(req.params.targetUserID);

@@ -15,8 +15,8 @@ module.exports = {
   tryCatchBlockForController: (schema, passInFunc) => {
     return async (req, res, next) => {
       if (schema) {
-        const validate = ajv.compile(schema);
-        const validRequest = validate(req.body);
+        const validateRequest = ajv.compile(schema);
+        const validRequest = validateRequest(req.body);
         if (!validRequest) return next(new HttpError("REQUEST_FAIL_INVALID_SCHEMA", 400));
       }
       try {
