@@ -1,10 +1,10 @@
 const mysql = require("mysql2");
 
 const pool = mysql.createPool({
-  host: "tinpet.clm9yz8uubsm.us-east-2.rds.amazonaws.com",
-  user: "admin",
-  database: "tinpet",
-  password: "dung1234",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
   multipleStatements: true,
 });
 

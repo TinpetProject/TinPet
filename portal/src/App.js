@@ -1,23 +1,12 @@
-import { HomePage, ContentWrapper, Content } from "./styled-component/style";
-import NavBar from "./components/NavBar";
-import SideBar from "./components/SideBar";
+import { HomePage } from "./styled-component/style";
 import Messenger from "./pages/Messenger";
 import Dashboard from "./screen/Dashboard/Dashboard";
 import Login from "./screen/Login";
-
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import jwt_decode from "jwt-decode";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Signup from "./screen/Signup";
-
-import InputPost from "./screen/Profile/InputPost";
-import ProfileHead from "./screen/Profile/ProfileHead";
-import Pictures from "./screen/Profile/Picture";
-import AboutPet from "./screen/Profile/AboutPet";
-import Post from "./screen/Profile/Post";
 import Matches from "./screen/Matches/Matches";
-import { useMemo } from "react";
 import openSocket from "socket.io-client";
 
 function App() {
