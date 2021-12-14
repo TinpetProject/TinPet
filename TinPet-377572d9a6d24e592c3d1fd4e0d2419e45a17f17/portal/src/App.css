@@ -1,0 +1,7 @@
+.main {
+    width: 100%;
+    display: flex;
+    margin-top: 60px;
+    position: relative;
+    margin-left: calc((100vw - 1140px)/2 + 220px);
+}
