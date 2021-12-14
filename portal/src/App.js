@@ -1,13 +1,14 @@
 import { HomePage } from "./styled-component/style";
-import Messenger from "./pages/Messenger";
-import Dashboard from "./screen/Dashboard/Dashboard";
 import Login from "./screen/Login";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Signup from "./screen/Signup";
+import Profile from "./screen/Profile";
 import Matches from "./screen/Matches/Matches";
 import openSocket from "socket.io-client";
+import Dashboard from "./screen/Dashboard/Dashboard"
+import Messenger from "./pages/Messenger"
 
 function App() {
   const [userID, setUserID] = useState();
@@ -15,6 +16,7 @@ function App() {
 
   const getUserInfo = (userInfo) => {
     setUserID(userInfo.userID);
+
   };
   
   return (

@@ -1,62 +1,48 @@
 import styled from "styled-components";
 
 export const AboutWrapper = styled.div`
-    position: absolute;
-    width: 415px;
-    height: 474px;
-    left: 775px;
-    top: 1130px;
+    position: relative;
+    width: 300px;
+    height: 400px;
+    left: 620px;
+    top: -140px;
     background: #FFFFFF;
     border-radius: 15px;
 `;
-export const Topic = styled.button`
-    position: absolute;
-    left: 25px;
-    top: 25px;
-    border: none;
+export const Topic = styled.text`
+    position: relative;
+    top: 20px;
+    left: 20px;
     background: #ffffff;
-    font-family: Source Sans Pro, sans-serif;
-    font-style: normal;
+    font-family: sans-serif;
     font-weight: bold;
-    font-size: 35px;
+    font-size: 28px;
     color: #373737;
-    cursor: pointer;
-    &:hover {
-        opacity: 0.7;
-    }
 `;
 export const About = styled.div`
-    display: flex;
+    display: relative;
     flex-direction: column;
     align-items: flex-start;
-    padding: 0px;
     border-bottom: solid 2px;
-    position: absolute;
-    width: 355px;
-    height: 250px;
-    left: 30px;
-    top: 80px;
+    position: relative;
+    width: 260px;
+    height: 220px;
+    left: 20px;
+    top: 30px;
 `;
 export const AboutInfo = styled.div`
     display: flex;
-    padding: 0px;
     position: static;
-    width: 355px;
-    height: 40px;
+    width: 260px;
+    height: 30px;
     font-family: Source Sans Pro, sans-serif;
-    font-style: normal;
-    font-weight: normal;
     font-size: 20px;
 `;
 export const Fav = styled.div`
     display: flex;
-    padding: 0px;
     position: static;
-    width: 355px;
-    height: 80px;
+    width: 260px;
     font-family: Source Sans Pro, sans-serif;
-    font-style: normal;
-    font-weight: normal;
     line-height: 30px;
     font-size: 20px;
 `;
@@ -69,21 +55,21 @@ export const Followers = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
-    width: 355px;
-    height: 105px;
-    left: 30px;
-    top: 340px;
+    position: relative;
+    width: 260px;
+    height: 85px;
+    top: 40px;
+    left: 20px;
 `;
 export const FollowNumber = styled.text`
-    font-family: Source Sans Pro, sans-serif;
+    font-family: sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 40px;
     color: #373737;
 `;
 export const Digit = styled.text`
-    font-family: Source Sans Pro, sans-serif;
+    font-family: sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 24px;

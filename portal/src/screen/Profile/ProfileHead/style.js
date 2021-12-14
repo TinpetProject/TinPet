@@ -1,63 +1,54 @@
 import styled from "styled-components";
 
 export const HeadWrapper = styled.div`
-  position: absolute;
-  width: 1170px;
-  height: 585px;
-  left: 20px;
+  position: relative;
+  width: 920px;
+  height: 452px;
   top: 20px;
   border-radius: 15px;
   background-color: #ffffff;
-
 `;
 
 export const Wallpaper = styled.img`
   border-radius: 15px 15px 0px 0px;
-  position: absolute;
-  width: 1170px;
-  height: 516px;
-  left: 0px;
-  top: 0px;
+  position: relative;
+  width: 920px;
+  height: 400px;
   object-fit: cover;
 `;
 
 export const Avatar = styled.img`
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  left: 36px;
-  top: 386px;
+  position: relative;
+  width: 150px;
+  height: 150px;
+  left: 40px;
+  top: -200px;
   object-fit: cover;
-  border-radius: 100px;
-  border: 5px solid #ffffff;
+  border-radius: 10000px;
+  border: 4px solid #ffffff;
 `;
 
-export const Name = styled.image`
-  position: absolute;
-  width: 98px;
+export const Name = styled.text`
+  position: relative;
+  width: 100px;
   height: 39px;
-  left: 250px;
-  top: 450px;
+  left: 220px;
+  top: -100px;
 
   font-family: Source Sans Pro, sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 45px;
   display: flex;
-  align-items: center;
-
   color: #FFFFFF;
 `;
 
-export const HeadBar = styled.image`
-  border-radius: 0px 0px 15px 0px;
-  position: absolute;
-  width: 921px;
-  height: 69px;
-  left: 249px;
-  top: 516px;
-
+export const HeadBar = styled.div`
+  border-radius: 15px;
+  position: relative;
+  height: 48px;
+  padding-left: 220px;
   background: #FFFFFF;
 `;
 
@@ -65,16 +56,16 @@ export const Button = styled.button`
   background-color: #F9F9F9;
   border: none;
   color: black; 
-  padding: 18px;
+  padding: 10px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-family: Source Sans Pro, sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
-  margin: 0px 1px;
+  margin-right: 5px;
   cursor: pointer;
   &:hover {
     border-bottom: solid 3px;
+    opacity: 0.5;
   }
 `;

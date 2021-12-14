@@ -18,10 +18,11 @@ import {
   Wrapper,
   WrapperApp,
 } from "./style";
-import PetsIcon from "@mui/icons-material/Pets";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import { Icon } from "@iconify/react";
+
 
 const Login = React.memo(({ getUserInfo, socket }) => {
   const [email, setEmail] = React.useState("");
@@ -51,9 +52,7 @@ const Login = React.memo(({ getUserInfo, socket }) => {
     <>
       <Wrapper>
         <WrapperApp>
-          <LogoWrapper>
-            <PetsIcon sx={{ fontSize: "100px" }} />{" "}
-          </LogoWrapper>{" "}
+          <Icon className="signup__logo-icon" icon="icons8:cat-footprint" />
           <TextWrapper> Tinpet </TextWrapper>{" "}
         </WrapperApp>{" "}
         <ContentBox>

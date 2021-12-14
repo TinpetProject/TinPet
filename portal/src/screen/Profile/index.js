@@ -1,12 +1,29 @@
 import React from "react";
-// import {
-  
-// } from "./style";
-import { Avatar } from "@mui/material";
+import NavBar from "../../components/NavBar";
+import SideBar from "../../components/SideBar";
+import { ProfileWrapper } from "./style";
+import ProfileHead from "./ProfileHead";
+import InputPost from "./InputPost";
+import Post from "./Post";
+import Pictures from "./Picture";
+import AboutPet from "./AboutPet";
+import { Main } from "../../styled-component/style";
 
 const Profile = () => {
   return (
-    <navbar></navbar>
+    <>
+      <NavBar />
+      <SideBar />
+      <Main>
+        <ProfileWrapper>
+          <ProfileHead />
+          <InputPost />
+          <Pictures />
+          <AboutPet />
+          {/* <Post /> */}
+        </ProfileWrapper>
+      </Main>      
+    </>
   );
 };
 
