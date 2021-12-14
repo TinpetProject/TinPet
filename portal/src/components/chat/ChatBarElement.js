@@ -20,7 +20,7 @@ const ChatBarElement = React.memo(({ conversation, openConversation, seenMessage
       </div>
       <div className="conversation__content-wrapper">
         <p className="conversation__name">{name}</p>
-        <p className={`conversation__message ${isSeen ? null : "not-seen"}`}>{message}</p>
+        <p className={`conversation__message ${isSeen ? "" : "not-seen"}`}>{message}</p>
       </div>
     </li>
   );

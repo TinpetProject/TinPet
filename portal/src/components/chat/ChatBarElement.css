@@ -3,6 +3,7 @@
   align-items: center;
   margin: 20px 10px;
   cursor: pointer;
+  width: 100%;
 }
 
 .conversation__avatar {
@@ -15,6 +16,7 @@
   display: flex;
   color: black;
   size: 12px;
+  width: 190px;
 }
 
 .conversation__message {

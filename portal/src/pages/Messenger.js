@@ -27,6 +27,7 @@ const Messenger = React.memo(({ userID, socket }) => {
     setConversationList((prevList) => {
       let updatedConversation;
       const newConversationList = prevList.filter((conversation) => {
+        console.log(conversation);
         if (conversation.userID === updatedData.userID)
           updatedConversation = { ...conversation, message: updatedData.content, isSeen: !!updatedData.isSeen };
         return conversation.userID !== updatedData.userID;
