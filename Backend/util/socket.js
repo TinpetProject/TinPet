@@ -16,6 +16,9 @@ module.exports = {
     });
     return io;
   },
+  disconect: (userID) => {
+    delete connections[userID];
+  },
   getIO: () => {
     if (!io) {
       throw new Error("socket.io is not inittialized");

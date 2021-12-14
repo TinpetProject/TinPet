@@ -2,6 +2,7 @@ const express = require("express");
 const authRoute = require("./routes/auth-router");
 const userRoute = require("./routes/user-router");
 const chatRoute = require("./routes/chat-router");
+const postRoute = require("./routes/post-router");
 require("dotenv").config();
 
 const app = express();
@@ -20,6 +21,8 @@ app.use("/auth", authRoute);
 app.use("/user", userRoute);
 
 app.use("/chat", chatRoute);
+
+app.use("/post", postRoute);
 
 app.use((error, req, res, next) => {
   res.status(error.errorCode);

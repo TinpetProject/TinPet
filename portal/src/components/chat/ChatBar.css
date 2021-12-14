@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .chat-bar__navigation__section {
@@ -33,9 +34,11 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  width: 100%;
 }
 
 .chat-bar__content__element {
   display: flex;
   align-items: center;
+  width: 100%;
 }
