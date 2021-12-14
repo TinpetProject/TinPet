@@ -1,0 +1,39 @@
+.chat__message {
+  background-color: #e5e5e5;
+  max-width: 600px;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #373737;
+}
+
+.chat__avatar {
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.chat__avatar.hidden img {
+  display: none;
+}
+
+.chat-wrapper--sender {
+  display: flex;
+  flex-flow: row-reverse;
+  margin: 5px 0;
+}
+
+.chat-wrapper--sender .chat__avatar {
+  margin-left: 12px;
+  margin-right: 0;
+}
+
+.chat-wrapper--receiver {
+  display: flex;
+  margin: 5px 0;
+}
+
+.chat-wrapper--receiver .chat__avatar {
+  margin-left: 0;
+  margin-right: 12px;
+}
