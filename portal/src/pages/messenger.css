@@ -11,6 +11,9 @@
   left: 30px;
   right: 0;
   bottom: 30px;
+
+  margin-top: 60px;
+  margin-left: calc((100vw - 1140px) / 2 + 220px);
 }
 
 .messenger__chat-window {
@@ -23,10 +26,14 @@
 
 .chat-window__messages-wrapper {
   width: calc(100% - 40px);
+  height: 650px;
   position: absolute;
   bottom: 76px;
   right: 20px;
   left: 20px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .chat-window__input-wrapper {

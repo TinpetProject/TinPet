@@ -1,57 +1,110 @@
 import React, { useState, useEffect } from "react";
 import ChatMessage from "./ChatMessage";
-import { useRef } from "react";
+import { useRef, useCallback } from "react";
 import ChatInput from "./ChatInput";
 
-const ChatWindow = React.memo(({ userID, chosenUserID, socket }) => {
-  const senderRef = useRef();
-  const receiverRef = useRef();
+const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceivedHandler }) => {
   const [conversation, setConversation] = useState([]);
+  const [messageOffset, setMessageOffset] = useState(null);
+  const [hasMoreMessage, setHasMoreMessage] = useState(true);
+  const additionalOffset = useRef(0);
+  let isLatestSenderMessage = true;
+  let isLatestReceiverMessage = true;
   useEffect(() => {
-    socket.on("message", (data) => {
-      if (data.userID === chosenUserID) {
-        setConversation((prev) => [...prev, { ...data }]);
-      }
+    socket?.on("message", (data) => {
+      newMessageReceivedHandler(data);
+      if (data.userID === chosenUserID) setConversation((prev) => [...prev, { ...data }]);
     });
   }, [socket, chosenUserID]);
 
   useEffect(() => {
-    const token = localStorage.getItem(userID);
     const fetchConversation = async () => {
-      chosenUserID = chosenUserID ? chosenUserID : userID;
-      const result = await fetch(`http://localhost:8888/chat/${chosenUserID}/1`, {
+      const token = localStorage.getItem(userID);
+      const rawData = await fetch(`http://localhost:8888/chat/${chosenUserID}/${messageOffset}`, {
         method: "GET",
         headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
       });
-      const conversation = (await result.json()).data;
-      setConversation(conversation);
+      if (!rawData.ok) return;
+
+      const newConversation = (await rawData.json()).data;
+      if (newConversation.length === 0) return setHasMoreMessage(false);
+
+      setConversation((prevConversation) => [...prevConversation, ...newConversation]);
     };
-    fetchConversation();
+    if (chosenUserID && hasMoreMessage) {
+      fetchConversation();
+    }
+  }, [messageOffset]);
+
+  useEffect(() => {
+    if (chosenUserID) {
+      setHasMoreMessage(true);
+      setMessageOffset(0);
+      setConversation([]);
+      additionalOffset.current = 0;
+    }
   }, [chosenUserID]);
 
+  const observer = useRef();
+  const lastMessageRef = useCallback(
+    (lastMessageElement) => {
+      observer.current?.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        return entries[0].isIntersecting && hasMoreMessage ? setMessageOffset((prev) => prev + 20 + additionalOffset.current) : null;
+      });
+      return lastMessageElement ? observer.current.observe(lastMessageElement) : null;
+    },
+    [hasMoreMessage]
+  );
+
   const sendMessage = async (message) => {
-    const messageID = Math.random() * 1000000000000000;
-    setConversation((prev) => [...prev, { userID, content: message, messageID }]);
     const token = localStorage.getItem(userID);
-    const result = await fetch(`http://localhost:8888/chat`, {
+    const rawData = await fetch(`http://localhost:8888/chat`, {
       method: "POST",
       headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
       body: JSON.stringify({ targetUserID: chosenUserID, content: message }),
     });
-    // return socket.emit("message", { receiver: chosenUserID, message, username: userID, messageID });
+    const data = (await rawData.json()).data;
+
+    const newMessage = { userID, content: message, messageID: data.messageID };
+    setConversation((prev) => [newMessage, ...prev]);
+
+    const newMessageForChatBar = { userID: chosenUserID, content: message, isSeen: true };
+    newMessageReceivedHandler(newMessageForChatBar);
+
+    additionalOffset.current = additionalOffset.current + 1;
+  };
+
+  const shouldAvarShow = (isSender) => {
+    let isAvarShow = false;
+    if (isSender && isLatestSenderMessage) {
+      isAvarShow = true;
+      isLatestSenderMessage = false;
+    }
+    if (!isSender && isLatestReceiverMessage) {
+      isAvarShow = true;
+      isLatestReceiverMessage = false;
+    }
+    return isAvarShow;
   };
 
   return (
     <div className="messenger__chat-window">
       <div className="chat-window__messages-wrapper">
-        {conversation
-          ? conversation.map((message) => {
-              const isSender = message.userID === userID;
-              return (
-                <ChatMessage key={message.messageID} isSender={isSender} message={message.content} refference={isSender ? senderRef : receiverRef} />
-              );
-            })
-          : null}
+        {conversation?.map((message, index) => {
+          const isSender = message.userID === userID;
+          const isLastMessage = index === conversation.length - 1;
+          const isAvarShow = shouldAvarShow(isSender);
+          return (
+            <ChatMessage
+              lastMessageRef={isLastMessage ? lastMessageRef : null}
+              key={message.messageID}
+              message={message.content}
+              isSender={isSender}
+              isAvarShow={isAvarShow}
+            />
+          );
+        })}
       </div>
       <ChatInput sendMessageHandler={sendMessage} />
     </div>

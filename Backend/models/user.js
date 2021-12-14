@@ -61,16 +61,34 @@ module.exports = class User {
   });
 
   sendMessage = tryCatchBlock(async (targetUserID, content) => {
-    // // get user: name,nickname,avatar,background,intro,pics
-    // let [resultSet] = await database.query(
-    //   `CALL Proc_SendMessage('c0646e0a-460b-11ec-a250-892621329b72','11272983-4328-1c6e-8b08-768121fccb40','TESTING MESSAGE',@returnValue); SELECT @returnValue;`
-    // );
-
-    let [resultSet] = await database.query(
+    const [resultSet] = await database.query(
       `CALL Proc_SendMessage('${this.userID}','${targetUserID}','${content}',@returnValue); SELECT @returnValue;`
     );
     const messageID = resultSet[1][0]["@returnValue"];
     return messageID;
+  });
+
+  getConversationList = tryCatchBlock(async () => {
+    const [resultSet] = await database.query(`CALL Proc_GetUserConversation('${this.userID}')`);
+    const conversationlist = resultSet[0].map((conversation) => ({
+      avatar: conversation.targetUserAvatar,
+      userID: conversation.targetUserID,
+      name: conversation.targetUserName,
+      message: conversation.message,
+      isSeen: !!conversation.status,
+    }));
+    console.log(conversationlist);
+    return conversationlist;
+  });
+
+  getMessageByOffset = tryCatchBlock(async (targetUserID, offset) => {
+    const [resultSet] = await database.query(`CALL Proc_GetConversationMessagesByOffset('${this.userID}','${targetUserID}','${offset} ')`);
+    const conversation = resultSet[0].map((message) => ({
+      messageID: message.messageID,
+      content: message.content,
+      userID: message.userID,
+    }));
+    return conversation;
   });
 
   // getPostByOffset: tryCatchBlock(async (userID, offset) => {

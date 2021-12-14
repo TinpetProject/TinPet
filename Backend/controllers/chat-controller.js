@@ -21,32 +21,45 @@ module.exports = {
   }),
 
   getMessageList: tryCatchBlock(null, async (req, res, next) => {
+    const userID = req.userData.userID;
+    const user = new User({ userID });
+
+    const conversationList = await user.getConversationList();
+
     return res.status(200).send({
       message: "SEND_MESSAGE_SUCCESS",
-      data: [
-        {
-          avatar: "https://media.travelmag.vn/files/quyensok/2021/02/19/151744159_1858284524329401_8015280447006743040_n-1629.jpg",
-          message: "tin nhắn với đinh khánh khang",
-          isSeen: true,
-          name: "Đinh Khánh Khang",
-          receiveTime: "Testing Time",
-          userID: "1139701f-7fb1-2b73-cce5-7797b077698d",
-        },
-        {
-          avatar: "https://media.travelmag.vn/files/quyensok/2021/02/19/151744159_1858284524329401_8015280447006743040_n-1629.jpg",
-          message: "tin nhắn với chung khánh toàn",
-          isSeen: true,
-          name: "Chung Khánh Toàn",
-          receiveTime: "Testing Time",
-          userID: "11272983-4328-1c6e-8b08-768121fccb40",
-        },
-      ],
+      data: conversationList,
+      // data: [
+      //   {
+      //     avatar: "https://media.travelmag.vn/files/quyensok/2021/02/19/151744159_1858284524329401_8015280447006743040_n-1629.jpg",
+      //     message: "tin nhắn với đinh khánh khang",
+      //     isSeen: true,
+      //     name: "Đinh Khánh Khang",
+      //     receiveTime: "Testing Time",
+      //     userID: "1139701f-7fb1-2b73-cce5-7797b077698d",
+      //   },
+      //   {
+      //     avatar: "https://media.travelmag.vn/files/quyensok/2021/02/19/151744159_1858284524329401_8015280447006743040_n-1629.jpg",
+      //     message: "tin nhắn với chung khánh toàn",
+      //     isSeen: true,
+      //     name: "Chung Khánh Toàn",
+      //     receiveTime: "Testing Time",
+      //     userID: "11272983-4328-1c6e-8b08-768121fccb40",
+      //   },
+      // ],
     });
   }),
-  
-  getMessage: tryCatchBlock(null, async (req, res, next) => {
+
+  getMessageByOffset: tryCatchBlock(null, async (req, res, next) => {
+    const userID = req.userData.userID;
+    const targetUserID = req.params.targetUserID;
+    const offset = req.params.offset;
+    const user = new User({ userID });
+
+    const conversationList = await user.getMessageByOffset(targetUserID, offset);
+
     let data;
-    console.log(req.params.targetUserID);
+
     switch (req.params.targetUserID) {
       case "1139701f-7fb1-2b73-cce5-7797b077698d":
         data = [{ content: "tin nhắn với đinh khánh khang", userID: req.params.targetUserID, messageID: 123 }];
@@ -56,6 +69,6 @@ module.exports = {
         break;
     }
 
-    return res.status(200).send({ message: "SEND_MESSAGE_SUCCESS", data });
+    return res.status(200).send({ message: "SEND_MESSAGE_SUCCESS", data: conversationList });
   }),
 };

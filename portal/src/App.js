@@ -17,24 +17,23 @@ import Pictures from "./screen/Profile/Picture";
 import AboutPet from "./screen/Profile/AboutPet";
 import Post from "./screen/Profile/Post";
 import Matches from "./screen/Matches/Matches";
-
+import { useMemo } from "react";
 import openSocket from "socket.io-client";
 
 function App() {
   const [userID, setUserID] = useState();
+  const [socket, setSocket] = useState(openSocket("http://localhost:8888"));
 
   const getUserInfo = (userInfo) => {
     setUserID(userInfo.userID);
   };
-  const socket = useRef();
-  socket.current = openSocket("http://localhost:8888");
-
+  
   return (
     <>
       <HomePage>
         <Switch>
           <Route exact path="/login">
-            <Login getUserInfo={getUserInfo} socket={socket.current} />
+            <Login getUserInfo={getUserInfo} socket={socket} />
           </Route>
           <Route exact path="/signup">
             <Signup />
@@ -46,7 +45,7 @@ function App() {
             <Matches />
           </Route>
           <Route exact path="/messenger">
-            <Messenger userID={userID} socket={socket.current} />
+            <Messenger userID={userID} socket={socket} />
           </Route>
           <Redirect from="/" to="/login" />
         </Switch>

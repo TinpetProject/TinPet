@@ -41,7 +41,7 @@ const Login = React.memo(({ getUserInfo, socket }) => {
         getUserInfo(userInfo);
         localStorage.setItem(userInfo.userID, token);
 
-        socket.emit("login", { socketID: socket.id, userID: userInfo.userID });
+        socket?.emit("login", { socketID: socket.id, userID: userInfo.userID });
         history.push("/messenger");
       })
       .catch((err) => console.log(err));
