@@ -20,13 +20,15 @@
     height: calc(100vh - 60px - 40px);
     width: 650px;
     position: relative;
+    overflow: hidden;
+    /*overflow de khong phai border radius cai chat head*/
 }
 
 .chat-window__messages-wrapper {
     width: calc(100% - 40px);
-    height: 650px;
+    height: calc(100vh - 240px);
     position: absolute;
-    bottom: 76px;
+    bottom: 75px;
     right: 20px;
     left: 20px;
     overflow: auto;
