@@ -26,13 +26,14 @@
 
 .chat-window__messages-wrapper {
     width: calc(100% - 40px);
-    height: calc(100vh - 240px);
+    height: calc(100vh - 235px);
     position: absolute;
-    bottom: 75px;
+    bottom: 70px;
     right: 20px;
     left: 20px;
     overflow: auto;
     display: flex;
+    padding-bottom: 3px;
     flex-direction: column-reverse;
 }
 
