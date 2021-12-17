@@ -13,7 +13,7 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
   useEffect(() => {
     socket?.on("message", (data) => {
       newMessageReceivedHandler(data);
-      if (data.userID === chosenUserID) setConversation((prev) => [...prev, { ...data }]);
+      if (data.userID === chosenUserID) setConversation((prev) => [{ ...data }, ...prev]);
     });
   }, [socket, chosenUserID]);
 
