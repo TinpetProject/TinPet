@@ -3,7 +3,7 @@ const authRoute = require("./routes/auth-router");
 const userRoute = require("./routes/user-router");
 const chatRoute = require("./routes/chat-router");
 const postRoute = require("./routes/post-router");
-const database = require("./util/database");
+const socket = require("./models/SocketIO");
 require("dotenv").config();
 
 const app = express();
@@ -32,4 +32,4 @@ app.use((error, req, res, next) => {
 
 const server = app.listen(process.env.LISTENING_PORT || 3000);
 
-const io = require("./util/socket").init(server);
+socket.init(server);

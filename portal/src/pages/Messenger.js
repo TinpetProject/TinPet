@@ -23,25 +23,15 @@ const Messenger = React.memo(({ userID, socket }) => {
     fetchList();
   }, []);
 
-  const getUserInfoByID = async (userID) => {};
-
   const updateConversationList = (updatedData) => {
     setConversationList((prevList) => {
       let updatedConversation;
       const newConversationList = prevList.filter((conversation) => {
         if (conversation.userID === updatedData.userID) {
-          // isNewConversation = false;
           updatedConversation = { ...conversation, message: updatedData.content, isSeen: !!updatedData.isSeen };
         }
         return conversation.userID !== updatedData.userID;
       });
-      // if (isNewConversation) {
-      //   console.log("in here");
-      //   const user = await getUserInfoByID(updatedData.userID);
-      //   const newConversation = { avatar: user.avartar, message: updatedData.content, isSeen: false, name: user.name, userID: updatedData.userID };
-      //   newConversationList.unshift(newConversation);
-      //   return newConversationList;
-      // }
       newConversationList.unshift(updatedConversation);
       return newConversationList;
     });
