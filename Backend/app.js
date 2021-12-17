@@ -3,6 +3,7 @@ const authRoute = require("./routes/auth-router");
 const userRoute = require("./routes/user-router");
 const chatRoute = require("./routes/chat-router");
 const postRoute = require("./routes/post-router");
+const database = require("./util/database");
 require("dotenv").config();
 
 const app = express();
