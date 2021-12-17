@@ -6,22 +6,22 @@ import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
 
 const Messenger = React.memo(({ userID, socket }) => {
-  const [chosenUserID, setChosenUserID] = useState("");
-  const [conversationList, setConversationList] = useState([]);
+    const [chosenUserID, setChosenUserID] = useState("");
+    const [conversationList, setConversationList] = useState([]);
 
-  useEffect(() => {
-    const fetchList = async () => {
-      const token = localStorage.getItem(userID);
-      const result = await fetch(`http://localhost:8888/chat`, {
-        method: "GET",
-        headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
-      });
-      const listOfConversations = (await result.json()).data;
-      setConversationList(listOfConversations);
-      setChosenUserID(listOfConversations[0].userID);
-    };
-    fetchList();
-  }, []);
+    //   useEffect(() => {
+    //     const fetchList = async () => {
+    //       const token = localStorage.getItem(userID);
+    //       const result = await fetch(`http://localhost:8888/chat`, {
+    //         method: "GET",
+    //         headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
+    //       });
+    //       const listOfConversations = (await result.json()).data;
+    //       setConversationList(listOfConversations);
+    //       setChosenUserID(listOfConversations[0].userID);
+    //     };
+    //     fetchList();
+    //   }, []);
 
   const getUserInfoByID = async (userID) => {};
 
@@ -47,22 +47,27 @@ const Messenger = React.memo(({ userID, socket }) => {
     });
   };
 
-  const openConversation = (targetUserID) => {
-    setChosenUserID(targetUserID);
-  };
+    const openConversation = (targetUserID) => {
+        setChosenUserID(targetUserID);
+    };
 
-  const seenMessage = (messageID) => {};
+    const seenMessage = (messageID) => {};
 
-  return (
-    <>
-      <NavBar />
-      <SideBar />
-      <div className="messenger">
-        <ChatWindow chosenUserID={chosenUserID} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
-        <ChatBar openConversation={openConversation} seenMessage={seenMessage} conversationList={conversationList} />
-      </div>
-    </>
-  );
+    return (
+        <>
+            <NavBar />
+            <SideBar />
+            <div className="messenger">
+                <ChatWindow
+                    chosenUserID={chosenUserID}
+                    socket={socket}
+                    userID={userID}
+                    newMessageReceivedHandler={updateConversationList}
+                />
+                <ChatBar openConversation={openConversation} seenMessage={seenMessage} conversationList={conversationList} />
+            </div>
+        </>
+    );
 });
 
 export default Messenger;

@@ -1,0 +1,9 @@
+.signup__logo-icon {
+    font-size: 6rem;
+    transform: translateX(10px);
+}
+
+.signup__logo-icon:hover {
+    color: white;
+    cursor: default;
+}

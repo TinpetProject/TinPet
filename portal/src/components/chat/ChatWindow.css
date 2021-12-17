@@ -1,0 +1,11 @@
+:root {
+    --main-gray-color: #bfbfbf;
+    --main-white-color: #fff;
+}
+
+.messenger__chat-head {
+    position: relative;
+    background-color: var(--main-white-color);
+    height: 65px;
+    border-bottom: 2px solid var(--main-gray-color);
+}

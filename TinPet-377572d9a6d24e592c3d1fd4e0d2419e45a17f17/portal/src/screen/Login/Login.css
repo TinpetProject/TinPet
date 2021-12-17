@@ -1,0 +1,9 @@
+.signin__logo-icon {
+    font-size: 6rem;
+    transform: translateX(10px);
+}
+
+.signin__logo-icon:hover {
+    color: white;
+    cursor: default;
+}
