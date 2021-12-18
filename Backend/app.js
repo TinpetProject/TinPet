@@ -1,9 +1,10 @@
+require("dotenv").config();
+
 const express = require("express");
 const authRoute = require("./routes/auth-router");
 const userRoute = require("./routes/user-router");
 const chatRoute = require("./routes/chat-router");
 const postRoute = require("./routes/post-router");
-require("dotenv").config();
 
 const app = express();
 app.use(express.json());
