@@ -4,9 +4,9 @@ import SideBar from "../../components/SideBar";
 import { ProfileWrapper } from "./style";
 import ProfileHead from "./ProfileHead";
 import InputPost from "./InputPost";
-import Post from "./Post";
 import Pictures from "./Picture";
 import AboutPet from "./AboutPet";
+import Feed from "./Feed";
 import { Main } from "../../styled-component/style";
 
 const Profile = () => {
@@ -20,7 +20,7 @@ const Profile = () => {
           <InputPost />
           <Pictures />
           <AboutPet />
-          {/* <Post /> */}
+          <Feed />
         </ProfileWrapper>
       </Main>      
     </>
