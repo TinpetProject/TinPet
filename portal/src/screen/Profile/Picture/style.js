@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export const PictureWrapper = styled.div`
-    position: relative;
+    position: absolute;
     width: 300px;
     height: 340px;
     left: 620px;
-    top: -163px;
+    top: 488px;
     background: #FFFFFF;
     border-radius: 15px;
+    box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
 `;
 export const Topic = styled.text`
     position: relative;
@@ -37,7 +38,7 @@ export const View = styled.button`
 `;
 export const PictureListWrapper = styled.div`
     position: relative;
-    left: 19px;
+    left: 20px;
     top: 30px;
 `;
 
