@@ -7,12 +7,13 @@ import {
         PostBottomLeft, PostLikeCounter,PostCommentCounter,
         PostBottomRight, PostLike, PostComment
 } from './style';
-import { Users } from "../dummyData";
+
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CommentIcon from '@mui/icons-material/Comment';
 import { useState } from "react";
 //data
+import { Users } from "../dummyData";
 
 export default function Post({ post }) {
   const [like,setLike] = useState(post.like)
@@ -39,8 +40,8 @@ export default function Post({ post }) {
             <PostLikeCounter>{like} likes</PostLikeCounter>
             <PostCommentCounter>{post.comment} comments</PostCommentCounter>
           </PostBottomLeft>
-          <PostBottomRight>
-            <PostLike><ThumbUpIcon sx={{marginRight:1}} fontSize="small" onClick={likeHandler}/>Like</PostLike>
+          <PostBottomRight >
+            <PostLike onClick={likeHandler}><ThumbUpIcon sx={{marginRight:1}} fontSize="small" />Like</PostLike>
             <PostComment><CommentIcon sx={{marginRight:1}} fontSize="small"/>Comment</PostComment>
           </PostBottomRight>
         </PostBottom>
