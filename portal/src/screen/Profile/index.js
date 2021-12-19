@@ -6,8 +6,8 @@ import ProfileHead from "./ProfileHead";
 import InputPost from "./InputPost";
 import Pictures from "./Picture";
 import AboutPet from "./AboutPet";
-import Feed from "./Feed";
 import { Main } from "../../styled-component/style";
+import Feed from "./Feed";
 
 const Profile = () => {
   return (
@@ -18,9 +18,9 @@ const Profile = () => {
         <ProfileWrapper>
           <ProfileHead />
           <InputPost />
+          <Feed/>
           <Pictures />
           <AboutPet />
-          <Feed />
         </ProfileWrapper>
       </Main>      
     </>

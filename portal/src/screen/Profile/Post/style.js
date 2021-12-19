@@ -7,7 +7,7 @@ export const PostWrapper = styled.div`
     background: #FFFFFF;
     border-radius: 15px;
     box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
-    padding: 25px;
+    padding: 20px;
     margin-bottom: 20px;
 `;
 
@@ -17,6 +17,7 @@ export const PostTop = styled.div`
     align-items: center;
 `;
 export const Avatar = styled.img`
+    position: relative;
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -71,7 +72,7 @@ export const PostBottom = styled.div`
 
 export const PostBottomLeft = styled.div`
     position: relative;
-    width: 350px;
+    width: 360px;
     display: inline-block;
     display: flex;
 `;
@@ -96,7 +97,7 @@ export const PostBottomRight = styled.div`
 
 export const PostLike = styled.button`
     border: none;
-    margin-right: 20px;
+    margin-right: 30px;
     background-color: #ffffff;
     font-size: 16px;
     font-family: sans-serif;
