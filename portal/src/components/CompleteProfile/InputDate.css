@@ -1,0 +1,23 @@
+:root {
+    --secondary-white-color: #e4e4e4;
+    --secondary-black-color: #a4a4a4;
+}
+
+.complete-profile__input-date input {
+    width: 300px;
+    height: 36px;
+    border-radius: 5px;
+    padding-left: 10px;
+    border: 1px solid var(--secondary-white-color);
+}
+
+.complete-profile__input-date label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.complete-profile__input-date input:focus {
+    outline: none;
+}

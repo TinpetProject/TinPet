@@ -84,28 +84,30 @@
 
 .best-match__message-btn {
     font-size: 2.2rem;
-    margin-top: 2px;
+    margin-top: 5px;
     position: absolute;
     right: 15px;
     margin-right: 19px;
     color: var(--blur-text-color);
+    transform: scale(0.9);
 
 }
 
 .best-match__plus-btn {
     font-size: 2.3rem;
-    margin-top: 3px;
+    margin-top: 5px;
     left: 30px;
     font-weight: 300;
     position: absolute;
     color: var(--blur-text-color);
+    transform: scale(0.9);
 }
 
 .best-match__heart-btn {
     position: absolute;
-    font-size: 5rem;
+    font-size: 4.8rem;
     left: 50%;
-    margin-top: 1.5rem;
+    margin-top: 1.7rem;
     transform: translateX(-50%);
     color: var(--blur-text-color);
 }

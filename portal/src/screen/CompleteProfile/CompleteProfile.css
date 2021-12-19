@@ -1,0 +1,166 @@
+:root {
+    --main-white-color: #fff;
+    --main-black-color: #373737;
+    --secondary-white-color: #efefef;
+    --secondary-black-color: #c4c4c4;
+}
+
+.complete-profile__wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.complete-profile__background {
+    position: absolute;
+    background-image: url("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*");
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.complete-profile__background::after {
+    content: "";
+    background-color: black;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    opacity: 40%;
+}
+
+.complete-profile__container {
+    height: 720px;
+    width: 700px;
+    background-color: var(--main-white-color);
+    z-index: 5;
+    margin-top: calc((100vh - 720px)/2);
+    border-radius: 14px;
+    position: relative;
+}
+
+.complete-profile__logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    border-bottom: 1.5px solid var(--main-black-color);
+    width: 320px;
+    padding-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.complete-profile__logo-wrapper:hover {
+    cursor: pointer;
+}
+
+.complete-profile__logo {
+    font-size: 4.25rem;
+}
+
+.complete-profile__logo-wrapper span {
+    font-size: 3rem;
+    color: var(--main-black-color);
+    font-weight: bold;
+}
+
+/* ************************************************************************** */
+/* ****************************** UPLOAD PHOTO ****************************** */
+
+.complete-profile__upload-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.complete-profile__upload-photo img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.complete-profile__upload-photo input {
+    display: none;
+}
+
+.complete-profile__upload-photo label {
+    border: 1px solid var(--main-black-color);
+    height: 36px;
+    width: 145px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.complete-profile__upload-photo span {
+    margin-left: 7px;
+}
+
+.complete-profile__upload-photo svg {
+    transform: translateY(1px);
+}
+
+.complete-profile__upload-photo label:hover {
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0px 3px 5px -2px var(--secondary-black-color);
+}
+
+/* ****************************** UPLOAD PHOTO ****************************** */
+/* ************************************************************************** */
+
+
+/* ************************************************************************** */
+/* ****************************** INPUT FIELDS ****************************** */
+
+.complete-profile__input-fields {
+    width: 620px;
+    margin: 0 auto;
+    /* background-color: red; */
+    margin-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* ****************************** INPUT FIELDS ****************************** */
+/* ************************************************************************** */
+
+
+.complete-profile__buttons button {
+    height: 36px;
+    width: 80px;
+    border-radius: 5px;
+    border: none;
+}
+
+.complete-profile__buttons button:hover {
+    cursor: pointer;
+    font-weight: 700;
+    transform: scale(1.05);
+    transition-duration: 0.2s;
+}
+
+.complete-profile__buttons {
+    position: absolute;
+    right: 40px;
+    bottom: 45px;
+}
+
+.complete-profile__clear-btn {
+    margin-right: 15px;
+}
+
+.complete-profile__submit-btn {
+    background-color: var(--main-black-color);
+    color: var(--main-white-color);
+}
