@@ -1,27 +1,47 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./InputSelection.css";
-import Select from "react-select";
 
 export default function InputSelection(props) {
-    const options = [
-        { value: "chocolate", label: "Chocolate" },
-        { value: "strawberry", label: "Strawberry" },
-        { value: "vanilla", label: "Vanilla" },
-    ];
+    const renderOptions = () => {
+        const data = props.list;
+
+        const options = data.map((option) => (
+            <option value={option.value}>
+                {option.label}
+                {option.country}
+                {typeof option !== "object" && option}
+            </option>
+        ));
+
+        return <>{options}</>;
+    };
+
+    const shouldDisable = () => {
+        if (props.label == "") {
+            return props.condition ? false : true;
+        }
+        return false;
+    };
+
+    const selectHandler = (e) => {
+        props.setValue(e.target.value);
+    };
 
     return (
         <div className="complete-profile__input-selection">
-            <label for="">{props.label}</label>
-            <select className="complete-profile__input-selection-field" required>
-                <option value="" selected disabled hidden>
+            <label>{props.label}</label>
+            <select
+                className="complete-profile__input-selection-field"
+                required
+                value={props.value}
+                onChange={selectHandler}
+                disabled={shouldDisable()}
+            >
+                <option selected disabled value="">
                     {props.placeholder}
                 </option>
-                <option value="">1</option>
-                <option value="">1</option>
-                <option value="">1</option>
-                <option value="">1</option>
-                <option value="">1</option>
+                {renderOptions()}
             </select>
         </div>
     );
