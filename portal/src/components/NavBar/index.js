@@ -1,18 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { LogoWrapper, AppTitle, NavBarWrapper, UserAvatarWrapper, UserWrapper, UserNotiWrapper, Menu, MenuItem } from "./style";
+import {
+  LogoWrapper,
+  AppTitle,
+  NavBarWrapper,
+  UserAvatarWrapper,
+  UserWrapper,
+  UserNotiWrapper,
+  Menu,
+  MenuItem,
+} from "./style";
 import Avatar from "@mui/material/Avatar";
 import Search from "../Search";
 import "./style.css";
 import { useHistory } from "react-router";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = React.memo(({ userID, socket }) => {
+  const [notifications, setNotifications] = useState([]);
   const history = useHistory();
   const logOutHandler = () => {
     localStorage.removeItem("token");
     history.push("/login");
   };
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("getNotification", (data) => {
+        console.log("getNotification");
+        // console.log(data);
+        // if(data.)
+        if(data?.userID === userID) {
+          setNotifications((prev) => [...prev, data]);
+        }
+      });
+    }
+  }, [socket, userID]);
+  console.log(notifications);
+
   return (
     <NavBarWrapper>
       <LogoWrapper>
@@ -23,6 +48,9 @@ const NavBar = () => {
       <UserWrapper>
         <UserNotiWrapper>
           <Icon className="nav__noti-icon" icon="bi:bell" />
+          {notifications.length > 0 && (
+            <div className="nav__counter">{notifications.length}</div>
+          )}
         </UserNotiWrapper>{" "}
         <UserAvatarWrapper>
           <Link to="/profile">
@@ -39,6 +67,6 @@ const NavBar = () => {
       </UserWrapper>{" "}
     </NavBarWrapper>
   );
-};
+});
 
 export default NavBar;

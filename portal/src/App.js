@@ -23,19 +23,19 @@ function App({ setUserID, userID, socket }) {
             {token && <Redirect to="/messenger" />}
           </Route>
           <Route exact path="/signup">
-            <Signup />
+            <Signup userID={userID} socket={socket} />
           </Route>
           <Route exact path="/dashboard">
-            <Dashboard />
+            <Dashboard userID={userID} socket={socket} />
           </Route>
           <Route exact path="/matches">
-            <Matches />
+            <Matches userID={userID} socket={socket} />
           </Route>
           <Route exact path="/messenger">
             <Messenger userID={userID} socket={socket} />
           </Route>
           <Route exact path="/profile">
-            <Profile />
+            <Profile userID={userID} socket={socket} />
           </Route>
           <Redirect from="/" to="/login" />
         </Switch>

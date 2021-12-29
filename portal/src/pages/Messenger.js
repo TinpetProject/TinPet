@@ -45,7 +45,7 @@ const Messenger = React.memo(({ userID, socket }) => {
 
   return (
     <>
-      <NavBar />
+      <NavBar socket={socket} userID={userID} />
       <SideBar />
       <div className="messenger">
         <ChatWindow chosenUserID={chosenUserID} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
