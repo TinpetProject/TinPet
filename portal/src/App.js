@@ -8,8 +8,10 @@ import Profile from "./screen/Profile";
 import Matches from "./screen/Matches/Matches";
 import Dashboard from "./screen/Dashboard/Dashboard";
 import Messenger from "./pages/Messenger";
+import CompleteProfile from "./screen/CompleteProfile/CompleteProfile";
 
 function App({ setUserID, userID, socket }) {
+
   const token = localStorage.getItem("token");
   const getUserInfo = (userInfo) => {
     setUserID(userInfo.userID);
@@ -42,6 +44,7 @@ function App({ setUserID, userID, socket }) {
       </HomePage>
     </>
   );
+
 }
 
 export default App;
