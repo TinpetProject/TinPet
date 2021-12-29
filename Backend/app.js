@@ -1,10 +1,11 @@
 require("dotenv").config();
-
 const express = require("express");
+const socket = require("./models/SocketIO");
 const authRoute = require("./routes/auth-router");
 const userRoute = require("./routes/user-router");
 const chatRoute = require("./routes/chat-router");
 const postRoute = require("./routes/post-router");
+const petRoute = require("./routes/pet-router");
 
 const app = express();
 app.use(express.json());
@@ -25,6 +26,8 @@ app.use("/chat", chatRoute);
 
 app.use("/post", postRoute);
 
+app.use("/pet", petRoute);
+
 app.use((error, req, res, next) => {
   res.status(error.errorCode);
   res.json({ message: error.message });
@@ -32,4 +35,4 @@ app.use((error, req, res, next) => {
 
 const server = app.listen(process.env.LISTENING_PORT || 3000);
 
-const io = require("./util/socket").init(server);
+socket.init(server);

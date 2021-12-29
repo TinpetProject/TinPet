@@ -10,31 +10,15 @@ import {
   FollowNumber,
   Digit
 } from "./style"
-
-const pet = [
-  {
-    userID: 1,
-    Breed: "Shiba",
-    Age: 2,
-    Location: "Hanoi",
-    Gender: "Male",
-    Favorite: "Sleeping, Walking, Eating, etc."
-},
-]
-const follow = [
-  {
-    Username: "Corgi",
-    Followers: 100000
-  }
-]
+import { Users } from "../dummyData";
 
 export default function AboutPet() {
   return (
     <>
       <AboutWrapper>
-        <Topic>AboutPet</Topic>
+        <Topic>About Pet</Topic>
         <About>
-        {pet?.map((abt) =>(
+        {Users?.map((abt) =>(
           <>
             <AboutInfo><Info>Breed: </Info>{abt.Breed}</AboutInfo>
             <AboutInfo><Info>Age: </Info>{abt.Age}</AboutInfo>
@@ -45,7 +29,7 @@ export default function AboutPet() {
         ))}
         </About>
         <Followers>
-        {follow?.map((abt) =>(
+        {Users?.map((abt) =>(
           <>
             <FollowNumber>{abt.Followers}</FollowNumber>
           </>
