@@ -34,10 +34,10 @@ export default function CompleteProfile() {
     }, []);
 
     useEffect(() => {
-        const found = countries.find((element) => element.country == country);
+        const found = countries.find((element) => element.country === country);
         setCity("");
 
-        if (found == undefined) {
+        if (found === undefined) {
             setCities([]);
         } else {
             setCities(found.cities);
@@ -57,8 +57,8 @@ export default function CompleteProfile() {
     };
 
     const uploadPhotoHandler = (e) => {
-        // alert(e.target.value);
-        setPictureProfile(e.target.value);
+        console.log(e.target.files[0]);
+        setPictureProfile(e.target.files[0]);
     };
 
     return (
@@ -75,11 +75,20 @@ export default function CompleteProfile() {
                         src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*"
                         alt=""
                     />
+
+                    <img
+                        src={`${
+                            pictureProfile
+                                ? pictureProfile
+                                : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*"
+                        }`}
+                        alt=""
+                    />
                     <label htmlFor="upload-photo">
                         {<Icon icon="carbon:cloud-upload" color="#373737" />}
                         {<span>Upload photo</span>}
                     </label>
-                    <input type="file" name="" id="upload-photo" value={pictureProfile} onChange={uploadPhotoHandler} />
+                    <input type="file" name="" id="upload-photo" onChange={uploadPhotoHandler} />
                 </div>
 
                 <div className="complete-profile__input-fields">

@@ -8,6 +8,7 @@ import Profile from "./screen/Profile";
 import Matches from "./screen/Matches/Matches";
 import Dashboard from "./screen/Dashboard/Dashboard";
 import Messenger from "./pages/Messenger";
+import CompleteProfile from "./screen/CompleteProfile/CompleteProfile";
 
 function App({ setUserID, userID, socket }) {
     const token = localStorage.getItem("token");
@@ -36,6 +37,9 @@ function App({ setUserID, userID, socket }) {
                     </Route>
                     <Route exact path="/profile">
                         <Profile />
+                    </Route>
+                    <Route exact path="/complete-profile">
+                        <CompleteProfile />
                     </Route>
                     <Redirect from="/" to="/login" />
                 </Switch>
