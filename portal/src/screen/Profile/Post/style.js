@@ -2,138 +2,118 @@ import styled from "styled-components";
 
 // Post Layout
 export const PostWrapper = styled.div`
-    position: absolute;
-    width: 730px;
-    top: 860px;
-    left: 20px;
+    position: relative;
+    width: 100%;
     background: #FFFFFF;
     border-radius: 15px;
-    overflow: ;
-    padding: 25px;
+    box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    margin-bottom: 20px;
 `;
 
 // Avatar, Username, Time
 export const PostTop = styled.div`
+    display: flex;
     align-items: center;
-    padding: 0px;
-    display:
-    position: relative;
-    width: 680px;
-    height: 80px;
-    margin-bottom: 20px;
 `;
 export const Avatar = styled.img`
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    border-radius: 10000px;
-    margin: 0px 10px 0px 0px;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     object-fit: cover;
 `;
 export const Username = styled.text`
-    position: relative;
-    left: 100px;
-    top: 10px;
+    margin: 0px 10px;
     font-family: Source Sans Pro, sans-serif;
     font-weight: bold;
     font-size: 24px;
 `;
 export const Time = styled.text`
-    position: relative;
-    left: 35px;
-    top: 35px;
     font-family: Source Sans Pro, sans-serif;
     font-size: 16px;
-    color: #888888;
+    opacity: 0.5;
 `;
 
 // Edit post
 export const Setting = styled.button`
-    position: relative;
-    align-items: center;
-    left: 425px;
-    top: 28px;
+    position: absolute;
+    left: 540px;
     background-color: #ffffff;
     border: none;
+    &:hover {
+        background-color: lightgray;
+        border-radius: 50%;
+      }
 `;
 
 // Content
 export const PostCenter = styled.div`
-    position: relative;
-    align-items: center;
+    margin: 10px 0;
 `;
 export const Text = styled.div`
     font-family: sans-serif;
     font-size: 16px;
-    line-height: 22px;
+    line-height: 21px;
     color: #373737;
-    margin-bottom: 10px;
 `;
 export const Img = styled.img`
     position: relative;
-    margin: 10px 0px 10px 0px;
-    width: 680px;
-    height: 680px;    
-    object-fit: cover;
-    background: url(.jpg);
+    margin: 10px 0px 5px 0px;
+    width: 100%;
 `;
 
 // Like and Comment
 export const PostBottom = styled.div`
-    position: relative;
-    border-top: solid 1px;
-    padding-top: 10px;
-    width: 680px;
-    height: 61px;
-    float: left
+    display: flex;
+    width: 100%;
+    flex-direction: right;
 `;
 
 export const PostBottomLeft = styled.div`
-    position: static;
-    float: left;
-    width: 340px;
-    height: 40px;
-    padding-top: 10px;
-    margin: auto;
+    position: relative;
+    width: 360px;
     display: inline-block;
+    display: flex;
 `;
-export const PostLikeCounter = styled.text`
-    font-family: Source Sans Pro, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
+export const PostLikeCounter = styled.div`
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 16px;
+    color: #373737;
+    margin-right: 10px;
+`;
+export const PostCommentCounter = styled.div`
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 16px;
     color: #373737;
 `;
 
 export const PostBottomRight = styled.div`
-    position: static;
-    width: 340px;
-    height: 40px;
-    left: 450px;
-    display: inline-block;
+    display: flex;
+    align-items: center;
 `;
+
 export const PostLike = styled.button`
     border: none;
-    float: right;
-    margin: auto;
-    margin-right: 40px;
-    height: 40px;
+    margin-right: 30px;
     background-color: #ffffff;
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 16px;
     font-family: sans-serif;
-    align-items: center;
     cursor: pointer;
+    &:hover {
+        opacity: 0.5;
+        color: #0019f8;
+      }
 `;
 export const PostComment = styled.button`
     border: none;
-    float: right;
-    height: 40px;
-    margin: auto;
     background-color: #ffffff;
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 16px;
     font-family: sans-serif;
-    align-items: center;
     cursor: pointer;
+    &:hover {
+        opacity: 0.5;
+      }
 `;

@@ -1,10 +1,11 @@
+require("dotenv").config();
 const express = require("express");
+const socket = require("./models/SocketIO");
 const authRoute = require("./routes/auth-router");
 const userRoute = require("./routes/user-router");
 const chatRoute = require("./routes/chat-router");
 const postRoute = require("./routes/post-router");
-const socket = require("./models/SocketIO");
-require("dotenv").config();
+const petRoute = require("./routes/pet-router");
 
 const app = express();
 app.use(express.json());
@@ -24,6 +25,8 @@ app.use("/user", userRoute);
 app.use("/chat", chatRoute);
 
 app.use("/post", postRoute);
+
+app.use("/pet", petRoute);
 
 app.use((error, req, res, next) => {
   res.status(error.errorCode);

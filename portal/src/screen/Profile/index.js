@@ -4,10 +4,10 @@ import SideBar from "../../components/SideBar";
 import { ProfileWrapper } from "./style";
 import ProfileHead from "./ProfileHead";
 import InputPost from "./InputPost";
-import Post from "./Post";
 import Pictures from "./Picture";
 import AboutPet from "./AboutPet";
 import { Main } from "../../styled-component/style";
+import Feed from "./Feed";
 
 const Profile = () => {
   return (
@@ -18,9 +18,9 @@ const Profile = () => {
         <ProfileWrapper>
           <ProfileHead />
           <InputPost />
+          <Feed/>
           <Pictures />
           <AboutPet />
-          {/* <Post /> */}
         </ProfileWrapper>
       </Main>      
     </>
