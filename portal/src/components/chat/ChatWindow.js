@@ -10,15 +10,31 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
   const [hasMoreMessage, setHasMoreMessage] = useState(true);
   const [clicker, setClicker] = useState(0);
   const additionalOffset = useRef(0);
+  const token = localStorage.getItem("token");
   let isLatestSenderMessage = true;
   let isLatestReceiverMessage = true;
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    socket?.on("message", (data) => {
-      newMessageReceivedHandler(data);
-      if (data.userID === chosenUserID) setConversation((prev) => [{ ...data }, ...prev]);
-    });
+    if (chosenUserID) {
+      setHasMoreMessage(true);
+      setMessageOffset(0);
+      setConversation([]);
+      setClicker((prev) => (prev += 1));
+      additionalOffset.current = 0;
+    }
+  }, [chosenUserID]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("message", (data) => {
+        console.log(data.userID === chosenUserID);
+        newMessageReceivedHandler(data);
+        if (data.userID === chosenUserID) setConversation((prev) => [{ ...data }, ...prev]);
+      });
+    }
+    return () => {
+      socket?.off("message");
+    };
   }, [socket, chosenUserID]);
 
   useEffect(() => {
@@ -38,16 +54,6 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
       fetchConversation();
     }
   }, [messageOffset, clicker]);
-
-  useEffect(() => {
-    if (chosenUserID) {
-      setHasMoreMessage(true);
-      setMessageOffset(0);
-      setConversation([]);
-      setClicker((prev) => (prev += 1));
-      additionalOffset.current = 0;
-    }
-  }, [chosenUserID]);
 
   const observer = useRef();
   const lastMessageRef = useCallback(

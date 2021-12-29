@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ChatWindow from "../components/chat/ChatWindow";
 import ChatBar from "../components/chat/ChatBar";
 import "./messenger.css";
@@ -23,7 +23,7 @@ const Messenger = React.memo(({ userID, socket }) => {
     fetchList();
   }, []);
 
-  const updateConversationList = (updatedData) => {
+  const updateConversationList = useCallback((updatedData) => {
     setConversationList((prevList) => {
       let updatedConversation;
       const newConversationList = prevList.filter((conversation) => {
@@ -35,7 +35,7 @@ const Messenger = React.memo(({ userID, socket }) => {
       newConversationList.unshift(updatedConversation);
       return newConversationList;
     });
-  };
+  }, []);
 
   const openConversation = (targetUserID) => {
     setChosenUserID(targetUserID);

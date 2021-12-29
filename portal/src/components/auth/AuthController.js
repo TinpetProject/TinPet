@@ -9,9 +9,11 @@ function AuthController(props) {
   const [socket, setSocket] = useState();
 
   useEffect(() => {
-    const newSocket = openSocket("http://localhost:8888");
-    newSocket.emit("login", { socketID: newSocket.id, userID });
-    setSocket(newSocket);
+    if (userID) {
+      const newSocket = openSocket("http://localhost:8888");
+      newSocket.emit("login", { socketID: newSocket.id, userID });
+      setSocket(newSocket);
+    }
   }, [userID]);
 
   const renewToken = async (token) => {
