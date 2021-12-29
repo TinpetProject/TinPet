@@ -1,11 +1,50 @@
 :root {
-    --main-gray-color: #bfbfbf;
-    --main-white-color: #fff;
+  --main-gray-color: #bfbfbf;
+  --main-white-color: #fff;
 }
 
-.messenger__chat-head {
-    position: relative;
-    background-color: var(--main-white-color);
-    height: 65px;
-    border-bottom: 2px solid var(--main-gray-color);
+.chat-window__header {
+  position: relative;
+  background-color: var(--main-white-color);
+  height: 65px;
+  border-bottom: 2px solid var(--main-gray-color);
+}
+
+.chat-window__messages-wrapper {
+  width: calc(100% - 40px);
+  height: calc(100vh - 235px);
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
+  left: 20px;
+  overflow: auto;
+  display: flex;
+  padding-bottom: 3px;
+  flex-direction: column-reverse;
+}
+
+.chat-window__input-wrapper {
+  background-color: #f7f7f7;
+  width: calc(100% - 40px);
+  height: 40px;
+  border-radius: 8px;
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.chat-window__input-wrapper > input {
+  flex: 1;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background-color: inherit;
+  line-height: 40px;
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 400;
 }

@@ -77,7 +77,6 @@ module.exports = class User {
       message: conversation.message,
       isSeen: !!conversation.status,
     }));
-    console.log(conversationlist);
     return conversationlist;
   });
 
