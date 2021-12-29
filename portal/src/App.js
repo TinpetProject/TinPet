@@ -38,6 +38,9 @@ function App({ setUserID, userID }) {
           <Route exact path="/messenger">
             <Messenger userID={userID} socket={socket} />
           </Route>
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
           <Redirect from="/" to="/login" />
         </Switch>
       </HomePage>
