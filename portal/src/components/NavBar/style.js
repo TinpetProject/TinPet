@@ -42,6 +42,8 @@ export const UserWrapper = styled.div`
 
 export const UserNotiWrapper = styled.div `
   cursor: pointer;
+  position: relative;
+  
 `;
 
 export const Menu = styled.div `
