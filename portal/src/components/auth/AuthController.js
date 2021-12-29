@@ -1,10 +1,19 @@
 import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import jwt from "jwt-decode";
+import openSocket from "socket.io-client";
 
 function AuthController(props) {
   const browserHistory = useHistory();
   const [userID, setUserID] = useState("");
+  const [socket, setSocket] = useState();
+
+  useEffect(() => {
+    const newSocket = openSocket("http://localhost:8888");
+    newSocket.emit("login", { socketID: newSocket.id, userID });
+    setSocket(newSocket);
+  }, [userID]);
+
   const renewToken = async (token) => {
     const respone = await fetch(`http://localhost:8888/auth/renew-token`, {
       method: "POST",
@@ -42,7 +51,7 @@ function AuthController(props) {
     checkAndRenewToken();
   }, []);
 
-  const AppComponent = { ...props.children, props: { userID, setUserID } };
+  const AppComponent = { ...props.children, props: { userID, setUserID, socket } };
   return <>{AppComponent}</>;
 }
 

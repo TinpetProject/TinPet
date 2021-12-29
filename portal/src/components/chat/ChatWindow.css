@@ -3,7 +3,7 @@
   --main-white-color: #fff;
 }
 
-.chat-window__headers {
+.chat-window__header {
   position: relative;
   background-color: var(--main-white-color);
   height: 65px;
