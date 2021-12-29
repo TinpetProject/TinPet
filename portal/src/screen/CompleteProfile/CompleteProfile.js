@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./CompleteProfile.css";
 import { Icon } from "@iconify/react";
-import axios from "axios";
+import axios, { Axios } from "axios";
 import InputText from "../../components/CompleteProfile/InputText";
 import InputSelection from "../../components/CompleteProfile/InputSelection";
 import InputDate from "../../components/CompleteProfile/InputDate";
@@ -56,9 +56,18 @@ export default function CompleteProfile() {
         console.log(name, gender, birthday, country, city, pictureProfile);
     };
 
-    const uploadPhotoHandler = (e) => {
-        console.log(e.target.files[0]);
-        setPictureProfile(e.target.files[0]);
+    const uploadPhotoHandler = async (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "pahpgw4x");
+
+        try {
+            setPictureProfile("./assets/img/giphy.gif");
+            const res = await axios.post("https://api.cloudinary.com/v1_1/thecodingpanda/upload", formData);
+            console.log(res.data.url);
+            setPictureProfile(res.data.url);
+        } catch (error) {}
     };
 
     return (
@@ -71,19 +80,7 @@ export default function CompleteProfile() {
                 </div>
 
                 <div className="complete-profile__upload-photo">
-                    <img
-                        src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*"
-                        alt=""
-                    />
-
-                    <img
-                        src={`${
-                            pictureProfile
-                                ? pictureProfile
-                                : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*"
-                        }`}
-                        alt=""
-                    />
+                    <img src={`${pictureProfile ? pictureProfile : "./assets/img/ava-pending.png"}`} alt="" />
                     <label htmlFor="upload-photo">
                         {<Icon icon="carbon:cloud-upload" color="#373737" />}
                         {<span>Upload photo</span>}
