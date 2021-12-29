@@ -8,7 +8,9 @@ const nodemailer = require("nodemailer");
 const tryCatchBlock = require("../util/function").tryCatchBlockForController;
 const HttpError = require("../models/http-error");
 const { getTokenFromRequest } = require("../util/function");
-
+const nodemailerExpressHandleBars = require("nodemailer-express-handlebars");
+const util = require("../util/function");
+const generateHTMLForResetPwLink = require("../views/generateHTMLForResetPasswordMail");
 module.exports = {
   signUp: tryCatchBlock(signUpSchema, async (req, res, next) => {
     const { email, password, name } = req.body;
@@ -50,22 +52,23 @@ module.exports = {
     const userID = await User.getUserIDByEmail(req.body.email);
     if (!userID) return next(new HttpError("GET_RESET_PASSWORD_LINK_FAIL_EMAIL_NOT_EXIST", 404));
 
-    const emailSender = nodemailer.createTransport({
-      host: process.env.NODEMAILER_HOST,
-      service: process.env.NODEMAILER_SERVICE,
-      port: process.env.NODEMAILER_PORT,
-      secure: true,
-      auth: {
-        user: process.env.NODEMAILER_USER,
-        pass: process.env.NODEMAILER_PASS,
-      },
-    });
+    const resetPwLink = await Authentication.createResetPwLink(userID);
+    const htmlForMail = generateHTMLForResetPwLink(resetPwLink);
 
-    await emailSender.sendMail({
+    const transporter = nodemailer.createTransport(util.getNodeMailerTransporterConfig());
+    await transporter.sendMail({
       subject: process.env.NODEMAILER_SUBJECT,
       from: process.env.NODEMAILER_USER,
       to: req.body.email,
-      text: await Authentication.createResetPwLink(userID),
+      html: htmlForMail,
+      template: "index",
+      attachments: [
+        {
+          filename: "forget-password-illus.jpg",
+          path: __dirname + "/../public/assets/images/forget-password-illus.png",
+          cid: "forget-password-illus",
+        },
+      ],
     });
 
     return res.status(200).send({ message: "RESET_PASSWORD_LINK_SENT" });

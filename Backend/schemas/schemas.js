@@ -39,6 +39,6 @@ module.exports = {
       content: { type: "string", minLength: 1, maxLength: 255 },
       targetUserID: { type: "string", minLength: 1, maxLength: 36 },
     },
-    ["content","targetUserID"]
+    ["content", "targetUserID"]
   ),
 };
