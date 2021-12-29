@@ -2,7 +2,7 @@ const User = require("../models/user");
 const tryCatchBlock = require("../util/function").tryCatchBlockForController;
 const HttpError = require("../models/http-error");
 const sendMessageSchema = require("../schemas/schemas").sendMessage;
-const ioUtil = require("../util/socket");
+const socket = require("../models/SocketIO");
 
 module.exports = {
   sendMessage: tryCatchBlock(sendMessageSchema, async (req, res, next) => {
@@ -15,7 +15,7 @@ module.exports = {
     const user = new User({ userID });
     const messageID = await user.sendMessage(targetUserID, content);
 
-    ioUtil.triggerEmit(targetUserID, "message", { content, userID, messageID });
+    socket.triggerEmit(targetUserID, "message", { content, userID, messageID });
 
     return res.status(200).send({ message: "SEND_MESSAGE_SUCCESS", data: { messageID } });
   }),

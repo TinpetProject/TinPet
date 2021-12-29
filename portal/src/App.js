@@ -7,24 +7,24 @@ import Signup from "./screen/Signup";
 import Profile from "./screen/Profile";
 import Matches from "./screen/Matches/Matches";
 import openSocket from "socket.io-client";
-import Dashboard from "./screen/Dashboard/Dashboard"
-import Messenger from "./pages/Messenger"
+import Dashboard from "./screen/Dashboard/Dashboard";
+import Messenger from "./pages/Messenger";
 
-function App() {
-  const [userID, setUserID] = useState();
+function App({ setUserID, userID }) {
   const [socket, setSocket] = useState(openSocket("http://localhost:8888"));
+  const token = localStorage.getItem("token");
 
   const getUserInfo = (userInfo) => {
     setUserID(userInfo.userID);
-
   };
-  
+
   return (
     <>
       <HomePage>
         <Switch>
           <Route exact path="/login">
-            <Login getUserInfo={getUserInfo} socket={socket} />
+            {token || <Login getUserInfo={getUserInfo} socket={socket} />}
+            {token && <Redirect to="/messenger" />}
           </Route>
           <Route exact path="/signup">
             <Signup />

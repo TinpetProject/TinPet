@@ -34,7 +34,7 @@ class SocketIO {
   };
 
   triggerEmit = (targetUserID, type, data) => {
-    this.socket.sockets.to(connections[targetUserID]).emit(type, data);
+    this.socket.sockets.to(this.connections[targetUserID]).emit(type, data);
   };
 
   getConnection = (userID) => {
@@ -44,4 +44,4 @@ class SocketIO {
 
 const socketIO = new SocketIO();
 Object.freeze(socketIO);
-module.exports = socketIO;
+module.exports = socketIO.instance;

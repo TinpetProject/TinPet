@@ -23,7 +23,6 @@ import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { Icon } from "@iconify/react";
 
-
 const Login = React.memo(({ getUserInfo, socket }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -40,7 +39,7 @@ const Login = React.memo(({ getUserInfo, socket }) => {
       .then((token) => {
         const userInfo = jwt_decode(token);
         getUserInfo(userInfo);
-        localStorage.setItem(userInfo.userID, token);
+        localStorage.setItem("token", token);
 
         socket?.emit("login", { socketID: socket.id, userID: userInfo.userID });
         history.push("/messenger");

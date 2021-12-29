@@ -1,6 +1,6 @@
 require("dotenv").config();
-
 const express = require("express");
+const socket = require("./models/SocketIO");
 const authRoute = require("./routes/auth-router");
 const userRoute = require("./routes/user-router");
 const chatRoute = require("./routes/chat-router");
@@ -35,4 +35,4 @@ app.use((error, req, res, next) => {
 
 const server = app.listen(process.env.LISTENING_PORT || 3000);
 
-const io = require("./util/socket").init(server);
+socket.init(server);

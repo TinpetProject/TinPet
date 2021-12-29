@@ -12,6 +12,7 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
   const additionalOffset = useRef(0);
   let isLatestSenderMessage = true;
   let isLatestReceiverMessage = true;
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     socket?.on("message", (data) => {
@@ -22,7 +23,6 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
 
   useEffect(() => {
     const fetchConversation = async () => {
-      const token = localStorage.getItem(userID);
       const rawData = await fetch(`http://localhost:8888/chat/${chosenUserID}/${messageOffset}`, {
         method: "GET",
         headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
@@ -62,7 +62,6 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
   );
 
   const sendMessage = async (message) => {
-    const token = localStorage.getItem(userID);
     const rawData = await fetch(`http://localhost:8888/chat`, {
       method: "POST",
       headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
