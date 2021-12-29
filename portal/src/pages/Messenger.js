@@ -11,7 +11,7 @@ const Messenger = React.memo(({ userID, socket }) => {
 
   useEffect(() => {
     const fetchList = async () => {
-      const token = localStorage.getItem(userID);
+      const token = localStorage.getItem("token");
       const result = await fetch(`http://localhost:8888/chat`, {
         method: "GET",
         headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },

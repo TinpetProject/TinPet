@@ -8,7 +8,7 @@ const nodemailer = require("nodemailer");
 const tryCatchBlock = require("../util/function").tryCatchBlockForController;
 const HttpError = require("../models/http-error");
 const { getTokenFromRequest } = require("../util/function");
-const nodemailerExpressHandleBars = require("nodemailer-express-handlebars");
+const jwt = require("jsonwebtoken");
 const util = require("../util/function");
 const generateHTMLForResetPwLink = require("../views/generateHTMLForResetPasswordMail");
 module.exports = {
@@ -41,6 +41,8 @@ module.exports = {
       if (!token) throw new Error();
 
       const data = jwt.verify(token, process.env.TOKEN_SECURITY_KEY);
+      delete data.iat;
+      delete data.exp;
       const newToken = Authentication.createToken(data);
 
       return res.status(200).send({ message: "RENEW_TOKEN_SUCCESS", data: newToken });

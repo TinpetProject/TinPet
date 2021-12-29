@@ -5,14 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
+import AuthController from "./components/auth/AuthController";
 
 axios.defaults.baseURL = "http://localhost:8888";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
-    </BrowserRouter>{" "}
+      <AuthController>
+        <App />
+      </AuthController>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
