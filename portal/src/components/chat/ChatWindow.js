@@ -93,7 +93,7 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
 
   return (
     <div className="messenger__chat-window">
-      <div className="messenger__chat-head">đây là chỗ cho phần head</div>
+      <div className="chat-window__headers">đây là chỗ cho phần head</div>
       <div className="chat-window__messages-wrapper">
         {conversation?.map((message, index) => {
           const isSender = message.userID === userID;
