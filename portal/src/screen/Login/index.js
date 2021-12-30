@@ -22,6 +22,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { Icon } from "@iconify/react";
+import { HomePage } from "../../styled-component/style";
 
 const Login = React.memo(({ getUserInfo }) => {
   const [email, setEmail] = React.useState("");
@@ -46,7 +47,7 @@ const Login = React.memo(({ getUserInfo }) => {
   };
 
   return (
-    <>
+    <HomePage>
       <Wrapper>
         <WrapperApp>
           <Icon className="signup__logo-icon" icon="icons8:cat-footprint" />
@@ -75,7 +76,7 @@ const Login = React.memo(({ getUserInfo }) => {
           </Form>{" "}
         </ContentBox>{" "}
       </Wrapper>{" "}
-    </>
+    </HomePage>
   );
 });
 

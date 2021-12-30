@@ -11,6 +11,7 @@ const NavBar = () => {
   const logOutHandler = () => {
     localStorage.removeItem("token");
     history.push("/login");
+    console.log("pushed");
   };
   return (
     <NavBarWrapper>

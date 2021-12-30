@@ -10,8 +10,8 @@ const Messenger = React.memo(({ userID, socket }) => {
   const [conversationList, setConversationList] = useState([]);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     const fetchList = async () => {
-      const token = localStorage.getItem("token");
       const result = await fetch(`http://localhost:8888/chat`, {
         method: "GET",
         headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
@@ -20,7 +20,9 @@ const Messenger = React.memo(({ userID, socket }) => {
       setConversationList(listOfConversations);
       setChosenUserID(listOfConversations[0].userID);
     };
-    fetchList();
+    if (token) {
+      fetchList();
+    }
   }, []);
 
   const updateConversationList = useCallback((updatedData) => {
@@ -44,14 +46,10 @@ const Messenger = React.memo(({ userID, socket }) => {
   const seenMessage = (messageID) => {};
 
   return (
-    <>
-      <NavBar />
-      <SideBar />
-      <div className="messenger">
-        <ChatWindow chosenUserID={chosenUserID} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
-        <ChatBar openConversation={openConversation} seenMessage={seenMessage} conversationList={conversationList} />
-      </div>
-    </>
+    <div className="messenger">
+      <ChatWindow chosenUserID={chosenUserID} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
+      <ChatBar openConversation={openConversation} seenMessage={seenMessage} conversationList={conversationList} />
+    </div>
   );
 });
 

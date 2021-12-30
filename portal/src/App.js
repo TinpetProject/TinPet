@@ -8,6 +8,7 @@ import Profile from "./screen/Profile";
 import Matches from "./screen/Matches/Matches";
 import Dashboard from "./screen/Dashboard/Dashboard";
 import Messenger from "./pages/Messenger";
+import Layout from "./components/Layout/Layout";
 
 function App({ setUserID, userID, socket }) {
   const token = localStorage.getItem("token");
@@ -16,27 +17,29 @@ function App({ setUserID, userID, socket }) {
   };
   return (
     <>
-      <HomePage>
-        <Switch>
-          <Route exact path="/login">
-            {token || <Login getUserInfo={getUserInfo} socket={socket} />}
-            {token && <Redirect to="/messenger" />}
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route exact path="/matches">
-            <Matches />
-          </Route>
-          <Route exact path="/messenger">
-            <Messenger userID={userID} socket={socket} />
-          </Route>
-          <Redirect from="/" to="/login" />
-        </Switch>
-      </HomePage>
+      {token || <Login getUserInfo={getUserInfo} socket={socket} />}
+      {token && (
+        <Layout>
+          <Switch>
+            <Route exact path="/login">
+              <Redirect to="/messenger" />
+            </Route>
+            <Route exact path="/signup">
+              <Signup />
+            </Route>
+            <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route exact path="/matches">
+              <Matches />
+            </Route>
+            <Route exact path="/messenger">
+              <Messenger userID={userID} socket={socket} />
+            </Route>
+            <Redirect from="/" to="/login" />
+          </Switch>
+        </Layout>
+      )}
     </>
   );
 }
