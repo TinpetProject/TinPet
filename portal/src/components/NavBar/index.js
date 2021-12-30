@@ -22,6 +22,7 @@ const NavBar = React.memo(({ userID, socket }) => {
   const logOutHandler = () => {
     localStorage.removeItem("token");
     history.push("/login");
+    console.log("pushed");
   };
 
   useEffect(() => {

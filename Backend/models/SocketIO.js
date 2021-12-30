@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 class SocketIO {
   constructor() {
     if (SocketIO.instance == null) {
@@ -11,7 +13,7 @@ class SocketIO {
   init = (httpServer) => {
     this.socket = require("socket.io")(httpServer, {
       cors: {
-        origin: "http://localhost:3000",
+        origin: process.env.FE_BASE_URL,
         credentials: true,
       },
     });

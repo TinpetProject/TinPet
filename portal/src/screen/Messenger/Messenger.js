@@ -1,26 +1,27 @@
 import React, { useState, useEffect, useCallback } from "react";
-import ChatWindow from "../components/chat/ChatWindow";
-import ChatBar from "../components/chat/ChatBar";
-import "./messenger.css";
-import NavBar from "../components/NavBar";
-import SideBar from "../components/SideBar";
+import ChatWindow from "../../components/Chat/ChatWindow";
+import ChatBar from "../../components/Chat/ChatBar";
+import "./Messenger.css";
 
 const Messenger = React.memo(({ userID, socket }) => {
-  const [chosenUserID, setChosenUserID] = useState("");
+  const [chosenUserInfo, setChosenUserInfo] = useState("");
   const [conversationList, setConversationList] = useState([]);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     const fetchList = async () => {
-      const token = localStorage.getItem("token");
       const result = await fetch(`http://localhost:8888/chat`, {
         method: "GET",
         headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
       });
       const listOfConversations = (await result.json()).data;
       setConversationList(listOfConversations);
-      setChosenUserID(listOfConversations[0].userID);
+
+      const firstConversation = listOfConversations[0];
+      setChosenUserInfo({ avatar: firstConversation.avatar, name: firstConversation.name, userID: firstConversation.userID });
     };
-    fetchList();
+
+    token && fetchList();
   }, []);
 
   const updateConversationList = useCallback((updatedData) => {
@@ -38,20 +39,16 @@ const Messenger = React.memo(({ userID, socket }) => {
   }, []);
 
   const openConversation = (targetUserID) => {
-    setChosenUserID(targetUserID);
+    setChosenUserInfo(targetUserID);
   };
 
   const seenMessage = (messageID) => {};
 
   return (
-    <>
-      <NavBar socket={socket} userID={userID} />
-      <SideBar />
-      <div className="messenger">
-        <ChatWindow chosenUserID={chosenUserID} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
-        <ChatBar openConversation={openConversation} seenMessage={seenMessage} conversationList={conversationList} />
-      </div>
-    </>
+    <div className="messenger">
+      <ChatWindow chosenUserInfo={chosenUserInfo} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
+      <ChatBar openConversation={openConversation} seenMessage={seenMessage} conversationList={conversationList} />
+    </div>
   );
 });
 

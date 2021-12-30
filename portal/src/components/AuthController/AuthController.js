@@ -32,7 +32,9 @@ function AuthController(props) {
   const tokenInvalidHandler = () => {
     localStorage.removeItem("token");
     setUserID("");
-    if (browserHistory.location.pathname !== "/login") {
+    const currentURL = browserHistory.location.pathname;
+    console.log(currentURL.split("/")[1], "reset-password");
+    if (currentURL !== "/login" && currentURL !== "/signup" && currentURL !== "/complete-profile" && currentURL.split("/")[1] !== "reset-password") {
       browserHistory.push("/login");
       return alert("Your session ended, please login to continue");
     }

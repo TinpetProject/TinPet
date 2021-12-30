@@ -7,44 +7,50 @@ import Signup from "./screen/Signup";
 import Profile from "./screen/Profile";
 import Matches from "./screen/Matches/Matches";
 import Dashboard from "./screen/Dashboard/Dashboard";
-import Messenger from "./pages/Messenger";
+import Messenger from "./screen/Messenger/Messenger";
+import Layout from "./components/Layout/Layout";
 import CompleteProfile from "./screen/CompleteProfile/CompleteProfile";
 
 function App({ setUserID, userID, socket }) {
-
   const token = localStorage.getItem("token");
   const getUserInfo = (userInfo) => {
     setUserID(userInfo.userID);
   };
   return (
-    <>
-      <HomePage>
+    <HomePage>
+      {token || (
         <Switch>
           <Route exact path="/login">
-            {token || <Login getUserInfo={getUserInfo} socket={socket} />}
-            {token && <Redirect to="/messenger" />}
+            <Login getUserInfo={getUserInfo} socket={socket} />
           </Route>
           <Route exact path="/signup">
-            <Signup userID={userID} socket={socket} />
+            <Signup />
           </Route>
-          <Route exact path="/dashboard">
-            <Dashboard userID={userID} socket={socket} />
+          <Route exact path="/complete-profile">
+            <CompleteProfile />
           </Route>
-          <Route exact path="/matches">
-            <Matches userID={userID} socket={socket} />
-          </Route>
-          <Route exact path="/messenger">
-            <Messenger userID={userID} socket={socket} />
-          </Route>
-          <Route exact path="/profile">
-            <Profile userID={userID} socket={socket} />
-          </Route>
-          <Redirect from="/" to="/login" />
         </Switch>
-      </HomePage>
-    </>
+      )}
+      {token && (
+        <Layout>
+          <Switch>
+            <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route exact path="/matches">
+              <Matches />
+            </Route>
+            <Route exact path="/messenger">
+              <Messenger userID={userID} socket={socket} />
+            </Route>
+            <Route path="/*">
+              <Redirect to="/dashboard" />
+            </Route>
+          </Switch>
+        </Layout>
+      )}
+    </HomePage>
   );
-
 }
 
 export default App;
