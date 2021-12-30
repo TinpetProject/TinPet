@@ -20,3 +20,19 @@
 .nav__noti-icon:hover {
     color: var(--main-red-color);
 }
+
+.nav__counter {
+    width: 18px;
+    height: 18px;
+    background-color: red;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    color: white;
+}

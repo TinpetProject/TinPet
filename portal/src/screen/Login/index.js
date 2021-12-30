@@ -47,7 +47,7 @@ const Login = React.memo(({ getUserInfo }) => {
   };
 
   return (
-    <HomePage>
+    <>
       <Wrapper>
         <WrapperApp>
           <Icon className="signup__logo-icon" icon="icons8:cat-footprint" />
@@ -76,7 +76,7 @@ const Login = React.memo(({ getUserInfo }) => {
           </Form>{" "}
         </ContentBox>{" "}
       </Wrapper>{" "}
-    </HomePage>
+    </>
   );
 });
 

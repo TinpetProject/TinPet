@@ -5,11 +5,11 @@ import SideBar from "../SideBar";
 
 const Layout = React.memo((props) => {
   return (
-    <HomePage>
+    <>
       <NavBar />
       <SideBar />
       {props.children}
-    </HomePage>
+    </>
   );
 });
 
