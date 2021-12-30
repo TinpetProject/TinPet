@@ -3,14 +3,16 @@ import ChatMessage from "./ChatMessage";
 import { useRef, useCallback } from "react";
 import ChatInput from "./ChatInput";
 import "./ChatWindow.css";
+import ChatWindowHeader from "./ChatWindowHeader/ChatWindowHeader";
 
-const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceivedHandler }) => {
+const ChatWindow = React.memo(({ userID, chosenUserInfo, socket, newMessageReceivedHandler }) => {
   const [conversation, setConversation] = useState([]);
   const [messageOffset, setMessageOffset] = useState(null);
   const [hasMoreMessage, setHasMoreMessage] = useState(true);
   const [clicker, setClicker] = useState(0);
   const additionalOffset = useRef(0);
   const token = localStorage.getItem("token");
+  const { userID: chosenUserID, avatar: chosenUserAvatar, name: chosenUserName } = chosenUserInfo;
   let isLatestSenderMessage = true;
   let isLatestReceiverMessage = true;
 
@@ -103,7 +105,7 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
 
   return (
     <div className="messenger__chat-window">
-      <div className="chat-window__header">đây là chỗ cho phần head</div>
+      <ChatWindowHeader chosenUserAvatar={chosenUserAvatar} chosenUserName={chosenUserName} />
       <div className="chat-window__messages-wrapper">
         {conversation?.map((message, index) => {
           const isSender = message.userID === userID;

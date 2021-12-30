@@ -4,7 +4,7 @@ import ChatBar from "../../components/Chat/ChatBar";
 import "./Messenger.css";
 
 const Messenger = React.memo(({ userID, socket }) => {
-  const [chosenUserID, setChosenUserID] = useState("");
+  const [chosenUserInfo, setChosenUserInfo] = useState("");
   const [conversationList, setConversationList] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,9 @@ const Messenger = React.memo(({ userID, socket }) => {
       });
       const listOfConversations = (await result.json()).data;
       setConversationList(listOfConversations);
-      setChosenUserID(listOfConversations[0].userID);
+
+      const firstConversation = listOfConversations[0];
+      setChosenUserInfo({ avatar: firstConversation.avatar, name: firstConversation.name, userID: firstConversation.userID });
     };
 
     token && fetchList();
@@ -37,14 +39,14 @@ const Messenger = React.memo(({ userID, socket }) => {
   }, []);
 
   const openConversation = (targetUserID) => {
-    setChosenUserID(targetUserID);
+    setChosenUserInfo(targetUserID);
   };
 
   const seenMessage = (messageID) => {};
 
   return (
     <div className="messenger">
-      <ChatWindow chosenUserID={chosenUserID} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
+      <ChatWindow chosenUserInfo={chosenUserInfo} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
       <ChatBar openConversation={openConversation} seenMessage={seenMessage} conversationList={conversationList} />
     </div>
   );
