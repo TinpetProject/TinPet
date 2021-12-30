@@ -8,7 +8,7 @@ const ChatBarElement = React.memo(({ conversation, openConversation, seenMessage
 
   const onClickHandler = () => {
     !isSeen && seenMessage();
-    return openConversation(userID);
+    return openConversation({ userID, avatar, name });
   };
 
   return (
