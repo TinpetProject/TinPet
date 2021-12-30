@@ -29,13 +29,13 @@ const ChatWindow = React.memo(({ userID, chosenUserInfo, socket, newMessageRecei
 
   useEffect(() => {
     const subscribeToSocket = () => {
-      socket.on("message", (data) => {
+      socket?.on("message", (data) => {
         console.log(data.userID === chosenUserID);
         newMessageReceivedHandler(data);
         if (data.userID === chosenUserID) setConversation((prev) => [{ ...data }, ...prev]);
       });
     };
-    socket && subscribeToSocket();
+    subscribeToSocket();
 
     //cleans up subscribe
     return () => {
@@ -105,7 +105,7 @@ const ChatWindow = React.memo(({ userID, chosenUserInfo, socket, newMessageRecei
 
   return (
     <div className="messenger__chat-window">
-      <ChatWindowHeader chosenUserAvatar={chosenUserAvatar} chosenUserName={chosenUserName} />
+      <ChatWindowHeader chosenUserInfo={chosenUserInfo} socket={socket} />
       <div className="chat-window__messages-wrapper">
         {conversation?.map((message, index) => {
           const isSender = message.userID === userID;

@@ -18,8 +18,24 @@
   width: 190px;
 }
 
-.header__status {
+.header__status--icon {
+  position: relative;
+  top: -16px;
+  left: 24px;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  border: solid 2px white;
+  background-color: grey;
+}
+
+.header__status--icon.online {
+  background-color: limegreen !important;
+}
+
+.header__status--text {
   width: 100%;
+  font-size: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: pre-wrap;
@@ -28,4 +44,8 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   display: -webkit-box;
+}
+
+.header__name {
+  font-size: 20px;
 }
