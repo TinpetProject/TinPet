@@ -7,10 +7,8 @@ const ChatBarElement = React.memo(({ conversation, openConversation, seenMessage
   const fakeAvatar = "https://media.travelmag.vn/files/quyensok/2021/02/19/151744159_1858284524329401_8015280447006743040_n-1629.jpg";
 
   const onClickHandler = () => {
-    if (!isSeen) {
-      seenMessage();
-    }
-    openConversation(userID);
+    !isSeen && seenMessage();
+    return openConversation(userID);
   };
 
   return (

@@ -15,23 +15,27 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
   let isLatestReceiverMessage = true;
 
   useEffect(() => {
-    if (chosenUserID) {
+    const resetComponentState = () => {
       setHasMoreMessage(true);
       setMessageOffset(0);
       setConversation([]);
       setClicker((prev) => (prev += 1));
       additionalOffset.current = 0;
-    }
+    };
+    chosenUserID && resetComponentState();
   }, [chosenUserID]);
 
   useEffect(() => {
-    if (socket) {
+    const subscribeToSocket = () => {
       socket.on("message", (data) => {
         console.log(data.userID === chosenUserID);
         newMessageReceivedHandler(data);
         if (data.userID === chosenUserID) setConversation((prev) => [{ ...data }, ...prev]);
       });
-    }
+    };
+    socket && subscribeToSocket();
+
+    //cleans up subscribe
     return () => {
       socket?.off("message");
     };

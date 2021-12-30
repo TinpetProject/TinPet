@@ -18,9 +18,8 @@ const Messenger = React.memo(({ userID, socket }) => {
       setConversationList(listOfConversations);
       setChosenUserID(listOfConversations[0].userID);
     };
-    if (token) {
-      fetchList();
-    }
+
+    token && fetchList();
   }, []);
 
   const updateConversationList = useCallback((updatedData) => {
