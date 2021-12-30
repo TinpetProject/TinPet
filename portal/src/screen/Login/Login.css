@@ -7,3 +7,11 @@
     color: white;
     cursor: default;
 }
+
+.back-icon {
+    margin-right: 10px;
+}
+
+.back-icon:hover {
+    opacity: 0.8;
+}
