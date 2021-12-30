@@ -14,7 +14,7 @@ module.exports = {
     await database.execute(
       `INSERT INTO ResetToken(token,userID,createdAt,updatedAt) VALUES('${resetPwToken}','${userID}','2021-11-05 04:00:58','2021-11-05 04:00:58')`
     );
-    return `${process.env.FE_BASE_URL}/reset-passwod/${resetPwToken}`;
+    return `${process.env.FE_BASE_URL}/reset-password/${resetPwToken}`;
   }),
   deleteResetPwToken: tryCatchBlock(async (resetPwToken) => {
     await database.execute(`DELETE FROM ResetToken WHERE token LIKE '${resetPwToken}'`);
