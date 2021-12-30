@@ -2,8 +2,6 @@ import React from "react";
 import Card from "../../components/CardDashboard/CardDashboard";
 import "./Dashboard.css";
 import { Icon } from "@iconify/react";
-import NavBar from "../../components/NavBar";
-import SideBar from "../../components/SideBar";
 import { Main } from "../../styled-component/style";
 import TopContent from "../../components/TopContent/TopContent";
 
@@ -11,8 +9,6 @@ export default function Dashboard() {
     return (
         <>
             {" "}
-            <NavBar />
-            <SideBar />
             <Main>
                 <div className="dashboard-wrapper">
                     <TopContent screen="Dashboard" count="2000" />

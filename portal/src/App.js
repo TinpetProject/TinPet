@@ -7,7 +7,7 @@ import Signup from "./screen/Signup";
 import Profile from "./screen/Profile";
 import Matches from "./screen/Matches/Matches";
 import Dashboard from "./screen/Dashboard/Dashboard";
-import Messenger from "./pages/Messenger";
+import Messenger from "./screen/Messenger/Messenger";
 import Layout from "./components/Layout/Layout";
 import CompleteProfile from "./screen/CompleteProfile/CompleteProfile";
 
