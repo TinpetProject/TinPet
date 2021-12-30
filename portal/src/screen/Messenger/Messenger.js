@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import ChatWindow from "../../components/Chat/ChatWindow";
-import ChatBar from "../../components/Chat/ChatBar";
+import ChatWindow from "../../components/chat/ChatWindow";
+import ChatBar from "../../components/chat/ChatBar";
 import "./Messenger.css";
 
 const Messenger = React.memo(({ userID, socket }) => {
