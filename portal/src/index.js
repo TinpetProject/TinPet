@@ -7,7 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import AuthController from "./components/AuthController/AuthController";
 
-axios.defaults.baseURL = "http://localhost:8888";
+axios.defaults.baseURL = "http://localhost:8888"; 
+axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem('token');
 
 ReactDOM.render(
   <React.StrictMode>
