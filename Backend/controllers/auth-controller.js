@@ -66,9 +66,19 @@ module.exports = {
       template: "index",
       attachments: [
         {
-          filename: "forget-password-illus.jpg",
+          filename: "forget-password-illus.png",
           path: __dirname + "/../public/assets/images/forget-password-illus.png",
           cid: "forget-password-illus",
+        },
+        {
+          filename: "logo.jpg",
+          path: __dirname + "/../public/assets/images/logo.png",
+          cid: "logo",
+        },
+        {
+          filename: "copyright.jpg",
+          path: __dirname + "/../public/assets/images/copyright.png",
+          cid: "copyright",
         },
       ],
     });
