@@ -22,7 +22,7 @@ module.exports = {
 
     const pet = new Pet({ userID: req.userData.userID });
     const petSuggestion = await pet.getPetSuggestion(start, end);
-    return res.status(200).send({ message: "GET_PROFILE_SUCCESS", data: petSuggestion });
+    return res.status(200).send({ message: "GET_SUGGEST_SUCCESS", data: petSuggestion });
     }),
 
     sendLike: tryCatchBlock(null, async (req, res, next) => {

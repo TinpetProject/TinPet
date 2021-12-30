@@ -42,18 +42,30 @@ module.exports = class Pet {
 
     const r1 = await database.execute(`SELECT petID FROM Pet WHERE userID = '${this.userID}'`);
     const petID = r1[0][0].petID;
-    const id_list = JSON.parse(await r_database.get(petID));
-    const petID_str = id_list.slice(start, end).map(a => "'" + a + "'").join(' , ');
-    const [resultSet] = await database.execute(
-        `SELECT p.*, r.isLiked, r.isMatched, r.isFriend 
-        FROM View_PetInformation p, (Pet pe
-        LEFT JOIN (SELECT * FROM Relationship WHERE targetUserID = '${this.userID}') r
-        ON pe.userId = r.userID) 
-        WHERE p.petID IN (${petID_str}) AND p.petID=pe.petID;`
-      );
-
-    return resultSet.length === 0 ? null : resultSet;
-    // return id_list;
+    // const id_list = JSON.parse(await r_database.get(petID));
+    const id_list = JSON.parse(await r_database.get('testadsds'));
+    if (id_list)
+    {
+      const petID_str = id_list.slice(start, end).map(a => "'" + a + "'").join(' , ');
+      const [resultSet] = await database.execute(
+          `SELECT p.*, r.isLiked, r.isMatched, r.isFriend 
+          FROM View_PetInformation p, (Pet pe
+          LEFT JOIN (SELECT * FROM Relationship WHERE targetUserID = '${this.userID}') r
+          ON pe.userId = r.userID) 
+          WHERE p.petID IN (${petID_str}) AND p.petID=pe.petID;`
+        );
+  
+      return resultSet.length === 0 ? null : resultSet;
+    }
+    else
+    {
+      // create a publisher to push petID to Redis
+      console.log('Publish to Redis!');
+      const publisher = r_database.duplicate();
+      await publisher.connect();
+      await publisher.publish('new_pet_data', `${petID}`);
+      return -1;
+    } 
   });
 
   like = tryCatchBlock(async (targetUserID) => {
