@@ -1,5 +1,5 @@
 module.exports = (resetPwLink) => {
-  return `<html lang="en">
+    return `<html lang="en">
     <head>
         <title>Title</title>
         <!-- Required meta tags -->
@@ -49,86 +49,128 @@ module.exports = (resetPwLink) => {
             -webkit-text-size-adjust: 100%;
         "
     >
-        <div
-            class="container-fluid"
-            style="color: #373737; background-color: #efefef; padding-top: 30px; height: 100vh; overflow: auto; width: 100vw"
-        >
-            <div class="logo" style="font-weight: bold; display: flex; align-items: center; justify-content: center">
-                <img src="cid:logo" alt="" style="transform: scale(0.5); margin-left: 0px" />
-                <h3
-                    class="logo__text"
-                    style="
-                        display: inline;
-                        font-weight: 600;
-                        font-size: 2.5rem;
-                        margin-top: 3px;
-                        padding-left: 0;
-                        margin-left: 0;
-                        transform: translate(-15px, 5px);
-                    "
-                >
-                    Tinpet
-                </h3>
-            </div>
-            <div
-                class="container"
-                style="
-                    background-color: #fff;
-                    margin-top: 1rem;
-                    width: 500px;
-                    border-radius: 14px;
-                    height: fit-content;
-                    padding: 50px;
-                    text-align: center;
-                "
-            >
-                <div class="container__head">
-                    <img src="cid:forget-password-illus" alt="" height="150" />
-                </div>
-                <hr />
 
-                <h4 style="font-weight: 700">Forgot your password?</h4>
-                <br /><br />
-                <h5 style="font-weight: 300; font-size: 1rem">That's okay, it happens!</h5>
-                <h5 style="font-weight: 300; font-size: 1rem">Click on the button below to reset your password</h5>
-                <button
-                    type="button"
-                    class="container__btn"
+
+            <table
+                class="container-fluid"
+                style="color: #373737; background-color: #efefef; padding-top: 30px; height: 100%; overflow: auto; width: 100%; text-align: center"
+                width="100%" border="0" cellspacing="0" cellpadding="0"
+                align="center"
+            >
+            <tr style="display: inline">
+                <td 
+                    align="center" 
+                    style="width: 100%"
+                >
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center
+                        "
+                    >
+                        <img src="cid:logo" alt="" style="margin-left: 0px" width="53" height="50"/>
+                        <span
+                            class="logo__text"
+                            style="
+                                display: inline;
+                                font-weight: 600;
+                                font-size: 35px;
+                                margin-top: 3px;
+                                padding-left: 0;
+                                margin-left: 10px;
+                            "
+                        >
+                            Tinpet
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td align="center">
+                <div
+                    class="container"
                     style="
-                        width: fit-content;
-                        padding: 10px 20px;
-                        margin-top: 2.6rem;
-                        margin-bottom: 1.1rem;
-                        background: rgb(255, 35, 165);
-                        background: linear-gradient(0deg, rgba(255, 35, 165, 1) 0%, rgba(255, 120, 84, 1) 100%);
-                        border: none;
-                        border-radius: 8px;
-                        text-transform: uppercase;
-                        color: #efefef;
-                        font-size: 1rem;
-                        font-weight: 500;
+                        background-color: #fff;
+                        margin-top: 30px;
+                        width: 400px;
+                        border-radius: 14px;
+                        height: fit-content;
+                        padding: 50px;
+                        text-align: center;
                     "
                 >
-                    <a
-                        href="${resetPwLink}"
+                    <div class="container__head">
+                        <img src="cid:forget-password-illus" alt="" height="150" />
+                    </div>
+                    <hr />
+
+                    <h4 style="font-weight: 700; font-size: 20px">Forgot your password?</h4>
+                    <br />
+                    <h5 style="font-weight: 300; font-size: 15px; margin: 0">That's okay, it happens!</h5>
+                    <h5 style="font-weight: 300; font-size: 15px; margin: 0">Click on the button below to reset your password</h5>
+                    <button
+                        type="button"
+                        class="container__btn"
                         style="
-                            text-decoration: none;
+                            width: fit-content;
+                            padding: 10px 20px;
+                            margin-top: 36px;
+                            margin-bottom: 16px;
+                            background: rgb(255, 35, 165);
+                            background: linear-gradient(0deg, rgba(255, 35, 165, 1) 0%, rgba(255, 120, 84, 1) 100%);
+                            border: none;
+                            border-radius: 8px;
+                            text-transform: uppercase;
                             color: #efefef;
-                            font-weight: 700;
-                            display: inline-block;
-                            line-height: 35px;
-                            font-size: 1rem;
-                            transform: translateY(1px);
+                            font-size: 14px;
+                            font-weight: 500;
                         "
-                        >reset your password</a
                     >
-                </button>
-            </div>
-            <div class="footer" style="font-size: 0.75rem; margin-top: 70px; margin-bottom: 30px; text-align: center; color: #c4c4c4">
-                <img src="cid:copyright" alt="" height="20" />
-                <span>2021 GROUP 5, INC</span>
-            </div>
-        </div>
+                        <a
+                            href="${resetPwLink}"
+                            style="
+                                text-decoration: none;
+                                color: #efefef;
+                                font-weight: 700;
+                                display: inline-block;
+                                line-height: 35px;
+                                font-size: 17px;
+                                transform: translateY(1px);
+                            "
+                            >reset your password</a
+                        >
+                    </button>
+                </div>
+                </td>
+            </tr>
+
+                <tr style="display: inline">
+                    <td 
+                        align="center" 
+                        style="width: 100%"
+                    >
+                        <div class="footer" style="font-size: 11px; margin-top: 60px; margin-bottom: 30px; text-align: center; color: #c4c4c4; display: flex">
+                            <img src="cid:copyright" alt="" height="20" />
+                            <span
+                                class="logo__text"
+                                style="
+                                    display: inline;
+                                    font-weight: 300;
+                                    font-size: 12px;
+                                    margin-top: 3px;
+                                    padding-left: 0;
+                                    margin-left: 10px;
+                                "
+                            >
+                                2021 GROUP 5, INC
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
 
         <!-- Bootstrap JavaScript Libraries -->
         <script
