@@ -23,24 +23,28 @@ import { useHistory } from "react-router";
 import jwt_decode from "jwt-decode";
 import { Icon } from "@iconify/react";
 import { toast } from "react-toastify"
+import Loading from "../../components/Loading";
 
 const Login = React.memo(({ getUserInfo }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [rememberMe, setRememberMe] = React.useState("");
   const history = useHistory();
+  const [isLoading, setIsLoading] = React.useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     axios
       .post("/auth/sign-in", {
         email,
         password,
       })
       .then((response) => {
-        if(response.status === 200) {
+        if (response.status === 200) {
           toast.success("Login success!", {
             position: toast.POSITION.TOP_RIGHT,
           });
+          setIsLoading(false);
         }
         return response.data.data;
       })
@@ -51,7 +55,7 @@ const Login = React.memo(({ getUserInfo }) => {
         history.push("/dashboard");
       })
       .catch((err) => {
-        switch(err.response.status) {
+        switch (err.response.status) {
           case 400:
           case 404:
             toast.error("Invalid email/password!", {
@@ -66,6 +70,7 @@ const Login = React.memo(({ getUserInfo }) => {
           default:
             break;
         }
+        setIsLoading(false);
       })
   };
 
@@ -101,6 +106,7 @@ const Login = React.memo(({ getUserInfo }) => {
             <ButtonRoot> Sign in </ButtonRoot>{" "}
           </Form>{" "}
         </ContentBox>{" "}
+        {isLoading && <Loading/>}
       </Wrapper>{" "}
     </>
   );

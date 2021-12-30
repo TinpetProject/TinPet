@@ -21,6 +21,7 @@ import { useHistory } from "react-router";
 import { Icon } from "@iconify/react";
 import "./Signup.css";
 import { toast } from "react-toastify"
+import Loading from "../../components/Loading";
 
 const Signup = ({ getUserInfo }) => {
     const [email, setEmail] = React.useState("");
@@ -28,9 +29,11 @@ const Signup = ({ getUserInfo }) => {
     const [passwordConfirm, setPasswordConfirm] = React.useState("");
     const [rememberMe, setRememberMe] = React.useState("");
     const [name, setName] = React.useState("");
+    const [isLoading, setIsLoading] = React.useState(false);
     const history = useHistory();
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsLoading(true);
         axios
             .post("/auth/sign-up", {
                 email,
@@ -43,6 +46,7 @@ const Signup = ({ getUserInfo }) => {
                         position: toast.POSITION.TOP_RIGHT
                     });
                 }
+                setIsLoading(true);
                 history.push("/complete-profile");
             })
             .catch((err) => {
@@ -61,6 +65,7 @@ const Signup = ({ getUserInfo }) => {
                     default:
                         break;
                 } 
+                setIsLoading(true);
             });
     };
 
@@ -105,6 +110,7 @@ const Signup = ({ getUserInfo }) => {
                         <ButtonRoot> Sign up </ButtonRoot>{" "}
                     </Form>{" "}
                 </ContentBox>{" "}
+                {isLoading && <Loading/>}
             </Wrapper>{" "}
         </>
     );
