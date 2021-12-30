@@ -16,15 +16,18 @@ import { useHistory, useParams } from "react-router";
 import { Icon } from "@iconify/react";
 import { toast } from "react-toastify";
 import "../Login/Login.css";
+import Loading from "../../components/Loading";
 
 const ResetPassword = () => {
     const [password, setPassword] = React.useState("");
     const [passwordConfirm, setPasswordConfirm] = React.useState("");
     const history = useHistory();
     const [resetToken, setResetToken] = React.useState(useParams().resetToken);
+    const [isLoading, setIsLoading] = React.useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsLoading(true);
         axios
             .post(`/auth/reset-password/${resetToken}`, {
                 password,
@@ -35,6 +38,7 @@ const ResetPassword = () => {
                     toast.success("Reset password success!", {
                         position: toast.POSITION.TOP_RIGHT
                     });
+                    setIsLoading(false);
                     history.replace("/login");
                 }
                 return response.data.data;
@@ -55,6 +59,7 @@ const ResetPassword = () => {
                     default:
                         break;
                 }
+                setIsLoading(false);
             })
     };
 
@@ -92,6 +97,7 @@ const ResetPassword = () => {
                         <ButtonRoot style={{ marginTop: "10px" }}> Reset Password </ButtonRoot>{" "}
                     </Form>{" "}
                 </ContentBox>{" "}
+                {isLoading && <Loading/>}
             </Wrapper>{" "}
         </>
     );
