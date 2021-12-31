@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import Grid from "@mui/material/Grid";
 // Folder style-component dùng tạm thời để test các component
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
+
 
 // Button
-export const ButtonRoot = styled.button`
+export const ButtonRoot = styled.button `
     width: 485px;
     height: 40px;
     padding: 10px 16px;
@@ -22,16 +20,18 @@ export const ButtonRoot = styled.button`
     margin-bottom: 10px;
 `;
 
-export const ButtonGoogle = styled(ButtonRoot)`
+export const ButtonGoogle = styled(ButtonRoot)
+`
     background-color: #efefef;
     color: black;
 `;
 
-export const ButtonFacebook = styled(ButtonRoot)`
+export const ButtonFacebook = styled(ButtonRoot)
+`
     background-color: #3b5998;
 `;
 
-export const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div `
     width: 100%;
     height: 100%;
     display: flex;
@@ -40,7 +40,7 @@ export const ButtonWrapper = styled.div`
     align-items: center;
 `;
 
-export const Main = styled.div`
+export const Main = styled.div `
     display: flex;
     margin-top: 60px;
     position: relative;
@@ -48,14 +48,15 @@ export const Main = styled.div`
 `;
 
 // Home page wrapper
-export const HomePage = styled.div`
+export const HomePage = styled.div `
     position: relative;
     width: 100vw;
     height: 100vh;
     background-color: #efefef;
 `;
 
-export const ContentWrapper = styled(Box)`
+export const ContentWrapper = styled(Box)
+`
     background-color: #efefef;
     width: 1440px;
     position: absolute;
@@ -66,7 +67,8 @@ export const ContentWrapper = styled(Box)`
     bottom: 0;
 `;
 
-export const Content = styled(Box)`
+export const Content = styled(Box)
+`
     background-color: #efefef;
     position: absolute;
     top: 0px;

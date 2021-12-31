@@ -34,7 +34,13 @@ function AuthController(props) {
     setUserID("");
 
     const currentURL = browserHistory.location.pathname;
-    if (currentURL !== "/login" && currentURL !== "/signup" && currentURL !== "/complete-profile" && currentURL.split("/")[1] !== "reset-password") {
+    if (
+      currentURL !== "/login" &&
+      currentURL !== "/signup" &&
+      currentURL !== "/complete-profile" &&
+      currentURL !== "/forgotpassword" &&
+      currentURL.split("/")[1] !== "reset-password"
+    ) {
       browserHistory.push("/login");
       return alert("Your session ended, please login to continue");
     }

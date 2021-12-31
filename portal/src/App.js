@@ -4,12 +4,20 @@ import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Signup from "./screen/Signup";
-import Profile from "./screen/Profile";
 import Matches from "./screen/Matches/Matches";
 import Dashboard from "./screen/Dashboard/Dashboard";
 import Messenger from "./screen/Messenger/Messenger";
 import Layout from "./components/Layout/Layout";
 import CompleteProfile from "./screen/CompleteProfile/CompleteProfile";
+import { ToastContainer } from "react-toastify";
+import ForgotPassword from "./screen/ForgotPassword";
+import ResetPassword from "./screen/ResetPassword";
+
+import { injectStyle } from "react-toastify/dist/inject-style";
+
+if (typeof window !== "undefined") {
+  injectStyle();
+}
 
 function App({ logInHandler, logOutHandler, userID, socket }) {
   return (
@@ -21,6 +29,12 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
           </Route>
           <Route exact path="/signup">
             <Signup />
+          </Route>
+          <Route exact path="/forgotpassword">
+            <ForgotPassword />
+          </Route>
+          <Route exact path="/reset-password/:resetToken">
+            <ResetPassword />
           </Route>
           <Route exact path="/complete-profile">
             <CompleteProfile />
@@ -45,6 +59,7 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
           </Switch>
         </Layout>
       )}
+      <ToastContainer autoClose={3000}/>
     </HomePage>
   );
 }

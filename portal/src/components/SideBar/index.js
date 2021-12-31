@@ -13,69 +13,73 @@ import { Link } from 'react-router-dom';
 import { Icon } from "@iconify/react";
 import "./style.css";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom"
 
-const mainMenu = [
-  {
-    icon: <Icon className="menu__dashboard-icon" icon="carbon:archive" />,
-    title: "Dashboard",
-    quantity: 24,
-    path: "/dashboard",
-  },
-  {
-    icon: (
-      <Icon
-        className="menu__heart-icon"
-        icon="teenyicons:heart-circle-outline"
-      />
-    ),
-    title: "Matches",
-    quantity: 10,
-    path: "/matches",
-  },
-  {
-    icon: (
-      <Icon
-        className="menu__message-icon"
-        icon="teenyicons:message-text-alt-outline"
-      />
-    ),
-    title: "Messages",
-    quantity: "99+",
-    path: "/messenger",
-  },
-  {
-    icon: <Icon className="menu__favor-icon" icon="akar-icons:heart" />,
-    title: "Favorite",
-    quantity: 3,
-    path: "/",
-  },
-  {
-    icon: (
-      <Icon className="menu__list-icon" icon="fluent:apps-list-20-regular" />
-    ),
-    title: "Pet List",
-    quantity: 18,
-    path: "/",
-  },
-];
-
-const other = [{
-        icon: ( <
-            Icon className = "menu__setting-icon"
-            icon = "simple-line-icons:settings" / >
+const SideBar = () => { 
+    const history = useHistory();
+    const mainMenu = [
+      {
+        icon: <Icon className="menu__dashboard-icon" icon="carbon:archive" />,
+        title: "Dashboard",
+        quantity: 24,
+        path: "/dashboard",
+      },
+      {
+        icon: (
+          <Icon
+            className="menu__heart-icon"
+            icon="teenyicons:heart-circle-outline"
+          />
         ),
-        title: "Settings",
-    },
-    {
-        icon: ( <
-            Icon className = "menu__logout-icon"
-            icon = "icon-park-outline:logout" / >
+        title: "Matches",
+        quantity: 10,
+        path: "/matches",
+      },
+      {
+        icon: (
+          <Icon
+            className="menu__message-icon"
+            icon="teenyicons:message-text-alt-outline"
+          />
         ),
-        title: "Log out",
-    },
-];
-
-const SideBar = () => {
+        title: "Messages",
+        quantity: "99+",
+        path: "/messenger",
+      },
+      {
+        icon: <Icon className="menu__favor-icon" icon="akar-icons:heart" />,
+        title: "Favorite",
+        quantity: 3,
+        path: "/",
+      },
+      {
+        icon: (
+          <Icon className="menu__list-icon" icon="fluent:apps-list-20-regular" />
+        ),
+        title: "Pet List",
+        quantity: 18,
+        path: "/",
+      },
+    ];
+    const other = [{
+            icon: ( <
+                Icon className = "menu__setting-icon"
+                icon = "simple-line-icons:settings" / >
+            ),
+            title: "Settings",
+        },
+        {
+            icon: ( <
+                Icon className = "menu__logout-icon"
+                icon = "icon-park-outline:logout" / >
+            ),
+            title: "Log out",
+            handler: () => {
+              history.push("/login");
+              localStorage.removeItem("token");
+            }
+        },
+    ];
     return (
       <SideBarWrapper>
         <SideBarList>
@@ -96,7 +100,7 @@ const SideBar = () => {
           {other.map((item, index) => (
             <SideBarElement key={index}>
               {item.icon}
-              <SideBarElementTitle> {item.title} </SideBarElementTitle>
+              <SideBarElementTitle onClick={item.handler ? item.handler : ""}> {item.title} </SideBarElementTitle>
             </SideBarElement>
           ))}
         </SideBarList>

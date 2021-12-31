@@ -14,12 +14,15 @@ module.exports = {
     }),
 
     getPetSuggestion: tryCatchBlock(null, async (req, res, next) => {
+    const start = req.query.start;
+    const end = req.query.end;
+
     const userIDIsExist = await Pet.isUserIDExist(req.userData.userID);
     if (!userIDIsExist) return next(new HttpError("GET_PROFILE_FAIL_USERID_NOT_EXIST", 404));
 
     const pet = new Pet({ userID: req.userData.userID });
-    const petSuggestion = await pet.getPetSuggestion();
-    return res.status(200).send({ message: "GET_PROFILE_SUCCESS", data: petSuggestion });
+    const petSuggestion = await pet.getPetSuggestion(start, end);
+    return res.status(200).send({ message: "GET_SUGGEST_SUCCESS", data: petSuggestion });
     }),
 
     sendLike: tryCatchBlock(null, async (req, res, next) => {
@@ -42,6 +45,16 @@ module.exports = {
         const pet = new Pet({ userID: req.userData.userID });
         const status = await pet.follow(targetUserID);
         return res.status(200).send({ message: "FOLLOW_PROCESSING_SUCCESS", status: status });
+    }),
+
+    testRedis: tryCatchBlock(null, async (req, res, next) => {
+        console.log('hehe');
+        const userIDIsExist = await Pet.isUserIDExist(req.userData.userID);
+        if (!userIDIsExist) return next(new HttpError("USERID_NOT_EXIST", 404));
+
+        const pet = new Pet({ userID: req.userData.userID });
+        const result = await pet.testRedis();
+        return res.status(200).send({ message: "TEST_REDIS_SUCCESS", data: result });
     }),
   //waiting for sql query
 
