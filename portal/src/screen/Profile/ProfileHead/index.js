@@ -33,15 +33,15 @@ export default function ProfileHead() {
       <HeadWrapper>
         <HeadBar> 
           {headbar?.map((btn) =>(
-            <Button>{btn.button}</Button>
+            <Button key={btn.button}>{btn.button}</Button>
             ))}
         </HeadBar>
         {Users.map((u) => (
-          <>
+          <div key={u.userid}>
             <Wallpaper src={u.wallPaper}/>
             <Avatar src={u.profilePicture}/>
             <Name>{u.username}</Name>
-          </>
+          </div>
         ))}
       </HeadWrapper>
     </div>

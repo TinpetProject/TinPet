@@ -19,20 +19,20 @@ export default function AboutPet() {
         <Topic>About Pet</Topic>
         <About>
         {Users?.map((abt) =>(
-          <>
+          <div key={abt.userid}>
             <AboutInfo><Info>Breed: </Info>{abt.Breed}</AboutInfo>
             <AboutInfo><Info>Age: </Info>{abt.Age}</AboutInfo>
             <AboutInfo><Info>Location: </Info>{abt.Location}</AboutInfo>
             <AboutInfo><Info>Gender: </Info>{abt.Gender}</AboutInfo>
             <Fav><Info>Favorite: </Info>{abt.Favorite}</Fav>
-          </>
+          </div>
         ))}
         </About>
         <Followers>
         {Users?.map((abt) =>(
-          <>
+          <div key={abt.userid}>
             <FollowNumber>{abt.Followers}</FollowNumber>
-          </>
+          </div>
         ))}
           <Digit>followers</Digit>
         </Followers>

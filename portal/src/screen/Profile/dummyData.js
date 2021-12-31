@@ -34,8 +34,8 @@ export const Posts = [
   },
   {
     id: 3,
-    desc: "Every moment is a fresh beginning.",
-    photo: "assets/post/3.jpeg",
+    text: "Every moment is a fresh beginning.",
+    photo: "",
     date: "1 hour ago",
     userId: 1,
     like: 61,
@@ -45,18 +45,22 @@ export const Posts = [
 
 export const itemData = [
   {
+    picid:1,
     img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
     title: 'Breakfast',
   },
   {
+    picid:2,
     img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
     title: 'Burger',
   },
   {
+    picid:3,
     img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
     title: 'Camera',
   },
   {
+    picid:4,
     img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
     title: 'Coffee',
   }  
