@@ -66,6 +66,7 @@ function AuthController(props) {
   };
 
   const logOutHandler = () => {
+    socket.emit("logout", { userID });
     setUserID("");
     setSocket("");
     localStorage.removeItem("token");

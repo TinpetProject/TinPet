@@ -19,7 +19,7 @@ const ChatWindowHeader = ({ chosenUserInfo, socket }) => {
     return () => {
       socket?.off("status");
     };
-  }, []);
+  }, [chosenUserID]);
 
   return (
     <div className="chat-window__header">

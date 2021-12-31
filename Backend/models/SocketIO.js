@@ -19,7 +19,12 @@ class SocketIO {
     });
     this.socket.on("connection", (socket) => {
       socket.on("login", (data) => {
+        this.notifyUserStatus({ userID: data.userID, isOnline: true });
         this.connections[data.userID] = socket.id;
+      });
+      socket.on("logout", (data) => {
+        this.notifyUserStatus({ userID: data.userID, isOnline: false });
+        delete this.connections[data.userID];
       });
     });
   };
@@ -37,6 +42,10 @@ class SocketIO {
 
   triggerEmit = (targetUserID, type, data) => {
     this.socket.sockets.to(this.connections[targetUserID]).emit(type, data);
+  };
+
+  notifyUserStatus = (data) => {
+    this.socket.sockets.emit("status", data);
   };
 
   getConnection = (userID) => {

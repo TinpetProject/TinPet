@@ -100,7 +100,7 @@ const SideBar = () => {
           {other.map((item, index) => (
             <SideBarElement key={index}>
               {item.icon}
-              <SideBarElementTitle onClick={item.handler ? item.handler : ""}> {item.title} </SideBarElementTitle>
+              <SideBarElementTitle > {item.title} </SideBarElementTitle>
             </SideBarElement>
           ))}
         </SideBarList>
