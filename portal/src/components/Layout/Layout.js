@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { HomePage } from "../../styled-component/style";
+import React from "react";
 import NavBar from "../NavBar/index";
 import SideBar from "../SideBar";
 
 const Layout = React.memo((props) => {
   return (
     <>
-      <NavBar />
+      <NavBar userID={props.userID} socket={props.socket} logOutHandler={props.logOutHandler} />
       <SideBar />
       {props.children}
     </>

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import ChatMessage from "./ChatMessage";
-import { useRef, useCallback } from "react";
 import ChatInput from "./ChatInput";
 import "./ChatWindow.css";
 import ChatWindowHeader from "./ChatWindowHeader/ChatWindowHeader";
@@ -12,7 +11,7 @@ const ChatWindow = React.memo(({ userID, chosenUserInfo, socket, newMessageRecei
   const [clicker, setClicker] = useState(0);
   const additionalOffset = useRef(0);
   const token = localStorage.getItem("token");
-  const { userID: chosenUserID, avatar: chosenUserAvatar, name: chosenUserName } = chosenUserInfo;
+  const { userID: chosenUserID } = chosenUserInfo;
   let isLatestSenderMessage = true;
   let isLatestReceiverMessage = true;
 
@@ -30,7 +29,6 @@ const ChatWindow = React.memo(({ userID, chosenUserInfo, socket, newMessageRecei
   useEffect(() => {
     const subscribeToSocket = () => {
       socket?.on("message", (data) => {
-        console.log(data.userID === chosenUserID);
         newMessageReceivedHandler(data);
         if (data.userID === chosenUserID) setConversation((prev) => [{ ...data }, ...prev]);
       });
@@ -56,11 +54,10 @@ const ChatWindow = React.memo(({ userID, chosenUserInfo, socket, newMessageRecei
 
       setConversation((prevConversation) => [...prevConversation, ...newConversation]);
     };
-    if (chosenUserID && hasMoreMessage) {
-      fetchConversation();
-    }
+    chosenUserID && hasMoreMessage && fetchConversation();
   }, [messageOffset, clicker]);
 
+  //handle infinite scrolling
   const observer = useRef();
   const lastMessageRef = useCallback(
     (lastMessageElement) => {
@@ -73,22 +70,25 @@ const ChatWindow = React.memo(({ userID, chosenUserInfo, socket, newMessageRecei
     [hasMoreMessage]
   );
 
-  const sendMessage = async (message) => {
-    const rawData = await fetch(`http://localhost:8888/chat`, {
-      method: "POST",
-      headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
-      body: JSON.stringify({ targetUserID: chosenUserID, content: message }),
-    });
-    const data = (await rawData.json()).data;
+  const sendMessage = useCallback(
+    async (message) => {
+      const rawData = await fetch(`http://localhost:8888/chat`, {
+        method: "POST",
+        headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
+        body: JSON.stringify({ targetUserID: chosenUserID, content: message }),
+      });
+      const data = (await rawData.json()).data;
 
-    const newMessage = { userID, content: message, messageID: data.messageID };
-    setConversation((prev) => [newMessage, ...prev]);
+      const newMessage = { userID, content: message, messageID: data.messageID };
+      setConversation((prev) => [newMessage, ...prev]);
 
-    const newMessageForChatBar = { userID: chosenUserID, content: message, isSeen: true };
-    newMessageReceivedHandler(newMessageForChatBar);
+      const newMessageForChatBar = { userID: chosenUserID, content: message, isSeen: true, sender: userID };
+      newMessageReceivedHandler(newMessageForChatBar);
 
-    additionalOffset.current = additionalOffset.current + 1;
-  };
+      additionalOffset.current = additionalOffset.current + 1;
+    },
+    [token, chosenUserID]
+  );
 
   const shouldAvarShow = (isSender) => {
     let isAvarShow = false;

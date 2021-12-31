@@ -19,12 +19,10 @@ import {
   WrapperApp,
 } from "./style";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { Icon } from "@iconify/react";
-import { HomePage } from "../../styled-component/style";
 
-const Login = React.memo(({ getUserInfo }) => {
+const Login = React.memo(({ logInHandler }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [rememberMe, setRememberMe] = React.useState("");
@@ -39,7 +37,7 @@ const Login = React.memo(({ getUserInfo }) => {
       .then((response) => response.data.data)
       .then((token) => {
         const userInfo = jwt_decode(token);
-        getUserInfo(userInfo);
+        logInHandler(userInfo.userID);
         localStorage.setItem("token", token);
         history.push("/messenger");
       })

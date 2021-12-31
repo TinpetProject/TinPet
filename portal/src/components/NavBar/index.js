@@ -1,29 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import {
-  LogoWrapper,
-  AppTitle,
-  NavBarWrapper,
-  UserAvatarWrapper,
-  UserWrapper,
-  UserNotiWrapper,
-  Menu,
-  MenuItem,
-} from "./style";
+import { LogoWrapper, AppTitle, NavBarWrapper, UserAvatarWrapper, UserWrapper, UserNotiWrapper, Menu, MenuItem } from "./style";
 import Avatar from "@mui/material/Avatar";
 import Search from "../Search";
 import "./style.css";
-import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
-const NavBar = React.memo(({ userID, socket }) => {
+const NavBar = React.memo(({ userID, socket, logOutHandler }) => {
   const [notifications, setNotifications] = useState([]);
-  const history = useHistory();
-  const logOutHandler = () => {
-    localStorage.removeItem("token");
-    history.push("/login");
-    console.log("pushed");
-  };
 
   useEffect(() => {
     if (socket) {
@@ -31,7 +15,7 @@ const NavBar = React.memo(({ userID, socket }) => {
         console.log("getNotification");
         // console.log(data);
         // if(data.)
-        if(data?.userID === userID) {
+        if (data?.userID === userID) {
           setNotifications((prev) => [...prev, data]);
         }
       });
@@ -49,9 +33,7 @@ const NavBar = React.memo(({ userID, socket }) => {
       <UserWrapper>
         <UserNotiWrapper>
           <Icon className="nav__noti-icon" icon="bi:bell" />
-          {notifications.length > 0 && (
-            <div className="nav__counter">{notifications.length}</div>
-          )}
+          {notifications.length > 0 && <div className="nav__counter">{notifications.length}</div>}
         </UserNotiWrapper>{" "}
         <UserAvatarWrapper>
           <Link to="/profile">
@@ -61,8 +43,7 @@ const NavBar = React.memo(({ userID, socket }) => {
             />
           </Link>
           <Menu>
-            <MenuItem> Setting </MenuItem> <MenuItem> Language </MenuItem>{" "}
-            <MenuItem onClick={logOutHandler}> Log out </MenuItem>{" "}
+            <MenuItem> Setting </MenuItem> <MenuItem> Language </MenuItem> <MenuItem onClick={logOutHandler}> Log out </MenuItem>{" "}
           </Menu>{" "}
         </UserAvatarWrapper>{" "}
       </UserWrapper>{" "}

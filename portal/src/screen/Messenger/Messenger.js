@@ -6,14 +6,16 @@ import "./Messenger.css";
 const Messenger = React.memo(({ userID, socket }) => {
   const [chosenUserInfo, setChosenUserInfo] = useState("");
   const [conversationList, setConversationList] = useState([]);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     const fetchList = async () => {
       const result = await fetch(`http://localhost:8888/chat`, {
         method: "GET",
         headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
       });
+      if (!result.ok) return;
+
       const listOfConversations = (await result.json()).data;
       setConversationList(listOfConversations);
 
@@ -29,7 +31,7 @@ const Messenger = React.memo(({ userID, socket }) => {
       let updatedConversation;
       const newConversationList = prevList.filter((conversation) => {
         if (conversation.userID === updatedData.userID) {
-          updatedConversation = { ...conversation, message: updatedData.content, isSeen: !!updatedData.isSeen };
+          updatedConversation = { ...conversation, message: updatedData.content, isSeen: !!updatedData.isSeen, sender: updatedData.sender };
         }
         return conversation.userID !== updatedData.userID;
       });
@@ -38,16 +40,14 @@ const Messenger = React.memo(({ userID, socket }) => {
     });
   }, []);
 
-  const openConversation = (targetUserID) => {
-    setChosenUserInfo(targetUserID);
-  };
-
-  const seenMessage = (messageID) => {};
+  const openConversation = useCallback((targetUserInfo) => {
+    setChosenUserInfo(targetUserInfo);
+  }, []);
 
   return (
     <div className="messenger">
       <ChatWindow chosenUserInfo={chosenUserInfo} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
-      <ChatBar openConversation={openConversation} seenMessage={seenMessage} conversationList={conversationList} />
+      <ChatBar openConversation={openConversation} conversationList={conversationList} userID={userID} />
     </div>
   );
 });
