@@ -16,9 +16,17 @@ module.exports = class Pet {
 
   getPetProfile = tryCatchBlock(async () => {
     
+
+    //get pet: id, avatar, background, 
     const [resultSet] = await database.execute(
-      `SELECT p.petID, p.name, p.dob, p.genderID
-       FROM Pet p
+      `SELECT p.petID, p.name, p.dob, p.genderID, u.avatar, u.backgroundImage, u.address,
+      (SELECT GROUP_CONCAT(f.name SEPARATOR ', ') FROM Property f, PetProperty pp 
+      WHERE f.propertyID = pp.propertyID AND pp.petID = p.petID GROUP BY p.petID) AS favourite,
+      (SELECT COUNT(*) FROM Relationship r JOIN Pet p
+      ON r.userID = p.userID OR r.targetUserID = p.userID
+      WHERE p.userID = '142e4cd5-771b-4bbe-01ec-2b4e69ea122c'
+      AND r.isLiked='1') AS follow
+      FROM Pet p JOIN User u ON u.userID = p.userID
        WHERE p.userID = '${this.userID}';`
     );
 
@@ -31,6 +39,7 @@ module.exports = class Pet {
 
   });
 
+<<<<<<< Updated upstream
   getPetSuggestion = tryCatchBlock(async (start, end) => {
     try {
       await r_database.connect();
@@ -39,6 +48,29 @@ module.exports = class Pet {
     {
       console.log('Already open connection to Redis!');
     }
+=======
+
+  getRecentImgs = tryCatchBlock(async () => {
+      // get user: name,nickname,avatar,background,intro,pics
+      const [resultSet] = await database.execute(
+        `SELECT link, title
+        FROM User usr
+        JOIN Album al ON usr.userID = al.userID
+        JOIN Photo ph ON al.albumID = ph.albumID
+        WHERE usr.userID LIKE '${this.userID}'
+        ORDER BY ph.createdAt LIMIT 4`
+      );
+      return resultSet.length === 0 ? [] : resultSet.map((result) => result.link);
+    });
+
+  getPetSuggestion = tryCatchBlock(async () => {
+    const [resultSet] = await database.execute(
+        `SELECT p.userID, p.petID, p.name, p.dob, p.genderID, r.isLiked, r.isMatched, r.isFriend
+        FROM  Pet p LEFT JOIN (SELECT * FROM Relationship WHERE targetUserID = '${this.userID}') r
+        ON p.userId = r.userID 
+        WHERE p.userId != '${this.userID}';`
+      );
+>>>>>>> Stashed changes
 
     const r1 = await database.execute(`SELECT petID FROM Pet WHERE userID = '${this.userID}'`);
     const petID = r1[0][0].petID;
