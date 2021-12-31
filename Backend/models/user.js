@@ -76,6 +76,7 @@ module.exports = class User {
       name: conversation.targetUserName,
       message: conversation.message,
       isSeen: !!conversation.status,
+      sender: conversation.sender,
     }));
     return conversationlist;
   });
@@ -90,40 +91,12 @@ module.exports = class User {
     return conversation;
   });
 
-  // getPostByOffset: tryCatchBlock(async (userID, offset) => {
-  //   const expect = {
-  //     postID: "ádjskfflajkl jklsad",
-  //     title: "dung ml",
-  //     content: "dung ml oi viet stored nao",
-  //     photos: [
-  //       {
-  //         photoID: 1,
-  //         link: "bcv.com",
-  //       },
-  //       {
-  //         photoID: 2,
-  //         link: "bcv2.com",
-  //       },
-  //     ],
-  //     tag: ["userID1", "userID2"],
-  //     video: [],
-  //     createdAt: "25-10-2021",
-  //     totalComment: 25,
-  //     totalReaction: 40,
-  //   };
-
-  //   return resultSet.length === 0 ? [] : resultSet.map((result) => result.link);
-  // }),
-
-  // like: tryCatchBlock(async (userID, targeUserID) => {
-  //   await database.execute(`INSERT INTO Relationship(userID,targetUserID,isLiked) VALUES ('${userID}','${targetUserID}',1)`);
-  // }),
-
-  // match: tryCatchBlock(async (userID, targeUserID) => {
-  //   await database.execute(`INSERT INTO Relationship(userID,targetUserID,isMatched) VALUES ('${userID}','${targetUserID}',1)`);
-  // }),
+  seenMessage = tryCatchBlock(async (targetUserID) => {
+    console.log("is seen");
+    return await database.query(`CALL Proc_UpdateMessagesStatus('${this.userID}','${targetUserID}')`);
+  });
 
   changePassword = tryCatchBlock(async () => {
-    await database.execute(`UPDATE User SET password = '${this.password}' WHERE userID LIKE '${this.userID}'`);
+    return await database.execute(`UPDATE User SET password = '${this.password}' WHERE userID LIKE '${this.userID}'`);
   });
 };

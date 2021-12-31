@@ -32,9 +32,15 @@ function AuthController(props) {
   const tokenInvalidHandler = () => {
     localStorage.removeItem("token");
     setUserID("");
+
     const currentURL = browserHistory.location.pathname;
-    console.log(currentURL.split("/")[1], "reset-password");
-    if (currentURL !== "/login" && currentURL !== "/signup" && currentURL !== "/complete-profile" && currentURL.split("/")[1] !== "reset-password") {
+    if (
+      currentURL !== "/login" &&
+      currentURL !== "/signup" &&
+      currentURL !== "/complete-profile" &&
+      currentURL !== "/forgotpassword" &&
+      currentURL.split("/")[1] !== "reset-password"
+    ) {
       browserHistory.push("/login");
       return alert("Your session ended, please login to continue");
     }
@@ -55,7 +61,18 @@ function AuthController(props) {
     checkAndRenewToken();
   }, []);
 
-  const AppComponent = { ...props.children, props: { userID, setUserID, socket } };
+  const logInHandler = (userID) => {
+    return setUserID(userID);
+  };
+
+  const logOutHandler = () => {
+    setUserID("");
+    setSocket("");
+    localStorage.removeItem("token");
+    browserHistory.push("/login");
+  };
+
+  const AppComponent = { ...props.children, props: { userID, socket, logInHandler, logOutHandler } };
   return <>{AppComponent}</>;
 }
 

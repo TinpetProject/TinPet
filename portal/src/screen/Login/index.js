@@ -25,7 +25,7 @@ import { Icon } from "@iconify/react";
 import { toast } from "react-toastify"
 import Loading from "../../components/Loading";
 
-const Login = React.memo(({ getUserInfo }) => {
+const Login = React.memo(({ logInHandler }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [rememberMe, setRememberMe] = React.useState("");
@@ -50,7 +50,7 @@ const Login = React.memo(({ getUserInfo }) => {
       })
       .then((token) => {
         const userInfo = jwt_decode(token);
-        getUserInfo(userInfo);
+        logInHandler(userInfo.userID);
         localStorage.setItem("token", token);
         history.push("/dashboard");
       })
