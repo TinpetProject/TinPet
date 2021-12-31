@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import ChatWindow from "../../components/Chat/ChatWindow";
 import ChatBar from "../../components/Chat/ChatBar";
+import { useHistory, useParams } from "react-router";
 import "./Messenger.css";
-
 const Messenger = React.memo(({ userID, socket }) => {
-  const [chosenUserInfo, setChosenUserInfo] = useState("");
   const [conversationList, setConversationList] = useState([]);
   const token = localStorage.getItem("token");
+  const chosenUserID = useParams().chosenUserID;
+  const browserHistory = useHistory();
 
   useEffect(() => {
     const fetchList = async () => {
@@ -17,18 +18,21 @@ const Messenger = React.memo(({ userID, socket }) => {
       if (!result.ok) return;
 
       const listOfConversations = (await result.json()).data;
-      setConversationList(listOfConversations);
+      if (listOfConversations.length !== 0) {
+        const firstConversation = listOfConversations[0];
 
-      const firstConversation = listOfConversations[0];
-      setChosenUserInfo({ avatar: firstConversation.avatar, name: firstConversation.name, userID: firstConversation.userID });
+        if (browserHistory.location.pathname !== `/messenger/${firstConversation.userID}`) {
+          browserHistory.push(`/messenger/${firstConversation.userID}`);
+        }
+        setConversationList(listOfConversations);
+      }
     };
-
     token && fetchList();
   }, []);
 
   const updateConversationList = useCallback((updatedData) => {
     setConversationList((prevList) => {
-      let updatedConversation;
+      let updatedConversation = null;
       const newConversationList = prevList.filter((conversation) => {
         if (conversation.userID === updatedData.userID) {
           updatedConversation = { ...conversation, message: updatedData.content, isSeen: !!updatedData.isSeen, sender: updatedData.sender };
@@ -40,14 +44,11 @@ const Messenger = React.memo(({ userID, socket }) => {
     });
   }, []);
 
-  const openConversation = useCallback((targetUserInfo) => {
-    setChosenUserInfo(targetUserInfo);
-  }, []);
-
   return (
     <div className="messenger">
-      <ChatWindow chosenUserInfo={chosenUserInfo} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
-      <ChatBar openConversation={openConversation} conversationList={conversationList} userID={userID} />
+      {/* <ChatWindow chosenUserInfo={chosenUserInfo} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} /> */}
+      <ChatWindow chosenUserID={chosenUserID} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
+      <ChatBar conversationList={conversationList} userID={userID} />
     </div>
   );
 });

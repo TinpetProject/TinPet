@@ -21,10 +21,13 @@ class SocketIO {
       socket.on("login", (data) => {
         this.notifyUserStatus({ userID: data.userID, isOnline: true });
         this.connections[data.userID] = socket.id;
+        console.log(this.connections);
       });
       socket.on("logout", (data) => {
+        console.log("logouted", data);
         this.notifyUserStatus({ userID: data.userID, isOnline: false });
         delete this.connections[data.userID];
+        console.log(this.connections);
       });
     });
   };
