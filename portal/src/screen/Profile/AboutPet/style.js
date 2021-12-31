@@ -56,14 +56,14 @@ export const Followers = styled.div`
     align-items: center;
     width: 260px;
 `;
-export const FollowNumber = styled.text`
+export const FollowNumber = styled.div`
     font-family: sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 40px;
     color: #373737;
 `;
-export const Digit = styled.text`
+export const Digit = styled.div`
     font-family: sans-serif;
     font-style: normal;
     font-weight: normal;

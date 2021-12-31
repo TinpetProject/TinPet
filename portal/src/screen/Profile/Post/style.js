@@ -23,13 +23,13 @@ export const Avatar = styled.img`
     border-radius: 50%;
     object-fit: cover;
 `;
-export const Username = styled.text`
+export const Username = styled.div`
     margin: 0px 10px;
     font-family: Source Sans Pro, sans-serif;
     font-weight: bold;
     font-size: 24px;
 `;
-export const Time = styled.text`
+export const Time = styled.div`
     font-family: Source Sans Pro, sans-serif;
     font-size: 16px;
     opacity: 0.5;
@@ -41,8 +41,9 @@ export const Setting = styled.button`
     left: 540px;
     background-color: #ffffff;
     border: none;
+    cursor: pointer;
     &:hover {
-        background-color: lightgray;
+        color: gray;
         border-radius: 50%;
       }
 `;

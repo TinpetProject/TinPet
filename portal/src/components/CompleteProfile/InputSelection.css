@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+
+:root {
+    --secondary-white-color: #e4e4e4;
+    --secondary-black-color: #a4a4a4;
+}
+
+.complete-profile__input-selection {
+    margin-bottom: 26px;
+}
+
+.complete-profile__input-selection-field {
+    width: 300px;
+    height: 36px;
+    border-radius: 5px;
+    padding-left: 5px;
+    border: 1px solid var(--secondary-white-color);
+}
+
+.complete-profile__input-selection label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    height: 20px;
+}
+
+.complete-profile__input-selection select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+.complete-profile__input-selection select:focus {
+    outline: none;
+}
+
+
+
+.complete-profile__input-selection select:required:invalid {
+    color: var(--secondary-black-color);
+}
+
+.complete-profile__input-selection-field:disabled {
+    color: var(--secondary-white-color) !important;
+}

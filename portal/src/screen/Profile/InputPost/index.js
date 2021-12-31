@@ -32,7 +32,7 @@ export default function InputPost() {
             <InputPostWrapper>
                 <InputPostContent>
                     {Users.map((u) => (
-                        <Avatar src={u.profilePicture}/>
+                        <Avatar src={u.profilePicture} key={u.userid}/>
                     ))}
                     <InputFieldText 
                         placeholder="How is your pet today?"
@@ -42,7 +42,7 @@ export default function InputPost() {
                 
                 <InputPostAdd>
                     {addmore?.map((btn) =>(
-                        <InputAdd>
+                        <InputAdd key={btn.button}>
                             <IconInput>{btn.icon}</IconInput>
                             <ButtonInput>{btn.button}</ButtonInput>
                         </InputAdd>

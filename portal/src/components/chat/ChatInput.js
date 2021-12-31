@@ -13,6 +13,7 @@ const ChatInput = React.memo(({ sendMessageHandler }) => {
     sendMessageHandler(message);
     return setMessage("");
   };
+
   const onKeyPressHandler = (event) => {
     return event.key === "Enter" ? onClickHandler() : null;
   };
@@ -21,7 +22,7 @@ const ChatInput = React.memo(({ sendMessageHandler }) => {
     <div className="chat-window__input-wrapper">
       <input value={message} onChange={onChangeHandler} onKeyPress={onKeyPressHandler} placeholder="Type in here"></input>
       <div className="icon-wrapper" onClick={onClickHandler}>
-        <SendIcon></SendIcon>
+        <SendIcon />
       </div>
     </div>
   );

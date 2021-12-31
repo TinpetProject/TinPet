@@ -2,47 +2,65 @@ import { HomePage } from "./styled-component/style";
 import Login from "./screen/Login";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Signup from "./screen/Signup";
-import Profile from "./screen/Profile";
 import Matches from "./screen/Matches/Matches";
-import openSocket from "socket.io-client";
-import Dashboard from "./screen/Dashboard/Dashboard"
-import Messenger from "./pages/Messenger"
+import Dashboard from "./screen/Dashboard/Dashboard";
+import Messenger from "./screen/Messenger/Messenger";
+import Layout from "./components/Layout/Layout";
+import CompleteProfile from "./screen/CompleteProfile/CompleteProfile";
+import { ToastContainer } from "react-toastify";
+import ForgotPassword from "./screen/ForgotPassword";
+import ResetPassword from "./screen/ResetPassword";
 
-function App() {
-  const [userID, setUserID] = useState();
+import { injectStyle } from "react-toastify/dist/inject-style";
 
-  const getUserInfo = (userInfo) => {
-    setUserID(userInfo.userID);
+if (typeof window !== "undefined") {
+  injectStyle();
+}
 
-  };
-  const socket = useRef();
-  socket.current = openSocket("http://localhost:8888");
-
+function App({ logInHandler, logOutHandler, userID, socket }) {
   return (
-    <>
-      <HomePage>
+    <HomePage>
+      {userID || (
         <Switch>
           <Route exact path="/login">
-            <Login getUserInfo={getUserInfo} socket={socket.current} />
+            <Login logInHandler={logInHandler} socket={socket} />
           </Route>
           <Route exact path="/signup">
             <Signup />
           </Route>
-          <Route exact path="/dashboard">
-            <Dashboard />
+          <Route exact path="/forgotpassword">
+            <ForgotPassword />
           </Route>
-          <Route exact path="/matches">
-            <Matches />
+          <Route exact path="/reset-password/:resetToken">
+            <ResetPassword />
           </Route>
-          <Route exact path="/messenger">
-            <Messenger userID={userID} socket={socket.current} />
+          <Route exact path="/complete-profile">
+            <CompleteProfile />
           </Route>
-          <Redirect from="/" to="/login" />
         </Switch>
-      </HomePage>
-    </>
+      )}
+      {userID && (
+        <Layout logOutHandler={logOutHandler} userID={userID} socket={socket}>
+          <Switch>
+            <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route exact path="/matches">
+              <Matches />
+            </Route>
+            <Route exact path="/messenger">
+              <Messenger userID={userID} socket={socket} />
+            </Route>
+            <Route path="/*">
+              <Redirect to="/dashboard" />
+            </Route>
+          </Switch>
+        </Layout>
+      )}
+      <ToastContainer autoClose={3000}/>
+    </HomePage>
   );
 }
 
