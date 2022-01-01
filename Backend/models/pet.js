@@ -52,23 +52,31 @@ module.exports = class Pet {
       return resultSet.length === 0 ? [] : resultSet.map((result) => result.link);
     });
 
-  getPetSuggestion = tryCatchBlock(async () => {
-    const [resultSet] = await database.execute(
-        `SELECT p.userID, p.petID, p.name, p.dob, p.genderID, r.isLiked, r.isMatched, r.isFriend
-        FROM  Pet p LEFT JOIN (SELECT * FROM Relationship WHERE targetUserID = '${this.userID}') r
-        ON p.userId = r.userID 
-        WHERE p.userId != '${this.userID}';`
-      );
+  getPetSuggestion = tryCatchBlock(async (start, end) => {
+    // const [resultSet] = await database.execute(
+    //     `SELECT p.userID, p.petID, p.name, p.dob, p.genderID, r.isLiked, r.isMatched, r.isFriend
+    //     FROM  Pet p LEFT JOIN (SELECT * FROM Relationship WHERE targetUserID = '${this.userID}') r
+    //     ON p.userId = r.userID 
+    //     WHERE p.userId != '${this.userID}';`
+    //   );
+    
+    try {
+      await r_database.connect();
+    }
+    catch(err)
+    {
+      console.log('Already open connection to Redis!');
+    }
 
     const r1 = await database.execute(`SELECT petID FROM Pet WHERE userID = '${this.userID}'`);
     const petID = r1[0][0].petID;
-    // const id_list = JSON.parse(await r_database.get(petID));
-    const id_list = JSON.parse(await r_database.get('testadsds'));
+    const id_list = JSON.parse(await r_database.get(petID));
+    // const id_list = JSON.parse(await r_database.get('testadsds'));
     if (id_list)
     {
       const petID_str = id_list.slice(start, end).map(a => "'" + a + "'").join(' , ');
       const [resultSet] = await database.execute(
-          `SELECT p.*, r.isLiked, r.isMatched, r.isFriend 
+          `SELECT p.*, pe.userID, r.isLiked, r.isMatched, r.isFriend
           FROM View_PetInformation p, (Pet pe
           LEFT JOIN (SELECT * FROM Relationship WHERE targetUserID = '${this.userID}') r
           ON pe.userId = r.userID) 
@@ -116,7 +124,14 @@ module.exports = class Pet {
   });
 
   testRedis = tryCatchBlock(async () => {
-    await r_database.connect();
+    try {
+      await r_database.connect();
+    }
+    catch(err)
+    {
+      console.log('Already open connection to Redis!');
+      console.log(err)
+    }
     const result = await r_database.get('7de791e4-19fd-1f90-f5e4-cbefc3792353')
 
     return result;
