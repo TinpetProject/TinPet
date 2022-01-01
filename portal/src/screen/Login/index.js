@@ -22,10 +22,10 @@ import {
 import { useHistory } from "react-router";
 import jwt_decode from "jwt-decode";
 import { Icon } from "@iconify/react";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
-import { validate } from "../../utils/validation"
-import "./Login.css"
+import { validate } from "../../utils/validation";
+import "./Login.css";
 
 const Login = React.memo(({ logInHandler }) => {
   const [email, setEmail] = React.useState("");
@@ -35,7 +35,7 @@ const Login = React.memo(({ logInHandler }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(validate()) {
+    if (validate()) {
       setIsLoading(true);
       axios
         .post("/auth/sign-in", {
@@ -53,7 +53,7 @@ const Login = React.memo(({ logInHandler }) => {
         })
         .then((token) => {
           const userInfo = jwt_decode(token);
-          getUserInfo(userInfo);
+          logInHandler(userInfo.userID);
           localStorage.setItem("token", token);
           history.push("/dashboard");
         })
@@ -74,7 +74,7 @@ const Login = React.memo(({ logInHandler }) => {
               break;
           }
           setIsLoading(false);
-        })
+        });
     }
   };
 
@@ -94,14 +94,26 @@ const Login = React.memo(({ logInHandler }) => {
             </FormSubScript>{" "}
             <FormControl>
               <FormControlLabel htmlFor="email"> Email </FormControlLabel>{" "}
-              <FormInput type="text" id="email" placeholder="Enter your username" onChange={(e) => setEmail(e.target.value)} data-rules="isRequired/isEmail" ></FormInput>{" "}
+              <FormInput
+                type="text"
+                id="email"
+                placeholder="Enter your username"
+                onChange={(e) => setEmail(e.target.value)}
+                data-rules="isRequired/isEmail"
+              ></FormInput>{" "}
               <div className="msg-container">
                 <ul className="msg-list"></ul>
               </div>
             </FormControl>{" "}
             <FormControl>
               <FormControlLabel htmlFor="password"> Password </FormControlLabel>{" "}
-              <FormInput type="password" id="password" placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} data-rules="isRequired"></FormInput>{" "}
+              <FormInput
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                onChange={(e) => setPassword(e.target.value)}
+                data-rules="isRequired"
+              ></FormInput>{" "}
               <div className="msg-container">
                 <ul className="msg-list"></ul>
               </div>
@@ -116,7 +128,7 @@ const Login = React.memo(({ logInHandler }) => {
             <ButtonRoot> Sign in </ButtonRoot>{" "}
           </Form>{" "}
         </ContentBox>{" "}
-        {isLoading && <Loading/>}
+        {isLoading && <Loading />}
       </Wrapper>{" "}
     </>
   );
