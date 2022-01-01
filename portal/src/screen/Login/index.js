@@ -27,7 +27,7 @@ import Loading from "../../components/Loading";
 import { validate } from "../../utils/validation"
 import "./Login.css"
 
-const Login = React.memo(({ getUserInfo }) => {
+const Login = React.memo(({ logInHandler }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   // const [rememberMe, setRememberMe] = React.useState("");

@@ -19,17 +19,13 @@ if (typeof window !== "undefined") {
   injectStyle();
 }
 
-function App({ setUserID, userID, socket }) {
-  const token = localStorage.getItem("token");
-  const getUserInfo = (userInfo) => {
-    setUserID(userInfo.userID);
-  };
+function App({ logInHandler, logOutHandler, userID, socket }) {
   return (
     <HomePage>
-      {token || (
+      {userID || (
         <Switch>
           <Route exact path="/login">
-            <Login getUserInfo={getUserInfo} socket={socket} />
+            <Login logInHandler={logInHandler} socket={socket} />
           </Route>
           <Route exact path="/signup">
             <Signup />
@@ -45,8 +41,8 @@ function App({ setUserID, userID, socket }) {
           </Route>
         </Switch>
       )}
-      {token && (
-        <Layout>
+      {userID && (
+        <Layout logOutHandler={logOutHandler} userID={userID} socket={socket}>
           <Switch>
             <Route exact path="/dashboard">
               <Dashboard />

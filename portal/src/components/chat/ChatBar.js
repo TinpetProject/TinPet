@@ -2,7 +2,7 @@ import ChatBarElement from "./ChatBarElement";
 import React from "react";
 import "./ChatBar.css";
 
-const ChatBar = React.memo(({ openConversation, conversationList, seenMessage }) => {
+const ChatBar = React.memo(({ openConversation, conversationList, userID }) => {
   return (
     <div className="messenger__chat-bar">
       <div className="chat-bar__navigation">
@@ -11,7 +11,7 @@ const ChatBar = React.memo(({ openConversation, conversationList, seenMessage })
       </div>
       <ul className="chat-bar__content">
         {conversationList?.map((conversation) => (
-          <ChatBarElement key={conversation.userID} conversation={conversation} seenMessage={seenMessage} openConversation={openConversation} />
+          <ChatBarElement key={conversation.userID} conversation={conversation} openConversation={openConversation} userID={userID} />
         ))}
       </ul>
     </div>

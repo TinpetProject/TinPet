@@ -11,6 +11,7 @@ const { getTokenFromRequest } = require("../util/function");
 const jwt = require("jsonwebtoken");
 const util = require("../util/function");
 const generateHTMLForResetPwLink = require("../views/generateHTMLForResetPasswordMail");
+const socket = require("../models/SocketIO");
 module.exports = {
   signUp: tryCatchBlock(signUpSchema, async (req, res, next) => {
     const { email, password, name } = req.body;
@@ -30,9 +31,9 @@ module.exports = {
     const user = new User({ email, password });
     const userInfo = await user.signIn();
 
-    return userInfo
-      ? res.status(200).send({ message: "SIGN_IN_SUCCESS", data: Authentication.createToken(userInfo) })
-      : res.status(404).send({ message: "SIGN_IN_FAIL" });
+    if (!userInfo) return res.status(404).send({ message: "SIGN_IN_FAIL" });
+
+    return res.status(200).send({ message: "SIGN_IN_SUCCESS", data: Authentication.createToken(userInfo) });
   }),
 
   renewToken: async (req, res, next) => {
