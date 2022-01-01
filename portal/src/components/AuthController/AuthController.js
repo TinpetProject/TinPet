@@ -17,7 +17,7 @@ function AuthController(props) {
   }, [userID]);
 
   const renewToken = async (token) => {
-    const respone = await fetch(`http://localhost:8888/auth/renew-token`, {
+    const response = await fetch(`http://localhost:8888/auth/renew-token`, {
       method: "POST",
       headers: {
         accept: "application/json",
@@ -25,8 +25,8 @@ function AuthController(props) {
         authorization: `Bearer ${token}`,
       },
     });
-    const isTokenExpired = !respone.ok;
-    return isTokenExpired ? null : (await respone.json()).data;
+    const isTokenExpired = !response.ok;
+    return isTokenExpired ? null : (await response.json()).data;
   };
 
   const tokenInvalidHandler = () => {
