@@ -33,7 +33,7 @@ const SideBar = () => {
             icon: <Icon className="menu__favor-icon" icon="akar-icons:heart" />,
             title: "Favorite",
             quantity: 3,
-            path: "/",
+            path: "/favorite",
         },
         {
             icon: <Icon className="menu__list-icon" icon="fluent:apps-list-20-regular" />,
