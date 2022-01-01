@@ -77,6 +77,7 @@ export const FormControl = styled.div `
     flex-direction: column;
     justify-content: center;
     margin-top: 16px;
+    position: relative;
 `;
 
 export const FormControlLabel = styled.label `
@@ -135,8 +136,9 @@ export const ButtonRoot = styled.button `
 
 export const OptionContainer = styled.div `
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    padding: 8px 0 20px;
 `;
 
 export const ForgetPassword = styled.div `
