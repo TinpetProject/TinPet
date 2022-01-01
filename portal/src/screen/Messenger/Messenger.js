@@ -1,20 +1,22 @@
 import React, { useState, useEffect, useCallback } from "react";
-import ChatWindow from "../../components/Chat/ChatWindow";
-import ChatBar from "../../components/Chat/ChatBar";
+import ChatWindow from "../../components/chat/ChatWindow";
+import ChatBar from "../../components/chat/ChatBar";
 import "./Messenger.css";
 import { Main } from "../../styled-component/style";
 
 const Messenger = React.memo(({ userID, socket }) => {
     const [chosenUserInfo, setChosenUserInfo] = useState("");
     const [conversationList, setConversationList] = useState([]);
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
         const fetchList = async () => {
             const result = await fetch(`http://localhost:8888/chat`, {
                 method: "GET",
                 headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
             });
+            if (!result.ok) return;
+
             const listOfConversations = (await result.json()).data;
             setConversationList(listOfConversations);
 
@@ -30,7 +32,12 @@ const Messenger = React.memo(({ userID, socket }) => {
             let updatedConversation;
             const newConversationList = prevList.filter((conversation) => {
                 if (conversation.userID === updatedData.userID) {
-                    updatedConversation = { ...conversation, message: updatedData.content, isSeen: !!updatedData.isSeen };
+                    updatedConversation = {
+                        ...conversation,
+                        message: updatedData.content,
+                        isSeen: !!updatedData.isSeen,
+                        sender: updatedData.sender,
+                    };
                 }
                 return conversation.userID !== updatedData.userID;
             });
@@ -39,11 +46,9 @@ const Messenger = React.memo(({ userID, socket }) => {
         });
     }, []);
 
-    const openConversation = (targetUserID) => {
-        setChosenUserInfo(targetUserID);
-    };
-
-    const seenMessage = (messageID) => {};
+    const openConversation = useCallback((targetUserInfo) => {
+        setChosenUserInfo(targetUserInfo);
+    }, []);
 
     return (
         <Main>

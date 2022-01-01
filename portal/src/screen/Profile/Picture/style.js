@@ -10,10 +10,9 @@ export const PictureWrapper = styled.div`
     border-radius: 15px;
     box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
 `;
-export const Topic = styled.text`
-    position: relative;
-    top: 20px;
-    left: 20px;
+export const Topic = styled.div`
+    position: absolute;
+    margin: 20px;
     background: #ffffff;
     font-family: sans-serif;
     font-weight: bold;
@@ -21,10 +20,9 @@ export const Topic = styled.text`
     color: #373737;
 `;
 export const View = styled.button`
-    position: relative;
+    position: absolute;
     border: none;
-    top: 20px;
-    left: 110px;
+    margin: 28px 0px 0px 220px;
     background: #ffffff;
     font-family: Source Sans Pro, sans-serif;
     font-weight: 600;
@@ -38,7 +36,7 @@ export const View = styled.button`
 `;
 export const PictureListWrapper = styled.div`
     position: relative;
-    left: 20px;
-    top: 30px;
+    margin-left: 20px;
+    margin-top: 60px;
 `;
 
