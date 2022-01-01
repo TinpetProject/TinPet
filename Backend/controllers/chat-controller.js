@@ -16,6 +16,19 @@ module.exports = {
     const messageID = await user.sendMessage(targetUserID, content);
 
     socket.triggerEmit(targetUserID, "message", { content, userID, messageID });
+    // socket.triggerEmit(targetUserID, "getNotification", {
+    //   content,
+    //   userID,
+    //   messageID,
+    //   targetUserID,
+    // });
+    socket.releaseNewMessage(targetUserID, {
+      content,
+      userID,
+      messageID,
+      targetUserID,
+    });
+    
 
     return res.status(200).send({ message: "SEND_MESSAGE_SUCCESS", data: { messageID } });
   }),

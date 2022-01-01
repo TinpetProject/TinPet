@@ -27,11 +27,11 @@ const NavBar = React.memo(({ userID, socket }) => {
   useEffect(() => {
     if (socket) {
       socket.on("getNotification", (data) => {
-        console.log("getNotification");
+        // console.log("getNotification");
         // console.log(data);
         // if(data.)
-        if(data?.userID === userID) {
-          setNotifications((prev) => [...prev, data]);
+        if(data[0]?.targetUserID === userID) {
+          setNotifications((prev) => [...prev, ...data]);
         }
       });
     }

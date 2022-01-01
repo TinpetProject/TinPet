@@ -38,6 +38,18 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
   }, [socket, chosenUserID]);
 
   useEffect(() => {
+    if (socket) {
+      socket.on("seenMessage", (data) => {
+        console.log("seenMessage");
+        // socket.removeNotification(userID, messageID);
+        // newMessageReceivedHandler(data);
+        // if (data.userID === chosenUserID)
+        //   setConversation((prev) => [{ ...data }, ...prev]);
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
     const fetchConversation = async () => {
       const rawData = await fetch(`http://localhost:8888/chat/${chosenUserID}/${messageOffset}`, {
         method: "GET",

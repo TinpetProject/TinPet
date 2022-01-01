@@ -41,7 +41,9 @@ const Messenger = React.memo(({ userID, socket }) => {
     setChosenUserID(targetUserID);
   };
 
-  const seenMessage = (messageID) => {};
+  const seenMessage = (messageID) => {
+    socket.emit("seenNotification", messageID);
+  };
 
   return (
     <>
