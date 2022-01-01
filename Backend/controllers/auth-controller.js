@@ -2,8 +2,8 @@ const signUpSchema = require("../schemas/schemas").signUp;
 const signInSchema = require("../schemas/schemas").signIn;
 const getResetPwLinkSchema = require("../schemas/schemas").getResetPwLink;
 const resetPasswordSchema = require("../schemas/schemas").resetPassword;
-const User = require("../models/user");
-const Authentication = require("../models/authentication");
+const User = require("../models/User");
+const Authentication = require("../models/Authentication");
 const nodemailer = require("nodemailer");
 const tryCatchBlock = require("../util/function").tryCatchBlockForController;
 const HttpError = require("../models/http-error");
@@ -11,6 +11,7 @@ const { getTokenFromRequest } = require("../util/function");
 const jwt = require("jsonwebtoken");
 const util = require("../util/function");
 const generateHTMLForResetPwLink = require("../views/generateHTMLForResetPasswordMail");
+const socket = require("../models/SocketIO");
 module.exports = {
   signUp: tryCatchBlock(signUpSchema, async (req, res, next) => {
     const { email, password, name } = req.body;
@@ -30,9 +31,9 @@ module.exports = {
     const user = new User({ email, password });
     const userInfo = await user.signIn();
 
-    return userInfo
-      ? res.status(200).send({ message: "SIGN_IN_SUCCESS", data: Authentication.createToken(userInfo) })
-      : res.status(404).send({ message: "SIGN_IN_FAIL" });
+    if (!userInfo) return res.status(404).send({ message: "SIGN_IN_FAIL" });
+
+    return res.status(200).send({ message: "SIGN_IN_SUCCESS", data: Authentication.createToken(userInfo) });
   }),
 
   renewToken: async (req, res, next) => {
@@ -66,9 +67,19 @@ module.exports = {
       template: "index",
       attachments: [
         {
-          filename: "forget-password-illus.jpg",
+          filename: "forget-password-illus.png",
           path: __dirname + "/../public/assets/images/forget-password-illus.png",
           cid: "forget-password-illus",
+        },
+        {
+          filename: "logo.jpg",
+          path: __dirname + "/../public/assets/images/logo.png",
+          cid: "logo",
+        },
+        {
+          filename: "copyright.jpg",
+          path: __dirname + "/../public/assets/images/copyright.png",
+          cid: "copyright",
         },
       ],
     });

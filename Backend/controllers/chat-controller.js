@@ -42,24 +42,6 @@ module.exports = {
     return res.status(200).send({
       message: "SEND_MESSAGE_SUCCESS",
       data: conversationList,
-      // data: [
-      //   {
-      //     avatar: "https://media.travelmag.vn/files/quyensok/2021/02/19/151744159_1858284524329401_8015280447006743040_n-1629.jpg",
-      //     message: "tin nhắn với đinh khánh khang",
-      //     isSeen: true,
-      //     name: "Đinh Khánh Khang",
-      //     receiveTime: "Testing Time",
-      //     userID: "1139701f-7fb1-2b73-cce5-7797b077698d",
-      //   },
-      //   {
-      //     avatar: "https://media.travelmag.vn/files/quyensok/2021/02/19/151744159_1858284524329401_8015280447006743040_n-1629.jpg",
-      //     message: "tin nhắn với chung khánh toàn",
-      //     isSeen: true,
-      //     name: "Chung Khánh Toàn",
-      //     receiveTime: "Testing Time",
-      //     userID: "11272983-4328-1c6e-8b08-768121fccb40",
-      //   },
-      // ],
     });
   }),
 
@@ -71,16 +53,7 @@ module.exports = {
 
     const conversationList = await user.getMessageByOffset(targetUserID, offset);
 
-    let data;
-
-    switch (req.params.targetUserID) {
-      case "1139701f-7fb1-2b73-cce5-7797b077698d":
-        data = [{ content: "tin nhắn với đinh khánh khang", userID: req.params.targetUserID, messageID: 123 }];
-        break;
-      default:
-        data = [{ content: "tin nhắn với chung khánh toàn", userID: req.params.targetUserID, messageID: 123 }];
-        break;
-    }
+    await user.seenMessage(targetUserID);
 
     return res.status(200).send({ message: "SEND_MESSAGE_SUCCESS", data: conversationList });
   }),

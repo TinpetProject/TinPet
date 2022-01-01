@@ -1,4 +1,4 @@
-const HttpError = require("../models/http-error");
+const HttpError = require("../models/Http-error");
 const crypto = require("crypto");
 const ajv = require("../schemas/ajv");
 require("dotenv").config();

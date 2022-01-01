@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import ChatMessage from "./ChatMessage";
-import { useRef, useCallback } from "react";
 import ChatInput from "./ChatInput";
 import "./ChatWindow.css";
+import ChatWindowHeader from "./ChatWindowHeader/ChatWindowHeader";
 
 const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceivedHandler }) => {
   const [conversation, setConversation] = useState([]);
@@ -15,23 +15,26 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
   let isLatestReceiverMessage = true;
 
   useEffect(() => {
-    if (chosenUserID) {
+    const resetComponentState = () => {
       setHasMoreMessage(true);
       setMessageOffset(0);
       setConversation([]);
       setClicker((prev) => (prev += 1));
       additionalOffset.current = 0;
-    }
+    };
+    chosenUserID && resetComponentState();
   }, [chosenUserID]);
 
   useEffect(() => {
-    if (socket) {
-      socket.on("message", (data) => {
-        console.log(data.userID === chosenUserID);
+    const subscribeToSocket = () => {
+      socket?.on("message", (data) => {
         newMessageReceivedHandler(data);
         if (data.userID === chosenUserID) setConversation((prev) => [{ ...data }, ...prev]);
       });
-    }
+    };
+    subscribeToSocket();
+
+    //cleans up subscribe
     return () => {
       socket?.off("message");
     };
@@ -62,11 +65,11 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
 
       setConversation((prevConversation) => [...prevConversation, ...newConversation]);
     };
-    if (chosenUserID && hasMoreMessage) {
-      fetchConversation();
-    }
-  }, [messageOffset, clicker]);
+    chosenUserID && socket && hasMoreMessage && fetchConversation();
+  }, [messageOffset, clicker, socket]);
+  // }, [messageOffset, chosenUserID, socket]);
 
+  //handle infinite scrolling
   const observer = useRef();
   const lastMessageRef = useCallback(
     (lastMessageElement) => {
@@ -79,22 +82,25 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
     [hasMoreMessage]
   );
 
-  const sendMessage = async (message) => {
-    const rawData = await fetch(`http://localhost:8888/chat`, {
-      method: "POST",
-      headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
-      body: JSON.stringify({ targetUserID: chosenUserID, content: message }),
-    });
-    const data = (await rawData.json()).data;
+  const sendMessage = useCallback(
+    async (message) => {
+      const rawData = await fetch(`http://localhost:8888/chat`, {
+        method: "POST",
+        headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
+        body: JSON.stringify({ targetUserID: chosenUserID, content: message }),
+      });
+      const data = (await rawData.json()).data;
 
-    const newMessage = { userID, content: message, messageID: data.messageID };
-    setConversation((prev) => [newMessage, ...prev]);
+      const newMessage = { userID, content: message, messageID: data.messageID };
+      setConversation((prev) => [newMessage, ...prev]);
 
-    const newMessageForChatBar = { userID: chosenUserID, content: message, isSeen: true };
-    newMessageReceivedHandler(newMessageForChatBar);
+      const newMessageForChatBar = { userID: chosenUserID, content: message, isSeen: true, sender: userID };
+      newMessageReceivedHandler(newMessageForChatBar);
 
-    additionalOffset.current = additionalOffset.current + 1;
-  };
+      additionalOffset.current = additionalOffset.current + 1;
+    },
+    [token, chosenUserID]
+  );
 
   const shouldAvarShow = (isSender) => {
     let isAvarShow = false;
@@ -109,9 +115,20 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
     return isAvarShow;
   };
 
+  // if (!chosenUserInfo) {
+  if (!chosenUserID) {
+    return (
+      <div className="messenger__chat-window">
+        <div className="chat-window__skeleton">
+          <p>It looks like you don't have any message</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="messenger__chat-window">
-      <div className="chat-window__header">đây là chỗ cho phần head</div>
+      <ChatWindowHeader chosenUserID={chosenUserID} socket={socket} />
       <div className="chat-window__messages-wrapper">
         {conversation?.map((message, index) => {
           const isSender = message.userID === userID;

@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 class SocketIO {
   constructor() {
     if (SocketIO.instance == null) {
@@ -12,18 +14,26 @@ class SocketIO {
   init = (httpServer) => {
     this.socket = require("socket.io")(httpServer, {
       cors: {
-        origin: "http://localhost:3000",
+        origin: process.env.FE_BASE_URL,
         credentials: true,
       },
     });
     this.socket.on("connection", (socket) => {
       socket.on("login", (data) => {
+        this.notifyUserStatus({ userID: data.userID, isOnline: true });
         this.connections[data.userID] = socket.id;
         this.triggerEmit(
           data.userID,
           "getNotification",
           this.notifications[data.userID]
         );
+        console.log(this.connections);
+      });
+      socket.on("logout", (data) => {
+        console.log("logouted", data);
+        this.notifyUserStatus({ userID: data.userID, isOnline: false });
+        delete this.connections[data.userID];
+        console.log(this.connections);
       });
     });
 
@@ -71,6 +81,10 @@ class SocketIO {
   removeNotification = (userID, messageID) => {
     const msgIndex = this.notifications[userID].indexOf(messageID);
     if (!!msgIndex) this.notifications[userID].splice(msgIndex, 1);
+  }
+  
+  notifyUserStatus = (data) => {
+    this.socket.sockets.emit("status", data);
   };
 
   getConnection = (userID) => {
