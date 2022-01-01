@@ -60,17 +60,17 @@ const SideBar = () => {
     <SideBarWrapper>
       <SideBarList>
         <SideBarListTitle> Main menu </SideBarListTitle>
-        {mainMenu.map((item, index) => (
-          <StyledLink to={item.path}>
-            <SideBarElement key={index}>
+        {mainMenu.map((item) => (
+          <StyledLink to={item.path} key={item.title}>
+            <SideBarElement>
               {item.icon}
               <SideBarElementTitle> {item.title} </SideBarElementTitle> <SideBarElementQuantity> {item.quantity} </SideBarElementQuantity>
             </SideBarElement>
           </StyledLink>
         ))}
         <SideBarListTitle> Other </SideBarListTitle>
-        {other.map((item, index) => (
-          <SideBarElement key={index}>
+        {other.map((item) => (
+          <SideBarElement key={item.title}>
             {item.icon}
             <SideBarElementTitle> {item.title} </SideBarElementTitle>
           </SideBarElement>
