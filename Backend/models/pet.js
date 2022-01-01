@@ -105,22 +105,44 @@ module.exports = class Pet {
       ON DUPLICATE KEY UPDATE
       isLiked = VALUES(isLiked);`
     );
-
+    
     return result[0].affectedRows === 1 ? true : false;
   });
 
   follow = tryCatchBlock(async (targetUserID) => {
-    // const result = await database.execute(
-    //     `INSERT INTO tinpet.Relationship 
-    //     (userID, targetUserID, isFollowed)
-    //     VALUES 
-    //     ('${this.userID}', '${targetUserID}', 1)
-    //     ON DUPLICATE KEY UPDATE
-    //     isFollowed = VALUES(isFollowed);`
-    //   );
-  
-    // return result[0].affectedRows === 1 ? true : false;
-    return null;
+    const result = await database.execute(
+        `INSERT INTO tinpet.Relationship 
+        (userID, targetUserID, isMatched)
+        VALUES 
+        ('${this.userID}', '${targetUserID}', 1)
+        ON DUPLICATE KEY UPDATE
+        isMatched = VALUES(isMatched);`
+      );
+    
+    if (result[0].affectedRows === 1)
+    {
+      const rela = await database.execute(`SELECT isMatched
+      FROM Relationship
+      WHERE userID = '${targetUserID}'
+      AND targetUserID = '${this.userID}';`);
+      const isMatched = rela[0][0]?.isMatched;
+      if (isMatched === 1)
+      {
+        const result_friend = await database.execute(
+          `INSERT INTO tinpet.Relationship 
+          (userID, targetUserID, isFriend)
+          VALUES 
+          ('${this.userID}', '${targetUserID}', 1)
+          ON DUPLICATE KEY UPDATE
+          isFriend = VALUES(isFriend);`
+        );
+        return result_friend[0].affectedRows === 1 ? 2 : 1;
+      }
+      else 
+        return 1;
+    }
+    return 0;
+    // return null;
   });
 
   testRedis = tryCatchBlock(async () => {
