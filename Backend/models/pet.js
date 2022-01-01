@@ -125,7 +125,7 @@ module.exports = class Pet {
       FROM Relationship
       WHERE userID = '${targetUserID}'
       AND targetUserID = '${this.userID}';`);
-      const isMatched = rela[0][0].isMatched;
+      const isMatched = rela[0][0]?.isMatched;
       if (isMatched === 1)
       {
         const result_friend = await database.execute(
