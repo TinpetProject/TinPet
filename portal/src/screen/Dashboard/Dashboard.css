@@ -10,12 +10,21 @@
     position: relative;
     margin-left: 0px;
     color: var(--black-text-color);
+    width: 650px;
+    margin-bottom: 20px;
+    height: calc(100vh - 60px - 80px);
+    overflow: hidden;
 }
 
 .dashboard-content {
     display: flex;
     margin-top: 110px;
     margin-left: 0px;
+    width: 650px;
+    height: calc(100vh - 60px - 130px);
+    background-color: var(--content-bg-color);
+    position: fixed;
+    border-radius: 14px;
 }
 
 .card-list {
@@ -25,6 +34,23 @@
     display: flex;
     flex-flow: row wrap;
     z-index: 0;
+    overflow: scroll;
+    box-sizing: content-box;
+    height: calc(100vh - 60px - 130px - 20px);
+    margin-top: 10px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.card-list::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.card-list {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 .best-match {
