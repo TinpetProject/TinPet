@@ -53,7 +53,7 @@ const Login = React.memo(({ logInHandler }) => {
         })
         .then((token) => {
           const userInfo = jwt_decode(token);
-          getUserInfo(userInfo);
+          logInHandler(userInfo);
           localStorage.setItem("token", token);
           history.push("/dashboard");
         })
