@@ -39,17 +39,6 @@ module.exports = class Pet {
 
   });
 
-<<<<<<< Updated upstream
-  getPetSuggestion = tryCatchBlock(async (start, end) => {
-    try {
-      await r_database.connect();
-    }
-    catch(err)
-    {
-      console.log('Already open connection to Redis!');
-    }
-=======
-
   getRecentImgs = tryCatchBlock(async () => {
       // get user: name,nickname,avatar,background,intro,pics
       const [resultSet] = await database.execute(
@@ -70,7 +59,6 @@ module.exports = class Pet {
         ON p.userId = r.userID 
         WHERE p.userId != '${this.userID}';`
       );
->>>>>>> Stashed changes
 
     const r1 = await database.execute(`SELECT petID FROM Pet WHERE userID = '${this.userID}'`);
     const petID = r1[0][0].petID;
