@@ -1,6 +1,6 @@
 const database = require("../util/database");
 const tryCatchBlock = require("../util/function").tryCatchBlockForModule;
-const HttpError = require("../models/http-error");
+const HttpError = require("./http-error");
 
 module.exports = class User {
   constructor(userData) {
