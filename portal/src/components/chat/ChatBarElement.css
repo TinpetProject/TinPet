@@ -1,7 +1,7 @@
 .conversation {
   display: flex;
   align-items: center;
-  margin: 20px 10px;
+  margin: 20px 0;
   cursor: pointer;
   width: 100%;
 }
@@ -9,6 +9,7 @@
 .conversation__avatar {
   width: 40px;
   height: 40px;
+  margin: 0 10px 0 16px;
 }
 
 .conversation__content-wrapper {
@@ -21,6 +22,8 @@
 
 .conversation__message {
   width: 100%;
+  font-size: 14px;
+  font-weight: 400;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: pre-wrap;
@@ -29,6 +32,11 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   display: -webkit-box;
+}
+
+.conversation__name {
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .not-seen {
