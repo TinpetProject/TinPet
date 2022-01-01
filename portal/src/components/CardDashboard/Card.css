@@ -20,19 +20,7 @@
 
 }
 
-.card:nth-child(1){
-    margin-top: 11px;
-}
-
-.card:nth-child(2){
-    margin-top: 11px;
-}
-
-.card:nth-child(3){
-    margin-top: 11px;
-}
-
-.card__bg-img img{
+.card__bg-img img {
     width: 100%;
     height: 100%;
     z-index: 0;
@@ -44,7 +32,8 @@
 
 .card__match {
     height: 26px;
-    inset:  15px 0px 0px 15px;/* top right bottom left */
+    inset: 15px 0px 0px 15px;
+    /* top right bottom left */
     position: absolute;
     width: fit-content;
     display: flex;
@@ -134,11 +123,10 @@
     font-size: 1.5rem;
 }
 
-.info__general span{
+.info__general span {
     margin-right: 8px;
 }
 
 .info__heart-btn-liked {
     color: var(--liked-heart-color);
 }
-
