@@ -2,6 +2,7 @@ const Pet = require("../models/pet");
 const HttpError = require("../models/http-error");
 const tryCatchBlock = require("../util/function").tryCatchBlockForController;
 
+
 module.exports = {
     getOwnPet: tryCatchBlock(null, async (req, res, next) => {
         const userIDIsExist = await Pet.isUserIDExist(req.userData.userID);
@@ -24,6 +25,16 @@ module.exports = {
     const petSuggestion = await pet.getPetSuggestion(start, end);
     return res.status(200).send({ message: "GET_SUGGEST_SUCCESS", data: petSuggestion });
     }),
+
+    getRecentImgs: tryCatchBlock(null, async(req, res, next)=>{
+        const userIDIsExist = await Pet.isUserIDExist(req.userData.userID);
+        if (!userIDIsExist) return next(new HttpError("GET_PROFILE_FAIL_USERID_NOT_EXIST", 404));
+
+        const pet = new Pet({ userID: req.userData.userID });
+        const petImgs = await pet.getRecentImgs();
+        return res.status(200).send({ message: "GET_RECENT_IMAGES_SUCCESS", data: petImgs });
+    }),
+
 
     sendLike: tryCatchBlock(null, async (req, res, next) => {
         const { targetUserID } = req.body;

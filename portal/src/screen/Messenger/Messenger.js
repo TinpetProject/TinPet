@@ -3,6 +3,7 @@ import ChatWindow from "../../components/Chat/ChatWindow";
 import ChatBar from "../../components/Chat/ChatBar";
 import { useHistory, useParams } from "react-router";
 import "./Messenger.css";
+import { Main } from "../../styled-component/style";
 const Messenger = React.memo(({ userID, socket }) => {
   const [conversationList, setConversationList] = useState([]);
   const token = localStorage.getItem("token");
@@ -45,11 +46,13 @@ const Messenger = React.memo(({ userID, socket }) => {
   }, []);
 
   return (
-    <div className="messenger">
-      {/* <ChatWindow chosenUserInfo={chosenUserInfo} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} /> */}
-      <ChatWindow chosenUserID={chosenUserID} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
-      <ChatBar conversationList={conversationList} userID={userID} />
-    </div>
+    <Main>
+      <div className="messenger">
+        {/* <ChatWindow chosenUserInfo={chosenUserInfo} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} /> */}
+        <ChatWindow chosenUserID={chosenUserID} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
+        <ChatBar conversationList={conversationList} userID={userID} />
+      </div>
+    </Main>
   );
 });
 

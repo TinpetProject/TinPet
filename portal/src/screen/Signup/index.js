@@ -22,51 +22,54 @@ import { Icon } from "@iconify/react";
 import "./Signup.css";
 import { toast } from "react-toastify"
 import Loading from "../../components/Loading";
+import { validate } from "../../utils/validation";
 
-const Signup = ({ getUserInfo }) => {
+const Signup = () => {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [passwordConfirm, setPasswordConfirm] = React.useState("");
-    const [rememberMe, setRememberMe] = React.useState("");
+    // const [rememberMe, setRememberMe] = React.useState("");
     const [name, setName] = React.useState("");
     const [isLoading, setIsLoading] = React.useState(false);
     const history = useHistory();
     const handleSubmit = (e) => {
         e.preventDefault();
-        setIsLoading(true);
-        axios
-            .post("/auth/sign-up", {
-                email,
-                password,
-                name,
-            })
-            .then((response) => {
-                if (response.status === 200) {
-                    toast.success("Sign up success!", {
-                        position: toast.POSITION.TOP_RIGHT
-                    });
-                }
-                setIsLoading(true);
-                history.push("/complete-profile");
-            })
-            .catch((err) => {
-                switch(err.response.status) {
-                    case 400:
-                    case 404:
-                        toast.error("Invalid email/password!", {
-                        position: toast.POSITION.TOP_RIGHT
+        if (validate()) {
+            setIsLoading(true);
+            axios
+                .post("/auth/sign-up", {
+                    email,
+                    password,
+                    name,
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        toast.success("Sign up success!", {
+                            position: toast.POSITION.TOP_RIGHT
                         });
-                        break;
-                    case 500:
-                        toast.error("Internal Server Error!", {
-                        position: toast.POSITION.TOP_RIGHT
-                        });
-                        break;
-                    default:
-                        break;
-                } 
-                setIsLoading(true);
-            });
+                    }
+                    setIsLoading(false);
+                    history.push("/complete-profile");
+                })
+                .catch((err) => {
+                    switch (err.response.status) {
+                        case 400:
+                        case 404:
+                            toast.error("Invalid email/password!", {
+                                position: toast.POSITION.TOP_RIGHT
+                            });
+                            break;
+                        case 500:
+                            toast.error("Internal Server Error!", {
+                                position: toast.POSITION.TOP_RIGHT
+                            });
+                            break;
+                        default:
+                            break;
+                    }
+                    setIsLoading(false);
+                });
+        }
     };
 
     return (
@@ -83,16 +86,26 @@ const Signup = ({ getUserInfo }) => {
                             <span> Already have an account ? </span> <FormLink onClick={() => history.push("/login")}> Go to login </FormLink>{" "}
                         </FormSubScript>{" "}
                         <FormControl>
-                            <FormControlLabel htmlFor="Email"> Email </FormControlLabel>{" "}
-                            <FormInput type="text" id="username" placeholder="Enter your username" onChange={(e) => setEmail(e.target.value)}></FormInput>{" "}
+                            <FormControlLabel htmlFor="email"> Email <span className="required">*</span> </FormControlLabel>{" "}
+                            <FormInput type="text" id="email" placeholder="Enter your username" onChange={(e) => setEmail(e.target.value)} data-rules="isRequired/isEmail"></FormInput>{" "}
+                            <div className="msg-container">
+                                <ul className="msg-list"></ul>
+                            </div>
                         </FormControl>{" "}
                         <FormControl>
-                            <FormControlLabel htmlFor="Email"> Your name </FormControlLabel>{" "}
-                            <FormInput type="text" id="username" placeholder="Enter your username" onChange={(e) => setName(e.target.value)}></FormInput>{" "}
+                            <FormControlLabel htmlFor="username"> Your name <span className="required">*</span> </FormControlLabel>{" "}
+                            <FormInput type="text" id="username" placeholder="Enter your username" onChange={(e) => setName(e.target.value)} data-rules="isRequired"></FormInput>{" "}
+                            <div className="msg-container">
+                                <ul className="msg-list"></ul>
+                            </div>
                         </FormControl>{" "}
                         <FormControl>
-                            <FormControlLabel htmlFor="password"> Password </FormControlLabel>{" "}
-                            <FormInput type="password" id="password" placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)}></FormInput>{" "}
+                            <FormControlLabel htmlFor="password"> Password <span className="required">*</span></FormControlLabel>{" "}
+                            <FormInput type="password" id="password" placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)}
+                                data-rules="isRequired"></FormInput>{" "}
+                            <div className="msg-container">
+                                <ul className="msg-list"></ul>
+                            </div>
                         </FormControl>{" "}
                         <FormControl>
                             <FormControlLabel htmlFor="passwordConfirm"> Confirm password </FormControlLabel>{" "}
@@ -101,16 +114,20 @@ const Signup = ({ getUserInfo }) => {
                                 id="passwordConfirm"
                                 placeholder="Enter your password"
                                 onChange={(e) => setPasswordConfirm(e.target.value)}
+                                data-rules="confirmPassword"
                             ></FormInput>{" "}
+                            <div className="msg-container">
+                                <ul className="msg-list"></ul>
+                            </div>
                         </FormControl>{" "}
-                        <FormControlCheckBox>
+                        {/* <FormControlCheckBox>
                             <FormInputCheckBox type="checkbox" id="rememberMe" onChange={(e) => setRememberMe(e.currentTarget.checked)}></FormInputCheckBox>{" "}
                             <FormControlLabelCheckBox htmlFor="rememberMe">Keep me logged in</FormControlLabelCheckBox>{" "}
-                        </FormControlCheckBox>{" "}
-                        <ButtonRoot> Sign up </ButtonRoot>{" "}
+                        </FormControlCheckBox>{" "} */}
+                        <ButtonRoot style={{ marginTop: "20px" }}> Sign up </ButtonRoot>{" "}
                     </Form>{" "}
                 </ContentBox>{" "}
-                {isLoading && <Loading/>}
+                {isLoading && <Loading />}
             </Wrapper>{" "}
         </>
     );

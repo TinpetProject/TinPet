@@ -28,7 +28,7 @@ export const Avatar = styled.img`
   border: 4px solid #ffffff;
 `;
 
-export const Name = styled.text`
+export const Name = styled.div`
   position: absolute;
   left: 210px;
   top: 320px;

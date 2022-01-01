@@ -10,8 +10,8 @@
     top: 0;
     left: 0;
     right: 0;
-    margin-top: 80px;
-    margin-left: calc((100vw - 1140px) / 2 + 220px);
+    margin-top: 20px;
+    margin-left: 0px;
 }
 
 .messenger__chat-window {
