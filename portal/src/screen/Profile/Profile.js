@@ -8,7 +8,7 @@ import { Main } from "../../styled-component/style";
 import Feed from "./Feed";
 
 
-const Profile = () => {
+const Profile = ({userID}) => {
   
   return (
     <>
