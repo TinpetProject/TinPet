@@ -16,6 +16,7 @@ import { injectStyle } from "react-toastify/dist/inject-style";
 import PetList from "./screen/PetList/PetList";
 import Favorite from "./screen/Favorite/Favorite";
 import Profile from "./screen/Profile/Profile";
+import Gallery from "./screen/Profile/Gallery";
 
 if (typeof window !== "undefined") {
   injectStyle();
@@ -57,6 +58,9 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
             </Route>
             <Route exact path="/profile">
               <Profile />
+            </Route>
+            <Route exact path="/gallery">
+              <Gallery />
             </Route>
             <Route path="/petlist">
               <PetList />

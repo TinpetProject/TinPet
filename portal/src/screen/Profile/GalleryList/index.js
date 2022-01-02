@@ -8,7 +8,7 @@ import {
 import { PhotoGal } from "../dummyData";
 
 export default function GalleryList({ setSelectedImg }) {
-
+    
     return (
         <div>  
             <PhotosWrapper>
