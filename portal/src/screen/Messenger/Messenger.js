@@ -14,7 +14,11 @@ const Messenger = React.memo(({ userID, socket }) => {
     const fetchList = async () => {
       const result = await fetch(`http://localhost:8888/chat`, {
         method: "GET",
-        headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
       });
       if (!result.ok) return;
 
@@ -36,7 +40,12 @@ const Messenger = React.memo(({ userID, socket }) => {
       let updatedConversation = null;
       const newConversationList = prevList.filter((conversation) => {
         if (conversation.userID === updatedData.userID) {
-          updatedConversation = { ...conversation, message: updatedData.content, isSeen: !!updatedData.isSeen, sender: updatedData.sender };
+          updatedConversation = {
+            ...conversation,
+            message: updatedData.content,
+            isSeen: !!updatedData.isSeen,
+            sender: updatedData.sender,
+          };
         }
         return conversation.userID !== updatedData.userID;
       });
@@ -48,7 +57,12 @@ const Messenger = React.memo(({ userID, socket }) => {
   return (
     <Main>
       <div className="messenger">
-        <ChatWindow chosenUserID={chosenUserID} socket={socket} userID={userID} newMessageReceivedHandler={updateConversationList} />
+        <ChatWindow
+          chosenUserID={chosenUserID}
+          socket={socket}
+          userID={userID}
+          newMessageReceivedHandler={updateConversationList}
+        />
         <ChatBar conversationList={conversationList} userID={userID} />
       </div>
     </Main>
