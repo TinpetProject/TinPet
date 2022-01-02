@@ -15,6 +15,7 @@ import ResetPassword from "./screen/ResetPassword";
 import { injectStyle } from "react-toastify/dist/inject-style";
 import PetList from "./screen/PetList/PetList";
 import Favorite from "./screen/Favorite/Favorite";
+import Game from "./screen/Game/Game";
 
 if (typeof window !== "undefined") {
     injectStyle();
@@ -59,6 +60,9 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
                         </Route>
                         <Route path="/favorite">
                             <Favorite />
+                        </Route>
+                        <Route path="/game">
+                            <Game />
                         </Route>
                         <Route path="/*">
                             <Redirect to="/dashboard" />

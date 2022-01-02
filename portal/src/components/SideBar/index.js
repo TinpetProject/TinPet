@@ -34,6 +34,12 @@ const SideBar = () => {
             title: "Favorite",
             quantity: 3,
             path: "/favorite",
+        }, 
+        {
+            icon: <Icon className="menu__game-icon" icon="teenyicons:game-controller-outline" />,
+            title: "Game",
+            quantity: "100+",
+            path: "/game",
         },
         {
             icon: <Icon className="menu__list-icon" icon="fluent:apps-list-20-regular" />,
