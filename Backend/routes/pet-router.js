@@ -3,6 +3,8 @@ const router = express.Router();
 const petController = require("../controllers/pet-controller.js");
 const checkAuth = require("../middleware/check-auth");
 
+router.get("/breads", petController.getBreads);
+
 router.use(checkAuth);
 
 router.get("/own", petController.getOwnPet);
@@ -16,7 +18,6 @@ router.put("/follow", petController.sendFollow);
 router.get("/breeds", petController.getBreeds);
 
 router.get("/redis", petController.testRedis);
-
 
 router.get("/recent-images", petController.getRecentImgs);
 
