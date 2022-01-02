@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import ForgotPassword from "./screen/ForgotPassword";
 import ResetPassword from "./screen/ResetPassword";
 import { injectStyle } from "react-toastify/dist/inject-style";
+import Profile from "./screen/Profile";
 
 if (typeof window !== "undefined") {
   injectStyle();
@@ -48,6 +49,9 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
             </Route>
             <Route exact path="/matches">
               <Matches />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
             </Route>
             <Route exact path="/messenger/:chosenUserID">
               <Messenger userID={userID} socket={socket} />
