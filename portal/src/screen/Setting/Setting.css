@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+.container-layout {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.5;
+    background-color: black;
+}
+
+/*Setting*/
+
+.container-content-wrapper {
+    position: absolute;
+    width: 1080px;
+    max-height: fit-content;
+    border-radius: 8px;
+    background-color: #fff;
+    z-index: 11;
+}
+
+/* Setting sidebar */
+
+
+/* Setting content */
+.content-box-header {
+    position: relative;
+    height: 60px;
+    border-bottom: 1px solid #ccc;
+}

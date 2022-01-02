@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import "./Setting.css";
 
-export default function Setting() {
+export default function Setting({userID, hideSetting}) {
     return (
-        <div>
-            DM Long Minh
+        <div className="container">
+            <div className="container-layout" onClick={hideSetting}></div>
+            <div className="container-content-box">
+                hahaha
+                <div></div>
+            </div>
         </div>
     )
-}
+};
