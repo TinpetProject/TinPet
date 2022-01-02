@@ -2,10 +2,11 @@ import { HomePage } from "./styled-component/style";
 import Login from "./screen/Login";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import React from "react";
+import React, { Profiler } from "react";
 import Signup from "./screen/Signup";
 import Matches from "./screen/Matches/Matches";
 import Dashboard from "./screen/Dashboard/Dashboard";
+import Profile from "./screen/Profile";
 import Messenger from "./screen/Messenger/Messenger";
 import Layout from "./components/Layout/Layout";
 import CompleteProfile from "./screen/CompleteProfile/CompleteProfile";
@@ -13,6 +14,8 @@ import { ToastContainer } from "react-toastify";
 import ForgotPassword from "./screen/ForgotPassword";
 import ResetPassword from "./screen/ResetPassword";
 import { injectStyle } from "react-toastify/dist/inject-style";
+import PetList from "./screen/PetList/PetList";
+import Favorite from "./screen/Favorite/Favorite";
 
 
 if (typeof window !== "undefined") {
@@ -54,6 +57,15 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
             </Route>
             <Route exact path="/messenger/:chosenUserID">
               <Messenger userID={userID} socket={socket} />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/petlist">
+              <PetList />
+            </Route>
+            <Route path="/favorite">
+              <Favorite />
             </Route>
             <Route path="/*">
               <Redirect to="/dashboard" />

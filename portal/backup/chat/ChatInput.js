@@ -17,6 +17,7 @@ const ChatInput = React.memo(({ sendMessageHandler }) => {
     return event.key === "Enter" ? onClickHandler() : null;
   };
 
+
   return (
     <div className="chat-window__input-wrapper">
       <input value={message} onChange={onChangeHandler} onKeyPress={onKeyPressHandler} placeholder="Type in here"></input>

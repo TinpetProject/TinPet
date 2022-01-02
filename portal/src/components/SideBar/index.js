@@ -88,7 +88,7 @@ const SideBar = (props) => {
 };
 
 const StyledLink = styled(Link)`
-  text-decoration: none !important;
+    text-decoration: none !important;
 `;
 
 export default SideBar;

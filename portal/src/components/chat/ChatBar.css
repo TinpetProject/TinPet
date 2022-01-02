@@ -42,3 +42,11 @@
   align-items: center;
   width: 100%;
 }
+
+.chat-bar__skeleton {
+  margin-left: 20px;
+  border-radius: 15px;
+  background-color: #fff;
+  height: calc(100vh - 60px - 40px);
+  width: 250px;
+}
