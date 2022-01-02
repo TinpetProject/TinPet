@@ -4,14 +4,13 @@ import ChatInput from "./ChatInput";
 import "./ChatWindow.css";
 import ChatWindowHeader from "./ChatWindowHeader/ChatWindowHeader";
 
-const ChatWindow = React.memo(({ userID, chosenUserInfo, socket, newMessageReceivedHandler }) => {
+const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceivedHandler, onSeenMessage }) => {
   const [conversation, setConversation] = useState([]);
   const [messageOffset, setMessageOffset] = useState(null);
   const [hasMoreMessage, setHasMoreMessage] = useState(true);
   const [clicker, setClicker] = useState(0);
   const additionalOffset = useRef(0);
   const token = localStorage.getItem("token");
-  const { userID: chosenUserID } = chosenUserInfo;
   let isLatestSenderMessage = true;
   let isLatestReceiverMessage = true;
 
@@ -29,6 +28,7 @@ const ChatWindow = React.memo(({ userID, chosenUserInfo, socket, newMessageRecei
   useEffect(() => {
     const subscribeToSocket = () => {
       socket?.on("message", (data) => {
+        // console.log("receive msg");
         newMessageReceivedHandler(data);
         if (data.userID === chosenUserID) setConversation((prev) => [{ ...data }, ...prev]);
       });
@@ -40,6 +40,18 @@ const ChatWindow = React.memo(({ userID, chosenUserInfo, socket, newMessageRecei
       socket?.off("message");
     };
   }, [socket, chosenUserID]);
+
+  // useEffect(() => {
+  //   if (socket) {
+  //     socket.on("seenMessage", (data) => {
+  //       console.log("seenMessage");
+  //       // socket.removeNotification(userID, messageID);
+  //       // newMessageReceivedHandler(data);
+  //       // if (data.userID === chosenUserID)
+  //       //   setConversation((prev) => [{ ...data }, ...prev]);
+  //     });
+  //   }
+  // }, [socket]);
 
   useEffect(() => {
     const fetchConversation = async () => {
@@ -54,8 +66,9 @@ const ChatWindow = React.memo(({ userID, chosenUserInfo, socket, newMessageRecei
 
       setConversation((prevConversation) => [...prevConversation, ...newConversation]);
     };
-    chosenUserID && hasMoreMessage && fetchConversation();
-  }, [messageOffset, clicker]);
+    chosenUserID && socket && hasMoreMessage && fetchConversation();
+  }, [messageOffset, clicker, socket]);
+  // }, [messageOffset, chosenUserID, socket]);
 
   //handle infinite scrolling
   const observer = useRef();
@@ -103,9 +116,20 @@ const ChatWindow = React.memo(({ userID, chosenUserInfo, socket, newMessageRecei
     return isAvarShow;
   };
 
+  // if (!chosenUserInfo) {
+  if (!chosenUserID) {
+    return (
+      <div className="messenger__chat-window">
+        <div className="chat-window__skeleton">
+          <p>It looks like you don't have any message</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="messenger__chat-window">
-      <ChatWindowHeader chosenUserInfo={chosenUserInfo} socket={socket} />
+      <ChatWindowHeader chosenUserID={chosenUserID} socket={socket} />
       <div className="chat-window__messages-wrapper">
         {conversation?.map((message, index) => {
           const isSender = message.userID === userID;
@@ -122,7 +146,10 @@ const ChatWindow = React.memo(({ userID, chosenUserInfo, socket, newMessageRecei
           );
         })}
       </div>
-      <ChatInput sendMessageHandler={sendMessage} />
+      <ChatInput
+        sendMessageHandler={sendMessage}
+        onSeenMessage={onSeenMessage(conversation[conversation.length - 1]?.messageID)}
+      />
     </div>
   );
 });

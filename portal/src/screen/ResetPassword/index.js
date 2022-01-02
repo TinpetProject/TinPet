@@ -17,6 +17,7 @@ import { Icon } from "@iconify/react";
 import { toast } from "react-toastify";
 import "../Login/Login.css";
 import Loading from "../../components/Loading";
+import { validate } from "../../utils/validation";
 
 const ResetPassword = () => {
     const [password, setPassword] = React.useState("");
@@ -27,41 +28,44 @@ const ResetPassword = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setIsLoading(true);
-        axios
-            .post(`/auth/reset-password/${resetToken}`, {
-                password,
-            })
-            .then((response) => {
-                console.log(response);
-                if (response.status === 200) {
-                    toast.success("Reset password success!", {
-                        position: toast.POSITION.TOP_RIGHT
-                    });
+        if (validate()) {
+
+            setIsLoading(true);
+            axios
+                .post(`/auth/reset-password/${resetToken}`, {
+                    password,
+                })
+                .then((response) => {
+                    console.log(response);
+                    if (response.status === 200) {
+                        toast.success("Reset password success!", {
+                            position: toast.POSITION.TOP_RIGHT
+                        });
+                        setIsLoading(false);
+                        history.replace("/login");
+                    }
+                    return response.data.data;
+                })
+                .catch((err) => {
+                    switch (err.response.status) {
+                        case 400:
+                        case 404:
+                            toast.error("Invalid password!", {
+                                position: toast.POSITION.TOP_RIGHT
+                            });
+                            break;
+                        case 500:
+                            toast.error("Internal Server Error!", {
+                                position: toast.POSITION.TOP_RIGHT
+                            });
+                            break;
+                        default:
+                            break;
+                    }
                     setIsLoading(false);
-                    history.replace("/login");
-                }
-                return response.data.data;
-            })
-            .catch((err) => {
-                switch (err.response.status) {
-                    case 400:
-                    case 404:
-                        toast.error("Invalid password!", {
-                            position: toast.POSITION.TOP_RIGHT
-                        });
-                        break;
-                    case 500:
-                        toast.error("Internal Server Error!", {
-                            position: toast.POSITION.TOP_RIGHT
-                        });
-                        break;
-                    default:
-                        break;
-                }
-                setIsLoading(false);
-            })
-    };
+                })
+        };
+    }
 
     return (
         <>
@@ -83,7 +87,11 @@ const ResetPassword = () => {
                                 id="password"
                                 placeholder="Enter your password"
                                 onChange={(e) => setPassword(e.target.value)}
+                                data-rules="isRequired"
                             ></FormInput>{" "}
+                            <div className="msg-container">
+                                <ul className="msg-list"></ul>
+                            </div>
                         </FormControl>{" "}
                         <FormControl>
                             <FormControlLabel htmlFor="passwordConfirm"> Confirm password </FormControlLabel>{" "}
@@ -92,12 +100,16 @@ const ResetPassword = () => {
                                 id="passwordConfirm"
                                 placeholder="Confirm your password"
                                 onChange={(e) => setPasswordConfirm(e.target.value)}
+                                data-rules="confirmPassword"
                             ></FormInput>{" "}
+                            <div className="msg-container">
+                                <ul className="msg-list"></ul>
+                            </div>
                         </FormControl>{" "}
                         <ButtonRoot style={{ marginTop: "10px" }}> Reset Password </ButtonRoot>{" "}
                     </Form>{" "}
                 </ContentBox>{" "}
-                {isLoading && <Loading/>}
+                {isLoading && <Loading />}
             </Wrapper>{" "}
         </>
     );

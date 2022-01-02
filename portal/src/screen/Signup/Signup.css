@@ -7,3 +7,7 @@
     color: white;
     cursor: default;
 }
+
+.required {
+    color: #fb6d6c;
+}

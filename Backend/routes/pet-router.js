@@ -13,7 +13,10 @@ router.put("/like", petController.sendLike);
 
 router.put("/follow", petController.sendFollow);
 
+
 router.get("/redis", petController.testRedis);
 
+
 router.get("/recent-images", petController.getRecentImgs);
+
 module.exports = router;

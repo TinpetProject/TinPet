@@ -42,7 +42,7 @@ export const ButtonWrapper = styled.div `
 
 export const Main = styled.div `
     display: flex;
-    margin-top: 60px;
+    margin-top: 40px;
     position: relative;
     margin-left: calc((100vw - 1140px) / 2 + 220px);
 `;

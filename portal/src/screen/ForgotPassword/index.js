@@ -17,6 +17,7 @@ import { Icon } from "@iconify/react";
 import { toast } from "react-toastify"
 import "../Login/Login.css"
 import Loading from "../../components/Loading"
+import { validate } from "../../utils/validation";
 
 const ForgotPassword = React.memo(() => {
     const [email, setEmail] = React.useState("");
@@ -24,38 +25,40 @@ const ForgotPassword = React.memo(() => {
     const [isLoading, setIsLoading] = React.useState(false);
     const handleSubmit = (e) => {
         e.preventDefault();
-        setIsLoading(true)
-        axios
-            .post("/auth/reset-password", {
-                email,
-            })
-            .then((response) => {
-                console.log(response);
-                if (response.status === 200) {
-                    toast.info("Please check your mail !", {
-                        position: toast.POSITION.TOP_RiGHT
-                    });
+        if (validate()) {
+            setIsLoading(true)
+            axios
+                .post("/auth/reset-password", {
+                    email,
+                })
+                .then((response) => {
+                    console.log(response);
+                    if (response.status === 200) {
+                        toast.info("Please check your mail !", {
+                            position: toast.POSITION.TOP_RiGHT
+                        });
+                        setIsLoading(false);
+                    }
+                })
+                .catch((err) => {
+                    switch (err.response.status) {
+                        case 400:
+                        case 404:
+                            toast.error("Invalid email!", {
+                                position: toast.POSITION.TOP_RIGHT
+                            });
+                            break;
+                        case 500:
+                            toast.error("Internal Server Error!", {
+                                position: toast.POSITION.TOP_RIGHT
+                            });
+                            break;
+                        default:
+                            break;
+                    }
                     setIsLoading(false);
-                }
-            })
-            .catch((err) => {
-                switch (err.response.status) {
-                    case 400:
-                    case 404:
-                        toast.error("Invalid email!", {
-                            position: toast.POSITION.TOP_RIGHT
-                        });
-                        break;
-                    case 500:
-                        toast.error("Internal Server Error!", {
-                            position: toast.POSITION.TOP_RIGHT
-                        });
-                        break;
-                    default:
-                        break;
-                }
-                setIsLoading(false);
-            })
+                })
+        }
     };
 
     return (
@@ -73,12 +76,16 @@ const ForgotPassword = React.memo(() => {
                         </FormTitle>{" "}
                         <FormControl>
                             <FormControlLabel htmlFor="email"> Email </FormControlLabel>{" "}
-                            <FormInput type="text" id="email" placeholder="Enter your email" onChange={(e) => setEmail(e.target.value)}></FormInput>{" "}
+                            <FormInput type="text" id="email" placeholder="Enter your email" onChange={(e) => setEmail(e.target.value)}
+                                data-rules="isRequired/isEmail"></FormInput>{" "}
+                            <div className="msg-container">
+                                <ul className="msg-list"></ul>
+                            </div>
                         </FormControl>{" "}
                         <ButtonRoot style={{ marginTop: "10px" }}> Send </ButtonRoot>{" "}
                     </Form>{" "}
                 </ContentBox>{" "}
-                { isLoading && <Loading/>}
+                {isLoading && <Loading />}
             </Wrapper>{" "}
         </>
     );

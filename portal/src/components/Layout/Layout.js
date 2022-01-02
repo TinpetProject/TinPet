@@ -6,7 +6,7 @@ const Layout = React.memo((props) => {
   return (
     <>
       <NavBar userID={props.userID} socket={props.socket} logOutHandler={props.logOutHandler} />
-      <SideBar />
+      <SideBar logOutHandler={props.logOutHandler} />
       {props.children}
     </>
   );
