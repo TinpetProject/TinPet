@@ -31,7 +31,19 @@ module.exports = {
 
     const post = new Post({ postID: req.params.postID });
     const commentID = await post.sendCommentByPost(userID, content);
-    console.log(commentID);
+
     return res.status(200).send({ message: "SEND_COMMENT_SUCCESS", data: commentID });
+  }),
+
+  likePost: tryCatchBlock(null, async (req, res, next) => {
+    const userID = req.userData.userID;
+
+    const postIDIsExist = await Post.isPostIDExist(req.params.postID);
+    if (!postIDIsExist) return next(new HttpError("LIKE_POST_FAIL_POSTID_NOT_EXIST", 404));
+
+    const post = new Post({ postID: req.params.postID });
+    await post.likePost(userID);
+
+    return res.status(200).send({ message: "LIKE_POST_SUCCESS" });
   }),
 };
