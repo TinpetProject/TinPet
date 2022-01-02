@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   PostWrapper,
   PostTop,
@@ -26,7 +26,24 @@ import { useState } from "react";
 import { Users } from "../dummyData";
 import CommentList from "../CommentList/CommentList";
 import "./post.css"
+const defaultPostID = "1116301c-477f-2a8f-555f-1885b89fc8fc";
 export default function Post({ post }) {
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const fetchList = async () => {
+      const result = await fetch(`http://localhost:8888/${defaultPostID}/comment`, {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(await result.json());
+      // if (!result.ok) return;
+    };
+    token && fetchList();
+  }, []);
   const [like, setLike] = useState(post.like);
   const [isLiked, setIsLiked] = useState(false);
   const [isCommenting, setIsCommenting] = useState(false);
