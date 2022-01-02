@@ -13,10 +13,7 @@ router.put("/like", petController.sendLike);
 
 router.put("/follow", petController.sendFollow);
 
-<<<<<<< Updated upstream
 router.get("/redis", petController.testRedis);
 
-=======
 router.get("/recent-images", petController.getRecentImgs);
->>>>>>> Stashed changes
 module.exports = router;
