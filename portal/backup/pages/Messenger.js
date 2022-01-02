@@ -31,7 +31,7 @@ const Messenger = () => {
 
   const sendMessage = (message) => {
     const messageID = Math.random() * 1000000000000000;
-    console.log(`sending message ${message}`);
+    // console.log(`sending message ${message}`);
     setConversation((prev) => [...prev, { userID: name, content: message, messageID }]);
     return socket.current.emit("message", { receiver, message, username: name, messageID });
   };
