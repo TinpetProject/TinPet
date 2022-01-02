@@ -39,7 +39,7 @@ export default function CompleteProfile() {
             redirect: "follow",
         };
 
-        fetch("http://localhost:8888/pet/breads", requestOptions)
+        fetch("http://localhost:8888/pet/breeds", requestOptions)
             .then((response) => response.json())
             .then((result) => result.data.map((el) => ({ br: el.name.charAt(0).toUpperCase() + el.name.slice(1) })))
             .then((breeds) => {

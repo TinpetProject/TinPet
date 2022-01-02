@@ -15,4 +15,5 @@ router.post("/:postID/like", postController.likePost);
 
 router.get("/:userID", postController.getPost);
 
+router.post("/comment")
 module.exports = router;
