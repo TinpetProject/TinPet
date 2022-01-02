@@ -9,8 +9,6 @@ import TopContent from "../../components/TopContent/TopContent";
 export default function Matches() {
     return (
         <>
-            <NavBar />
-            <SideBar />
             <Main>
                 <TopContent screen="Matches" count="232" />
 

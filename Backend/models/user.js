@@ -1,6 +1,6 @@
 const database = require("../util/database");
 const tryCatchBlock = require("../util/function").tryCatchBlockForModule;
-const HttpError = require("../models/http-error");
+const HttpError = require("./http-error");
 
 module.exports = class User {
   constructor(userData) {
@@ -95,11 +95,20 @@ module.exports = class User {
   });
 
   seenMessage = tryCatchBlock(async (targetUserID) => {
-    console.log("is seen");
     return await database.query(`CALL Proc_UpdateMessagesStatus('${this.userID}','${targetUserID}')`);
   });
 
   changePassword = tryCatchBlock(async () => {
     return await database.execute(`UPDATE User SET password = '${this.password}' WHERE userID LIKE '${this.userID}'`);
+  });
+
+  getBriefInfo = tryCatchBlock(async (targetUserID) => {
+    const [resultSet] = await database.execute(`SELECT name,avatar FROM User WHERE userID LIKE '${targetUserID}'`);
+    const user = {
+      userID: targetUserID,
+      name: resultSet[0].name,
+      avatar: resultSet[0].avatar,
+    };
+    return user;
   });
 };

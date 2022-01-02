@@ -52,7 +52,7 @@ export const validate = () => {
                 msgList.innerHTML = "";
                 msgList.classList.add("msg-list");
                 for (const error of errorMsg) {
-                    const msgItem = document.createElement("lí");
+                    const msgItem = document.createElement("li");
                     msgItem.classList.add("msg-item");
                     const msgText = `* ${capitalize(error)}`
                     msgItem.appendChild(document.createTextNode(msgText));

@@ -2,17 +2,17 @@ import { HomePage } from "./styled-component/style";
 import Login from "./screen/Login";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { Profiler } from "react";
 import Signup from "./screen/Signup";
 import Matches from "./screen/Matches/Matches";
 import Dashboard from "./screen/Dashboard/Dashboard";
+import Profile from "./screen/Profile";
 import Messenger from "./screen/Messenger/Messenger";
 import Layout from "./components/Layout/Layout";
 import CompleteProfile from "./screen/CompleteProfile/CompleteProfile";
 import { ToastContainer } from "react-toastify";
 import ForgotPassword from "./screen/ForgotPassword";
 import ResetPassword from "./screen/ResetPassword";
-
 import { injectStyle } from "react-toastify/dist/inject-style";
 
 if (typeof window !== "undefined") {
@@ -50,8 +50,11 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
             <Route exact path="/matches">
               <Matches />
             </Route>
-            <Route exact path="/messenger">
+            <Route exact path="/messenger/:chosenUserID">
               <Messenger userID={userID} socket={socket} />
+            </Route>
+            <Route exact path="/profile">
+              <Profile/>
             </Route>
             <Route path="/*">
               <Redirect to="/dashboard" />
@@ -59,7 +62,7 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
           </Switch>
         </Layout>
       )}
-      <ToastContainer autoClose={3000}/>
+      <ToastContainer autoClose={3000} />
     </HomePage>
   );
 }
