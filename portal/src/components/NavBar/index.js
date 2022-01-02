@@ -113,7 +113,7 @@ const NavBar = React.memo(({ userID, socket, logOutHandler }) => {
       </LogoWrapper>{" "}
       <Search />
       <UserWrapper>
-        <UserNotiWrapper onClick={() => setOpenNotification(!openNotification)}>
+        <UserNotiWrapper onClick={() => {if(notifications?.length > 0) setOpenNotification(!openNotification)}}>
           <Icon
             className="nav__noti-icon"
             icon="bi:chat-dots"
@@ -135,7 +135,7 @@ const NavBar = React.memo(({ userID, socket, logOutHandler }) => {
           </Menu>{" "}
         </UserAvatarWrapper>{" "}
       </UserWrapper>{" "}
-      {openNotification && (
+      {openNotification && notifications?.length > 0 && (
         <div className="nav__notifications">
           {notifications?.map((n) => displayNotification(n))}
           <button className="nav__nButton" onClick={handleRead}>
