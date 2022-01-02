@@ -74,7 +74,7 @@ export default function CompleteProfile() {
             gender,
             dob: birthday,
             breed,
-            address: city + " " + country,
+            address: city + ", " + country,
             avtURL : pictureProfile,
             email : localStorage.getItem("email")
         }
