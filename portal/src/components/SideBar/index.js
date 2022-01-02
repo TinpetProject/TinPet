@@ -8,8 +8,14 @@ import "./style.css";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-const SideBar = () => {
+const SideBar = (props) => {
   const history = useHistory();
+
+  const onClickSettings = () => {
+    
+    props.showSetting();
+  }
+
   const mainMenu = [
     {
       icon: <Icon className="menu__dashboard-icon" icon="carbon:archive" />,
@@ -26,7 +32,7 @@ const SideBar = () => {
     {
       icon: <Icon className="menu__message-icon" icon="teenyicons:message-text-alt-outline" />,
       title: "Messages",
-      quantity: "99+",
+      quantity: "69+",
       path: "/messenger/chats",
     },
     {
@@ -46,6 +52,7 @@ const SideBar = () => {
     {
       icon: <Icon className="menu__setting-icon" icon="simple-line-icons:settings" />,
       title: "Settings",
+      handler: onClickSettings
     },
     {
       icon: <Icon className="menu__logout-icon" icon="icon-park-outline:logout" />,
@@ -70,7 +77,7 @@ const SideBar = () => {
         ))}
         <SideBarListTitle> Other </SideBarListTitle>
         {other.map((item) => (
-          <SideBarElement key={item.title}>
+          <SideBarElement key={item.title} onClick={item.handler}>
             {item.icon}
             <SideBarElementTitle> {item.title} </SideBarElementTitle>
           </SideBarElement>
