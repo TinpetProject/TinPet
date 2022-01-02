@@ -1,0 +1,7 @@
+.post__comment-list {
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    margin-top: 20px;
+    /* border-top: solid 1px black; */
+}

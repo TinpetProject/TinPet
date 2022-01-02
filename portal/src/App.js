@@ -2,10 +2,11 @@ import { HomePage } from "./styled-component/style";
 import Login from "./screen/Login";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import React from "react";
+import React, { Profiler } from "react";
 import Signup from "./screen/Signup";
 import Matches from "./screen/Matches/Matches";
 import Dashboard from "./screen/Dashboard/Dashboard";
+import Profile from "./screen/Profile/Profile";
 import Messenger from "./screen/Messenger/Messenger";
 import Layout from "./components/Layout/Layout";
 import CompleteProfile from "./screen/CompleteProfile/CompleteProfile";
@@ -17,8 +18,9 @@ import PetList from "./screen/PetList/PetList";
 import Favorite from "./screen/Favorite/Favorite";
 import Game from "./screen/Game/Game";
 
+
 if (typeof window !== "undefined") {
-    injectStyle();
+  injectStyle();
 }
 
 function App({ logInHandler, logOutHandler, userID, socket }) {

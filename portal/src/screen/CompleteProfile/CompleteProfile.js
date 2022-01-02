@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./CompleteProfile.css";
 import { Icon } from "@iconify/react";
-import axios, { Axios } from "axios";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router";
 import InputText from "../../components/CompleteProfile/InputText";
 import InputSelection from "../../components/CompleteProfile/InputSelection";
 import InputDate from "../../components/CompleteProfile/InputDate";
 
 export default function CompleteProfile() {
     const genderOptions = [
-        { label: "Female", value: "female" },
-        { label: "Male", value: "male" },
+        { label: "Female", value: 0 },
+        { label: "Male", value: 1 },
     ];
 
     const [breeds, setBreeds] = useState([]);
@@ -19,11 +21,11 @@ export default function CompleteProfile() {
     const [pictureProfile, setPictureProfile] = useState("");
     const [name, setName] = useState("");
     const [gender, setGender] = useState("");
-    const [breed, setBreed] = useState([]);
+    const [breed, setBreed] = useState("");
     const [birthday, setBirthday] = useState("");
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
-
+    const history = useHistory();
     useEffect(() => {
         const getData = async () => {
             const res = await axios("https://countriesnow.space/api/v0.1/countries");
@@ -31,6 +33,19 @@ export default function CompleteProfile() {
             setCountries(await res.data.data);
         };
         getData();
+
+        var requestOptions = {
+            method: "GET",
+            redirect: "follow",
+        };
+
+        fetch("http://localhost:8888/pet/breads", requestOptions)
+            .then((response) => response.json())
+            .then((result) => result.data.map((el) => ({ br: el.name.charAt(0).toUpperCase() + el.name.slice(1) })))
+            .then((breeds) => {
+                setBreeds(breeds);
+            })
+            .catch((error) => console.log("error", error));
     }, []);
 
     useEffect(() => {
@@ -50,23 +65,60 @@ export default function CompleteProfile() {
         setCity("");
         setCountry("");
         setBirthday("");
+        setBreed("");
     };
 
     const submitBtnHandler = () => {
-        console.log(name, gender, birthday, country, city, pictureProfile);
+        var payload = {
+            petName: name,
+            gender,
+            dob: birthday,
+            breed,
+            address: city + ", " + country,
+            avtURL : pictureProfile,
+            email : localStorage.getItem("email")
+        }
+        var requestOptions = {
+            method: "POST",
+            redirect: "follow",
+            body: JSON.stringify(payload),
+            headers: {
+                "Content-Type": "application/json"
+            },
+        };
+        console.log(name, gender != "" ? gender : 2, birthday, breed , country, city, pictureProfile, localStorage.getItem("email"));
+        // TBNGOC: Thêm phần lưu thông tin pet
+
+        fetch("http://localhost:8888/pet",requestOptions).then((response) => {
+            if (response.status === 200) {
+                toast.success("Complete profile success!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
+            history.push("/login");
+        })
     };
 
     const uploadPhotoHandler = async (e) => {
         const file = e.target.files[0];
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("upload_preset", "pahpgw4x");
 
         try {
             setPictureProfile("./assets/img/giphy.gif");
-            const res = await axios.post("https://api.cloudinary.com/v1_1/thecodingpanda/upload", formData);
-            console.log(res.data.url);
-            setPictureProfile(res.data.url);
+            var formdata = new FormData();
+            formdata.append("file", file);
+            formdata.append("upload_preset", "iiyjshqb");
+
+            var requestOptions = {
+                method: "POST",
+                body: formdata,
+                redirect: "follow",
+            };
+
+            fetch("https://api.cloudinary.com/v1_1/thecodingpanda/upload", requestOptions)
+                .then((response) => response.json())
+                .then((result) => setPictureProfile(result.url))
+                .catch((error) => console.log("error", error));
+            // setPictureProfile(res.data.url);
         } catch (error) {}
     };
 
@@ -106,6 +158,7 @@ export default function CompleteProfile() {
                     </button>
                 </div>
             </div>
+            s
         </div>
     );
 }

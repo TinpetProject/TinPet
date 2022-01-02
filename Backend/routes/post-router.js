@@ -5,6 +5,14 @@ const checkAuth = require("../middleware/check-auth");
 
 router.use(checkAuth);
 
-router.get("/:targetUserID/:offset", postController.getUserPostByOffset);
+// router.get("/:targetUserID/:offset", postController.getUserPostByOffset);
+
+router.get("/:postID/comment", postController.getCommentByPost);
+
+router.post("/:postID/comment", postController.sendCommentByPost);
+
+router.post("/:postID/like", postController.likePost);
+
+router.get("/:userID", postController.getPost);
 
 module.exports = router;

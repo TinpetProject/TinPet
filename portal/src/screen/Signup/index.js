@@ -20,7 +20,7 @@ import {
 import { useHistory } from "react-router";
 import { Icon } from "@iconify/react";
 import "./Signup.css";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
 import { validate } from "../../utils/validation";
 
@@ -45,23 +45,34 @@ const Signup = () => {
                 .then((response) => {
                     if (response.status === 200) {
                         toast.success("Sign up success!", {
-                            position: toast.POSITION.TOP_RIGHT
+                            position: toast.POSITION.TOP_RIGHT,
                         });
                     }
                     setIsLoading(false);
+                    localStorage.setItem("email", email);
                     history.push("/complete-profile");
                 })
                 .catch((err) => {
                     switch (err.response.status) {
                         case 400:
+                            if (err.response.data.message === "REQUEST_FAIL_INVALID_SCHEMA") {
+                                toast.error("Invalid Schema!", {
+                                    position: toast.POSITION.TOP_RIGHT,
+                                });
+                            } else if (err.response.data.message === "SIGN_UP_FAIL_DUPPLICATE_EMAIL") {
+                                toast.error("Duplicate Email!", {
+                                    position: toast.POSITION.TOP_RIGHT,
+                                });
+                            }
+                            break;
                         case 404:
-                            toast.error("Invalid email/password!", {
-                                position: toast.POSITION.TOP_RIGHT
+                            toast.error("Not found!", {
+                                position: toast.POSITION.TOP_RIGHT,
                             });
                             break;
                         case 500:
                             toast.error("Internal Server Error!", {
-                                position: toast.POSITION.TOP_RIGHT
+                                position: toast.POSITION.TOP_RIGHT,
                             });
                             break;
                         default:
@@ -83,26 +94,53 @@ const Signup = () => {
                     <Form onSubmit={handleSubmit}>
                         <FormTitle> Sign up </FormTitle>{" "}
                         <FormSubScript>
-                            <span> Already have an account ? </span> <FormLink onClick={() => history.push("/login")}> Go to login </FormLink>{" "}
+                            <span> Already have an account ? </span>{" "}
+                            <FormLink onClick={() => history.push("/login")}> Go to login </FormLink>{" "}
                         </FormSubScript>{" "}
                         <FormControl>
-                            <FormControlLabel htmlFor="email"> Email <span className="required">*</span> </FormControlLabel>{" "}
-                            <FormInput type="text" id="email" placeholder="Enter your username" onChange={(e) => setEmail(e.target.value)} data-rules="isRequired/isEmail"></FormInput>{" "}
+                            <FormControlLabel htmlFor="email">
+                                {" "}
+                                Email <span className="required">*</span>{" "}
+                            </FormControlLabel>{" "}
+                            <FormInput
+                                type="text"
+                                id="email"
+                                placeholder="Enter your username"
+                                onChange={(e) => setEmail(e.target.value)}
+                                data-rules="isRequired/isEmail"
+                            ></FormInput>{" "}
                             <div className="msg-container">
                                 <ul className="msg-list"></ul>
                             </div>
                         </FormControl>{" "}
                         <FormControl>
-                            <FormControlLabel htmlFor="username"> Your name <span className="required">*</span> </FormControlLabel>{" "}
-                            <FormInput type="text" id="username" placeholder="Enter your username" onChange={(e) => setName(e.target.value)} data-rules="isRequired"></FormInput>{" "}
+                            <FormControlLabel htmlFor="username">
+                                {" "}
+                                Your name <span className="required">*</span>{" "}
+                            </FormControlLabel>{" "}
+                            <FormInput
+                                type="text"
+                                id="username"
+                                placeholder="Enter your username"
+                                onChange={(e) => setName(e.target.value)}
+                                data-rules="isRequired"
+                            ></FormInput>{" "}
                             <div className="msg-container">
                                 <ul className="msg-list"></ul>
                             </div>
                         </FormControl>{" "}
                         <FormControl>
-                            <FormControlLabel htmlFor="password"> Password <span className="required">*</span></FormControlLabel>{" "}
-                            <FormInput type="password" id="password" placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)}
-                                data-rules="isRequired"></FormInput>{" "}
+                            <FormControlLabel htmlFor="password">
+                                {" "}
+                                Password <span className="required">*</span>
+                            </FormControlLabel>{" "}
+                            <FormInput
+                                type="password"
+                                id="password"
+                                placeholder="Enter your password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                data-rules="isRequired"
+                            ></FormInput>{" "}
                             <div className="msg-container">
                                 <ul className="msg-list"></ul>
                             </div>

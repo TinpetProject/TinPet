@@ -65,3 +65,46 @@ export const itemData = [
     title: 'Coffee',
   }  
 ];
+
+export const PhotoGal = [
+  {
+    id: 1,
+    photo: "https://lh6.googleusercontent.com/proxy/TzFjtW4IYw1Ct9IGlUbmq_GNXCjqGfKucN1irkehgc8kKNyIKLm9HEdcbgeoMlL27I5dGrxpslMZttyw6JKGslKObBJ7K1Su50OL3npuVhy5VDFeCC2laqmZcalwMaBQdXaxqCIpj1fPb8HtFJIzxzM",
+  },
+  {
+    id: 2,
+    photo: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*",
+  },
+  {
+    id: 3,
+    photo: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg",
+  },
+  {
+    id: 4,
+    photo: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg",
+  },
+  {
+    id: 5,
+    photo: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg",
+  },
+  {
+    id: 6,
+    photo: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg",
+  },
+  {
+    id: 7,
+    photo: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg",
+  },
+  {
+    id: 8,
+    photo: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg",
+  },
+  {
+    id: 9,
+    photo: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg",
+  },
+  {
+    id: 10,
+    photo: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg",
+  }
+];
