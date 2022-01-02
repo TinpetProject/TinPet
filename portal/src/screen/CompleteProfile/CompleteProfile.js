@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./CompleteProfile.css";
 import { Icon } from "@iconify/react";
-import axios, { Axios } from "axios";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router";
 import InputText from "../../components/CompleteProfile/InputText";
 import InputSelection from "../../components/CompleteProfile/InputSelection";
 import InputDate from "../../components/CompleteProfile/InputDate";
@@ -23,7 +25,7 @@ export default function CompleteProfile() {
     const [birthday, setBirthday] = useState("");
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
-
+    const history = useHistory();
     useEffect(() => {
         const getData = async () => {
             const res = await axios("https://countriesnow.space/api/v0.1/countries");
@@ -67,7 +69,34 @@ export default function CompleteProfile() {
     };
 
     const submitBtnHandler = () => {
-        console.log(name, gender, birthday, breed != "" ? breed : 2, country, city, pictureProfile, localStorage.getItem("email"));
+        var payload = {
+            petName: name,
+            gender,
+            dob: birthday,
+            breed,
+            address: city + " " + country,
+            avtURL : pictureProfile,
+            email : localStorage.getItem("email")
+        }
+        var requestOptions = {
+            method: "POST",
+            redirect: "follow",
+            body: JSON.stringify(payload),
+            headers: {
+                "Content-Type": "application/json"
+            },
+        };
+        console.log(name, gender != "" ? gender : 2, birthday, breed , country, city, pictureProfile, localStorage.getItem("email"));
+        // TBNGOC: Thêm phần lưu thông tin pet
+
+        fetch("http://localhost:8888/pet",requestOptions).then((response) => {
+            if (response.status === 200) {
+                toast.success("Complete profile success!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
+            history.push("/login");
+        })
     };
 
     const uploadPhotoHandler = async (e) => {

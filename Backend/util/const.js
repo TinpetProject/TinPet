@@ -6,7 +6,7 @@ module.exports = {
             petName : "Default",
             gender : 2,
             dob: "",
-            bread: "Dog",
+            breed: "Dog",
             address: ""
         }
     }    

@@ -22,7 +22,7 @@ module.exports = {
     const emailIsExist = await User.isEmailExist(email);
     if (emailIsExist) return next(new HttpError("SIGN_UP_FAIL_DUPPLICATE_EMAIL", 400));
     const defaultValue = constUtils.defaultPet();
-    console.log(defaultValue)
+
     const user = new User({ email,
       password, 
        name , 
@@ -34,6 +34,7 @@ module.exports = {
     
     await user.signUp();
     await pet.savePet({...defaultValue,email});
+    
     return res.status(200).send({ message: "SIGN_UP_SUCCESS" });
   }),
 

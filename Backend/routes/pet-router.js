@@ -3,7 +3,9 @@ const router = express.Router();
 const petController = require("../controllers/pet-controller.js");
 const checkAuth = require("../middleware/check-auth");
 
-router.get("/breads", petController.getBreads);
+router.get("/breads", petController.getBreeds);
+
+router.post("",petController.changeInfoPet);
 
 router.use(checkAuth);
 
@@ -14,8 +16,6 @@ router.get("/pet-suggestion", petController.getPetSuggestion);
 router.put("/like", petController.sendLike);
 
 router.put("/follow", petController.sendFollow);
-
-router.get("/breeds", petController.getBreeds);
 
 router.get("/redis", petController.testRedis);
 

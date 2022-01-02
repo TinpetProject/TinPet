@@ -170,9 +170,15 @@ module.exports = class Pet {
 
   savePet = tryCatchBlock(async (petObject)=>{
     const [resultSet] = await database.query(`CALL Proc_StorePetInformation(
-      '${petObject.petName}','${petObject.email}','${petObject.dob}','${petObject.bread}',${petObject.gender}
+      '${petObject.petName}','${petObject.email}','${petObject.dob}','${petObject.breed}',${petObject.gender}
     );`);
-      console.log(resultSet);
+  })
+
+  changeInfoPet = tryCatchBlock(async (petObject) =>{
+    const [resultSet] = await database.query(`CALL Proc_ChangePetInformation(
+      '${petObject.petName}','${petObject.email}','${petObject.dob}',
+      '${petObject.breed}',${petObject.gender},'${petObject.address}','${petObject.avtURL}'
+    );`);
   })
 //   getConversationList = tryCatchBlock(async () => {
 //     const [resultSet] = await database.query(`CALL Proc_GetUserConversation('${this.userID}')`);
