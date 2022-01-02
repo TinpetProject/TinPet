@@ -59,7 +59,7 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
               <Messenger userID={userID} socket={socket} />
             </Route>
             <Route exact path="/profile">
-              <Profile />
+              <Profile userID={userID}/>
             </Route>
             <Route path="/petlist">
               <PetList />
@@ -70,12 +70,10 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
             <Route path="/*">
               <Redirect to="/dashboard" />
             </Route>
-            
           </Switch>
         </Layout>
       )}
       <ToastContainer autoClose={3000} />
-
     </HomePage>
   );
 }

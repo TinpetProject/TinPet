@@ -39,6 +39,8 @@ export default function Post({ post }) {
   const commentHandler = () => {
     setIsCommenting((prev) => !prev);
   };
+
+  console.log(post);
   return (
     <>
       <PostWrapper>
