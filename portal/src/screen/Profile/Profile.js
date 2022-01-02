@@ -9,7 +9,7 @@ import Feed from "./Feed";
 
 
 const Profile = () => {
-  
+
   return (
     <>
       <Main>
