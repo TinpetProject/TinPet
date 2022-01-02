@@ -7,15 +7,22 @@ import {
 //data
 import { PhotoGal } from "../dummyData";
 
-export default function Gallery() {
+export default function Gallery({ setSelectedImg }) {
 
-    
     return (
         <div>  
             <PhotosWrapper>
                 {PhotoGal?.map((p) => (
-                    <ImgWrapper>
-                        <Img src={p.photo}/>
+                    <ImgWrapper key={p.id} 
+                        layout 
+                        whileHover={{ opacity: 1 }}s 
+                        onClick={() => setSelectedImg(p.photo)}
+                    >
+                        <Img src={p.photo} 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 1 }}
+                        />
                     </ImgWrapper>
                 ))}
             </PhotosWrapper>

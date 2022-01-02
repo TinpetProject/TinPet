@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { ProfileWrapper } from "./style";
 import ProfileHead from "./ProfileHead";
 import InputPost from "./InputPost";
@@ -7,8 +7,10 @@ import AboutPet from "./AboutPet";
 import { Main } from "../../styled-component/style";
 import Feed from "./Feed";
 import Gallery from "./Gallery";
+import Modal from "./Gallery/Modal";
 
 const Profile = () => {
+  const [selectedImg, setSelectedImg] = useState(null);
   return (
     <Main>
       <ProfileWrapper>
@@ -17,7 +19,10 @@ const Profile = () => {
         <Feed />
         <Pictures />
         <AboutPet /> */}
-        <Gallery />
+        <Gallery setSelectedImg={setSelectedImg}/>
+        { selectedImg && (
+        <Modal selectedImg={selectedImg} setSelectedImg={setSelectedImg} />
+        )}
       </ProfileWrapper>
     </Main>
   );
