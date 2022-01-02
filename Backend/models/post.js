@@ -32,4 +32,11 @@ module.exports = class Post {
 
     return resultSet.length === 0 ? null : resultSet[0];
   });
+
+  getPost = tryCatchBlock(async (userID) => {
+    // like poss
+    const [resultSet] = await database.query(`CALL Proc_GetPost('${userID}');`);
+
+    return resultSet.length === 0 ? null : resultSet[0];
+  });
 };

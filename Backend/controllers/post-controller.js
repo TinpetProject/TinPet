@@ -46,4 +46,13 @@ module.exports = {
 
     return res.status(200).send({ message: "LIKE_POST_SUCCESS" });
   }),
+
+  getPost: tryCatchBlock(null, async (req, res, next) => {
+    const userID = req.params.userID;
+
+    const post = new Post({});
+    const postList = await post.getPost(userID);
+
+    return res.status(200).send({ message: "GET_POST_SUCCESS", data: postList });
+  }),
 };

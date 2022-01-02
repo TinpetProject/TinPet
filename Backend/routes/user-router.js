@@ -13,8 +13,6 @@ router.get("/:userID/recent-imgs", userController.getRecentImgs);
 
 router.get("/userID", userController.getUserID);
 
-router.get("/:userID/posts/:offset", userController.getPostByOffset);
-
 // router.get("/post/:offset", userController.getPostByOffset);
 
 module.exports = router;
