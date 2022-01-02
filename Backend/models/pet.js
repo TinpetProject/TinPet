@@ -7,6 +7,7 @@ module.exports = class Pet {
   constructor(petData) {
     this.userID = petData.userID;
     // this.petID = petData.petID;
+
   }
 
   static isUserIDExist = tryCatchBlock(async (userID) => {
@@ -126,7 +127,7 @@ module.exports = class Pet {
       FROM Relationship
       WHERE userID = '${targetUserID}'
       AND targetUserID = '${this.userID}';`);
-      const isMatched = rela[0][0]?.isMatched;
+      const isMatched = rela[0][0].isMatched;
       if (isMatched === 1)
       {
         const result_friend = await database.execute(
@@ -159,6 +160,26 @@ module.exports = class Pet {
 
     return result;
   });
+
+  getBreeds = tryCatchBlock(async () =>{
+    const [resultSet] = await database.execute(
+      "select * from PetType order by name"
+    );
+    return resultSet.length === 0 ? [] : resultSet;
+  })
+
+  savePet = tryCatchBlock(async (petObject)=>{
+    const [resultSet] = await database.query(`CALL Proc_StorePetInformation(
+      '${petObject.petName}','${petObject.email}','${petObject.dob}','${petObject.breed}',${petObject.gender}
+    );`);
+  })
+
+  changeInfoPet = tryCatchBlock(async (petObject) =>{
+    const [resultSet] = await database.query(`CALL Proc_ChangePetInformation(
+      '${petObject.petName}','${petObject.email}','${petObject.dob}',
+      '${petObject.breed}',${petObject.gender},'${petObject.address}','${petObject.avtURL}'
+    );`);
+  })
 //   getConversationList = tryCatchBlock(async () => {
 //     const [resultSet] = await database.query(`CALL Proc_GetUserConversation('${this.userID}')`);
 //     const conversationlist = resultSet[0].map((conversation) => ({
