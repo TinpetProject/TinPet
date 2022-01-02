@@ -23,6 +23,9 @@ module.exports = {
   }),
 
   sendCommentByPost: tryCatchBlock(null, async (req, res, next) => {
+    const userID = req.userData.userID;
+    const content = req.body.content;
+
     const postIDIsExist = await Post.isPostIDExist(req.params.postID);
     if (!postIDIsExist) return next(new HttpError("SEND_COMMENT_FAIL_POSTID_NOT_EXIST", 404));
 

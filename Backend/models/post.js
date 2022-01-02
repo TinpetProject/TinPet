@@ -20,7 +20,7 @@ module.exports = class Post {
   sendCommentByPost = tryCatchBlock(async (userID, content) => {
     // send comment
     const [resultSet] = await database.query(
-      `CALL Proc_SendComment('${userID}','${this.postID}','${content}');`
+      `CALL Proc_SendComment('${userID}','${this.postID}','${content}',@returnValue); SELECT @returnValue;`
     );
     return resultSet.length === 0 ? null : resultSet[0].commentIDpo;
   });
