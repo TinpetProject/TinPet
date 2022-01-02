@@ -55,4 +55,11 @@ module.exports = {
 
     return res.status(200).send({ message: "GET_POST_SUCCESS", data: postList });
   }),
+  setLikeComment: tryCatchBlock(null, async (req, res, next) => {
+    const {commentID,targetUserID,command} = req.body;
+
+    const post = new Post({});
+    await post.setLikeComment(commentID, targetUserID,command);
+    return res.status(200).send({message: "SET_LIKE_COMMENT_SUCCESSFULLY"});
+  })
 };
