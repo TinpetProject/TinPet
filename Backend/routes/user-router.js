@@ -15,6 +15,8 @@ router.get("/userID", userController.getUserID);
 
 router.get("/:userID/posts/:offset", userController.getPostByOffset);
 
+router.post("/post", userController.uploadPost);
+
 // router.get("/post/:offset", userController.getPostByOffset);
 
 module.exports = router;

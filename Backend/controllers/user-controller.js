@@ -72,6 +72,17 @@ module.exports = {
     return res.status(200).send({ message: "GET_POST_SUCCESS", data: posts });
   }),
 
+  uploadPost: tryCatchBlock(null, async (req, res, next) => {
+    const { title, content } = req.body;
+    const userID = req.userData.userID;
+
+
+    const user = new User({ userID});
+    const postID = await user.uploadPost(title, content);
+  
+    return res.status(200).send({ message: "UPLOAD_POST_SUCCESS", data: { postID } });
+  }),
+
   // likeProcessing: tryCatchBlock(null, async (req, res, next) => {
   //   const { targetUserID } = req.body;
   //   const userIDIsExist = await User.isUserIDExist(req.userData.userID);
