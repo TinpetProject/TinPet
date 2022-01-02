@@ -62,16 +62,6 @@ module.exports = {
   //     .send({ message: "GET_USER_ID_SUCCESS", data: userName });
   // }),
 
-  getPostByOffset: tryCatchBlock(null, async (req, res, next) => {
-    const userIDIsExist = await User.isUserIDExist(req.params.userID);
-    if (!userIDIsExist)
-      return next(new HttpError("GET_POST_FAIL_USERID_NOT_EXIST", 404));
-
-    const user = new User({ userID: req.params.userID });
-    const posts = await user.getPostByOffset(req.params.offset);
-    return res.status(200).send({ message: "GET_POST_SUCCESS", data: posts });
-  }),
-
   // likeProcessing: tryCatchBlock(null, async (req, res, next) => {
   //   const { targetUserID } = req.body;
   //   const userIDIsExist = await User.isUserIDExist(req.userData.userID);
