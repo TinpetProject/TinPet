@@ -2,10 +2,11 @@ import { HomePage } from "./styled-component/style";
 import Login from "./screen/Login";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import React from "react";
+import React, { Profiler } from "react";
 import Signup from "./screen/Signup";
 import Matches from "./screen/Matches/Matches";
 import Dashboard from "./screen/Dashboard/Dashboard";
+import Profile from "./screen/Profile";
 import Messenger from "./screen/Messenger/Messenger";
 import Layout from "./components/Layout/Layout";
 import CompleteProfile from "./screen/CompleteProfile/CompleteProfile";
@@ -15,14 +16,15 @@ import ResetPassword from "./screen/ResetPassword";
 import { injectStyle } from "react-toastify/dist/inject-style";
 import PetList from "./screen/PetList/PetList";
 import Favorite from "./screen/Favorite/Favorite";
-import Profile from "./screen/Profile";
-import Gallery from "./screen/Profile";
+
 
 if (typeof window !== "undefined") {
   injectStyle();
 }
 
 function App({ logInHandler, logOutHandler, userID, socket }) {
+  
+
   return (
     <HomePage>
       {userID || (
@@ -59,9 +61,6 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
             <Route exact path="/profile">
               <Profile />
             </Route>
-            <Route exact path="/gallery">
-              <Gallery />
-            </Route>
             <Route path="/petlist">
               <PetList />
             </Route>
@@ -71,10 +70,12 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
             <Route path="/*">
               <Redirect to="/dashboard" />
             </Route>
+            
           </Switch>
         </Layout>
       )}
       <ToastContainer autoClose={3000} />
+
     </HomePage>
   );
 }
