@@ -25,6 +25,7 @@ import { useState } from "react";
 //data
 import { Users } from "../dummyData";
 import CommentList from "../CommentList/CommentList";
+import "./post.css"
 export default function Post({ post }) {
   const [like, setLike] = useState(post.like);
   const [isLiked, setIsLiked] = useState(false);
@@ -32,7 +33,7 @@ export default function Post({ post }) {
   const userAvatar = Users.filter((u) => u.userid === post?.userId)[0].profilePicture;
   const userName = Users.filter((u) => u.userid === post?.userId)[0].username;
   const likeHandler = () => {
-    setLike(isLiked ? like - 1 : like + 1);
+    setLike(like => isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
   const commentHandler = () => {
@@ -65,13 +66,13 @@ export default function Post({ post }) {
             </PostCommentCounter>
           </PostBottomLeft>
           <PostBottomRight>
-            <PostLike onClick={likeHandler}>
+            <PostLike onClick={likeHandler} style={isLiked ? { color: "#0019f8" } : { color: "#333" }}>
               <ThumbUpIcon sx={{ marginRight: 1 }} fontSize="small" />
-              Like
+              <div className="postLikeTitle">{isLiked ? "Liked" : "Like"}</div>
             </PostLike>
             <PostComment onClick={commentHandler}>
               <CommentIcon sx={{ marginRight: 1 }} fontSize="small" />
-              Comment
+              <div className="postCommentTitle">Comment</div>
             </PostComment>
           </PostBottomRight>
         </PostBottom>
