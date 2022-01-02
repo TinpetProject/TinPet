@@ -68,6 +68,7 @@ module.exports = class Pet {
       console.log('Already open connection to Redis!');
     }
 
+
     const r1 = await database.execute(`SELECT petID FROM Pet WHERE userID = '${this.userID}'`);
     const petID = r1[0][0].petID;
     const id_list = JSON.parse(await r_database.get(petID));
@@ -125,7 +126,7 @@ module.exports = class Pet {
       FROM Relationship
       WHERE userID = '${targetUserID}'
       AND targetUserID = '${this.userID}';`);
-      const isMatched = rela[0][0]?.isMatched;
+      const isMatched = rela[0][0].isMatched;
       if (isMatched === 1)
       {
         const result_friend = await database.execute(
@@ -158,6 +159,13 @@ module.exports = class Pet {
 
     return result;
   });
+
+  getBreads = tryCatchBlock(async () =>{
+    const [resultSet] = await database.execute(
+      "select * from PetType order by name"
+    );
+    return resultSet.length === 0 ? [] : resultSet;
+  })
 //   getConversationList = tryCatchBlock(async () => {
 //     const [resultSet] = await database.query(`CALL Proc_GetUserConversation('${this.userID}')`);
 //     const conversationlist = resultSet[0].map((conversation) => ({
