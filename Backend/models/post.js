@@ -6,4 +6,18 @@ module.exports = class Post{
         this.postID = data.postID;
     }
 
+    static isPostIDExist = tryCatchBlock(async (postID) => {
+        const [resultSet] = await database.execute(`SELECT * from Post WHERE postID LIKE '${postID}'`);
+        return resultSet.length === 1 ? true : false;
+    });
+
+    getCommentByPost = tryCatchBlock(async () => {
+        // get comment
+        const [resultSet] = await database.query(
+          `CALL Proc_GetComment('${this.postID}');`
+          
+        );
+        return resultSet.length === 0 ? null : resultSet[0];
+      });
+
 };
