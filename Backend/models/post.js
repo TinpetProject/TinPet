@@ -25,4 +25,11 @@ module.exports = class Post {
 
     return resultSet.length === 0 ? null : resultSet[1][0]["@returnValue"];
   });
+
+  likePost = tryCatchBlock(async (userID) => {
+    // like poss
+    const [resultSet] = await database.query(`CALL Proc_LikePost('${userID}','${this.postID}');`);
+
+    return resultSet.length === 0 ? null : resultSet[0];
+  });
 };
