@@ -5,6 +5,8 @@ const checkAuth = require("../middleware/check-auth");
 
 router.use(checkAuth);
 
+router.get("/brief/:targetUserID", userController.getBriefInfo);
+
 router.get("/:userID/profile", userController.getProfile);
 
 router.get("/:userID/recent-imgs", userController.getRecentImgs);

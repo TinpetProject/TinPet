@@ -11,7 +11,7 @@
 }
 
 .chat-window__messages-wrapper {
-  width: calc(100% - 40px);
+  width: calc(100% - 25px);
   height: calc(100vh - 235px);
   position: absolute;
   bottom: 70px;
@@ -19,7 +19,7 @@
   left: 20px;
   overflow: auto;
   display: flex;
-  padding-bottom: 3px;
+  padding: 0 10px 3px 10px;
   flex-direction: column-reverse;
 }
 
@@ -47,4 +47,14 @@
   padding: 0 16px;
   font-size: 16px;
   font-weight: 400;
+}
+
+.chat-window__skeleton {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  -webkit-transform: translateY(-100px);
 }

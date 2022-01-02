@@ -12,10 +12,25 @@ module.exports = {
     const userIDIsExist = await User.isUserIDExist(targetUserID);
     if (!userIDIsExist) return next(new HttpError("SEND_MESSAGE_FAIL_RECEIVER_NOT_EXIST", 404));
 
-    const user = new User({ userID });
+    const user = new User({ userID});
     const messageID = await user.sendMessage(targetUserID, content);
-
-    socket.triggerEmit(targetUserID, "message", { content, userID, messageID, sender: userID });
+    const profile = await User.getUserName(userID);
+    socket.triggerEmit(targetUserID, "message", { content, userID, messageID });
+    // socket.triggerEmit(targetUserID, "getNotification", {
+    //   content,
+    //   userID,
+    //   messageID,
+    //   targetUserID,
+    // });
+    const senderName = profile[0].name
+    socket.releaseNewMessage(targetUserID, {
+      content,
+      userID,
+      messageID,
+      targetUserID,
+      senderName,
+    });
+    
 
     return res.status(200).send({ message: "SEND_MESSAGE_SUCCESS", data: { messageID } });
   }),
@@ -37,6 +52,7 @@ module.exports = {
     const targetUserID = req.params.targetUserID;
     const offset = req.params.offset;
     const user = new User({ userID });
+    
 
     const conversationList = await user.getMessageByOffset(targetUserID, offset);
 
