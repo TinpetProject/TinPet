@@ -15,7 +15,7 @@ import ResetPassword from "./screen/ResetPassword";
 import { injectStyle } from "react-toastify/dist/inject-style";
 import PetList from "./screen/PetList/PetList";
 import Favorite from "./screen/Favorite/Favorite";
-import Profile from "./screen/Profile/index";
+import Profile from "./screen/Profile/Profile";
 
 if (typeof window !== "undefined") {
   injectStyle();

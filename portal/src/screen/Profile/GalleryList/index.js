@@ -7,7 +7,7 @@ import {
 //data
 import { PhotoGal } from "../dummyData";
 
-export default function Gallery({ setSelectedImg }) {
+export default function GalleryList({ setSelectedImg }) {
 
     return (
         <div>  
