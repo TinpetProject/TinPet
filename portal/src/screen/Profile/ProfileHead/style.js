@@ -65,3 +65,32 @@ export const Button = styled.div `
     opacity: 0.5;
   }
 `;
+
+export const IconInput = styled.div `
+    transform: scale(1);
+    margin-left: 10px;
+`;
+export const ButtonInput = styled.div `
+    font-size: 14px;
+    font-family: sans-serif;
+    font-weight: 750;
+    padding: 0px 10px 0px 8px;
+`;
+
+
+export const ButtonPut = styled.button `
+  position: relative;
+  background-color: #C0C0C0;
+  padding: 5px;
+  left: 350px;
+  width: 50px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+      background-color: #fb6d6c;
+      color: #fff;
+  }
+  transition: 0.5s;
+`;
