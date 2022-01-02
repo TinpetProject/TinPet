@@ -67,6 +67,11 @@ module.exports = {
         const result = await pet.testRedis();
         return res.status(200).send({ message: "TEST_REDIS_SUCCESS", data: result });
     }),
+    getBreads: tryCatchBlock(null, async (req, res, next) => {
+        const pet = new Pet("");
+        const petBreads = await pet.getBreads();
+        return res.status(200).send({ message: "GET_BREAD", data: petBreads });
+    }),
   //waiting for sql query
 
   // getPostByOffset: tryCatchBlock(null, async (req, res, next) => {
