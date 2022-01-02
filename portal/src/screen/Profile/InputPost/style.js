@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InputPostWrapper = styled.div`
+export const InputPostWrapper = styled.div `
     position: relative;
     width: 600px;
     height: 170px;
@@ -10,7 +10,7 @@ export const InputPostWrapper = styled.div`
     box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
 `;
 
-export const InputPostContent = styled.div`
+export const InputPostContent = styled.div `
     display: flex;
     align-items: center;
     position: relative;
@@ -20,41 +20,40 @@ export const InputPostContent = styled.div`
     top: 20px;
 `;
 
-export const Avatar = styled.img`
+export const Avatar = styled.img `
     position: relative;
-    width: 75px;
-    height: 75px;
+    width: 50px;
+    height: 50px;
     background: url(.jpg);
     border-radius: 50%;
-    margin-right: 10px;
     object-fit: cover;
+    margin-right: 10px;
 `;
 // Field Text
-export const InputFieldText = styled.input`
+export const InputFieldText = styled.div `
     position: static;
     width: 470px;
-    height: 60px;
+    height: 50px;
     border: none;
     outline-color: lightgray;
     padding: 10px;
     margin-left: 5px;
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
-    line-height: 30px;
-    
+    opacity: 0.5;
+    resize: vertical;
+    display: flex;
+    align-items: center;
     background-color: #efefef;
     border-radius: 8px;
-    &::placeholder {
-        color: #888888;
-        font-size: 18px;
-        font-weight: 400;
-      }
+    cursor: text;
+    font-weight: 400;
     overflow-wrap: break-word; 
 `;
 
 // Posting adder
-export const InputPostAdd = styled.div`
+export const InputPostAdd = styled.div `
     display: flex;
     flex-direction: row;
     position: relative;
@@ -63,7 +62,7 @@ export const InputPostAdd = styled.div`
     top: 30px;
 `;
 
-export const InputAdd = styled.button`
+export const InputAdd = styled.button `
     border: none;
     border-radius: 10px;
     margin-right: 20px;
@@ -76,18 +75,18 @@ export const InputAdd = styled.button`
     }
     transition: 0.5s;
 `;
-export const IconInput = styled.div`
+export const IconInput = styled.div `
     transform: scale(1);
     margin-left: 10px;
 `;
-export const ButtonInput = styled.div`
-    font-size: 18px;
+export const ButtonInput = styled.div `
+    font-size: 14px;
     font-family: sans-serif;
     font-weight: 750;
-    padding: 0px 10px 0px 5px;
+    padding: 0px 10px 0px 8px;
 `;
 
-export const InputPostButton = styled.button`
+export const InputPostButton = styled.button `
     position: relative;
     background-color: #C0C0C0;
     height: 40px;
@@ -99,12 +98,11 @@ export const InputPostButton = styled.button`
     color: black; 
     cursor: pointer;
     font-family: Source Sans Pro, sans-serif;
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 600;
     &:hover {
         background-color: #fb6d6c;
         color: #fff;
     }
     transition: 0.5s;
 `;
-

@@ -3,6 +3,7 @@ const signInSchema = require("../schemas/schemas").signIn;
 const getResetPwLinkSchema = require("../schemas/schemas").getResetPwLink;
 const resetPasswordSchema = require("../schemas/schemas").resetPassword;
 const User = require("../models/User");
+const Pet = require("../models/Pet");
 const Authentication = require("../models/Authentication");
 const nodemailer = require("nodemailer");
 const tryCatchBlock = require("../util/function").tryCatchBlockForController;
@@ -12,16 +13,28 @@ const jwt = require("jsonwebtoken");
 const util = require("../util/function");
 const generateHTMLForResetPwLink = require("../views/generateHTMLForResetPasswordMail");
 const socket = require("../models/SocketIO");
+const constUtils = require("../util/const");
+
 module.exports = {
   signUp: tryCatchBlock(signUpSchema, async (req, res, next) => {
     const { email, password, name } = req.body;
 
     const emailIsExist = await User.isEmailExist(email);
     if (emailIsExist) return next(new HttpError("SIGN_UP_FAIL_DUPPLICATE_EMAIL", 400));
+    const defaultValue = constUtils.defaultPet();
 
-    const user = new User({ email, password, name });
+    const user = new User({ email,
+      password, 
+       name , 
+       address: defaultValue.address,
+       avatar : defaultValue.avtURL,
+    });
+
+    const pet = new Pet({});
+    
     await user.signUp();
-
+    await pet.savePet({...defaultValue,email});
+    
     return res.status(200).send({ message: "SIGN_UP_SUCCESS" });
   }),
 

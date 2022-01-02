@@ -11,15 +11,17 @@ import Feed from "./Feed";
 const Profile = () => {
   
   return (
-    <Main>
-      <ProfileWrapper>
-        <ProfileHead />
-        <InputPost />
-        <Feed />
-        <Pictures />
-        <AboutPet />
-      </ProfileWrapper>
-    </Main>
+    <>
+      <Main>
+        <ProfileWrapper>
+          <ProfileHead />
+          <InputPost />
+          <Feed />
+          <Pictures />
+          <AboutPet />
+        </ProfileWrapper>
+      </Main>
+    </>
   );
 };
 
