@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   PostWrapper,
   PostTop,
@@ -24,14 +24,20 @@ import CommentIcon from "@mui/icons-material/Comment";
 import { useState } from "react";
 //data
 import { Users } from "../dummyData";
+import { PostServices } from "../../../services";
 import CommentList from "../CommentList/CommentList";
 import "./post.css"
+const defaultPostID = "1116301c-477f-2a8f-555f-1885b89fc8fc";
+
+
 export default function Post({ post }) {
-  const [like, setLike] = useState(post.like);
+  const [comments, setComments] = useState([]);
+  const token = localStorage.getItem("token");
+  const [like, setLike] = useState(post.numLike);
   const [isLiked, setIsLiked] = useState(false);
   const [isCommenting, setIsCommenting] = useState(false);
-  const userAvatar = Users.filter((u) => u.userid === post?.userId)[0].profilePicture;
-  const userName = Users.filter((u) => u.userid === post?.userId)[0].username;
+  const userAvatar = Users.filter((u) => u.userid === post?.userID)[0]?.profilePicture;
+  const userName = Users.filter((u) => u.userid === post?.userID)[0]?.username;
   const likeHandler = () => {
     setLike(like => isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
@@ -51,8 +57,8 @@ export default function Post({ post }) {
           </Setting>
         </PostTop>
         <PostCenter>
-          <Text>{post?.text}</Text>
-          <Img src={post.photo} />
+          <Text>{post?.title}</Text>
+          {/* <Img src={post.photo} /> */}
         </PostCenter>
         <PostBottom>
           <PostBottomLeft>
@@ -62,11 +68,16 @@ export default function Post({ post }) {
             </PostLikeCounter>
             <PostCommentCounter>
               {/* <Icon icon="fa-regular:comment-alt" /> */}
-              <div className="postCommentCounterTitle">{post.comment} comments</div>
+              <div className="postCommentCounterTitle">
+                {'50'} comments
+              </div>
             </PostCommentCounter>
           </PostBottomLeft>
           <PostBottomRight>
-            <PostLike onClick={likeHandler} style={isLiked ? { color: "#0019f8" } : { color: "#333" }}>
+            <PostLike
+              onClick={likeHandler}
+              style={isLiked ? { color: "#0019f8" } : { color: "#333" }}
+            >
               <ThumbUpIcon sx={{ marginRight: 1 }} fontSize="small" />
               <div className="postLikeTitle">{isLiked ? "Liked" : "Like"}</div>
             </PostLike>
@@ -76,7 +87,7 @@ export default function Post({ post }) {
             </PostComment>
           </PostBottomRight>
         </PostBottom>
-        {isCommenting && <CommentList postID={post.postID} />}
+        {isCommenting && <CommentList postID={defaultPostID} />}
       </PostWrapper>
     </>
   );

@@ -16,7 +16,7 @@ const Profile = ({userID}) => {
         <ProfileWrapper>
           <ProfileHead />
           <InputPost />
-          <Feed />
+          <Feed userID={userID} />
           <Pictures />
           <AboutPet />
         </ProfileWrapper>
