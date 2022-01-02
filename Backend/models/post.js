@@ -22,6 +22,7 @@ module.exports = class Post {
     const [resultSet] = await database.query(
       `CALL Proc_SendComment('${userID}','${this.postID}','${content}',@returnValue); SELECT @returnValue;`
     );
-    return resultSet.length === 0 ? null : resultSet[0].commentIDpo;
+
+    return resultSet.length === 0 ? null : resultSet[1][0]["@returnValue"];
   });
 };

@@ -31,7 +31,7 @@ module.exports = {
 
     const post = new Post({ postID: req.params.postID });
     const commentID = await post.sendCommentByPost(userID, content);
-
+    console.log(commentID);
     return res.status(200).send({ message: "SEND_COMMENT_SUCCESS", data: commentID });
   }),
 };
