@@ -68,6 +68,7 @@ module.exports = class Pet {
       console.log('Already open connection to Redis!');
     }
 
+
     const r1 = await database.execute(`SELECT petID FROM Pet WHERE userID = '${this.userID}'`);
     const petID = r1[0][0].petID;
     const id_list = JSON.parse(await r_database.get(petID));
