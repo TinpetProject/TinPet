@@ -14,6 +14,7 @@ import PermMediaIcon from '@mui/icons-material/PermMedia';
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
 //data
 import { Users } from "../dummyData";
+import CreatePost from "./CreatePost/CreatePost"
 
 const addmore = [
     {
@@ -27,6 +28,14 @@ const addmore = [
 ];
 
 export default function InputPost() {
+    const [isOpen, setIsOpen] = React.useState(true);
+    const postHandler = () => {
+        setIsOpen(true);
+    }
+    const close = () => {
+        setIsOpen(false);
+    }
+
     return (
         <div>  
             <InputPostWrapper>
@@ -34,10 +43,7 @@ export default function InputPost() {
                     {Users.map((u) => (
                         <Avatar src={u.profilePicture} key={u.userid}/>
                     ))}
-                    <InputFieldText 
-                        placeholder="How is your pet today?"
-                        inputProps={{ "aria-label": "Post" }}
-                    />
+                    <InputFieldText onClick={postHandler}>What do you think?</InputFieldText>
                 </InputPostContent>
                 
                 <InputPostAdd>
@@ -48,9 +54,9 @@ export default function InputPost() {
                         </InputAdd>
                     ))}
                 </InputPostAdd>
-
                 <InputPostButton>Post</InputPostButton>
             </InputPostWrapper>
+            {isOpen ? <CreatePost close={close}/> : ""}
         </div>
     )
     

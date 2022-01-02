@@ -54,8 +54,18 @@ const Signup = () => {
                 .catch((err) => {
                     switch (err.response.status) {
                         case 400:
+                            if(err.response.data.message === "SIGN_UP_INVALID_SCHEMA") {
+                                toast.error("Invalid Schema!", {
+                                    position: toast.POSITION.TOP_RIGHT
+                                });
+                            } else if(err.response.data.message === "SIGN_UP_FAIL_DUPPLICATE_EMAIL") {
+                                toast.error("Duplicate Email!", {
+                                    position: toast.POSITION.TOP_RIGHT
+                                });
+                            }
+                            break;
                         case 404:
-                            toast.error("Invalid email/password!", {
+                            toast.error("Not found!", {
                                 position: toast.POSITION.TOP_RIGHT
                             });
                             break;
