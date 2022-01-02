@@ -12,10 +12,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Authorization");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  next();
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Authorization");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    next();
 });
 
 app.use("/auth", authRoute);
@@ -29,8 +29,8 @@ app.use("/post", postRoute);
 app.use("/pet", petRoute);
 
 app.use((error, req, res, next) => {
-  res.status(error.errorCode);
-  res.json({ message: error.message });
+    res.status(error.errorCode);
+    res.json({ message: error.message });
 });
 
 const server = app.listen(process.env.LISTENING_PORT || 3000);

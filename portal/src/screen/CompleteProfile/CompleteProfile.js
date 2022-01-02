@@ -8,8 +8,8 @@ import InputDate from "../../components/CompleteProfile/InputDate";
 
 export default function CompleteProfile() {
     const genderOptions = [
-        { label: "Female", value: "female" },
-        { label: "Male", value: "male" },
+        { label: "Female", value: 0 },
+        { label: "Male", value: 1 },
     ];
 
     const [breeds, setBreeds] = useState([]);
@@ -19,7 +19,7 @@ export default function CompleteProfile() {
     const [pictureProfile, setPictureProfile] = useState("");
     const [name, setName] = useState("");
     const [gender, setGender] = useState("");
-    const [breed, setBreed] = useState([]);
+    const [breed, setBreed] = useState("");
     const [birthday, setBirthday] = useState("");
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
@@ -31,6 +31,19 @@ export default function CompleteProfile() {
             setCountries(await res.data.data);
         };
         getData();
+
+        var requestOptions = {
+            method: "GET",
+            redirect: "follow",
+        };
+
+        fetch("http://localhost:8888/pet/breads", requestOptions)
+            .then((response) => response.json())
+            .then((result) => result.data.map((el) => ({ br: el.name.charAt(0).toUpperCase() + el.name.slice(1) })))
+            .then((breeds) => {
+                setBreeds(breeds);
+            })
+            .catch((error) => console.log("error", error));
     }, []);
 
     useEffect(() => {
@@ -50,10 +63,11 @@ export default function CompleteProfile() {
         setCity("");
         setCountry("");
         setBirthday("");
+        setBreed("");
     };
 
     const submitBtnHandler = () => {
-        console.log(name, gender, birthday, country, city, pictureProfile);
+        console.log(name, gender, birthday, breed != "" ? breed : 2, country, city, pictureProfile, localStorage.getItem("email"));
     };
 
     const uploadPhotoHandler = async (e) => {
@@ -115,6 +129,7 @@ export default function CompleteProfile() {
                     </button>
                 </div>
             </div>
+            s
         </div>
     );
 }
