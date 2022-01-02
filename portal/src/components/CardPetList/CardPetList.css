@@ -1,0 +1,111 @@
+:root {
+    --green-main-color: #5FCE7B;
+    --white-main-color: white;
+    --white-secondary-color: #efefef;
+    --black-main-color: #373737;
+    --blur-text-color: #a7a7a7;
+}
+
+.card-pet-list {
+    width: 435px;
+    height: 110px;
+    border-radius: 8px;
+    border: 1px solid #c1c1c1;
+    margin-top: 10px;
+    position: relative;
+}
+
+.card-pet-list:nth-child(1) {
+    margin-top: 0;
+}
+
+.card-pet-list:nth-child(2) {
+    margin-top: 0;
+}
+
+.card-pet-list:nth-child(even) {
+    margin-left: 10px;
+}
+
+.card-pet-list img {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+
+.card-pet-list__info {
+    width: 150px;
+    height: 55px;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 118px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-pet-list__info--general {}
+
+.card-pet-list__info--location {
+    transform: translateX(-4px);
+}
+
+.card-pet-list__info--location svg {
+    font-size: 1.4rem;
+    transform: translateY(5px);
+}
+
+.card-pet-list__info--location span {
+    transform: translateY(-1px);
+}
+
+.card-pet-list__options {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 22px;
+}
+
+svg {
+    font-size: 1.2rem;
+}
+
+.card-pet-list__options-box {
+    height: 41px;
+    width: 111px;
+    border: 1px solid #373737;
+    position: absolute;
+    right: 22px;
+    top: 70px;
+    border-radius: 4px;
+    background-color: var(--white-main-color);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.card-pet-list__options-box:hover {
+    cursor: pointer;
+    background-color: #e4e4e4;
+    transition: 200ms;
+
+}
+
+.card-pet-list__options-box span {
+    margin-left: 7px;
+}
+
+.card-pet-list__options-box svg {
+    transform: translateY(1px);
+    font-size: 1.3rem;
+}

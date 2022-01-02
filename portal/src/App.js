@@ -13,7 +13,9 @@ import { ToastContainer } from "react-toastify";
 import ForgotPassword from "./screen/ForgotPassword";
 import ResetPassword from "./screen/ResetPassword";
 import { injectStyle } from "react-toastify/dist/inject-style";
-import Profile from "./screen/Profile";
+import PetList from "./screen/PetList/PetList";
+import Favorite from "./screen/Favorite/Favorite";
+import Profile from "./screen/Profile/index";
 
 if (typeof window !== "undefined") {
   injectStyle();
@@ -50,11 +52,17 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
             <Route exact path="/matches">
               <Matches />
             </Route>
+            <Route exact path="/messenger/:chosenUserID">
+              <Messenger userID={userID} socket={socket} />
+            </Route>
             <Route exact path="/profile">
               <Profile />
             </Route>
-            <Route exact path="/messenger/:chosenUserID">
-              <Messenger userID={userID} socket={socket} />
+            <Route path="/petlist">
+              <PetList />
+            </Route>
+            <Route path="/favorite">
+              <Favorite />
             </Route>
             <Route path="/*">
               <Redirect to="/dashboard" />

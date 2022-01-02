@@ -4,7 +4,7 @@ import ChatInput from "./ChatInput";
 import "./ChatWindow.css";
 import ChatWindowHeader from "./ChatWindowHeader/ChatWindowHeader";
 
-const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceivedHandler }) => {
+const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceivedHandler, onSeenMessage }) => {
   const [conversation, setConversation] = useState([]);
   const [messageOffset, setMessageOffset] = useState(null);
   const [hasMoreMessage, setHasMoreMessage] = useState(true);
@@ -28,6 +28,7 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
   useEffect(() => {
     const subscribeToSocket = () => {
       socket?.on("message", (data) => {
+        // console.log("receive msg");
         newMessageReceivedHandler(data);
         if (data.userID === chosenUserID) setConversation((prev) => [{ ...data }, ...prev]);
       });
@@ -39,6 +40,18 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
       socket?.off("message");
     };
   }, [socket, chosenUserID]);
+
+  // useEffect(() => {
+  //   if (socket) {
+  //     socket.on("seenMessage", (data) => {
+  //       console.log("seenMessage");
+  //       // socket.removeNotification(userID, messageID);
+  //       // newMessageReceivedHandler(data);
+  //       // if (data.userID === chosenUserID)
+  //       //   setConversation((prev) => [{ ...data }, ...prev]);
+  //     });
+  //   }
+  // }, [socket]);
 
   useEffect(() => {
     const fetchConversation = async () => {
@@ -133,7 +146,10 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
           );
         })}
       </div>
-      <ChatInput sendMessageHandler={sendMessage} />
+      <ChatInput
+        sendMessageHandler={sendMessage}
+        onSeenMessage={onSeenMessage(conversation[conversation.length - 1]?.messageID)}
+      />
     </div>
   );
 });
