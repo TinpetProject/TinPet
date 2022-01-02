@@ -22,34 +22,33 @@ export const InputPostContent = styled.div `
 
 export const Avatar = styled.img `
     position: relative;
-    width: 75px;
-    height: 75px;
+    width: 50px;
+    height: 50px;
     background: url(.jpg);
     border-radius: 50%;
-    margin-right: 10px;
     object-fit: cover;
+    margin-right: 10px;
 `;
 // Field Text
-export const InputFieldText = styled.input `
+export const InputFieldText = styled.div `
     position: static;
     width: 470px;
-    height: 60px;
+    height: 50px;
     border: none;
     outline-color: lightgray;
     padding: 10px;
     margin-left: 5px;
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
-    line-height: 30px;
+    opacity: 0.5;
     resize: vertical;
+    display: flex;
+    align-items: center;
     background-color: #efefef;
     border-radius: 8px;
-    &::placeholder {
-        color: #888888;
-        font-size: 18px;
-        font-weight: 400;
-      }
+    cursor: text;
+    font-weight: 400;
     overflow-wrap: break-word; 
 `;
 
@@ -81,10 +80,10 @@ export const IconInput = styled.div `
     margin-left: 10px;
 `;
 export const ButtonInput = styled.div `
-    font-size: 18px;
+    font-size: 14px;
     font-family: sans-serif;
     font-weight: 750;
-    padding: 0px 10px 0px 5px;
+    padding: 0px 10px 0px 8px;
 `;
 
 export const InputPostButton = styled.button `
@@ -99,8 +98,8 @@ export const InputPostButton = styled.button `
     color: black; 
     cursor: pointer;
     font-family: Source Sans Pro, sans-serif;
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 600;
     &:hover {
         background-color: #fb6d6c;
         color: #fff;

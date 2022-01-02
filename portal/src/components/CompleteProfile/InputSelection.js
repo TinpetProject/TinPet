@@ -6,13 +6,16 @@ export default function InputSelection(props) {
     const renderOptions = () => {
         const data = props.list;
 
-        const options = data.map((option) => (
-            <option value={option.value}>
-                {option.label}
-                {option.country}
-                {typeof option !== "object" && option}
-            </option>
-        ));
+        const options = data.map((option, index) => {
+            return (
+                <option value={option.value} key={index}>
+                    {option.label}
+                    {option.country}
+                    {option.br}
+                    {typeof option !== "object" && option}
+                </option>
+            );
+        });
 
         return <>{options}</>;
     };
@@ -28,6 +31,8 @@ export default function InputSelection(props) {
         props.setValue(e.target.value);
     };
 
+    // console.log(props.list);
+
     return (
         <div className="complete-profile__input-selection">
             <label>{props.label}</label>
@@ -38,7 +43,7 @@ export default function InputSelection(props) {
                 onChange={selectHandler}
                 disabled={shouldDisable()}
             >
-                <option selected disabled value="">
+                <option disabled value="">
                     {props.placeholder}
                 </option>
                 {renderOptions()}

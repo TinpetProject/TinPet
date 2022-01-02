@@ -1,6 +1,4 @@
 import React from "react";
-import NavBar from "../../components/NavBar";
-import SideBar from "../../components/SideBar";
 import { ProfileWrapper } from "./style";
 import ProfileHead from "./ProfileHead";
 import InputPost from "./InputPost";
@@ -11,15 +9,17 @@ import Feed from "./Feed";
 
 const Profile = () => {
   return (
-    <Main>
-      <ProfileWrapper>
-        <ProfileHead />
-        <InputPost />
-        <Feed />
-        <Pictures />
-        <AboutPet />
-      </ProfileWrapper>
-    </Main>
+    <>
+      <Main>
+        <ProfileWrapper>
+          <ProfileHead />
+          <InputPost />
+          <Feed />
+          <Pictures />
+          <AboutPet />
+        </ProfileWrapper>
+      </Main>
+    </>
   );
 };
 
