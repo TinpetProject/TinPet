@@ -58,15 +58,24 @@ export default function CompleteProfile() {
 
     const uploadPhotoHandler = async (e) => {
         const file = e.target.files[0];
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("upload_preset", "pahpgw4x");
 
         try {
             setPictureProfile("./assets/img/giphy.gif");
-            const res = await axios.post("https://api.cloudinary.com/v1_1/thecodingpanda/upload", formData);
-            console.log(res.data.url);
-            setPictureProfile(res.data.url);
+            var formdata = new FormData();
+            formdata.append("file", file);
+            formdata.append("upload_preset", "iiyjshqb");
+
+            var requestOptions = {
+                method: "POST",
+                body: formdata,
+                redirect: "follow",
+            };
+
+            fetch("https://api.cloudinary.com/v1_1/thecodingpanda/upload", requestOptions)
+                .then((response) => response.json())
+                .then((result) => setPictureProfile(result.url))
+                .catch((error) => console.log("error", error));
+            // setPictureProfile(res.data.url);
         } catch (error) {}
     };
 
