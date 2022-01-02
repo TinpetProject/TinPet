@@ -15,11 +15,20 @@ module.exports = {
   getCommentByPost: tryCatchBlock(null, async (req, res, next) => {
     const postIDIsExist = await Post.isPostIDExist(req.params.postID);
     if (!postIDIsExist) return next(new HttpError("GET_COMMENT_FAIL_POSTID_NOT_EXIST", 404));
-    
 
     const post = new Post({ postID: req.params.postID });
     const comment = await post.getCommentByPost();
 
     return res.status(200).send({ message: "GET_COMMENT_SUCCESS", data: comment });
+  }),
+
+  sendCommentByPost: tryCatchBlock(null, async (req, res, next) => {
+    const postIDIsExist = await Post.isPostIDExist(req.params.postID);
+    if (!postIDIsExist) return next(new HttpError("SEND_COMMENT_FAIL_POSTID_NOT_EXIST", 404));
+
+    const post = new Post({ postID: req.params.postID });
+    const commentID = await post.sendCommentByPost(userID, content);
+
+    return res.status(200).send({ message: "SEND_COMMENT_SUCCESS", data: commentID });
   }),
 };
