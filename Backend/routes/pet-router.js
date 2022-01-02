@@ -13,7 +13,7 @@ router.put("/like", petController.sendLike);
 
 router.put("/follow", petController.sendFollow);
 
-router.get("/breads", petController.getBreads);
+router.get("/breeds", petController.getBreeds);
 
 router.get("/redis", petController.testRedis);
 
