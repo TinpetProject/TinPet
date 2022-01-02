@@ -4,9 +4,10 @@ import { Backdrop, BackdropImg } from './style';
 const Modal = ({ setSelectedImg, selectedImg }) => {
 
   const handleClick = (e) => {
-    if (e.target.classList.contains('backdrop')) {
-      setSelectedImg(null);
-    }
+    // if (e.target.classList.contains(Backdrop)) {
+    //   setSelectedImg(null);
+    // }
+    setSelectedImg(null);
   }
 
   return (

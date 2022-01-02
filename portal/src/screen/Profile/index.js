@@ -11,6 +11,7 @@ import Modal from "./Gallery/Modal";
 
 const Profile = () => {
   const [selectedImg, setSelectedImg] = useState(null);
+  
   return (
     <Main>
       <ProfileWrapper>
