@@ -14,16 +14,7 @@ const headbar = [
     button: "Profile",
   },
   {
-    button: "Followers",
-  },
-  {
-    button: "Detail info",
-  },
-  {
     button: "Photos",
-  },
-  {
-    button: "Video",
   }
 ]
 
