@@ -7,7 +7,9 @@ import AboutPet from "./AboutPet";
 import { Main } from "../../styled-component/style";
 import Feed from "./Feed";
 
+
 const Profile = () => {
+
   return (
     <>
       <Main>
