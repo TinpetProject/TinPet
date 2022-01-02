@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InputPostWrapper = styled.div`
+export const InputPostWrapper = styled.div `
     position: relative;
     width: 600px;
     height: 170px;
@@ -10,7 +10,7 @@ export const InputPostWrapper = styled.div`
     box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
 `;
 
-export const InputPostContent = styled.div`
+export const InputPostContent = styled.div `
     display: flex;
     align-items: center;
     position: relative;
@@ -20,7 +20,7 @@ export const InputPostContent = styled.div`
     top: 20px;
 `;
 
-export const Avatar = styled.img`
+export const Avatar = styled.img `
     position: relative;
     width: 75px;
     height: 75px;
@@ -30,7 +30,7 @@ export const Avatar = styled.img`
     object-fit: cover;
 `;
 // Field Text
-export const InputFieldText = styled.input`
+export const InputFieldText = styled.input `
     position: static;
     width: 470px;
     height: 60px;
@@ -42,7 +42,7 @@ export const InputFieldText = styled.input`
     font-size: 20px;
     font-weight: 500;
     line-height: 30px;
-    
+    resize: vertical;
     background-color: #efefef;
     border-radius: 8px;
     &::placeholder {
@@ -54,7 +54,7 @@ export const InputFieldText = styled.input`
 `;
 
 // Posting adder
-export const InputPostAdd = styled.div`
+export const InputPostAdd = styled.div `
     display: flex;
     flex-direction: row;
     position: relative;
@@ -63,7 +63,7 @@ export const InputPostAdd = styled.div`
     top: 30px;
 `;
 
-export const InputAdd = styled.button`
+export const InputAdd = styled.button `
     border: none;
     border-radius: 10px;
     margin-right: 20px;
@@ -76,18 +76,18 @@ export const InputAdd = styled.button`
     }
     transition: 0.5s;
 `;
-export const IconInput = styled.div`
+export const IconInput = styled.div `
     transform: scale(1);
     margin-left: 10px;
 `;
-export const ButtonInput = styled.div`
+export const ButtonInput = styled.div `
     font-size: 18px;
     font-family: sans-serif;
     font-weight: 750;
     padding: 0px 10px 0px 5px;
 `;
 
-export const InputPostButton = styled.button`
+export const InputPostButton = styled.button `
     position: relative;
     background-color: #C0C0C0;
     height: 40px;
@@ -107,4 +107,3 @@ export const InputPostButton = styled.button`
     }
     transition: 0.5s;
 `;
-

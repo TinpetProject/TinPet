@@ -8,7 +8,7 @@ import "./style.css";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-const SideBar = () => {
+const SideBar = ({ logOutHandler }) => {
     const history = useHistory();
     const mainMenu = [
         {
@@ -46,14 +46,14 @@ const SideBar = () => {
         {
             icon: <Icon className="menu__setting-icon" icon="simple-line-icons:settings" />,
             title: "Settings",
+            handler: () => {
+              console.log("go to settings");
+            }
         },
         {
             icon: <Icon className="menu__logout-icon" icon="icon-park-outline:logout" />,
             title: "Log out",
-            handler: () => {
-                history.push("/login");
-                localStorage.removeItem("token");
-            },
+            handler: logOutHandler,
         },
     ];
     return (
@@ -71,7 +71,7 @@ const SideBar = () => {
                 ))}
                 <SideBarListTitle> Other </SideBarListTitle>
                 {other.map((item) => (
-                    <SideBarElement key={item.title}>
+                    <SideBarElement key={item.title} onClick={item.handler}>
                         {item.icon}
                         <SideBarElementTitle> {item.title} </SideBarElementTitle>
                     </SideBarElement>

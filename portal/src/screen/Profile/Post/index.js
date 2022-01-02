@@ -55,8 +55,14 @@ export default function Post({ post }) {
         </PostCenter>
         <PostBottom>
           <PostBottomLeft>
-            <PostLikeCounter>{like} likes</PostLikeCounter>
-            <PostCommentCounter>{post.comment} comments</PostCommentCounter>
+            <PostLikeCounter>
+              {/* <Icon icon="ei:like" /> */}
+              <div className="postLikeCounterTitle">{like} likes</div>
+            </PostLikeCounter>
+            <PostCommentCounter>
+              {/* <Icon icon="fa-regular:comment-alt" /> */}
+              <div className="postCommentCounterTitle">{post.comment} comments</div>
+            </PostCommentCounter>
           </PostBottomLeft>
           <PostBottomRight>
             <PostLike onClick={likeHandler}>
