@@ -1,0 +1,147 @@
+:root {
+    --content-bg-color: #fff;
+    --white-text-color: #fff;
+    --black-text-color: #373737;
+    --main-bg-color: #efefef;
+    --blur-text-color: #a7a7a7;
+}
+
+.game-wrapper {
+    position: relative;
+    margin-left: 0px;
+    color: var(--black-text-color);
+    width: 650px;
+    margin-bottom: 20px;
+    height: calc(100vh - 60px - 80px);
+    overflow: hidden;
+}
+
+.game-content {
+    display: flex;
+    margin-top: 50px;
+    /* margin-left: 0px; */
+    margin-left: 150px;
+    margin-right: 100px;
+    width: 350px;
+    /* width: 650px; */
+    height: 750px;
+    background-color: var(--content-bg-color);
+    position: fixed;
+    border-radius: 14px;
+}
+
+.card-list {
+    background-color: var(--content-bg-color);
+    width: 650px;
+    border-radius: 14px;
+    display: flex;
+    flex-flow: row wrap;
+    z-index: 0;
+    overflow: scroll;
+    box-sizing: content-box;
+    height: calc(100vh - 60px - 130px - 20px);
+    margin-top: 10px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.card-list::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.card-list {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.high-score {
+    background-color: var(--content-bg-color);
+    width: 250px;
+    height: 535px;
+    border-radius: 14px;
+    position: fixed !important;
+    left: calc((100vw - 1140px)/2 + 650px + 40px + 200px);
+    padding: 20px;
+    top: 170px;
+}
+
+.high-score__card img {
+    width: 213px;
+    height: 213px;
+    object-fit: cover;
+    border-radius: 8px;
+    position: absolute;
+    left: 50%;
+    margin-top: 15px;
+    transform: translateX(-50%);
+    display: block;
+}
+
+.high-score p {
+    color: var(--blur-text-color);
+    font-size: 1rem;
+
+}
+
+.high-score__info {
+    margin-top: 240px;
+    line-height: 1.5rem;
+}
+
+.high-score__info span {
+    font-size: 1.2rem;
+    color: var(--black-text-color) !important;
+}
+
+.high-score__info p {
+    font-size: 1.2rem;
+    color: var(--black-text-color) !important;
+}
+
+.high-score__info--bold {
+    font-weight: bold;
+    color: var(--black-text-color);
+}
+
+.high-score hr {
+    color: var(--blur-text-color);
+    margin: 10px auto;
+    margin-bottom: 6px;
+}
+
+.high-score__message-btn {
+    font-size: 2.2rem;
+    margin-top: 5px;
+    position: absolute;
+    right: 15px;
+    margin-right: 19px;
+    color: var(--blur-text-color);
+    transform: scale(0.9);
+
+}
+
+.high-score__plus-btn {
+    font-size: 2.3rem;
+    margin-top: 5px;
+    left: 30px;
+    font-weight: 300;
+    position: absolute;
+    color: var(--blur-text-color);
+    transform: scale(0.9);
+}
+
+.high-score__heart-btn {
+    position: absolute;
+    font-size: 4.8rem;
+    left: 50%;
+    margin-top: 1.7rem;
+    transform: translateX(-50%);
+    color: var(--blur-text-color);
+}
+
+svg:hover {
+    cursor: pointer;
+    color: var(--black-text-color);
+}

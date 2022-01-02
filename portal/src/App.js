@@ -16,6 +16,7 @@ import ResetPassword from "./screen/ResetPassword";
 import { injectStyle } from "react-toastify/dist/inject-style";
 import PetList from "./screen/PetList/PetList";
 import Favorite from "./screen/Favorite/Favorite";
+import Game from "./screen/Game/Game";
 
 
 if (typeof window !== "undefined") {
@@ -23,61 +24,57 @@ if (typeof window !== "undefined") {
 }
 
 function App({ logInHandler, logOutHandler, userID, socket }) {
-  
-
-  return (
-    <HomePage>
-      {userID || (
-        <Switch>
-          <Route exact path="/login">
-            <Login logInHandler={logInHandler} socket={socket} />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/forgotpassword">
-            <ForgotPassword />
-          </Route>
-          <Route exact path="/reset-password/:resetToken">
-            <ResetPassword />
-          </Route>
-          <Route exact path="/complete-profile">
-            <CompleteProfile />
-          </Route>
-        </Switch>
-      )}
-      {userID && (
-        <Layout logOutHandler={logOutHandler} userID={userID} socket={socket}>
-          <Switch>
-            <Route exact path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route exact path="/matches">
-              <Matches />
-            </Route>
-            <Route exact path="/messenger/:chosenUserID">
-              <Messenger userID={userID} socket={socket} />
-            </Route>
-            <Route exact path="/profile">
-              <Profile />
-            </Route>
-            <Route path="/petlist">
-              <PetList />
-            </Route>
-            <Route path="/favorite">
-              <Favorite />
-            </Route>
-            <Route path="/*">
-              <Redirect to="/dashboard" />
-            </Route>
-            
-          </Switch>
-        </Layout>
-      )}
-      <ToastContainer autoClose={3000} />
-
-    </HomePage>
-  );
+    return (
+        <HomePage>
+            {userID || (
+                <Switch>
+                    <Route exact path="/login">
+                        <Login logInHandler={logInHandler} socket={socket} />
+                    </Route>
+                    <Route exact path="/signup">
+                        <Signup />
+                    </Route>
+                    <Route exact path="/forgotpassword">
+                        <ForgotPassword />
+                    </Route>
+                    <Route exact path="/reset-password/:resetToken">
+                        <ResetPassword />
+                    </Route>
+                    <Route exact path="/complete-profile">
+                        <CompleteProfile />
+                    </Route>
+                </Switch>
+            )}
+            {userID && (
+                <Layout logOutHandler={logOutHandler} userID={userID} socket={socket}>
+                    <Switch>
+                        <Route exact path="/dashboard">
+                            <Dashboard />
+                        </Route>
+                        <Route exact path="/matches">
+                            <Matches />
+                        </Route>
+                        <Route exact path="/messenger/:chosenUserID">
+                            <Messenger userID={userID} socket={socket} />
+                        </Route>
+                        <Route path="/petlist">
+                            <PetList />
+                        </Route>
+                        <Route path="/favorite">
+                            <Favorite />
+                        </Route>
+                        <Route path="/game">
+                            <Game />
+                        </Route>
+                        <Route path="/*">
+                            <Redirect to="/dashboard" />
+                        </Route>
+                    </Switch>
+                </Layout>
+            )}
+            <ToastContainer autoClose={3000} />
+        </HomePage>
+    );
 }
 
 export default App;
