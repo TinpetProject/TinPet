@@ -7,9 +7,12 @@ import { Icon } from "@iconify/react";
 import "./style.css";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { useState  } from "react";
+import Setting from "../../screen/Setting/Setting";
 
 const SideBar = () => {
     const history = useHistory();
+    const [isShownSetting, setIsShownSetting] = useState(false);
     const mainMenu = [
         {
             icon: <Icon className="menu__dashboard-icon" icon="carbon:archive" />,
@@ -38,7 +41,7 @@ const SideBar = () => {
         {
             icon: <Icon className="menu__game-icon" icon="teenyicons:game-controller-outline" />,
             title: "Game",
-            quantity: "100+",
+
             path: "/game",
         },
         {
@@ -48,20 +51,21 @@ const SideBar = () => {
             path: "/petlist",
         },
     ];
-    const other = [
-        {
-            icon: <Icon className="menu__setting-icon" icon="simple-line-icons:settings" />,
-            title: "Settings",
-        },
-        {
-            icon: <Icon className="menu__logout-icon" icon="icon-park-outline:logout" />,
-            title: "Log out",
-            handler: () => {
-                history.push("/login");
-                localStorage.removeItem("token");
-            },
-        },
-    ];
+    // const other = [
+    //     {
+    //         icon: <Icon className="menu__setting-icon" icon="simple-line-icons:settings" />,
+    //         title: "Settings",
+            
+    //     },
+    //     {
+    //         icon: <Icon className="menu__logout-icon" icon="icon-park-outline:logout" />,
+    //         title: "Log out",
+    //         handler: () => {
+    //             history.push("/login");
+    //             localStorage.removeItem("token");
+    //         },
+    //     },
+    // ];
     return (
         <SideBarWrapper>
             <SideBarList>
@@ -76,12 +80,31 @@ const SideBar = () => {
                     </StyledLink>
                 ))}
                 <SideBarListTitle> Other </SideBarListTitle>
-                {other.map((item) => (
-                    <SideBarElement key={item.title}>
+                {/* {other.map((item) => (
+                    <SideBarElement key={item.title} onClick={onclick}>
                         {item.icon}
                         <SideBarElementTitle> {item.title} </SideBarElementTitle>
                     </SideBarElement>
-                ))}
+                ))} */}
+                {/* Test */}
+                    {/* setting */}
+                <SideBarElement onClick={() => setIsShownSetting(true)}>
+                    <Icon className="menu__setting-icon" icon="simple-line-icons:settings" />
+                    <SideBarElementTitle> Settings </SideBarElementTitle>
+                </SideBarElement>
+
+                <Setting trigger={isShownSetting} setTrigger={setIsShownSetting}/>
+                    {/* signout */}
+                <SideBarElement
+                    onClick={() => {   
+                        history.push("/login");
+                        localStorage.removeItem("token");
+                    }}
+                >
+                    <Icon className="menu__logout-icon" icon="icon-park-outline:logout" />
+                    <SideBarElementTitle> Sign out </SideBarElementTitle>
+                </SideBarElement>
+
             </SideBarList>
         </SideBarWrapper>
     );
