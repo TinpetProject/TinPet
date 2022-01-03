@@ -9,13 +9,6 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
 export default function SideBar(props) {
-  const history = useHistory();
-
-  const onClickSettings = () => {
-
-    props.showSetting();
-  }
-
   const mainMenu = [
     {
       icon: <Icon className="menu__dashboard-icon" icon="carbon:archive" />,
@@ -39,7 +32,7 @@ export default function SideBar(props) {
       icon: <Icon className="menu__favor-icon" icon="akar-icons:heart" />,
       title: "Favorite",
       quantity: 3,
-      path: "/",
+      path: "/favorite",
     },
     {
       icon: <Icon className="menu__game-icon" icon="teenyicons:game-controller-outline" />,
@@ -51,7 +44,7 @@ export default function SideBar(props) {
       icon: <Icon className="menu__list-icon" icon="fluent:apps-list-20-regular" />,
       title: "Pet List",
       quantity: 18,
-      path: "/",
+      path: "/petlist",
     },
   ];
   const other = [

@@ -101,7 +101,6 @@ export default function CompleteProfile() {
 
     const uploadPhotoHandler = async (e) => {
         const file = e.target.files[0];
-
         try {
             setPictureProfile("./assets/img/giphy.gif");
             var formdata = new FormData();

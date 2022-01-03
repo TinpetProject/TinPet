@@ -1,7 +1,7 @@
 import React from "react";
 import "./CreatePost.css"
 import { Icon } from "@iconify/react"
-import { useEffect } from "react";
+import ALertDialog from "../../../../components/AlertDialog"
 
 export default function CreatePost({ closePostDetail }) {
   //upload or not
@@ -11,10 +11,20 @@ export default function CreatePost({ closePostDetail }) {
   // uploaded files
   const [selectedFiles, setSelectedFiles] = React.useState([]);
   // selected files for preview mode
-  const [preview, setPreview] = React.useState(""); 
+  const [preview, setPreview] = React.useState("");
   const uploadInput = React.useRef(null);
   // go to preview mode
-  const [isPreview, setIsPreview] = React.useState(false); 
+  const [isPreview, setIsPreview] = React.useState(false);
+
+  // Open dialog
+  const [open, setOpen] = React.useState(false);
+
+  const openDialog = () => {
+    setOpen(true);
+  };
+  const closeDialog = () => {
+    setOpen(false);
+  };
 
 
   // Toggle upload files
@@ -31,11 +41,17 @@ export default function CreatePost({ closePostDetail }) {
   const onChangeFile = (e) => {
     if (e.target.files) {
       let temp = [];
+      let maxSize = 10485760;
       for (let i = 0; i < e.target.files.length; i++) {
-        temp.unshift({
+        if(e.target.files[i].size > maxSize) {
+          openDialog(true)
+          return;
+        }
+        temp.push({
           name: e.target.files[i].name,
           url: URL.createObjectURL(e.target.files[i]),
           type: e.target.files[i].type,
+          file: e.target.files[i]
         });
       }
       if (temp.length > 0) {
@@ -128,17 +144,19 @@ export default function CreatePost({ closePostDetail }) {
   const openPreviewFiles = (e) => {
     setIsPreview(true);
     let src;
-    if(e.target.src) {
+    if (e.target.src) {
       src = e.target.src
     } else {
       src = e.target.firstChild.src;
     }
     setPreview(src);
   }
+
   const closePreviewFiles = () => {
     setIsPreview(false)
     setPreview("");
   }
+
   // Preview
   const renderPreviewFiles = (source) => {
     return (
@@ -151,7 +169,7 @@ export default function CreatePost({ closePostDetail }) {
   const handlePreviewPrev = () => {
     const currentTargetSrc = preview;
     const currentTargetIdx = selectedFiles.findIndex(file => file.url === currentTargetSrc);
-    if(currentTargetIdx === 0) {
+    if (currentTargetIdx === 0) {
       setPreview(selectedFiles[selectedFiles.length - 1].url)
     } else {
       setPreview(selectedFiles[currentTargetIdx - 1].url)
@@ -161,7 +179,7 @@ export default function CreatePost({ closePostDetail }) {
   const handlePreviewNext = () => {
     const currentTargetSrc = preview;
     const currentTargetIdx = selectedFiles.findIndex(file => file.url === currentTargetSrc);
-    if(currentTargetIdx === selectedFiles.length - 1) {
+    if (currentTargetIdx === selectedFiles.length - 1) {
       setPreview(selectedFiles[0].url)
     } else {
       setPreview(selectedFiles[currentTargetIdx + 1].url)
@@ -187,6 +205,22 @@ export default function CreatePost({ closePostDetail }) {
   // Submit
   const postSubmit = () => {
     console.log(postContent);
+    for (let file of selectedFiles) {
+      try {
+        let formData = new FormData();
+        formData.append("file", file.file);
+        formData.append("upload_preset", "iiyjshqb");
+        console.log(file.file);
+        let requestOptions = {
+          method: "POST",
+          body: formData,
+          redirect: "follow",
+        }
+        fetch("https://api.cloudinary.com/v1_1/thecodingpanda/upload", requestOptions).then(res => console.log(res)).catch(err => console.log(err));
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 
   return (
@@ -202,7 +236,7 @@ export default function CreatePost({ closePostDetail }) {
           </div>
           <div className="content-box-body">
             <div className="content-box-body-top">
-              <img src={"https://scontent.fhan5-4.fna.fbcdn.net/v/t39.30808-6/270772893_1567946906894523_1047998408474512960_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=UDouyg3f9X4AX-pmsZd&tn=i1yGCvqKaMsUYmLN&_nc_ht=scontent.fhan5-4.fna&oh=00_AT8z-4gaLISuR7xppz5vpNfe01um66ajORsM6f-vM7pKKg&oe=61D5CA10"} className="user-avatar" alt=""/>
+              <img src={"https://scontent.fhan5-4.fna.fbcdn.net/v/t39.30808-6/270772893_1567946906894523_1047998408474512960_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=UDouyg3f9X4AX-pmsZd&tn=i1yGCvqKaMsUYmLN&_nc_ht=scontent.fhan5-4.fna&oh=00_AT8z-4gaLISuR7xppz5vpNfe01um66ajORsM6f-vM7pKKg&oe=61D5CA10"} className="user-avatar" alt="" />
               <div className="user">
                 <div className="user-name">Minh Tâm</div>
                 <div className="user-name-belong">vợ Minh Trí</div>
@@ -215,7 +249,7 @@ export default function CreatePost({ closePostDetail }) {
             </div>
             {isUpload ? (
               <>
-                <input type="file" multiple ref={uploadInput} id="uploadInput" onChange={onChangeFile} accept="image/*" />
+                <input type="file" multiple ref={uploadInput} id="uploadInput" onChange={onChangeFile} accept="image/*"/>
                 <div className="upload-box" onClick={handleUploadFiles}>
                   {selectedFiles && renderFiles(selectedFiles)}
                   {selectedFiles.length > 0 && (<div className="more-btn" onClick={handleUploadMore}>
@@ -255,6 +289,7 @@ export default function CreatePost({ closePostDetail }) {
           </div>
         </div>
       </div>
+      <ALertDialog msg="Files exceed the maximum size!!!" openDialog={openDialog} closeDialog={closeDialog} open={open}/>
     </>
   );
 }
