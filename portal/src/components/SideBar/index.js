@@ -58,7 +58,7 @@ export default function SideBar(props) {
     {
       icon: <Icon className="menu__setting-icon" icon="simple-line-icons:settings" />,
       title: "Settings",
-      handler: onClickSettings
+      handler: props.showSetting
     },
     {
       icon: <Icon className="menu__logout-icon" icon="icon-park-outline:logout" />,
@@ -89,3 +89,7 @@ export default function SideBar(props) {
     </SideBarWrapper>
   );
 }
+
+const StyledLink = styled(Link)`
+    text-decoration: none !important;
+`;
