@@ -61,7 +61,7 @@ module.exports = {
     return res.status(200).send({message: "GET_MATCHES_SUCCESSFULLY", data : data })
   }),
   handleRequestMatches: tryCatchBlock(null, async (req, res, next) => {
-    const {userID, targetUserID, command} = req.body;
+    const { userID, targetUserID, command } = req.body;
     await User.handleRequestMatches(userID, targetUserID, command);
     return res.status(200).send({message: "HANDLE_REQUEST_MATCHES_SUCCESSFULLY"});
   }),
