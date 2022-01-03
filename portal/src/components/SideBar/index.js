@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import "./style.css";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 
 export default function SideBar({showSetting,logOutHandler}) {
   const mainMenu = [

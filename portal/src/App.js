@@ -77,7 +77,7 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
           </Switch>
         </Layout>
       )}
-      <ToastContainer autoClose={3000} />
+      <ToastContainer autoClose={2500} />
     </HomePage>
   );
 }

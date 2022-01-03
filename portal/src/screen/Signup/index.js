@@ -5,11 +5,8 @@ import {
     ContentBox,
     Form,
     FormControl,
-    FormControlCheckBox,
     FormControlLabel,
-    FormControlLabelCheckBox,
     FormInput,
-    FormInputCheckBox,
     FormLink,
     FormSubScript,
     FormTitle,
@@ -28,7 +25,6 @@ const Signup = () => {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [passwordConfirm, setPasswordConfirm] = React.useState("");
-    // const [rememberMe, setRememberMe] = React.useState("");
     const [name, setName] = React.useState("");
     const [isLoading, setIsLoading] = React.useState(false);
     const history = useHistory();
@@ -67,7 +63,7 @@ const Signup = () => {
                             break;
                         case 404:
                             toast.error("Not found!", {
-                                position: toast.POSITION.TOP_RIGHT,
+                                position: toast.POSITION.TOP_RIGHT
                             });
                             break;
                         case 500:
