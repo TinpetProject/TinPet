@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import "./style.css";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
-
-export default function SideBar(props) {
+export default function SideBar({showSetting,logOutHandler}) {
   const mainMenu = [
     {
       icon: <Icon className="menu__dashboard-icon" icon="carbon:archive" />,
@@ -51,14 +49,15 @@ export default function SideBar(props) {
     {
       icon: <Icon className="menu__setting-icon" icon="simple-line-icons:settings" />,
       title: "Settings",
-      handler: props.showSetting
+      handler: showSetting
     },
     {
       icon: <Icon className="menu__logout-icon" icon="icon-park-outline:logout" />,
       title: "Log out",
-      handler: props.logOutHandler
+      handler: logOutHandler
     },
   ];
+  
   return (
     <SideBarWrapper>
       <SideBarList>
