@@ -66,7 +66,19 @@ module.exports = class Pet {
     }
     catch(err)
     {
-      console.log('Already open connection to Redis!');
+      console.log(err);
+      if (err.errno == -61)
+      {
+        const [resultSet] = await database.execute(
+          `SELECT p.*, pe.userID, r.isLiked, r.isMatched, r.isFriend
+          FROM View_PetInformation p, (Pet pe
+          LEFT JOIN (SELECT * FROM Relationship WHERE targetUserID = '${this.userID}') r
+          ON pe.userId = r.userID) 
+          WHERE p.petID=pe.petID;`
+        );
+  
+        return resultSet.length === 0 ? null : resultSet;
+      }
     }
 
 
@@ -94,7 +106,16 @@ module.exports = class Pet {
       const publisher = r_database.duplicate();
       await publisher.connect();
       await publisher.publish('new_pet_data', `${petID}`);
-      return -1;
+
+      const [resultSet] = await database.execute(
+        `SELECT p.*, pe.userID, r.isLiked, r.isMatched, r.isFriend
+        FROM View_PetInformation p, (Pet pe
+        LEFT JOIN (SELECT * FROM Relationship WHERE targetUserID = '${this.userID}') r
+        ON pe.userId = r.userID) 
+        WHERE p.petID=pe.petID;`
+      );
+
+      return resultSet.length === 0 ? null : resultSet;
     } 
   });
 

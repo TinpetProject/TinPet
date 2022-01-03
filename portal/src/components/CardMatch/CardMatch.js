@@ -7,25 +7,25 @@ export default function CardMatch(props) {
         <div className="card-match">
             <div className="card-match__info">
                 <div className="card-match__info--general">
-                    <span>{props.name}, 2</span>
+                    <span>{props?.match?.name}, {props?.match?.age}</span>
                 </div>
                 <div className="card-match__info--location">
                     <Icon className="location__location-icon" icon="ci:location" />
-                    <span>Hanoi</span>
+                    <span>{props?.match?.address}</span>
                 </div>
             </div>
 c
-            <div className="card-match__btn card-match__btn--accept">
+            <div className="card-match__btn card-match__btn--accept" onClick={() => props.acceptMatches(props.userId, props?.match?.userID, "accept")}>
                 <span>Accept</span>
             </div>
 
-            <div className="card-match__btn card-match__btn--remove">
+            <div className="card-match__btn card-match__btn--remove" onClick={() => props.rejectMatches( props?.match?.userID, "reject")}>
                 <span>Remove</span>
             </div>
 
             <div className="card-match__bg-img">
                 <img
-                    src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/16/08/gettyimages-464163411.jpg?crop=1.0xw:1xh;center,top&resize=980:*"
+                    src={props?.match?.avatar}
                     alt=""
                 />
             </div>
