@@ -8,6 +8,8 @@ module.exports = class User {
     this.password = userData.password;
     this.name = userData.name;
     this.userID = userData.userID;
+    // this.address = userData.address;
+    // this.avatar = userData.avatar;
   }
 
   static isEmailExist = tryCatchBlock(async (email) => {
@@ -40,7 +42,7 @@ module.exports = class User {
 
   signUp = tryCatchBlock(async () => {
     await database.execute(
-      `INSERT INTO User(userID,email,password,name,status,createdAt,updatedAt) VALUES(uuid(),'${this.email}','${this.password}','${this.name}',0,'2021-11-05 04:00:58','2021-11-05 04:00:58')`
+      `INSERT INTO User(userID,email,password,name,status,createdAt,updatedAt,avatar,address) VALUES(uuid(),'${this.email}','${this.password}','${this.name}',0,CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'${this.avatar}','${this.address}')`
     );
   });
 

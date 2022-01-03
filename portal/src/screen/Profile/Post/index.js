@@ -44,8 +44,10 @@ export default function Post({ post }) {
       <PostWrapper>
         <PostTop>
           <Avatar src={userAvatar} />
-          <Username>{userName}</Username>
-          <Time>{post.date}</Time>
+          <div className="user-info">
+            <Username>{userName}</Username>
+            <Time>{post.date}</Time>
+          </div>
           <Setting>
             <MoreHorizIcon fontSize="large" />
           </Setting>

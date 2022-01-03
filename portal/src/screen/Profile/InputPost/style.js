@@ -22,8 +22,8 @@ export const InputPostContent = styled.div `
 
 export const Avatar = styled.img `
     position: relative;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background: url(.jpg);
     border-radius: 50%;
     object-fit: cover;

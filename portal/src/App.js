@@ -17,11 +17,14 @@ import { injectStyle } from "react-toastify/dist/inject-style";
 import PetList from "./screen/PetList/PetList";
 import Favorite from "./screen/Favorite/Favorite";
 
+
 if (typeof window !== "undefined") {
   injectStyle();
 }
 
 function App({ logInHandler, logOutHandler, userID, socket }) {
+  
+
   return (
     <HomePage>
       {userID || (
@@ -67,10 +70,12 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
             <Route path="/*">
               <Redirect to="/dashboard" />
             </Route>
+            
           </Switch>
         </Layout>
       )}
-      <ToastContainer autoClose={3000} />
+      <ToastContainer autoClose={2500} />
+
     </HomePage>
   );
 }

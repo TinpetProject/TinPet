@@ -18,16 +18,15 @@ export const PostTop = styled.div `
 `;
 export const Avatar = styled.img `
     position: relative;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
 `;
 export const Username = styled.div `
-    margin: 0px 10px;
     font-family: Source Sans Pro, sans-serif;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 20px;
 `;
 export const Time = styled.div `
     font-family: Source Sans Pro, sans-serif;

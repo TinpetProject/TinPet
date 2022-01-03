@@ -16,25 +16,29 @@ import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import { Users } from "../dummyData";
 import CreatePost from "./CreatePost/CreatePost"
 
-const addmore = [
-    {
-        icon: <PermMediaIcon/>,
-        button: "Pictures/Videos",
-    },
-    {
-        icon: <LoyaltyIcon/>,
-        button: "Tag",
-    },
-];
+
 
 export default function InputPost() {
     const [isOpen, setIsOpen] = React.useState(true);
-    const postHandler = () => {
+    const openPostDetail = () => {
         setIsOpen(true);
     }
-    const close = () => {
+    const closePostDetail = () => {
         setIsOpen(false);
     }
+
+    const addmore = [
+        {
+            icon: <PermMediaIcon/>,
+            button: "Pictures/Videos",
+            handler: openPostDetail
+        },
+        {
+            icon: <LoyaltyIcon/>,
+            button: "Tag",
+            handler: openPostDetail
+        },
+    ];
 
     return (
         <div>  
@@ -43,20 +47,20 @@ export default function InputPost() {
                     {Users.map((u) => (
                         <Avatar src={u.profilePicture} key={u.userid}/>
                     ))}
-                    <InputFieldText onClick={postHandler}>What do you think?</InputFieldText>
+                    <InputFieldText onClick={openPostDetail}>What do you think?</InputFieldText>
                 </InputPostContent>
                 
                 <InputPostAdd>
                     {addmore?.map((btn) =>(
-                        <InputAdd key={btn.button}>
+                        <InputAdd key={btn.button} onClick={btn.handler}>
                             <IconInput>{btn.icon}</IconInput>
                             <ButtonInput>{btn.button}</ButtonInput>
                         </InputAdd>
                     ))}
                 </InputPostAdd>
-                <InputPostButton>Post</InputPostButton>
+                <InputPostButton onClick={openPostDetail}>Post</InputPostButton>
             </InputPostWrapper>
-            {isOpen ? <CreatePost close={close}/> : ""}
+            {isOpen ? <CreatePost closePostDetail={closePostDetail} /> : ""}
         </div>
     )
     
