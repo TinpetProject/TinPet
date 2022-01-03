@@ -2,7 +2,7 @@ import React from 'react';
 import "./Setting.css";
 import { Icon } from "@iconify/react";
 
-export default function Setting({userID, hideSetting}) {
+export default function Setting({userID,hideSetting}) {
     const mainMenu = [
         {
             icon: <Icon className="menu__account-icon" icon="mdi:account-circle-outline" />,
@@ -56,7 +56,10 @@ export default function Setting({userID, hideSetting}) {
                     <div className="content-box-sidebar-user">
                         <img src="https://lh6.googleusercontent.com/proxy/TzFjtW4IYw1Ct9IGlUbmq_GNXCjqGfKucN1irkehgc8kKNyIKLm9HEdcbgeoMlL27I5dGrxpslMZttyw6JKGslKObBJ7K1Su50OL3npuVhy5VDFeCC2laqmZcalwMaBQdXaxqCIpj1fPb8HtFJIzxzM" 
                         className="avatar" alt="Shiba"/>
-                        <div className="name"> Shiba</div>
+                        <div className='id'>
+                            <div className="name"> Shiba</div>
+                            <div className="email"> Shiba@gmail.com</div>
+                        </div>
                     </div>
                     <div className="content-box-sidebar-menu">
                         {mainMenu.map((item) => (
@@ -76,10 +79,11 @@ export default function Setting({userID, hideSetting}) {
                     </div>
                 </div>
 {/* main */}
+    {/* Account */}
                 <div className="content-box-main">
                     <div className="content-box-main-header">
                         <div className="title">Account</div>
-                        <div className="close">
+                        <div className="close" onClick={hideSetting}>
                             <Icon className="menu__signout-icon" icon="carbon:close" style={{ fontSize: '2rem' }}/>
                         </div>
                     </div>
@@ -123,6 +127,9 @@ export default function Setting({userID, hideSetting}) {
                                     </div>
                                 </div>
                             ))}
+                            <div className="update-profile-btn">
+                                Update profile
+                            </div>
                         </div>
                     </div>
                     <div className="content-box-main-bottom">
