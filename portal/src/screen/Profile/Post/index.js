@@ -31,7 +31,7 @@ import { timeSince } from "../../../utils/datetime";
 const defaultPostID = "1116301c-477f-2a8f-555f-1885b89fc8fc";
 
 
-export default function Post({ post }) {
+export default function Post({ post, userID }) {
   const [comments, setComments] = useState([]);
   const token = localStorage.getItem("token");
   const [like, setLike] = useState(post.like);
@@ -73,7 +73,9 @@ export default function Post({ post }) {
             </PostLikeCounter>
             <PostCommentCounter>
               {/* <Icon icon="fa-regular:comment-alt" /> */}
-              <div className="postCommentCounterTitle">{post.comment} comments</div>
+              <div className="postCommentCounterTitle">
+                {post.comment} comments
+              </div>
             </PostCommentCounter>
           </PostBottomLeft>
           <PostBottomRight>
@@ -90,7 +92,7 @@ export default function Post({ post }) {
             </PostComment>
           </PostBottomRight>
         </PostBottom>
-        {isCommenting && <CommentList postID={defaultPostID} />}
+        {isCommenting && !!post && <CommentList postID={post.id} userID={userID} />}
       </PostWrapper>
     </>
   );
