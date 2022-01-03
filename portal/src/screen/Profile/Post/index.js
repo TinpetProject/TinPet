@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   PostWrapper,
   PostTop,
@@ -8,7 +8,6 @@ import {
   Setting,
   PostCenter,
   Text,
-  Img,
   PostBottom,
   PostBottomLeft,
   PostLikeCounter,
@@ -22,13 +21,12 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import CommentIcon from "@mui/icons-material/Comment";
 import { useState } from "react";
-//data
-import { PostServices } from "../../../services";
 import CommentList from "../CommentList/CommentList";
 import "./post.css";
 import { timeSince } from "../../../utils/datetime";
 // import "../InputPost/CreatePost/CreatePost.css";
-import { Icon } from "@iconify/react"
+import { Icon } from "@iconify/react";
+import axios from "axios";
 
 // const defaultPostID = "1116301c-477f-2a8f-555f-1885b89fc8fc";
 
@@ -46,9 +44,12 @@ export default function Post({ post, userID, user }) {
   const [isPreview, setIsPreview] = React.useState(false);
 
   const likeHandler = () => {
-    setLike(like => isLiked ? like - 1 : like + 1);
-    setIsLiked(!isLiked);
+      axios.post(`/post/${post.id}/like`).then(response => console.log(response))
+    .catch(error => console.log(error));
+    // setLike(like => isLiked ? like - 1 : like + 1);
+    setIsLiked(true);
   };
+
   const commentHandler = () => {
     setIsCommenting((prev) => !prev);
   };
