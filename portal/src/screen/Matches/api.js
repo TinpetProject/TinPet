@@ -7,16 +7,16 @@ export const getAllMatches = (userID) => {
         .catch(error => console.log(error));
 }
 
-export const handleMatches = (userId, targetUserId, command) => {
-    return axios.post("/user/matches", { userId, targetUserId, command })
+export const handleMatches = (userID, targetUserID, command) => {
+    return axios.post("/user/matches", { userID, targetUserID, command })
         .then((response) => {
             if (response.status === 200) {
                 if (command === "accept") {
-                    toast.success(`Accept user ${targetUserId} successfully!`, {
+                    toast.success(`Accept user ${targetUserID} successfully!`, {
                         position: toast.POSITION.TOP_RIGHT,
                     });
                 } else {
-                    toast.success(`Remove user ${targetUserId} successfully!`, {
+                    toast.success(`Remove user ${targetUserID} successfully!`, {
                         position: toast.POSITION.TOP_RIGHT,
                     });
                 }

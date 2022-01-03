@@ -29,7 +29,10 @@ export default function Matches({ userID }) {
             userID,
             targetUserID,
             command,
-        })
+        });
+    }
+    const updateMatchesList = (targetUserID) => {
+        setMatchList(matchList.filter(match => match.userID === targetUserID))
     }
 
     return (
@@ -39,12 +42,12 @@ export default function Matches({ userID }) {
                 <div className="matches-content">
                     {matchList && matchList.length > 0 && matchList.map(match => {
                         return (
-                            <CardMatch match={match} acceptMatches={handleMatches} rejectMatches={rejectMatches} userId={userID} key={match.userID}/>
+                            <CardMatch match={match} acceptMatches={handleMatches} rejectMatches={rejectMatches} userID={userID} key={match.userID} updateMatchesList={updateMatchesList}/>
                         )
                     })}
                 </div>
             </Main>
-            <OptionDialog handleClose={handleCloseDialog} handleOpen={handleOpenDialog} open={openDialog} option="Remove" msg="Are you really want remove this user ?" handleMatches={handleMatches} params={requiredParams}/>
+            <OptionDialog handleClose={handleCloseDialog} handleOpen={handleOpenDialog} open={openDialog} option="Remove" msg="Are you really want remove this user ?" handleMatches={handleMatches} params={requiredParams} updateMatchesList={updateMatchesList}/>
         </>
     );
 }

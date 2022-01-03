@@ -7,7 +7,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { toast } from 'react-toastify';
 
 export default function ResponsiveDialog(props) {
   const theme = useTheme();
@@ -35,8 +34,9 @@ export default function ResponsiveDialog(props) {
           </Button>
           <Button onClick={() => {
             props.handleMatches(props.params.userID, props.params.targetUserID, props.params.command);
+            props.updateMatchesList(props.params.targetUserID);
             props.handleClose();
-          }} autoFocus>
+          }}>
             {props.option}
           </Button>
         </DialogActions>

@@ -15,11 +15,14 @@ export default function CardMatch(props) {
                 </div>
             </div>
 c
-            <div className="card-match__btn card-match__btn--accept" onClick={() => props.acceptMatches(props.userId, props?.match?.userID, "accept")}>
+            <div className="card-match__btn card-match__btn--accept" onClick={() => {
+                props.acceptMatches(props.userID, props?.match?.userID, "accept");
+                props.updateMatchesList(props?.match?.userID);
+            }}>
                 <span>Accept</span>
             </div>
 
-            <div className="card-match__btn card-match__btn--remove" onClick={() => props.rejectMatches(props.userId, props?.match?.userID, "reject")}>
+            <div className="card-match__btn card-match__btn--remove" onClick={() => props.rejectMatches(props?.match?.userID, "reject")}>
                 <span>Remove</span>
             </div>
 
