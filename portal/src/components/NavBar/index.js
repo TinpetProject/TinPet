@@ -26,7 +26,7 @@ const StyledButton = styled(Button)`
   border-bottom: #dfdfdf solid 1px !important;
 `;
 
-const NavBar = React.memo(({ userID, socket, logOutHandler }) => {
+const NavBar = React.memo(({ userID, socket, showSetting, logOutHandler }) => {
   const history = useHistory();
   const location = useLocation();
   const [notifications, setNotifications] = useState([]);
@@ -130,7 +130,8 @@ const NavBar = React.memo(({ userID, socket, logOutHandler }) => {
             />
           </Link>
           <Menu>
-            <MenuItem> Setting </MenuItem> <MenuItem> Language </MenuItem>{" "}
+            <MenuItem onClick={showSetting}> Setting </MenuItem> 
+            <MenuItem> Language </MenuItem>{" "}
             <MenuItem onClick={logOutHandler}> Log out </MenuItem>{" "}
           </Menu>{" "}
         </UserAvatarWrapper>{" "}
