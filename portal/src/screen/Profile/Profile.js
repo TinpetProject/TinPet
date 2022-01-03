@@ -7,10 +7,13 @@ import AboutPet from "./AboutPet";
 import { Main } from "../../styled-component/style";
 import Feed from "./Feed";
 import axios from "axios";
+import { PostServices } from "../../services"
 
 
 const Profile = ({ userID }) => {
-  const [user, setUser] = React.useState({})
+  const token = localStorage.getItem("token");
+  const [user, setUser] = React.useState({});
+  const [posts, setPosts] = React.useState([]);
 
   useEffect(() => {
     const getUser = async () => {
@@ -23,15 +26,50 @@ const Profile = ({ userID }) => {
 
   }, [userID])
 
-  console.log(user);
+  useEffect(() => {
+    const getPost = async () => {
+      const data = await PostServices.getPostByUserID(userID, token);
+      console.log(data);
+      if (!!data && data.code === 200) {
+        // console.log("commentList");
+        // console.log("data", data);
+        setPosts(data.data.map((post) => {
+          if (post.photos) {
+            const photos = post.photos.split(",");
+            // console.log(photos);
+            return {
+              ...post,
+              photos: photos.map((photo) => JSON.parse(photo.replaceAll("'", '"')))
+            }
+          } else return post;
+        }));
+      }
+    };
+    !!token && getPost();
+    // const fetchList = async () => {
+    //   const result = await fetch(`http://localhost:8888/post/${userID}/posts/1`, {
+    //     method: "GET",
+    //     headers: {
+    //       accept: "application/json",
+    //       "Content-Type": "application/json",
+    //       authorization: `Bearer ${token}`,
+    //     },
+    //   });
+    //   console.log(result);
+    // };
+    // token && fetchList();
+  }, [token, userID]);
 
+  console.log(posts);
+
+  
   return (
     <>
       <Main>
         <ProfileWrapper>
           <ProfileHead user={user} />
           <InputPost user={user} />
-          <Feed userID={userID} user={user} />
+          <Feed userID={userID} user={user} posts={posts} />
           <Pictures />
           <AboutPet />
         </ProfileWrapper>

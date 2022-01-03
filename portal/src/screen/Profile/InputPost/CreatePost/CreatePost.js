@@ -231,12 +231,13 @@ export default function CreatePost({ closePostDetail, user }) {
         console.log(error)
       }
     }
-    console.log(photos);
+    // console.log(photos);
     // console.log({ title: user.name, content: postContent, links: photos });
     axios.post("/user/post", { title: user.name, content: postContent, links: photos })
       .then(response => console.log(response))
       .catch(error => console.log(error));
     closePostDetail();
+    // fetchPost();
   }
 
   return (

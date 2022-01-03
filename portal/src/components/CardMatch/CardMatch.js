@@ -25,7 +25,7 @@ export default function CardMatch(props) {
             <div className="card-match__btn card-match__btn--accept" onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                props.acceptMatches(props.userID, props?.match?.userID, "accept");
+                props.acceptMatches({ userID: props.userID, targetUserID: props?.match?.userID, command: "accept" });
                 props.updateMatchesList(props?.match?.userID);
             }}>
                 <span>Accept</span>
