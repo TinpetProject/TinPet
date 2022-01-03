@@ -16,6 +16,7 @@ import ResetPassword from "./screen/ResetPassword";
 import { injectStyle } from "react-toastify/dist/inject-style";
 import PetList from "./screen/PetList/PetList";
 import Favorite from "./screen/Favorite/Favorite";
+import Game from "./screen/Game/Game";
 
 
 if (typeof window !== "undefined") {
@@ -59,7 +60,7 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
               <Messenger userID={userID} socket={socket} />
             </Route>
             <Route exact path="/profile">
-              <Profile />
+              <Profile userID={userID}/>
             </Route>
             <Route path="/petlist">
               <PetList />
@@ -67,15 +68,16 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
             <Route path="/favorite">
               <Favorite />
             </Route>
+            <Route path="/game">
+              <Game />
+            </Route>
             <Route path="/*">
               <Redirect to="/dashboard" />
             </Route>
-            
           </Switch>
         </Layout>
       )}
       <ToastContainer autoClose={3000} />
-
     </HomePage>
   );
 }

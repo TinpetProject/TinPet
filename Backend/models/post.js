@@ -39,4 +39,8 @@ module.exports = class Post {
 
     return resultSet.length === 0 ? null : resultSet[0];
   });
+
+  setLikeComment = tryCatchBlock(async (commentID,targetUserID,command) =>{
+    const [resultSet] = await database.query(`CALL Proc_ProcessLikeComment('${commentID}','${targetUserID}','${command}')`);
+  })
 };

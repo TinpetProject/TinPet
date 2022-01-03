@@ -1,6 +1,6 @@
 const database = require("../util/database");
 const tryCatchBlock = require("../util/function").tryCatchBlockForModule;
-const HttpError = require("./http-error");
+const HttpError = require("../models/http-error");
 
 module.exports = class User {
   constructor(userData) {
@@ -13,9 +13,7 @@ module.exports = class User {
   }
 
   static isEmailExist = tryCatchBlock(async (email) => {
-    const [resultSet] = await database.execute(
-      `SELECT * from User WHERE email LIKE '${email}'`
-    );
+    const [resultSet] = await database.execute(`SELECT * from User WHERE email LIKE '${email}'`);
     return resultSet.length === 0 ? false : true;
   });
 
@@ -26,17 +24,24 @@ module.exports = class User {
     return resultSet;
   });
 
+  static handleRequestMatches = tryCatchBlock(async (userID,targetUserID,command) =>{
+    const [resultSet] = await database.execute(`call Proc_HandleRequestMatches('${userID}','${targetUserID}','${command}');`);
+  })
+  static removeFollower = tryCatchBlock(async (userID,targetUserID) =>{
+    const [resultSet] = await database.execute(`call Proc_RemoveFollower('${userID}','${targetUserID}');`);
+  })
+
+  static removeFriend = tryCatchBlock(async (userID,targetUserID) =>{
+    const [resultSet] = await database.execute(`call Proc_RemoveFriend('${userID}','${targetUserID}');`);
+  })
+
   static isUserIDExist = tryCatchBlock(async (userID) => {
-    const [resultSet] = await database.execute(
-      `SELECT * from User WHERE userID LIKE '${userID}'`
-    );
+    const [resultSet] = await database.execute(`SELECT * from User WHERE userID LIKE '${userID}'`);
     return resultSet.length === 1 ? true : false;
   });
 
   static getUserIDByEmail = tryCatchBlock(async (email) => {
-    const [resultSet] = await database.execute(
-      `SELECT userID from User WHERE email LIKE '${email}'`
-    );
+    const [resultSet] = await database.execute(`SELECT userID from User WHERE email LIKE '${email}'`);
     return resultSet.length === 1 ? resultSet[0].userID : null;
   });
 
@@ -47,22 +52,20 @@ module.exports = class User {
   });
 
   signIn = tryCatchBlock(async () => {
-    const [resultSet] = await database.execute(
-      `SELECT * FROM User WHERE email LIKE '${this.email}' AND password LIKE '${this.password}'`
-    );
-    return resultSet.length === 0
-      ? null
-      : { userID: resultSet[0].userID, avatar: resultSet[0].avatar };
+    const [resultSet] = await database.execute(`SELECT * FROM User WHERE email LIKE '${this.email}' AND password LIKE '${this.password}'`);
+    return resultSet.length === 0 ? null : { userID: resultSet[0].userID, avatar: resultSet[0].avatar };
   });
 
   getProfile = tryCatchBlock(async () => {
     // get user: name,nickname,avatar,background,intro,pics
     const [resultSet] = await database.query(
       `CALL Proc_GetUserProfile('${this.userID}');`
+      
     );
     resultSet[0][0].gender = resultSet[0][0].gender == 1 ? "Male" : "Female";
     return resultSet.length === 0 ? null : resultSet[0][0];
   });
+
 
   getRecentImgs = tryCatchBlock(async () => {
     // get user: name,nickname,avatar,background,intro,pics
@@ -89,9 +92,7 @@ module.exports = class User {
   });
 
   getConversationList = tryCatchBlock(async () => {
-    const [resultSet] = await database.query(
-      `CALL Proc_GetUserConversation('${this.userID}')`
-    );
+    const [resultSet] = await database.query(`CALL Proc_GetUserConversation('${this.userID}')`);
     const conversationlist = resultSet[0].map((conversation) => ({
       avatar: conversation.targetUserAvatar,
       userID: conversation.targetUserID,
@@ -104,9 +105,7 @@ module.exports = class User {
   });
 
   getMessageByOffset = tryCatchBlock(async (targetUserID, offset) => {
-    const [resultSet] = await database.query(
-      `CALL Proc_GetConversationMessagesByOffset('${this.userID}','${targetUserID}','${offset} ')`
-    );
+    const [resultSet] = await database.query(`CALL Proc_GetConversationMessagesByOffset('${this.userID}','${targetUserID}','${offset} ')`);
     const conversation = resultSet[0].map((message) => ({
       messageID: message.messageID,
       content: message.content,
@@ -116,15 +115,18 @@ module.exports = class User {
   });
 
   seenMessage = tryCatchBlock(async (targetUserID) => {
-    return await database.query(
-      `CALL Proc_UpdateMessagesStatus('${this.userID}','${targetUserID}')`
-    );
+    console.log("is seen");
+    return await database.query(`CALL Proc_UpdateMessagesStatus('${this.userID}','${targetUserID}')`);
   });
 
   changePassword = tryCatchBlock(async () => {
-    return await database.execute(
-      `UPDATE User SET password = '${this.password}' WHERE userID LIKE '${this.userID}'`
-    );
+    return await database.execute(`UPDATE User SET password = '${this.password}' WHERE userID LIKE '${this.userID}'`);
+  });
+
+  uploadPost = tryCatchBlock(async (title, content) => {
+    
+    const [resultSet] = await database.query(`CALL Proc_UploadPost('${this.userID}','${title}','${content}', @returnValue); SELECT @returnValue;`);
+    return resultSet.length === 0 ? null : resultSet[1][0]["@returnValue"];
   });
 
   getBriefInfo = tryCatchBlock(async (targetUserID) => {
@@ -137,5 +139,25 @@ module.exports = class User {
       avatar: resultSet[0].avatar,
     };
     return user;
+  });
+
+  getMatches = tryCatchBlock(async () =>{
+    const [resultSet] = await database.execute(`Call Proc_GetMatches('${this.userID}')`);
+    return resultSet[0];
+  })
+
+  getFollowerList = tryCatchBlock(async () =>{
+    const [resultSet] = await database.execute(`Call Proc_GetFollowerList('${this.userID}')`);
+    return resultSet[0];
+  })
+
+  getFriendList = tryCatchBlock(async () =>{
+    const [resultSet] = await database.execute(`Call Proc_GetFriendList('${this.userID}')`);
+    return resultSet[0];
+  })
+  uploadPost = tryCatchBlock(async (title, content) => {
+
+    const [resultSet] = await database.query(`CALL Proc_UploadPost('${this.userID}','${title}','${content}', @returnValue); SELECT @returnValue;`);
+    return resultSet.length === 0 ? null : resultSet[1][0]["@returnValue"];
   });
 };
