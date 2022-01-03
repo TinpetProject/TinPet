@@ -51,7 +51,7 @@ export default function Setting({userID, hideSetting}) {
         <div className="container">
             <div className="container-layout" onClick={hideSetting}></div>
             <div className="container-content-wrapper">
-{/* sidebar */}
+
                 <div className="content-box-sidebar">
                     <div className="content-box-sidebar-user">
                         <img src="https://lh6.googleusercontent.com/proxy/TzFjtW4IYw1Ct9IGlUbmq_GNXCjqGfKucN1irkehgc8kKNyIKLm9HEdcbgeoMlL27I5dGrxpslMZttyw6JKGslKObBJ7K1Su50OL3npuVhy5VDFeCC2laqmZcalwMaBQdXaxqCIpj1fPb8HtFJIzxzM" 
@@ -75,7 +75,7 @@ export default function Setting({userID, hideSetting}) {
                         </li>
                     </div>
                 </div>
-{/* main */}
+
                 <div className="content-box-main">
                     <div className="content-box-main-header">
                         <div className="title">Account</div>

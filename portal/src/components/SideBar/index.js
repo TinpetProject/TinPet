@@ -85,25 +85,6 @@ const SideBar = ({setIsShownSetting}) => {
                         <SideBarElementTitle> {item.title} </SideBarElementTitle>
                     </SideBarElement>
                 ))}
-                {/* Test */}
-                    {/* setting */}
-                {/* <SideBarElement onClick={() => setIsShownSetting(true)}>
-                    <Icon className="menu__setting-icon" icon="simple-line-icons:settings" />
-                    <SideBarElementTitle> Settings </SideBarElementTitle>
-                </SideBarElement>
-
-                <Setting trigger={isShownSetting} setTrigger={setIsShownSetting}/> */}
-                    {/* signout */}
-                {/* <SideBarElement
-                    onClick={() => {   
-                        history.push("/login");
-                        localStorage.removeItem("token");
-                    }}
-                >
-                    <Icon className="menu__logout-icon" icon="icon-park-outline:logout" />
-                    <SideBarElementTitle> Sign out </SideBarElementTitle>
-                </SideBarElement> */}
-
             </SideBarList>
         </SideBarWrapper>
     );
