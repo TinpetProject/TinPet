@@ -23,10 +23,20 @@
     transform: translateX(-50%);
     top: 10px;
     border-radius: 8px;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     padding: 15px;
     font-weight: 600;
     z-index: 3;
+}
+
+.card-match__info span {
+    text-overflow: ellipsis;
+    width: 110px;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card-match__info--general {

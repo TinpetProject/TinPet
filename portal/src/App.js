@@ -18,68 +18,65 @@ import PetList from "./screen/PetList/PetList";
 import Favorite from "./screen/Favorite/Favorite";
 import Game from "./screen/Game/Game";
 
-
 if (typeof window !== "undefined") {
-  injectStyle();
+    injectStyle();
 }
 
 function App({ logInHandler, logOutHandler, userID, socket }) {
-  
-
-  return (
-    <HomePage>
-      {userID || (
-        <Switch>
-          <Route exact path="/login">
-            <Login logInHandler={logInHandler} socket={socket} />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/forgotpassword">
-            <ForgotPassword />
-          </Route>
-          <Route exact path="/reset-password/:resetToken">
-            <ResetPassword />
-          </Route>
-          <Route exact path="/complete-profile">
-            <CompleteProfile />
-          </Route>
-        </Switch>
-      )}
-      {userID && (
-        <Layout logOutHandler={logOutHandler} userID={userID} socket={socket}>
-          <Switch>
-            <Route exact path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route exact path="/matches">
-              <Matches userID={userID} />
-            </Route>
-            <Route exact path="/messenger/:chosenUserID">
-              <Messenger userID={userID} socket={socket} />
-            </Route>
-            <Route exact path="/profile">
-              <Profile userID={userID}/>
-            </Route>
-            <Route path="/petlist">
-              <PetList userID={userID}/>
-            </Route>
-            <Route path="/favorite">
-              <Favorite userID={userID}/>
-            </Route>
-            <Route path="/game">
-              <Game />
-            </Route>
-            <Route path="/*">
-              <Redirect to="/dashboard" />
-            </Route>
-          </Switch>
-        </Layout>
-      )}
-      <ToastContainer autoClose={2500} />
-    </HomePage>
-  );
+    return (
+        <HomePage>
+            {userID || (
+                <Switch>
+                    <Route exact path="/login">
+                        <Login logInHandler={logInHandler} socket={socket} />
+                    </Route>
+                    <Route exact path="/signup">
+                        <Signup />
+                    </Route>
+                    <Route exact path="/forgotpassword">
+                        <ForgotPassword />
+                    </Route>
+                    <Route exact path="/reset-password/:resetToken">
+                        <ResetPassword />
+                    </Route>
+                    <Route exact path="/complete-profile">
+                        <CompleteProfile />
+                    </Route>
+                </Switch>
+            )}
+            {userID && (
+                <Layout logOutHandler={logOutHandler} userID={userID} socket={socket}>
+                    <Switch>
+                        <Route exact path="/dashboard">
+                            <Dashboard />
+                        </Route>
+                        <Route exact path="/matches">
+                            <Matches userID={userID} />
+                        </Route>
+                        <Route exact path="/messenger/:chosenUserID">
+                            <Messenger userID={userID} socket={socket} />
+                        </Route>
+                        <Route exact path="/profile">
+                            <Profile userID={userID} />
+                        </Route>
+                        <Route path="/petlist">
+                            <PetList userID={userID} />
+                        </Route>
+                        <Route path="/favorite">
+                            <Favorite userID={userID} />
+                        </Route>
+                        <Route path="/game">
+                            <Game />
+                        </Route>
+                        <Route path="/*">
+                            <Redirect to="/dashboard" />
+                        </Route>
+                    </Switch>
+                </Layout>
+            )}
+            <ToastContainer autoClose={2500} />
+        </HomePage>
+    );
 }
 
 export default App;
