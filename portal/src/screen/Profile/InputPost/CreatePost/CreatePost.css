@@ -59,9 +59,7 @@
     background-color: #e5e5e5;
 }
 
-
 /* post body */
-
 .content-box-body {
     margin-bottom: 12px;
 }
@@ -118,11 +116,11 @@
     /* Firefox */
 }
 
-.content-box-body-bottom {}
+/* .content-box-body-bottom {}
 
 .body-bottom-right {}
 
-.body-bottom-left {}
+.body-bottom-left {} */
 
 
 /* footer */

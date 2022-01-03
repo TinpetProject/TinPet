@@ -28,7 +28,7 @@ const addmore = [
 ];
 
 export default function InputPost() {
-    const [isOpen, setIsOpen] = React.useState(true);
+    const [isOpen, setIsOpen] = React.useState(false);
     const postHandler = () => {
         setIsOpen(true);
     }
