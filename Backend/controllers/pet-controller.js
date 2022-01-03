@@ -1,6 +1,7 @@
 const Pet = require("../models/pet");
 const HttpError = require("../models/http-error");
 const tryCatchBlock = require("../util/function").tryCatchBlockForController;
+const User = require("../models/user");
 
 
 module.exports = {
@@ -76,7 +77,7 @@ module.exports = {
         const pet = new Pet("");
         await pet.changeInfoPet(req.body);
         return res.status(200).send({ message: "SAVE_COMPLETE_PROFILE_SUCCESSFULLY"})
-    })
+    }),
   //waiting for sql query
 
   // getPostByOffset: tryCatchBlock(null, async (req, res, next) => {
