@@ -37,7 +37,8 @@ export default function PetList({ userID }) {
     const removePetList = (targetUserID) => {
         setOpenDialog(true);
         setRequiredParam({
-            userID: targetUserID,
+            userID,
+            targetUserID,
         });
     }
     const updatePetList = (targetUserID) => {
@@ -76,7 +77,7 @@ export default function PetList({ userID }) {
                         Cancel
                     </Button>
                     <Button onClick={() => {
-                        removeFromPetList(requiredParams.userID)
+                        removeFromPetList(requiredParams)
                         updatePetList(requiredParams.userID);
                         handleCloseDialog();
                     }}>

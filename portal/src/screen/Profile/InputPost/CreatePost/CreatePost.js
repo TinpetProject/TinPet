@@ -3,7 +3,7 @@ import "./CreatePost.css"
 import { Icon } from "@iconify/react"
 import ALertDialog from "../../../../components/Dialog/AlertDialog"
 
-export default function CreatePost({ closePostDetail }) {
+export default function CreatePost({ closePostDetail, user }) {
   //upload or not
   const [isUpload, setIsUpload] = React.useState(false);
   // post
@@ -166,6 +166,7 @@ export default function CreatePost({ closePostDetail }) {
       </>
     )
   }
+
   const handlePreviewPrev = () => {
     const currentTargetSrc = preview;
     const currentTargetIdx = selectedFiles.findIndex(file => file.url === currentTargetSrc);
@@ -205,22 +206,24 @@ export default function CreatePost({ closePostDetail }) {
   // Submit
   const postSubmit = () => {
     console.log(postContent);
-    for (let file of selectedFiles) {
-      try {
-        let formData = new FormData();
-        formData.append("file", file.file);
-        formData.append("upload_preset", "iiyjshqb");
-        console.log(file.file);
-        let requestOptions = {
-          method: "POST",
-          body: formData,
-          redirect: "follow",
-        }
-        fetch("https://api.cloudinary.com/v1_1/thecodingpanda/upload", requestOptions).then(res => console.log(res)).catch(err => console.log(err));
-      } catch (error) {
-        console.log(error)
-      }
-    }
+    // for (let file of selectedFiles) {
+    //   try {
+    //     let formData = new FormData();
+    //     formData.append("file", file.file);
+    //     formData.append("upload_preset", "iiyjshqb");
+    //     console.log(file.file);
+    //     let requestOptions = {
+    //       method: "POST",
+    //       body: formData,
+    //       redirect: "follow",
+    //     }
+    //     fetch("https://api.cloudinary.com/v1_1/thecodingpanda/upload", requestOptions).then(res => console.log(res)).catch(err => console.log(err));
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // }
+    let urls = selectedFiles.map(file => file.url);
+    console.log(urls);
   }
 
   return (
@@ -236,9 +239,9 @@ export default function CreatePost({ closePostDetail }) {
           </div>
           <div className="content-box-body">
             <div className="content-box-body-top">
-              <img src={"https://scontent.fhan5-4.fna.fbcdn.net/v/t39.30808-6/270772893_1567946906894523_1047998408474512960_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=UDouyg3f9X4AX-pmsZd&tn=i1yGCvqKaMsUYmLN&_nc_ht=scontent.fhan5-4.fna&oh=00_AT8z-4gaLISuR7xppz5vpNfe01um66ajORsM6f-vM7pKKg&oe=61D5CA10"} className="user-avatar" alt="" />
+              <img src={user.avatar} className="user-avatar" alt="" />
               <div className="user">
-                <div className="user-name">Minh Tâm</div>
+                <div className="user-name">{user.name}</div>
                 <div className="user-name-belong">vợ Minh Trí</div>
               </div>
             </div>

@@ -7,8 +7,8 @@ export const getPetList = (userID) => {
         .catch(error => console.log(error));
 }
 
-export const removeFromPetList = (userID) => {
-    return axios.post("/user/friend", { userID })
+export const removeFromPetList = ({ userID, targetUserID }) => {
+    return axios.post("/user/friend", { userID, targetUserID })
         .then((response) => {
             if (response.status === 200) {
                 toast.success(`Remove user ${userID} successfully!`, {

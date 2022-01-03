@@ -7,7 +7,7 @@ export const getAllMatches = (userID) => {
         .catch(error => console.log(error));
 }
 
-export const handleMatches = (userID, targetUserID, command) => {
+export const handleMatches = ({ userID, targetUserID, command }) => {
     return axios.post("/user/matches", { userID, targetUserID, command })
         .then((response) => {
             if (response.status === 200) {

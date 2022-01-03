@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   HeadWrapper,
   Wallpaper,
@@ -8,7 +8,6 @@ import {
   Button,
   ButtonPut
 } from "./style";
-import { Users } from "../dummyData"
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatIcon from '@mui/icons-material/Chat';
@@ -22,25 +21,24 @@ const headbar = [
   }
 ]
 
-export default function ProfileHead() {
+export default function ProfileHead({ user }) {
+
   return (
     <div>
       <HeadWrapper>
-        <HeadBar> 
-          {headbar?.map((btn) =>(
+        <HeadBar>
+          {headbar?.map((btn) => (
             <Button key={btn.button}>{btn.button}</Button>
-            ))}
-          <ButtonPut><AddCircleOutlineIcon/></ButtonPut>
-          <ButtonPut><FavoriteBorderIcon/></ButtonPut>
-          <ButtonPut><ChatIcon/></ButtonPut>
+          ))}
+          <ButtonPut><AddCircleOutlineIcon /></ButtonPut>
+          <ButtonPut><FavoriteBorderIcon /></ButtonPut>
+          <ButtonPut><ChatIcon /></ButtonPut>
         </HeadBar>
-        {Users.map((u) => (
-          <div key={u.userid}>
-            <Wallpaper src={u.wallPaper}/>
-            <Avatar src={u.profilePicture}/>
-            <Name>{u.username}</Name>
-          </div>
-        ))}
+        <div key={user.userID}>
+          <Wallpaper src={user.backgroundImage} />
+          <Avatar src={user.avatar} />
+          <Name>{user.name}</Name>
+        </div>
       </HeadWrapper>
     </div>
   );

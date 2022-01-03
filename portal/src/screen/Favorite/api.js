@@ -7,7 +7,7 @@ export const getAllFavorites = (userID) => {
         .catch(error => console.log(error));
 };
 
-export const removeFavorite = (userID, targetUserID) => {
+export const removeFavorite = ({ userID, targetUserID }) => {
     return axios.post("/user/follow", { userID, targetUserID })
         .then((response) => {
             if (response.status === 200) {
