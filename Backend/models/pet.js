@@ -66,7 +66,9 @@ module.exports = class Pet {
     }
     catch(err)
     {
-      console.log('Already open connection to Redis!');
+      // console.log(err);
+      if (err.errno == -61)
+        return null;
     }
 
 
