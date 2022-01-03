@@ -1,13 +1,42 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const getAllMatches = (userID) => {
     return axios.get(`/user/matches/${userID}`)
-        .then(response => response.data)
+        .then(response => response.data.data)
         .catch(error => console.log(error));
 }
 
 export const handleMatches = (userId, targetUserId, command) => {
     return axios.post("/user/matches", { userId, targetUserId, command })
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
+        .then((response) => {
+            if (response.status === 200) {
+                if (command === "accept") {
+                    toast.success(`Accept user ${targetUserId} successfully!`, {
+                        position: toast.POSITION.TOP_RIGHT,
+                    });
+                } else {
+                    toast.success(`Remove user ${targetUserId} successfully!`, {
+                        position: toast.POSITION.TOP_RIGHT,
+                    });
+                }
+            }
+        })
+        .catch((err) => {
+            switch (err.response.status) {
+                case 400:
+                case 404:
+                    toast.error("Invalid user", {
+                        position: toast.POSITION.TOP_RIGHT,
+                    });
+                    break;
+                case 500:
+                    toast.error("Internal Server Error!", {
+                        position: toast.POSITION.TOP_RIGHT,
+                    });
+                    break;
+                default:
+                    break;
+            }
+        })
 }

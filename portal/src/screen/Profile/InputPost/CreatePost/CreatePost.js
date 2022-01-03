@@ -1,7 +1,7 @@
 import React from "react";
 import "./CreatePost.css"
 import { Icon } from "@iconify/react"
-import ALertDialog from "../../../../components/AlertDialog"
+import ALertDialog from "../../../../components/Dialog/AlertDialog"
 
 export default function CreatePost({ closePostDetail }) {
   //upload or not

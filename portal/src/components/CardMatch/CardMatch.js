@@ -11,21 +11,21 @@ export default function CardMatch(props) {
                 </div>
                 <div className="card-match__info--location">
                     <Icon className="location__location-icon" icon="ci:location" />
-                    <span>{props?.match?.location}</span>
+                    <span>{props?.match?.address}</span>
                 </div>
             </div>
 c
-            <div className="card-match__btn card-match__btn--accept" onClick={() => props.handleMatches(props.userId, props?.match?.id, "accept")}>
+            <div className="card-match__btn card-match__btn--accept" onClick={() => props.acceptMatches(props.userId, props?.match?.userID, "accept")}>
                 <span>Accept</span>
             </div>
 
-            <div className="card-match__btn card-match__btn--remove" onClick={() => props.handleMatches(props.userId, props?.match?.id, "reject")}>
+            <div className="card-match__btn card-match__btn--remove" onClick={() => props.rejectMatches(props.userId, props?.match?.userID, "reject")}>
                 <span>Remove</span>
             </div>
 
             <div className="card-match__bg-img">
                 <img
-                    src={props?.match?.AVA}
+                    src={props?.match?.avatar}
                     alt=""
                 />
             </div>
