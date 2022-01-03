@@ -9,13 +9,6 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
 export default function SideBar(props) {
-  const history = useHistory();
-
-  const onClickSettings = () => {
-
-    props.showSetting();
-  }
-
   const mainMenu = [
     {
       icon: <Icon className="menu__dashboard-icon" icon="carbon:archive" />,
@@ -66,6 +59,7 @@ export default function SideBar(props) {
       handler: props.logOutHandler
     },
   ];
+  
   return (
     <SideBarWrapper>
       <SideBarList>
