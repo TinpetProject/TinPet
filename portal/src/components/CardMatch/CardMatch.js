@@ -19,7 +19,7 @@ c
                 <span>Accept</span>
             </div>
 
-            <div className="card-match__btn card-match__btn--remove" onClick={() => props.rejectMatches(props.userId, props?.match?.userID, "reject")}>
+            <div className="card-match__btn card-match__btn--remove" onClick={() => props.rejectMatches( props?.match?.userID, "reject")}>
                 <span>Remove</span>
             </div>
 
