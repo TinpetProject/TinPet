@@ -62,6 +62,7 @@ module.exports = class User {
       `CALL Proc_GetUserProfile('${this.userID}');`
       
     );
+    if(resultSet[0][0])
     resultSet[0][0].gender = resultSet[0][0].gender == 1 ? "Male" : "Female";
     return resultSet.length === 0 ? null : resultSet[0][0];
   });
