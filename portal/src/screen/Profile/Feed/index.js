@@ -4,7 +4,7 @@ import Post from "../Post";
 import { FeedWrapper } from "./style";
 import { PostServices } from "../../../services";
 
-export default function Feed({ userID }) {
+export default function Feed({ userID, user }) {
   const token = localStorage.getItem("token");
   const [posts, setPosts] = useState([]);
   useEffect(() => {
@@ -30,11 +30,18 @@ export default function Feed({ userID }) {
     // };
     // token && fetchList();
   }, [token, userID]);
-  console.log(posts);
+
+  const abc = posts.map((post) => {
+    if (post.photos) {
+      const photos = post.photos.split(",");
+      return photos.map((photo) => JSON.parse(photo.replaceAll("'", '"')));
+    } else return "";
+  });
+
   return (
     <div>
       <FeedWrapper>
-        {!!posts.length > 0 && posts.map((p) => <Post key={p.postID} post={p} userID={userID} />)}
+        {!!posts.length > 0 && posts.map((p) => <Post key={p.postID} post={p} user={user} userID={userID} />)}
       </FeedWrapper>
     </div>
   );

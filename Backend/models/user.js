@@ -165,11 +165,16 @@ module.exports = class User {
   getFriendList = tryCatchBlock(async () => {
     const [resultSet] = await database.execute(`Call Proc_GetFriendList('${this.userID}')`);
     return resultSet[0];
-  });
-  uploadPost = tryCatchBlock(async (title, content) => {
-    const [resultSet] = await database.query(
-      `CALL Proc_UploadPost('${this.userID}','${title}','${content}', @returnValue); SELECT @returnValue;`
-    );
+  })
+  uploadPost = tryCatchBlock(async (title, content, links) => {
+
+    const [resultSet] = await database.query(`CALL Proc_UploadPost('${this.userID}','${title}','${content}', @returnValue); SELECT @returnValue;`);
+    const postID = resultSet[1][0]["@returnValue"]
+
+    for (var link in links){
+      database.query(`CALL Proc_UploadPhotoToPost('${postID}','${this.userID}','${links[link]}', @returnValue)`);
+    }
+
     return resultSet.length === 0 ? null : resultSet[1][0]["@returnValue"];
   });
 };

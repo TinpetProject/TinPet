@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import "./CardPetList.css";
 import { Icon } from "@iconify/react";
 
-export default function CardPetList() {
+export default function CardPetList(props) {
     const ref = useRef();
 
     const [isOptionVisible, setIsOptionVisible] = useState(false);
@@ -36,17 +36,17 @@ export default function CardPetList() {
     return (
         <div className="card-pet-list">
             <img
-                src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/16/08/gettyimages-464163411.jpg?crop=1.0xw:1xh;center,top&resize=980:*"
+                src={props?.pet?.avatar}
                 alt=""
             />
 
             <div className="card-pet-list__info">
                 <div className="card-pet-list__info--general">
-                    <span>Name, 2</span>
+                    <span>{props?.pet?.name}, {props?.pet?.age}</span>
                 </div>
                 <div className="card-pet-list__info--location">
                     <Icon className="location__location-icon" icon="ci:location" />
-                    <span>Hanoi</span>
+                    <span>{props?.pet?.address}</span>
                 </div>
             </div>
 
@@ -58,6 +58,11 @@ export default function CardPetList() {
                     display: isOptionVisible ? "flex" : "none",
                 }}
                 ref={ref}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    props.removePetList(props?.favorite?.userID)
+                }}
             >
                 <Icon icon="feather:x-square" color="#373737" />
                 <span>Remove</span>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {
-    InputPostWrapper, 
-    InputPostContent, 
+    InputPostWrapper,
+    InputPostContent,
     InputFieldText,
     InputPostAdd,
     InputAdd,
@@ -18,7 +18,7 @@ import CreatePost from "./CreatePost/CreatePost"
 
 
 
-export default function InputPost() {
+export default function InputPost({ user }) {
     const [isOpen, setIsOpen] = React.useState(false);
     const openPostDetail = () => {
         setIsOpen(true);
@@ -29,29 +29,27 @@ export default function InputPost() {
 
     const addmore = [
         {
-            icon: <PermMediaIcon/>,
+            icon: <PermMediaIcon />,
             button: "Pictures/Videos",
             handler: openPostDetail
         },
         {
-            icon: <LoyaltyIcon/>,
+            icon: <LoyaltyIcon />,
             button: "Tag",
             handler: openPostDetail
         },
     ];
 
     return (
-        <div>  
+        <div>
             <InputPostWrapper>
                 <InputPostContent>
-                    {Users.map((u) => (
-                        <Avatar src={u.profilePicture} key={u.userid}/>
-                    ))}
+                    <Avatar src={user.avatar} key={user.userID} />
                     <InputFieldText onClick={openPostDetail}>What do you think?</InputFieldText>
                 </InputPostContent>
-                
+
                 <InputPostAdd>
-                    {addmore?.map((btn) =>(
+                    {addmore?.map((btn) => (
                         <InputAdd key={btn.button} onClick={btn.handler}>
                             <IconInput>{btn.icon}</IconInput>
                             <ButtonInput>{btn.button}</ButtonInput>
@@ -60,8 +58,8 @@ export default function InputPost() {
                 </InputPostAdd>
                 <InputPostButton onClick={openPostDetail}>Post</InputPostButton>
             </InputPostWrapper>
-            {isOpen ? <CreatePost closePostDetail={closePostDetail} /> : ""}
+            {isOpen ? <CreatePost closePostDetail={closePostDetail} user={user} /> : ""}
         </div>
     )
-    
+
 }

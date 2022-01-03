@@ -1,25 +1,19 @@
-import axios from "axios";
-import { toast } from "react-toastify";
+import axios from "axios"
+import { toast } from "react-toastify"
 
-export const getAllMatches = (userID) => {
-    return axios.get(`/user/matches/${userID}`)
+export const getPetList = (userID) => {
+    return axios.get(`/user/friend/${userID}`)
         .then(response => response.data.data)
         .catch(error => console.log(error));
 }
 
-export const handleMatches = ({ userID, targetUserID, command }) => {
-    return axios.post("/user/matches", { userID, targetUserID, command })
+export const removeFromPetList = ({ userID, targetUserID }) => {
+    return axios.post("/user/friend", { userID, targetUserID })
         .then((response) => {
             if (response.status === 200) {
-                if (command === "accept") {
-                    toast.success(`Accept user ${targetUserID} successfully!`, {
-                        position: toast.POSITION.TOP_RIGHT,
-                    });
-                } else {
-                    toast.success(`Remove user ${targetUserID} successfully!`, {
-                        position: toast.POSITION.TOP_RIGHT,
-                    });
-                }
+                toast.success(`Remove user ${userID} successfully!`, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
             }
         })
         .catch((err) => {
@@ -38,5 +32,5 @@ export const handleMatches = ({ userID, targetUserID, command }) => {
                 default:
                     break;
             }
-        })
+        });
 }
