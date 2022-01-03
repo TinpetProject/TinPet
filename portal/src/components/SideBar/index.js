@@ -10,9 +10,8 @@ import { useHistory } from "react-router-dom";
 import { useState  } from "react";
 import Setting from "../../screen/Setting/Setting";
 
-const SideBar = () => {
+const SideBar = ({setIsShownSetting}) => {
     const history = useHistory();
-    const [isShownSetting, setIsShownSetting] = useState(false);
     const mainMenu = [
         {
             icon: <Icon className="menu__dashboard-icon" icon="carbon:archive" />,
@@ -51,21 +50,21 @@ const SideBar = () => {
             path: "/petlist",
         },
     ];
-    // const other = [
-    //     {
-    //         icon: <Icon className="menu__setting-icon" icon="simple-line-icons:settings" />,
-    //         title: "Settings",
-            
-    //     },
-    //     {
-    //         icon: <Icon className="menu__logout-icon" icon="icon-park-outline:logout" />,
-    //         title: "Log out",
-    //         handler: () => {
-    //             history.push("/login");
-    //             localStorage.removeItem("token");
-    //         },
-    //     },
-    // ];
+    const other = [
+        {
+            icon: <Icon className="menu__setting-icon" icon="simple-line-icons:settings" />,
+            title: "Settings",
+            handler: () => {setIsShownSetting(true)}
+        },
+        {
+            icon: <Icon className="menu__logout-icon" icon="icon-park-outline:logout" />,
+            title: "Log out",
+            handler: () => {
+                history.push("/login");
+                localStorage.removeItem("token");
+            },
+        },
+    ];
     return (
         <SideBarWrapper>
             <SideBarList>
@@ -80,22 +79,22 @@ const SideBar = () => {
                     </StyledLink>
                 ))}
                 <SideBarListTitle> Other </SideBarListTitle>
-                {/* {other.map((item) => (
-                    <SideBarElement key={item.title} onClick={onclick}>
+                {other.map((item) => (
+                    <SideBarElement key={item.title} onClick={item.handler}>
                         {item.icon}
                         <SideBarElementTitle> {item.title} </SideBarElementTitle>
                     </SideBarElement>
-                ))} */}
+                ))}
                 {/* Test */}
                     {/* setting */}
-                <SideBarElement onClick={() => setIsShownSetting(true)}>
+                {/* <SideBarElement onClick={() => setIsShownSetting(true)}>
                     <Icon className="menu__setting-icon" icon="simple-line-icons:settings" />
                     <SideBarElementTitle> Settings </SideBarElementTitle>
                 </SideBarElement>
 
-                <Setting trigger={isShownSetting} setTrigger={setIsShownSetting}/>
+                <Setting trigger={isShownSetting} setTrigger={setIsShownSetting}/> */}
                     {/* signout */}
-                <SideBarElement
+                {/* <SideBarElement
                     onClick={() => {   
                         history.push("/login");
                         localStorage.removeItem("token");
@@ -103,7 +102,7 @@ const SideBar = () => {
                 >
                     <Icon className="menu__logout-icon" icon="icon-park-outline:logout" />
                     <SideBarElementTitle> Sign out </SideBarElementTitle>
-                </SideBarElement>
+                </SideBarElement> */}
 
             </SideBarList>
         </SideBarWrapper>

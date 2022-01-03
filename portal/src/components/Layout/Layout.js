@@ -7,21 +7,21 @@ import SideBar from "../SideBar";
 
 const Layout = React.memo((props) => {
 
-  // const [isShownSetting, setIsShownSetting] = useState(false);
+  const [isShownSetting, setIsShownSetting] = useState(false);
 
-  // const showSetting = () =>{
-  //   setIsShownSetting(true);
-  // }
-  // const hideSetting = () =>{
-  //   setIsShownSetting(false);
-  // }
+  const showSetting = () =>{
+    setIsShownSetting(true);
+  }
+  const hideSetting = () =>{
+    setIsShownSetting(false);
+  }
   
   return (
     <>
       <NavBar userID={props.userID} socket={props.socket} logOutHandler={props.logOutHandler} />
-      <SideBar />
+      <SideBar showSetting={showSetting} hideSetting={hideSetting} />
       {props.children}
-      {/* {isShownSetting && <Setting userID={props.userID} /> } */}
+      {isShownSetting && <Setting userID={props.userID} /> }
     </>
   );
 });
