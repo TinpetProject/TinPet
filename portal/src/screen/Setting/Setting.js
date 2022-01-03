@@ -1,7 +1,6 @@
 import React from 'react';
 import "./Setting.css";
 import { Icon } from "@iconify/react";
-import Avatar from "@mui/material/Avatar";
 
 export default function Setting({userID, hideSetting}) {
     const mainMenu = [
@@ -21,29 +20,29 @@ export default function Setting({userID, hideSetting}) {
     const inputleft = [
         {
             title: "Country",
-            placeholder: "Vietnam"
+            placeholder: ""
         },
         {
             title: "City",
-            placeholder: "Hanoi"
+            placeholder: ""
         }
     ];
     const inputright = [
         {
             title: "Name",
-            placeholder: "Shiba"
+            field: ""
         },
         {
             title: "Date of Birth",
-            placeholder: "dd/mm/yyyy"
+            field: ""
         },
         {
             title: "Gender",
-            placeholder: "Male/Female"
+            field: ""
         },
         {
             title: "Breed",
-            placeholder: "Shiba"
+            field: ""
         }
     ];
 
@@ -52,12 +51,11 @@ export default function Setting({userID, hideSetting}) {
         <div className="container">
             <div className="container-layout" onClick={hideSetting}></div>
             <div className="container-content-wrapper">
+{/* sidebar */}
                 <div className="content-box-sidebar">
                     <div className="content-box-sidebar-user">
-                        <Avatar className="avatar" 
-                            src="https://lh6.googleusercontent.com/proxy/TzFjtW4IYw1Ct9IGlUbmq_GNXCjqGfKucN1irkehgc8kKNyIKLm9HEdcbgeoMlL27I5dGrxpslMZttyw6JKGslKObBJ7K1Su50OL3npuVhy5VDFeCC2laqmZcalwMaBQdXaxqCIpj1fPb8HtFJIzxzM" 
-                            alt="corgi"
-                        /> 
+                        <img src="https://lh6.googleusercontent.com/proxy/TzFjtW4IYw1Ct9IGlUbmq_GNXCjqGfKucN1irkehgc8kKNyIKLm9HEdcbgeoMlL27I5dGrxpslMZttyw6JKGslKObBJ7K1Su50OL3npuVhy5VDFeCC2laqmZcalwMaBQdXaxqCIpj1fPb8HtFJIzxzM" 
+                        className="avatar" alt="Shiba"/>
                         <div className="name"> Shiba</div>
                     </div>
                     <div className="content-box-sidebar-menu">
@@ -77,33 +75,51 @@ export default function Setting({userID, hideSetting}) {
                         </li>
                     </div>
                 </div>
-
+{/* main */}
                 <div className="content-box-main">
                     <div className="content-box-main-header">
                         <div className="title">Account</div>
                         <div className="close">
-                            <Icon className="menu__signout-icon" icon="carbon:close" />
+                            <Icon className="menu__signout-icon" icon="carbon:close" style={{ fontSize: '2rem' }}/>
                         </div>
                     </div>
                     <div className="content-box-main-mid">
                         <div className="left">
-                            <div className="User"></div>
-
+                            <div className="user">
+                                <div className="title">Photo</div>
+                                <div className="edit-avatar">
+                                    <img src="https://lh6.googleusercontent.com/proxy/TzFjtW4IYw1Ct9IGlUbmq_GNXCjqGfKucN1irkehgc8kKNyIKLm9HEdcbgeoMlL27I5dGrxpslMZttyw6JKGslKObBJ7K1Su50OL3npuVhy5VDFeCC2laqmZcalwMaBQdXaxqCIpj1fPb8HtFJIzxzM" 
+                                    className="avatar" alt="Shiba"/>
+                                    <div className="edit">
+                                        <div className="name">Shiba</div>
+                                        <div className="btn">
+                                            <Icon icon="carbon:cloud-upload"/> Upload Photo
+                                        </div>
+                                        <div className="note">Pick a photo up to 4MB</div>
+                                    </div>
+                                </div>
+                            </div>
                             {inputleft.map((item) => (
-                                <div className="sidebar-menu"  key={item.title}>
-                                    <div className="sidebar-element">
-                                        {item.icon}
-                                        <div className="sidebar-element-title"> {item.title} </div>
+                                <div className="detail-edit"  key={item.title}>
+                                    <div className="title">{item.title}</div>
+                                    <div className="fieldtext" 
+                                    contentEditable={true} 
+                                    data-text="Type here..."
+                                    > 
+                                        {item.field}
                                     </div>
                                 </div>
                             ))}
                         </div>
                         <div className="right">
                             {inputright.map((item) => (
-                                <div className="sidebar-menu"  key={item.title}>
-                                    <div className="sidebar-element">
-                                        {item.icon}
-                                        <div className="sidebar-element-title"> {item.title} </div>
+                                <div className="detail-edit"  key={item.title}>
+                                    <div className="title">{item.title}</div>
+                                    <div className="fieldtext" 
+                                    contentEditable={true} 
+                                    data-text="Type here..."
+                                    > 
+                                        {item.field}
                                     </div>
                                 </div>
                             ))}

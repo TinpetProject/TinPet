@@ -45,6 +45,7 @@
 .content-box-sidebar-user{
     position: relative;
     background-color: white;
+    padding: 10px;
     border-radius: 8px;
     align-items: center;
     display: flex;
@@ -52,9 +53,10 @@
     align-items: center;
 }
 .content-box-sidebar-user .avatar {
-    position: relative;
-    float: left;
-    margin: 14px 14px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 .content-box-sidebar-user .name {
     position: relative;
@@ -63,6 +65,7 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
+    margin-left: 15px;
 }
 
 /* Sidebar menu */
@@ -112,7 +115,7 @@
 }
 
 
-/* Sidebar dign out */
+/* Sidebar sign out */
 .content-box-sidebar-signout{
     position: relative;
     top: 400px;
@@ -150,18 +153,15 @@
     font-size: 24px;
 }
 .content-box-main-header .close{
-    width:  20px;
-    height: 20px;
+    width:  32px;
+    height: 32px;
     border-radius: 50%;
-    margin-top: 25px;   
+    margin-top: 15px;   
     margin-left: 630px;
     position: relative;
 }
 .content-box-main-header .close:hover{
     background-color: #c1c1c1;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
 }
 
 /* content mid */
@@ -173,11 +173,112 @@
     display:flex;
     float: left;
 }
+/* left column */
 .content-box-main-mid .left{
     width: 50%;
+    padding: 10px;
 }
+
+/* avatar upload */
+.content-box-main-mid .left .user{
+    position: relative;
+    width: 100%;
+    padding: 20px 0px 0px 20px;
+    display: flex;
+    flex-direction: column;
+}
+.content-box-main-mid .left .user .title{
+    position: relative;
+    font-family: sans-serif;
+    font-weight: bold;
+    line-height: 17px;
+}
+.content-box-main-mid .left .user .edit-avatar{
+    position: relative;
+    padding: 20px 0px 10px 20px;;
+    float: left;
+    display: flex;
+}
+.content-box-main-mid .left .user .edit-avatar .avatar{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.content-box-main-mid .left .user .edit-avatar .edit{
+    margin-left:20px;
+}
+.content-box-main-mid .left .user .edit-avatar .edit .name{
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 17px;
+    margin: 10px 0px;
+}
+.content-box-main-mid .left .user .edit-avatar .edit .btn{
+    width: 135px;
+    height: 36px; 
+    padding: 5px;
+    justify-content: center;
+    align-items: center;  
+    border: solid 1px #333333; 
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 17px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.btn:hover{
+    opacity: 0.5;
+}
+.content-box-main-mid .left .user .edit-avatar .edit .note{
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color: #A4A4A4;
+}
+/* right column */
 .content-box-main-mid .right{
     width: 50%;
+    padding: 10px;
+}
+
+/* editting fieldtext */
+.detail-edit{
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+.detail-edit .title{
+    font-family: sans-serif;
+    font-weight: bold;
+    line-height: 17px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.detail-edit .fieldtext {
+    width: 320px;
+    height: 34px; 
+    margin-left: 20px;
+    padding: 5px;
+    outline: unset;
+    font-size: 16px;
+    font-weight: 400;
+    border: solid 1px gray;
+    border-radius: 5px;
+    align-items: center;  
+    color: gray;
+    overflow: auto;
+}
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text);
+    color: rgb(144, 144, 144);
+}
+.fieldtext::-webkit-scrollbar {
+    display: none;
 }
 
 /* content bottom */
@@ -228,3 +329,4 @@
 .content-box-main-bottom .delete:hover{
     opacity: 0.5;
 }
+
