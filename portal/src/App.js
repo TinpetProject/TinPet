@@ -68,6 +68,9 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
             <Route path="/favorite">
               <Favorite />
             </Route>
+            <Route path="/game">
+              <Game />
+            </Route>
             <Route path="/*">
               <Redirect to="/dashboard" />
             </Route>
