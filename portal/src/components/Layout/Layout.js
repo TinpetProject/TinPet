@@ -8,7 +8,6 @@ import SideBar from "../SideBar";
 const Layout = React.memo((props) => {
 
   const [isShownSetting, setIsShownSetting] = useState(false);
-
   const showSetting = () =>{
     setIsShownSetting(true);
   }
