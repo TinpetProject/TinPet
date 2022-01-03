@@ -77,7 +77,12 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
           </Switch>
         </Layout>
       )}
+<<<<<<< HEAD
+      <ToastContainer autoClose={2500} />
+
+=======
       <ToastContainer autoClose={3000} />
+>>>>>>> 52600cd5b9f337d2ae5235e0daa70f9afa76d3ae
     </HomePage>
   );
 }
