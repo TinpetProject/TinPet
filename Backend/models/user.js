@@ -18,22 +18,26 @@ module.exports = class User {
   });
 
   static getUserName = tryCatchBlock(async (userID) => {
-    const [resultSet] = await database.execute(
-      `SELECT * from User WHERE userID LIKE '${userID}'`
-    );
+    const [resultSet] = await database.execute(`SELECT * from User WHERE userID LIKE '${userID}'`);
     return resultSet;
   });
 
-  static handleRequestMatches = tryCatchBlock(async (userID,targetUserID,command) =>{
-    const [resultSet] = await database.execute(`call Proc_HandleRequestMatches('${userID}','${targetUserID}','${command}');`);
-  })
-  static removeFollower = tryCatchBlock(async (userID,targetUserID) =>{
-    const [resultSet] = await database.execute(`call Proc_RemoveFollower('${userID}','${targetUserID}');`);
-  })
+  static handleRequestMatches = tryCatchBlock(async (userID, targetUserID, command) => {
+    const [resultSet] = await database.execute(
+      ` CALL Proc_HandleRequestMatches('${userID}','${targetUserID}','${command}'); `
+    );
+  });
+  static removeFollower = tryCatchBlock(async (userID, targetUserID) => {
+    const [resultSet] = await database.execute(
+      `call Proc_RemoveFollower('${userID}','${targetUserID}');`
+    );
+  });
 
-  static removeFriend = tryCatchBlock(async (userID,targetUserID) =>{
-    const [resultSet] = await database.execute(`call Proc_RemoveFriend('${userID}','${targetUserID}');`);
-  })
+  static removeFriend = tryCatchBlock(async (userID, targetUserID) => {
+    const [resultSet] = await database.execute(
+      `call Proc_RemoveFriend('${userID}','${targetUserID}');`
+    );
+  });
 
   static isUserIDExist = tryCatchBlock(async (userID) => {
     const [resultSet] = await database.execute(`SELECT * from User WHERE userID LIKE '${userID}'`);
@@ -41,7 +45,9 @@ module.exports = class User {
   });
 
   static getUserIDByEmail = tryCatchBlock(async (email) => {
-    const [resultSet] = await database.execute(`SELECT userID from User WHERE email LIKE '${email}'`);
+    const [resultSet] = await database.execute(
+      `SELECT userID from User WHERE email LIKE '${email}'`
+    );
     return resultSet.length === 1 ? resultSet[0].userID : null;
   });
 
@@ -52,27 +58,24 @@ module.exports = class User {
   });
 
   signIn = tryCatchBlock(async () => {
-    const [resultSet] = await database.execute(`SELECT * FROM User WHERE email LIKE '${this.email}' AND password LIKE '${this.password}'`);
-    return resultSet.length === 0 ? null : { userID: resultSet[0].userID, avatar: resultSet[0].avatar };
+    const [resultSet] = await database.execute(
+      `SELECT * FROM User WHERE email LIKE '${this.email}' AND password LIKE '${this.password}'`
+    );
+    return resultSet.length === 0
+      ? null
+      : { userID: resultSet[0].userID, avatar: resultSet[0].avatar };
   });
 
   getProfile = tryCatchBlock(async () => {
     // get user: name,nickname,avatar,background,intro,pics
-    const [resultSet] = await database.query(
-      `CALL Proc_GetUserProfile('${this.userID}');`
-      
-    );
-    if(resultSet[0][0])
-    resultSet[0][0].gender = resultSet[0][0].gender == 1 ? "Male" : "Female";
+    const [resultSet] = await database.query(`CALL Proc_GetUserProfile('${this.userID}');`);
+    if (resultSet[0][0]) resultSet[0][0].gender = resultSet[0][0].gender == 1 ? "Male" : "Female";
     return resultSet.length === 0 ? null : resultSet[0][0];
   });
 
-
   getRecentImgs = tryCatchBlock(async () => {
     // get user: name,nickname,avatar,background,intro,pics
-    const [resultSet] = await database.execute(
-      `CALL Proc_GetUserRecentImage('${this.userID}')`
-    );
+    const [resultSet] = await database.execute(`CALL Proc_GetUserRecentImage('${this.userID}')`);
     return resultSet.length === 0 ? [] : resultSet[0];
   });
 
@@ -106,7 +109,9 @@ module.exports = class User {
   });
 
   getMessageByOffset = tryCatchBlock(async (targetUserID, offset) => {
-    const [resultSet] = await database.query(`CALL Proc_GetConversationMessagesByOffset('${this.userID}','${targetUserID}','${offset} ')`);
+    const [resultSet] = await database.query(
+      `CALL Proc_GetConversationMessagesByOffset('${this.userID}','${targetUserID}','${offset} ')`
+    );
     const conversation = resultSet[0].map((message) => ({
       messageID: message.messageID,
       content: message.content,
@@ -117,16 +122,21 @@ module.exports = class User {
 
   seenMessage = tryCatchBlock(async (targetUserID) => {
     console.log("is seen");
-    return await database.query(`CALL Proc_UpdateMessagesStatus('${this.userID}','${targetUserID}')`);
+    return await database.query(
+      `CALL Proc_UpdateMessagesStatus('${this.userID}','${targetUserID}')`
+    );
   });
 
   changePassword = tryCatchBlock(async () => {
-    return await database.execute(`UPDATE User SET password = '${this.password}' WHERE userID LIKE '${this.userID}'`);
+    return await database.execute(
+      `UPDATE User SET password = '${this.password}' WHERE userID LIKE '${this.userID}'`
+    );
   });
 
   uploadPost = tryCatchBlock(async (title, content) => {
-    
-    const [resultSet] = await database.query(`CALL Proc_UploadPost('${this.userID}','${title}','${content}', @returnValue); SELECT @returnValue;`);
+    const [resultSet] = await database.query(
+      `CALL Proc_UploadPost('${this.userID}','${title}','${content}', @returnValue); SELECT @returnValue;`
+    );
     return resultSet.length === 0 ? null : resultSet[1][0]["@returnValue"];
   });
 
@@ -142,23 +152,24 @@ module.exports = class User {
     return user;
   });
 
-  getMatches = tryCatchBlock(async () =>{
+  getMatches = tryCatchBlock(async () => {
     const [resultSet] = await database.execute(`Call Proc_GetMatches('${this.userID}')`);
     return resultSet[0];
-  })
+  });
 
-  getFollowerList = tryCatchBlock(async () =>{
+  getFollowerList = tryCatchBlock(async () => {
     const [resultSet] = await database.execute(`Call Proc_GetFollowerList('${this.userID}')`);
     return resultSet[0];
-  })
+  });
 
-  getFriendList = tryCatchBlock(async () =>{
+  getFriendList = tryCatchBlock(async () => {
     const [resultSet] = await database.execute(`Call Proc_GetFriendList('${this.userID}')`);
     return resultSet[0];
-  })
+  });
   uploadPost = tryCatchBlock(async (title, content) => {
-
-    const [resultSet] = await database.query(`CALL Proc_UploadPost('${this.userID}','${title}','${content}', @returnValue); SELECT @returnValue;`);
+    const [resultSet] = await database.query(
+      `CALL Proc_UploadPost('${this.userID}','${title}','${content}', @returnValue); SELECT @returnValue;`
+    );
     return resultSet.length === 0 ? null : resultSet[1][0]["@returnValue"];
   });
 };

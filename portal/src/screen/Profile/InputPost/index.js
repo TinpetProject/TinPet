@@ -19,7 +19,7 @@ import CreatePost from "./CreatePost/CreatePost"
 
 
 export default function InputPost() {
-    const [isOpen, setIsOpen] = React.useState(true);
+    const [isOpen, setIsOpen] = React.useState(false);
     const openPostDetail = () => {
         setIsOpen(true);
     }
