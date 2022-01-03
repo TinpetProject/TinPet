@@ -12,12 +12,14 @@ import { Users } from "../dummyData"
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatIcon from '@mui/icons-material/Chat';
-
+import { Link } from "react-router-dom";
 const headbar = [
   {
+    link: "/profile",
     button: "Profile",
   },
   {
+    link: "/profile/gallery",
     button: "Photos",
   }
 ]
@@ -28,7 +30,9 @@ export default function ProfileHead() {
       <HeadWrapper>
         <HeadBar> 
           {headbar?.map((btn) =>(
-            <Button key={btn.button}>{btn.button}</Button>
+            <Link to={btn.link} key={btn.button} style={{textDecoration: 'none'}}>
+              <Button>{btn.button}</Button>
+            </Link>
             ))}
           <ButtonPut><AddCircleOutlineIcon/></ButtonPut>
           <ButtonPut><FavoriteBorderIcon/></ButtonPut>

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { ProfileWrapper } from "./style";
 import ProfileHead from "./ProfileHead";
 import InputPost from "./InputPost";
@@ -7,9 +7,12 @@ import AboutPet from "./AboutPet";
 import { Main } from "../../styled-component/style";
 import Feed from "./Feed";
 
+import GalleryList from "./GalleryList";
+import Modal from "./GalleryList/Modal";
 
 const Profile = ({userID}) => {
-  
+  const [choosePath, setChoosePath] = useState(false);
+
   return (
     <>
       <Main>
