@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import "./CardFavorite.css";
 import { Icon } from "@iconify/react";
 
-export default function CardFavorite() {
+export default function CardFavorite(props) {
     const ref = useRef();
 
     const [isOptionVisible, setIsOptionVisible] = useState(false);
@@ -36,17 +36,17 @@ export default function CardFavorite() {
     return (
         <div className="card-favorite">
             <img
-                src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/16/08/gettyimages-464163411.jpg?crop=1.0xw:1xh;center,top&resize=980:*"
+                src={props?.favorite?.avatar}
                 alt=""
             />
 
             <div className="card-favorite__info">
                 <div className="card-favorite__info--general">
-                    <span>Name, 2</span>
+                    <span>{props?.favorite?.name}, {props?.favorite?.age}</span>
                 </div>
                 <div className="card-favorite__info--location">
                     <Icon className="location__location-icon" icon="ci:location" />
-                    <span>Hanoi</span>
+                    <span>{props?.favorite?.address}</span>
                 </div>
             </div>
 
@@ -59,11 +59,20 @@ export default function CardFavorite() {
                 }}
                 ref={ref}
             >
-                <div className="card-favorite__options-item">
+                <div className="card-favorite__options-item" onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    console.log("Matched")
+                    props.acceptFavorite();
+                }}>
                     <Icon icon="bx:bx-heart-circle" color="#373737" />
                     <span>Match</span>
                 </div>
-                <div className="card-favorite__options-item">
+                <div className="card-favorite__options-item" onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    props.removeFavorite(props?.favorite?.userID)
+                }}>
                     <Icon icon="feather:x-square" color="#373737" />
                     <span>Remove</span>
                 </div>

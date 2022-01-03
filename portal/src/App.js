@@ -63,10 +63,10 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
               <Profile userID={userID}/>
             </Route>
             <Route path="/petlist">
-              <PetList />
+              <PetList userID={userID}/>
             </Route>
             <Route path="/favorite">
-              <Favorite />
+              <Favorite userID={userID}/>
             </Route>
             <Route path="/game">
               <Game />
