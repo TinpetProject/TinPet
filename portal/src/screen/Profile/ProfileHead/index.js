@@ -45,7 +45,6 @@ export default function ProfileHead({ user, userID, selectedUser }) {
       </>
     )
   }
-  console.log(user.userID, selectedUser)
 
   return (
     <div>
