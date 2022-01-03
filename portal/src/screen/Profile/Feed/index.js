@@ -30,15 +30,14 @@ export default function Feed({ userID, user }) {
     // };
     // token && fetchList();
   }, [token, userID]);
-  // console.log(posts);
-  // const abc = posts.map(post => {
-  //   if (post.photos) {
-  //     const photos = post.photos.split(",")
-  //     return photos.map(photo => JSON.parse(photo));
-  //   } else return "";
 
-  // });
-  // console.log(abc);
+  const abc = posts.map((post) => {
+    if (post.photos) {
+      const photos = post.photos.split(",");
+      return photos.map((photo) => JSON.parse(photo.replaceAll("'", '"')));
+    } else return "";
+  });
+
   return (
     <div>
       <FeedWrapper>
