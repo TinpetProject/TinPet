@@ -93,6 +93,16 @@ module.exports = {
     await User.removeFriend(userID, targetUserID);
     return res.status(200).send({message: "HANDLE_REMOVE_FRIEND_SUCCESSFULLY"});
   }),
+  uploadPost: tryCatchBlock(null, async (req, res, next) => {
+    const { title, content } = req.body;
+    const userID = req.userData.userID;
+
+
+    const user = new User({ userID});
+    const postID = await user.uploadPost(title, content);
+
+    return res.status(200).send({ message: "UPLOAD_POST_SUCCESS", data: { postID } });
+  }),
   // getUserName: tryCatchBlock(null, async (req, res, next) => {
   //   const userName = await User.getUserName(req.userData.user);
   //   if (!userName)

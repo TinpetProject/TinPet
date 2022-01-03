@@ -155,4 +155,9 @@ module.exports = class User {
     const [resultSet] = await database.execute(`Call Proc_GetFriendList('${this.userID}')`);
     return resultSet[0];
   })
+  uploadPost = tryCatchBlock(async (title, content) => {
+
+    const [resultSet] = await database.query(`CALL Proc_UploadPost('${this.userID}','${title}','${content}', @returnValue); SELECT @returnValue;`);
+    return resultSet.length === 0 ? null : resultSet[1][0]["@returnValue"];
+  });
 };
