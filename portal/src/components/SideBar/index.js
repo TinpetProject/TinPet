@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import "./style.css";
 import styled from "styled-components";
-
 export default function SideBar({showSetting,logOutHandler}) {
   const mainMenu = [
     {
@@ -31,7 +30,7 @@ export default function SideBar({showSetting,logOutHandler}) {
       icon: <Icon className="menu__favor-icon" icon="akar-icons:heart" />,
       title: "Favorite",
       quantity: 3,
-      path: "/",
+      path: "/favorite",
     },
     {
       icon: <Icon className="menu__game-icon" icon="teenyicons:game-controller-outline" />,
@@ -43,7 +42,7 @@ export default function SideBar({showSetting,logOutHandler}) {
       icon: <Icon className="menu__list-icon" icon="fluent:apps-list-20-regular" />,
       title: "Pet List",
       quantity: 18,
-      path: "/",
+      path: "/petlist",
     },
   ];
   const other = [
