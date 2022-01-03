@@ -54,7 +54,7 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
               <Dashboard />
             </Route>
             <Route exact path="/matches">
-              <Matches />
+              <Matches userID={userID} />
             </Route>
             <Route exact path="/messenger/:chosenUserID">
               <Messenger userID={userID} socket={socket} />
