@@ -207,7 +207,8 @@ export default function CreatePost({ closePostDetail, user }) {
   }
 
   // Submit
-  const postSubmit = () => {
+  const postSubmit = async () => {
+    let photos = [];
     for (let file of selectedFiles) {
       try {
         let formData = new FormData();
@@ -219,12 +220,18 @@ export default function CreatePost({ closePostDetail, user }) {
           body: formData,
           redirect: "follow",
         }
-        fetch("https://api.cloudinary.com/v1_1/thecodingpanda/upload", requestOptions).then(res => console.log(res)).catch(err => console.log(err));
+        await fetch("https://api.cloudinary.com/v1_1/thecodingpanda/upload", requestOptions)
+          .then(res => res.json())
+          .then(data => {
+            // console.log(data.url);
+            photos.push(String(data.url));
+          })
+          .catch(err => console.log(err));
       } catch (error) {
         console.log(error)
       }
     }
-    let photos = selectedFiles.map(file => file.url);
+    console.log(photos);
     // console.log({ title: user.name, content: postContent, links: photos });
     axios.post("/user/post", { title: user.name, content: postContent, links: photos })
       .then(response => console.log(response))
