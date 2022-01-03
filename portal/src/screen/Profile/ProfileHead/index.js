@@ -5,25 +5,20 @@ import {
   Avatar,
   Name,
   HeadBar,
-  Button
+  Button,
+  ButtonPut
 } from "./style";
 import { Users } from "../dummyData"
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ChatIcon from '@mui/icons-material/Chat';
 
 const headbar = [
   {
     button: "Profile",
   },
   {
-    button: "Followers",
-  },
-  {
-    button: "Detail info",
-  },
-  {
     button: "Photos",
-  },
-  {
-    button: "Video",
   }
 ]
 
@@ -35,6 +30,9 @@ export default function ProfileHead() {
           {headbar?.map((btn) =>(
             <Button key={btn.button}>{btn.button}</Button>
             ))}
+          <ButtonPut><AddCircleOutlineIcon/></ButtonPut>
+          <ButtonPut><FavoriteBorderIcon/></ButtonPut>
+          <ButtonPut><ChatIcon/></ButtonPut>
         </HeadBar>
         {Users.map((u) => (
           <div key={u.userid}>

@@ -8,7 +8,7 @@ import "./style.css";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-const SideBar = (props) => {
+export default function SideBar(props) {
   const history = useHistory();
 
   const onClickSettings = () => {
@@ -40,6 +40,12 @@ const SideBar = (props) => {
       title: "Favorite",
       quantity: 3,
       path: "/",
+    },
+    {
+      icon: <Icon className="menu__game-icon" icon="teenyicons:game-controller-outline" />,
+      title: "Game",
+      quantity: "100+",
+      path: "/game",
     },
     {
       icon: <Icon className="menu__list-icon" icon="fluent:apps-list-20-regular" />,
@@ -82,10 +88,4 @@ const SideBar = (props) => {
       </SideBarList>
     </SideBarWrapper>
   );
-};
-
-const StyledLink = styled(Link)`
-    text-decoration: none !important;
-`;
-
-export default SideBar;
+}

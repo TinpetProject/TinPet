@@ -68,10 +68,13 @@ export const Img = styled.img `
 `;
 
 // Like and Comment
-export const PostBottom = styled.div `
-    display: flex;
-    width: 100%;
-    flex-direction: right;
+export const PostBottom = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: right;
+  border-top: #c0c0c0 1px solid;
+  border-bottom: #c0c0c0 1px solid;
+  padding: 12px 0;
 `;
 
 export const PostBottomLeft = styled.div `
@@ -104,6 +107,7 @@ export const PostBottomRight = styled.div `
 `;
 
 export const PostLike = styled.div `
+    margin-right: 24px;
     flex-grow: 1;
     border: none;
     background-color: #ffffff;

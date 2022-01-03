@@ -51,13 +51,13 @@ const Signup = () => {
                 .catch((err) => {
                     switch (err.response.status) {
                         case 400:
-                            if(err.response.data.message === "SIGN_UP_INVALID_SCHEMA") {
+                            if (err.response.data.message === "REQUEST_FAIL_INVALID_SCHEMA") {
                                 toast.error("Invalid Schema!", {
-                                    position: toast.POSITION.TOP_RIGHT
+                                    position: toast.POSITION.TOP_RIGHT,
                                 });
-                            } else if(err.response.data.message === "SIGN_UP_FAIL_DUPPLICATE_EMAIL") {
+                            } else if (err.response.data.message === "SIGN_UP_FAIL_DUPPLICATE_EMAIL") {
                                 toast.error("Duplicate Email!", {
-                                    position: toast.POSITION.TOP_RIGHT
+                                    position: toast.POSITION.TOP_RIGHT,
                                 });
                             }
                             break;
