@@ -44,7 +44,7 @@ export default function SideBar(props) {
     {
       icon: <Icon className="menu__game-icon" icon="teenyicons:game-controller-outline" />,
       title: "Game",
-      quantity: "100+",
+      quantity: "",
       path: "/game",
     },
     {

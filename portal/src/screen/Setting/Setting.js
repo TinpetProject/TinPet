@@ -2,7 +2,7 @@ import React from 'react';
 import "./Setting.css";
 import { Icon } from "@iconify/react";
 
-export default function Setting({userID, hideSetting}) {
+export default function Setting({userID},props) {
     const mainMenu = [
         {
             icon: <Icon className="menu__account-icon" icon="mdi:account-circle-outline" />,
@@ -49,7 +49,7 @@ export default function Setting({userID, hideSetting}) {
     
     return (
         <div className="container">
-            <div className="container-layout" onClick={hideSetting}></div>
+            <div className="container-layout" onClick={props.hideSetting}></div>
             <div className="container-content-wrapper">
 {/* sidebar */}
                 <div className="content-box-sidebar">
@@ -79,7 +79,7 @@ export default function Setting({userID, hideSetting}) {
                 <div className="content-box-main">
                     <div className="content-box-main-header">
                         <div className="title">Account</div>
-                        <div className="close">
+                        <div className="close" onClick={props.hideSetting}>
                             <Icon className="menu__signout-icon" icon="carbon:close" style={{ fontSize: '2rem' }}/>
                         </div>
                     </div>
