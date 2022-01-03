@@ -8,6 +8,8 @@ module.exports = class User {
     this.password = userData.password;
     this.name = userData.name;
     this.userID = userData.userID;
+    // this.address = userData.address;
+    // this.avatar = userData.avatar;
   }
 
   static isEmailExist = tryCatchBlock(async (email) => {
@@ -22,6 +24,17 @@ module.exports = class User {
     return resultSet;
   });
 
+  static handleRequestMatches = tryCatchBlock(async (userID,targetUserID,command) =>{
+    const [resultSet] = await database.execute(`call Proc_HandleRequestMatches('${userID}','${targetUserID}','${command}');`);
+  })
+  static removeFollower = tryCatchBlock(async (userID,targetUserID) =>{
+    const [resultSet] = await database.execute(`call Proc_RemoveFollower('${userID}','${targetUserID}');`);
+  })
+
+  static removeFriend = tryCatchBlock(async (userID,targetUserID) =>{
+    const [resultSet] = await database.execute(`call Proc_RemoveFriend('${userID}','${targetUserID}');`);
+  })
+
   static isUserIDExist = tryCatchBlock(async (userID) => {
     const [resultSet] = await database.execute(`SELECT * from User WHERE userID LIKE '${userID}'`);
     return resultSet.length === 1 ? true : false;
@@ -34,7 +47,7 @@ module.exports = class User {
 
   signUp = tryCatchBlock(async () => {
     await database.execute(
-      `INSERT INTO User(userID,email,password,name,status,createdAt,updatedAt) VALUES(uuid(),'${this.email}','${this.password}','${this.name}',0,'2021-11-05 04:00:58','2021-11-05 04:00:58')`
+      `INSERT INTO User(userID,email,password,name,status,createdAt,updatedAt,avatar,address) VALUES(uuid(),'${this.email}','${this.password}','${this.name}',0,CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'${this.avatar}','${this.address}')`
     );
   });
 
@@ -127,4 +140,19 @@ module.exports = class User {
     };
     return user;
   });
+
+  getMatches = tryCatchBlock(async () =>{
+    const [resultSet] = await database.execute(`Call Proc_GetMatches('${this.userID}')`);
+    return resultSet[0];
+  })
+
+  getFollowerList = tryCatchBlock(async () =>{
+    const [resultSet] = await database.execute(`Call Proc_GetFollowerList('${this.userID}')`);
+    return resultSet[0];
+  })
+
+  getFriendList = tryCatchBlock(async () =>{
+    const [resultSet] = await database.execute(`Call Proc_GetFriendList('${this.userID}')`);
+    return resultSet[0];
+  })
 };

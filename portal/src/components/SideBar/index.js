@@ -8,7 +8,7 @@ import "./style.css";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-const SideBar = ({ logOutHandler }) => {
+const SideBar = () => {
     const history = useHistory();
     const mainMenu = [
         {
@@ -34,6 +34,12 @@ const SideBar = ({ logOutHandler }) => {
             title: "Favorite",
             quantity: 3,
             path: "/favorite",
+        }, 
+        {
+            icon: <Icon className="menu__game-icon" icon="teenyicons:game-controller-outline" />,
+            title: "Game",
+            quantity: "100+",
+            path: "/game",
         },
         {
             icon: <Icon className="menu__list-icon" icon="fluent:apps-list-20-regular" />,
@@ -46,14 +52,14 @@ const SideBar = ({ logOutHandler }) => {
         {
             icon: <Icon className="menu__setting-icon" icon="simple-line-icons:settings" />,
             title: "Settings",
-            handler: () => {
-              console.log("go to settings");
-            }
         },
         {
             icon: <Icon className="menu__logout-icon" icon="icon-park-outline:logout" />,
             title: "Log out",
-            handler: logOutHandler,
+            handler: () => {
+                history.push("/login");
+                localStorage.removeItem("token");
+            },
         },
     ];
     return (
@@ -71,7 +77,7 @@ const SideBar = ({ logOutHandler }) => {
                 ))}
                 <SideBarListTitle> Other </SideBarListTitle>
                 {other.map((item) => (
-                    <SideBarElement key={item.title} onClick={item.handler}>
+                    <SideBarElement key={item.title}>
                         {item.icon}
                         <SideBarElementTitle> {item.title} </SideBarElementTitle>
                     </SideBarElement>

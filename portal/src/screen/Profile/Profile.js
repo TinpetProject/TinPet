@@ -1,6 +1,4 @@
 import React from "react";
-import NavBar from "../../components/NavBar";
-import SideBar from "../../components/SideBar";
 import { ProfileWrapper } from "./style";
 import ProfileHead from "./ProfileHead";
 import InputPost from "./InputPost";
@@ -9,17 +7,21 @@ import AboutPet from "./AboutPet";
 import { Main } from "../../styled-component/style";
 import Feed from "./Feed";
 
-const Profile = () => {
+
+const Profile = ({userID}) => {
+  
   return (
-    <Main>
-      <ProfileWrapper>
-        <ProfileHead />
-        <InputPost />
-        <Feed />
-        <Pictures />
-        <AboutPet />
-      </ProfileWrapper>
-    </Main>
+    <>
+      <Main>
+        <ProfileWrapper>
+          <ProfileHead />
+          <InputPost />
+          <Feed userID={userID} />
+          <Pictures />
+          <AboutPet />
+        </ProfileWrapper>
+      </Main>
+    </>
   );
 };
 

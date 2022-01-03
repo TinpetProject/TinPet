@@ -9,4 +9,11 @@ router.use(checkAuth);
 
 router.get("/:postID/comment", postController.getCommentByPost);
 
+router.post("/:postID/comment", postController.sendCommentByPost);
+
+router.post("/:postID/like", postController.likePost);
+
+router.get("/:userID", postController.getPost);
+
+router.post("/comment")
 module.exports = router;

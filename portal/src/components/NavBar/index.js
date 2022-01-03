@@ -82,12 +82,12 @@ const NavBar = React.memo(({ userID, socket, logOutHandler }) => {
         <div
           className="nav__notification"
           onClick={() => {
-            console.log(location.pathname);
-            console.log(`messenger/${userID}`);
+            // console.log(location.pathname);
+            // console.log(`messenger/${userID}`);
             const isOnRightPath = location.pathname?.includes(
               `messenger/${userID}`
             );
-            console.log(isOnRightPath);
+            // console.log(isOnRightPath);
             if (!isOnRightPath) {
               history.push(`messenger/${userID}`);
             }
@@ -113,8 +113,11 @@ const NavBar = React.memo(({ userID, socket, logOutHandler }) => {
       </LogoWrapper>{" "}
       <Search />
       <UserWrapper>
-        <UserNotiWrapper onClick={() => setOpenNotification(!openNotification)}>
-          <Icon className="nav__noti-icon" icon="bi:bell" />
+        <UserNotiWrapper onClick={() => {if(notifications?.length > 0) setOpenNotification(!openNotification)}}>
+          <Icon
+            className="nav__noti-icon"
+            icon="bi:chat-dots"
+          />
           {notifications?.length > 0 && (
             <div className="nav__counter">{notifications.length}</div>
           )}
@@ -132,7 +135,7 @@ const NavBar = React.memo(({ userID, socket, logOutHandler }) => {
           </Menu>{" "}
         </UserAvatarWrapper>{" "}
       </UserWrapper>{" "}
-      {openNotification && (
+      {openNotification && notifications?.length > 0 && (
         <div className="nav__notifications">
           {notifications?.map((n) => displayNotification(n))}
           <button className="nav__nButton" onClick={handleRead}>

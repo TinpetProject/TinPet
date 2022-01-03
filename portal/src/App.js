@@ -6,7 +6,7 @@ import React, { Profiler } from "react";
 import Signup from "./screen/Signup";
 import Matches from "./screen/Matches/Matches";
 import Dashboard from "./screen/Dashboard/Dashboard";
-import Profile from "./screen/Profile";
+import Profile from "./screen/Profile/Profile";
 import Messenger from "./screen/Messenger/Messenger";
 import Layout from "./components/Layout/Layout";
 import CompleteProfile from "./screen/CompleteProfile/CompleteProfile";
@@ -16,12 +16,16 @@ import ResetPassword from "./screen/ResetPassword";
 import { injectStyle } from "react-toastify/dist/inject-style";
 import PetList from "./screen/PetList/PetList";
 import Favorite from "./screen/Favorite/Favorite";
+import Game from "./screen/Game/Game";
+
 
 if (typeof window !== "undefined") {
   injectStyle();
 }
 
 function App({ logInHandler, logOutHandler, userID, socket }) {
+  
+
   return (
     <HomePage>
       {userID || (
@@ -56,7 +60,7 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
               <Messenger userID={userID} socket={socket} />
             </Route>
             <Route exact path="/profile">
-              <Profile />
+              <Profile userID={userID}/>
             </Route>
             <Route path="/petlist">
               <PetList />

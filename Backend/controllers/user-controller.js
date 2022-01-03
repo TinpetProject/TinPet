@@ -51,7 +51,48 @@ module.exports = {
       .status(200)
       .send({ message: "GET_USER_ID_SUCCESS", data: userID });
   }),
+  getMatches: tryCatchBlock(null, async (req, res, next) => {
+    const userIDIsExist = await User.isUserIDExist(req.params.userID);
+    if (!userIDIsExist)
+      return next(new HttpError("GET_MATCHES_FAIL_USERID_NOT_EXIST", 404));
 
+    const user = new User({ userID: req.params.userID });
+    const data = await user.getMatches();
+    return res.status(200).send({message: "GET_MATCHES_SUCCESSFULLY", data : data })
+  }),
+  handleRequestMatches: tryCatchBlock(null, async (req, res, next) => {
+    const {userID, targetUserID, command} = req.body;
+    await User.handleRequestMatches(userID, targetUserID, command);
+    return res.status(200).send({message: "HANDLE_REQUEST_MATCHES_SUCCESSFULLY"});
+  }),
+  getFollowerList : tryCatchBlock(null, async (req, res, next) => {
+    const userIDIsExist = await User.isUserIDExist(req.params.userID);
+    if (!userIDIsExist)
+      return next(new HttpError("GET_FOLLOWER_LIST_FAIL_USERID_NOT_EXIST", 404));
+
+    const user = new User({ userID: req.params.userID });
+    const data = await user.getFollowerList();
+    return res.status(200).send({message: "GET_FOLLOWERS_LIST_SUCCESSFULLY", data : data })
+  }),
+  removeFollower: tryCatchBlock(null, async (req, res, next) => {
+    const {userID, targetUserID} = req.body;
+    await User.removeFollower(userID, targetUserID);
+    return res.status(200).send({message: "HANDLE_REMOVE_FOLLOWER_SUCCESSFULLY"});
+  }),
+  getFriendList : tryCatchBlock(null, async (req, res, next) => {
+    const userIDIsExist = await User.isUserIDExist(req.params.userID);
+    if (!userIDIsExist)
+      return next(new HttpError("GET_FRIEND_LIST_FAIL_USERID_NOT_EXIST", 404));
+
+    const user = new User({ userID: req.params.userID });
+    const data = await user.getFriendList();
+    return res.status(200).send({message: "GET_FRIEND_LIST_SUCCESSFULLY", data : data })
+  }),
+  removeFriend: tryCatchBlock(null, async (req, res, next) => {
+    const {userID, targetUserID} = req.body;
+    await User.removeFriend(userID, targetUserID);
+    return res.status(200).send({message: "HANDLE_REMOVE_FRIEND_SUCCESSFULLY"});
+  }),
   // getUserName: tryCatchBlock(null, async (req, res, next) => {
   //   const userName = await User.getUserName(req.userData.user);
   //   if (!userName)
@@ -61,27 +102,6 @@ module.exports = {
   //     .status(200)
   //     .send({ message: "GET_USER_ID_SUCCESS", data: userName });
   // }),
-
-  getPostByOffset: tryCatchBlock(null, async (req, res, next) => {
-    const userIDIsExist = await User.isUserIDExist(req.params.userID);
-    if (!userIDIsExist)
-      return next(new HttpError("GET_POST_FAIL_USERID_NOT_EXIST", 404));
-
-    const user = new User({ userID: req.params.userID });
-    const posts = await user.getPostByOffset(req.params.offset);
-    return res.status(200).send({ message: "GET_POST_SUCCESS", data: posts });
-  }),
-
-  uploadPost: tryCatchBlock(null, async (req, res, next) => {
-    const { title, content } = req.body;
-    const userID = req.userData.userID;
-
-
-    const user = new User({ userID});
-    const postID = await user.uploadPost(title, content);
-  
-    return res.status(200).send({ message: "UPLOAD_POST_SUCCESS", data: { postID } });
-  }),
 
   // likeProcessing: tryCatchBlock(null, async (req, res, next) => {
   //   const { targetUserID } = req.body;
