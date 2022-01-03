@@ -23,7 +23,9 @@ module.exports = {
   }),
 
   sendCommentByPost: tryCatchBlock(null, async (req, res, next) => {
-    const userID = req.userData.userID;
+    
+    // const userID = req.userData.userID;
+    const userID = req.body.userID;
     const content = req.body.content;
 
     const postIDIsExist = await Post.isPostIDExist(req.params.postID);

@@ -41,7 +41,7 @@ export default function Feed({ userID, user }) {
   return (
     <div>
       <FeedWrapper>
-        {!!posts.length > 0 && posts.map((p) => <Post key={p.postID} post={p} user={user} />)}
+        {!!posts.length > 0 && posts.map((p) => <Post key={p.postID} post={p} user={user} userID={userID} />)}
       </FeedWrapper>
     </div>
   );
