@@ -22,7 +22,7 @@ const headbar = [
   }
 ]
 
-export default function ProfileHead({ user }) {
+export default function ProfileHead({ user, userID, selectedUser }) {
   const [isPreview, setIsPreview] = React.useState(false);
   const [preview, setPreview] = React.useState("")
 
@@ -53,9 +53,13 @@ export default function ProfileHead({ user }) {
           {headbar?.map((btn) => (
             <Button key={btn.button}>{btn.button}</Button>
           ))}
-          <ButtonPut><AddCircleOutlineIcon /></ButtonPut>
-          <ButtonPut><FavoriteBorderIcon /></ButtonPut>
-          <ButtonPut><ChatIcon /></ButtonPut>
+          {userID !== selectedUser ? (
+            <>
+              <ButtonPut><AddCircleOutlineIcon /></ButtonPut>
+              <ButtonPut><FavoriteBorderIcon /></ButtonPut>
+              <ButtonPut><ChatIcon /></ButtonPut>
+            </>
+          ) : ("")}
         </HeadBar>
         <div key={user.userID}>
           <Wallpaper src={user.backgroundImage} onClick={handleOpen} />
