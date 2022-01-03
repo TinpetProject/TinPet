@@ -225,6 +225,7 @@ export default function CreatePost({ closePostDetail, user }) {
       }
     }
     let photos = selectedFiles.map(file => file.url);
+    // console.log({ title: user.name, content: postContent, links: photos });
     axios.post("/user/post", { title: user.name, content: postContent, links: photos })
       .then(response => console.log(response))
       .catch(error => console.log(error));

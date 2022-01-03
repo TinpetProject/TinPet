@@ -22,7 +22,6 @@ export default function CardMatch(props) {
                     <span>{props?.match?.address}</span>
                 </div>
             </div>
-            c
             <div className="card-match__btn card-match__btn--accept" onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
