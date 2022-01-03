@@ -15,6 +15,7 @@ router.get("/userID", userController.getUserID);
 
 router.get("/matches/:userID",userController.getMatches)
 
+
 router.post("/matches",userController.handleRequestMatches);
 
 router.get("/follow/:userID",userController.getFollowerList);
@@ -24,6 +25,10 @@ router.post("/follow",userController.removeFollower);
 router.get("/friend/:userID",userController.getFriendList);
 
 router.post("/friend",userController.removeFriend)
+
+router.post("/post", userController.uploadPost);
+
+
 // router.get("/post/:offset", userController.getPostByOffset);
 
 module.exports = router;
