@@ -24,7 +24,7 @@ module.exports = class User {
 
   static handleRequestMatches = tryCatchBlock(async (userID, targetUserID, command) => {
     const [resultSet] = await database.execute(
-      `SET SQL_SAFE_UPDATES = 0; CALL Proc_HandleRequestMatches('${userID}','${targetUserID}','${command}'); SET SQL_SAFE_UPDATES = 1;`
+      ` CALL Proc_HandleRequestMatches('${userID}','${targetUserID}','${command}'); `
     );
   });
   static removeFollower = tryCatchBlock(async (userID, targetUserID) => {

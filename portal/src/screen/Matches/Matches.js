@@ -21,7 +21,7 @@ export default function Matches({ userID }) {
         userID && getAllMatches(userID).then(data => setMatchList(data));
     }, [userID])
 
-    console.log(matchList);
+    // console.log(matchList);
 
     const rejectMatches = (targetUserID, command) => {
         setOpenDialog(true);
@@ -32,7 +32,7 @@ export default function Matches({ userID }) {
         });
     }
     const updateMatchesList = (targetUserID) => {
-        setMatchList(matchList.filter(match => match.userID === targetUserID))
+        setMatchList(matchList.filter(match => match.userID !== targetUserID))
     }
 
     return (
@@ -47,7 +47,7 @@ export default function Matches({ userID }) {
                     })}
                 </div>
             </Main>
-            <OptionDialog handleClose={handleCloseDialog} handleOpen={handleOpenDialog} open={openDialog} option="Remove" msg="Are you really want remove this user ?" handleMatches={handleMatches} params={requiredParams} updateMatchesList={updateMatchesList}/>
+            <OptionDialog handleClose={handleCloseDialog} handleOpen={handleOpenDialog} open={openDialog} option="Remove" msg="Are you really want remove this user ?" handleRequest={handleMatches} params={requiredParams} updateList={updateMatchesList}/>
         </>
     );
 }

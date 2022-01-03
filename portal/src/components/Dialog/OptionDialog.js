@@ -33,8 +33,8 @@ export default function ResponsiveDialog(props) {
             Cancel
           </Button>
           <Button onClick={() => {
-            props.handleMatches(props.params.userID, props.params.targetUserID, props.params.command);
-            props.updateMatchesList(props.params.targetUserID);
+            props.handleRequest(props.params);
+            props.updateList(props.params.targetUserID);
             props.handleClose();
           }}>
             {props.option}
