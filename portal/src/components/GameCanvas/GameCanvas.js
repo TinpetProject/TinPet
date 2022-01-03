@@ -1,6 +1,7 @@
 import "./GameCanvas.css";
 import { Fragment, StrictMode, useEffect, useState } from "react";
 import Unity, { UnityContext } from "react-unity-webgl";
+import { Button } from "@mui/material";
 
 
 // This is the context that Unity will use to communicate with the React app.
@@ -18,7 +19,7 @@ const unityContext = new UnityContext({
   dataUrl: "runoftruth/Build/runoftruth.data",
   frameworkUrl: "runoftruth/Build/runoftruth.framework.js",
   codeUrl: "runoftruth/Build/runoftruth.wasm",
-  streamingAssetsUrl: "runoftruth/StreamingAssets/build_info",
+  //streamingAssetsUrl: "runoftruth/StreamingAssets/build_info",
   // Additional configuration options.
   webglContextAttributes: {
     preserveDrawingBuffer: true,
@@ -35,7 +36,7 @@ function GameCanvas() {
   const [saidMessage, setSaidMessage] = useState("Nothing");
   const [isLoaded, setIsLoaded] = useState(false);
   const [progression, setProgression] = useState(0);
-  const [claimSuperlike, setClaimMessage] = useState(0);
+  //const [claimSuperlike, alert] = useState(0);
 
   // When the component is mounted, we'll register some event listener.
   useEffect(() => {
@@ -43,12 +44,17 @@ function GameCanvas() {
     unityContext.on("progress", handleOnUnityProgress);
     unityContext.on("loaded", handleOnUnityLoaded);
     unityContext.on("RotationDidUpdate", handleOnUnityRotationDidUpdate);
-    unityContext.on("ClickedPosition", handleOnUnityClickedPosition);
+    //unityContext.on("ClickedPosition", handleOnUnityClickedPosition);
     unityContext.on("Say", handleOnUnitySayMessage);
     unityContext.on("Claim", handleOnUnityClaimMessage);
     // When the component is unmounted, we'll unregister the event listener.
     return function () {
-      unityContext.removeAllEventListeners();
+      //unityContext.removeAllEventListeners();
+      // if (isLoaded === true) {
+      //   setIsLoaded(false);
+      // }
+      setIsLoaded(false);
+      setIsUnityMounted(isUnityMounted === false);
     };
   }, []);
 
@@ -80,9 +86,9 @@ function GameCanvas() {
 
   // Custom event invoked when the Unity app sends a message indicating that the
   // mouse click position has changed.
-  function handleOnUnityClickedPosition(x, y) {
-    setClickPosition({ x, y });
-  }
+  // function handleOnUnityClickedPosition(x, y) {
+  //   setClickPosition({ x, y });
+  // }
 
   // Custom event invoked when the Unity app sends a message including something
   // it said.
