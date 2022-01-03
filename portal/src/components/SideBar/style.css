@@ -1,6 +1,7 @@
 :root {
     --main-white-color: white;
 }
+
 /* 
 .menu__heart-icon {
     font-size: 1.5rem;
@@ -38,4 +39,9 @@ svg {
 
 .menu__logout-icon:hover {
     color: var(--main-white-color);
+}
+
+.selected li {
+    background-color: #fb6d6c;
+    color: #fff;
 }
