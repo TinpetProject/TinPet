@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import {
   PostWrapper,
   PostTop,
@@ -27,7 +27,10 @@ import { PostServices } from "../../../services";
 import CommentList from "../CommentList/CommentList";
 import "./post.css";
 import { timeSince } from "../../../utils/datetime";
-const defaultPostID = "1116301c-477f-2a8f-555f-1885b89fc8fc";
+// import "../InputPost/CreatePost/CreatePost.css";
+import { Icon } from "@iconify/react"
+
+// const defaultPostID = "1116301c-477f-2a8f-555f-1885b89fc8fc";
 
 
 export default function Post({ post, userID, user }) {
@@ -39,6 +42,8 @@ export default function Post({ post, userID, user }) {
   const userAvatar = user.avatar;
   const userName = user.name;
   const displayTime = !!post.date && `${timeSince(Date.parse(post.date))} ago`;
+  const [preview, setPreview] = React.useState("");
+  const [isPreview, setIsPreview] = React.useState(false);
 
   const likeHandler = () => {
     setLike(like => isLiked ? like - 1 : like + 1);
@@ -47,6 +52,117 @@ export default function Post({ post, userID, user }) {
   const commentHandler = () => {
     setIsCommenting((prev) => !prev);
   };
+
+  const openPreviewFiles = (e) => {
+    setIsPreview(true);
+    let src;
+    if (e.target.src) {
+      src = e.target.src
+    } else {
+      src = e.target.firstChild.src;
+    }
+    setPreview(src);
+  }
+
+  const closePreviewFiles = () => {
+    setIsPreview(false)
+    setPreview("");
+  }
+
+  const renderFiles = (files) => {
+    const previewFiles = (files && files.length > 3) ? files.slice(0, 3) : files;
+    switch (files.length) {
+      case 0:
+        break;
+      case 1:
+        return (
+          <div className="picture-box">
+            <div className="picture-list-1">
+              {previewFiles.map(file => {
+                return (
+                  <div className="picture-sleeve" onClick={openPreviewFiles}>
+                    <img className="picture-item" src={file.url} alt={file.name} key={file} />
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )
+      case 2:
+        return (
+          <div className="picture-box">
+            <div className="picture-list-2">
+              {previewFiles.map(file => {
+                return (
+                  <div className="picture-sleeve" onClick={openPreviewFiles}>
+                    <img className="picture-item" src={file.url} alt={file.name} key={file} />
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )
+      case 3:
+        return (
+          <div className="picture-box">
+            <div className="picture-list-3" onClick={openPreviewFiles}>
+              {previewFiles.map(file => {
+                return (
+                  <div className="picture-sleeve">
+                    <img className="picture-item" src={file.url} alt={file.name} key={file} />
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )
+      default:
+        console.log("case default");
+        return (
+          <div className="picture-box">
+            <div className="picture-list">
+              {previewFiles.map(file => {
+                return (
+                  <div className="picture-sleeve" onClick={openPreviewFiles}>
+                    <img className="picture-item" src={file.url} alt={file.name} key={file} />
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )
+    }
+  }
+
+  const renderPreviewFiles = (source) => {
+    return (
+      <>
+        <img src={source} alt="" />
+        <Icon icon="bi:x-square" color="#fff" width="32" height="32" className="cls" onClick={closePreviewFiles} />
+      </>
+    )
+  }
+
+  const handlePreviewPrev = () => {
+    const currentTargetSrc = preview;
+    const currentTargetIdx = post.photos.findIndex(file => file.url === currentTargetSrc);
+    if (currentTargetIdx === 0) {
+      setPreview(post.photos[post.photos.length - 1].url)
+    } else {
+      setPreview(post.photos[currentTargetIdx - 1].url)
+    }
+  }
+
+  const handlePreviewNext = () => {
+    const currentTargetSrc = preview;
+    const currentTargetIdx = post.photos.findIndex(file => file.url === currentTargetSrc);
+    if (currentTargetIdx === post.photos.length - 1) {
+      setPreview(post.photos[0].url)
+    } else {
+      setPreview(post.photos[currentTargetIdx + 1].url)
+    }
+  }
+
   return (
     <>
       <PostWrapper>
@@ -62,17 +178,21 @@ export default function Post({ post, userID, user }) {
         </PostTop>
         <PostCenter>
           <Text>{post?.content}</Text>
-          <Img src={"https://scontent.fhan5-10.fna.fbcdn.net/v/t39.30808-6/245527774_3029881763934187_5955578281008105357_n.jpg?_nc_cat=101&_nc_rgb565=1&ccb=1-5&_nc_sid=730e14&_nc_ohc=2Na_e0OtLywAX8vZxab&_nc_ht=scontent.fhan5-10.fna&oh=00_AT8acS3EFMhcQseP-0XOvO0V3BuKXKKhhF4UWmSdnjl1Aw&oe=61D843EC"} />
-          <div className="picture-box">
-            <div className="picture-list">
-              {/* {previewFiles.map(file => {
-                return (
-                  <div className="picture-sleeve" onClick={openPreviewFiles}>
-                    <img className="picture-item" src={file.url} alt={file.name} key={file} />
-                  </div>
-                )
-              })} */}
-            </div>
+          <div className="img-container">
+            {post.photos && post.photos.length > 0 && renderFiles(post.photos)}
+          </div>
+          <div className={`model ${isPreview ? "open" : ""}`}>
+            {post.photos && renderPreviewFiles(preview)}
+            {post.photos && post.photos.length > 0 && (
+              <>
+                <div className="prev" onClick={handlePreviewPrev}>
+                  <Icon icon="grommet-icons:previous" color="white" width="32" height="32" />
+                </div>
+                <div className="next" onClick={handlePreviewNext}>
+                  <Icon icon="grommet-icons:next" color="white" width="32" height="32" />
+                </div>
+              </>
+            )}
           </div>
         </PostCenter>
         <PostBottom>
