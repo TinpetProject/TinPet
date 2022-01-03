@@ -7,8 +7,8 @@ export default function CardMatch(props) {
     const history = useHistory();
 
     const redirectToProfile = () => {
-        // history.push(`/profile/${props?.match?.userID}`);
-        console.log(`May duoc redirect den trang profile cua user ${props?.match?.userID}`);
+        history.push(`/profile/${props?.match?.userID}`);
+        // console.log(`May duoc redirect den trang profile cua user ${props?.match?.userID}`);
     }
 
     return (
