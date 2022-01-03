@@ -18,8 +18,16 @@ const Layout = React.memo((props) => {
   
   return (
     <>
-      <NavBar userID={props.userID} socket={props.socket} logOutHandler={props.logOutHandler} />
-      <SideBar showSetting={showSetting} hideSetting={hideSetting} />
+      <NavBar 
+        userID={props.userID} 
+        socket={props.socket} 
+        showSetting={showSetting} 
+        logOutHandler={props.logOutHandler} 
+      />
+      <SideBar 
+        showSetting={showSetting} 
+        logOutHandler={props.logOutHandler} 
+      />
       {props.children}
       {isShownSetting && <Setting userID={props.userID} hideSetting={hideSetting} /> }
     </>
