@@ -2,13 +2,21 @@ import React from "react";
 import { useState } from "react";
 import "./Card.css";
 import { Icon } from "@iconify/react";
+import { useHistory } from "react-router-dom";
 
 export default function Card(props) {
     const [isHeartClicked, setIsHeartClicked] = useState(false);
     const [isPlusClicked, setIsPlusClicked] = useState(false);
+    const history = useHistory();
+
     const cardOnClickHandler = () => {
-        console.log(props.petID);
+        history.push(`/profile/${props?.petID}`);
+        // console.log(`May duoc redirect den trang profile cua user ${props?.match?.userID}`);
     };
+
+    // const cardOnClickHandler = () => {
+    //     console.log(props.petID);
+    // };
 
     const heartBtnOnClickHandler = () => {
         setIsHeartClicked(!isHeartClicked);
