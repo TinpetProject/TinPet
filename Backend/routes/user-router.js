@@ -28,6 +28,8 @@ router.post("/friend",userController.removeFriend)
 
 router.post("/post", userController.uploadPost);
 
+// router.get("/:name", userController.searchByName);
+
 // router.get("/post/:offset", userController.getPostByOffset);
 
 module.exports = router;

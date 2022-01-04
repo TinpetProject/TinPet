@@ -15,6 +15,7 @@ export const Wallpaper = styled.img `
   width: 100%;
   height: 400px;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 export const Avatar = styled.img `
@@ -26,6 +27,7 @@ export const Avatar = styled.img `
   object-fit: cover;
   border-radius: 50%;
   border: 4px solid #ffffff;
+  cursor: pointer;
 `;
 
 export const Name = styled.div `

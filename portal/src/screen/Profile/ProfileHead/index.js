@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   HeadWrapper,
   Wallpaper,
@@ -8,11 +8,11 @@ import {
   Button,
   ButtonPut
 } from "./style";
-import { Users } from "../dummyData"
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatIcon from '@mui/icons-material/Chat';
-import { Link } from "react-router-dom";
+import { Icon } from "@iconify/react";
+
 const headbar = [
   {
     link: "/profile",
@@ -24,28 +24,54 @@ const headbar = [
   }
 ]
 
-export default function ProfileHead() {
+export default function ProfileHead({ user, userID, selectedUser }) {
+  const [isPreview, setIsPreview] = React.useState(false);
+  const [preview, setPreview] = React.useState("")
+
+
+  const handleOpen = (e) => {
+    setIsPreview(true);
+    setPreview(e.target.src)
+    console.log(e.target);
+  }
+
+  const handleClose = () => {
+    setIsPreview(false);
+  }
+
+  const renderPreviewFile = (source) => {
+    return (
+      <>
+        <img src={source} alt="" />
+        <Icon icon="bi:x-square" color="#fff" width="32" height="32" className="cls" onClick={handleClose} />
+      </>
+    )
+  }
+
   return (
     <div>
       <HeadWrapper>
-        <HeadBar> 
-          {headbar?.map((btn) =>(
-            <Link to={btn.link} key={btn.button} style={{textDecoration: 'none'}}>
-              <Button>{btn.button}</Button>
-            </Link>
-            ))}
-          <ButtonPut><AddCircleOutlineIcon/></ButtonPut>
-          <ButtonPut><FavoriteBorderIcon/></ButtonPut>
-          <ButtonPut><ChatIcon/></ButtonPut>
+        <HeadBar>
+          {headbar?.map((btn) => (
+            <Button key={btn.button}>{btn.button}</Button>
+          ))}
+          {userID !== selectedUser ? (
+            <>
+              <ButtonPut><AddCircleOutlineIcon /></ButtonPut>
+              <ButtonPut><FavoriteBorderIcon /></ButtonPut>
+              <ButtonPut><ChatIcon /></ButtonPut>
+            </>
+          ) : ("")}
         </HeadBar>
-        {Users.map((u) => (
-          <div key={u.userid}>
-            <Wallpaper src={u.wallPaper}/>
-            <Avatar src={u.profilePicture}/>
-            <Name>{u.username}</Name>
-          </div>
-        ))}
+        <div key={user.userID}>
+          <Wallpaper src={user.backgroundImage} onClick={handleOpen} />
+          <Avatar src={user.avatar} onClick={handleOpen} />
+          <Name>{user.name}</Name>
+        </div>
       </HeadWrapper>
+      <div className={`model ${isPreview ? "open" : ""}`}>
+        {renderPreviewFile(preview)}
+      </div>
     </div>
   );
 };

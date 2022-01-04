@@ -36,11 +36,15 @@ module.exports = class Post {
   getPost = tryCatchBlock(async (userID) => {
     // like poss
     const [resultSet] = await database.query(`CALL Proc_GetPost('${userID}');`);
-
-    return resultSet.length === 0 ? null : resultSet[0];
+    const postList = resultSet[0].map((post) => {
+      return { ...post, isLike: !!post.isLike };
+    });
+    return resultSet.length === 0 ? null : postList;
   });
 
-  setLikeComment = tryCatchBlock(async (commentID,targetUserID,command) =>{
-    const [resultSet] = await database.query(`CALL Proc_ProcessLikeComment('${commentID}','${targetUserID}','${command}')`);
-  })
+  setLikeComment = tryCatchBlock(async (commentID, targetUserID, command) => {
+    const [resultSet] = await database.query(
+      `CALL Proc_ProcessLikeComment('${commentID}','${targetUserID}','${command}')`
+    );
+  });
 };

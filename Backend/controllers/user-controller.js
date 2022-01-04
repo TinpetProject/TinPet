@@ -104,6 +104,15 @@ module.exports = {
 
     return res.status(200).send({ message: "UPLOAD_POST_SUCCESS", data: { postID } });
   }),
+
+  // searchByName: tryCatchBlock(null, async (req, res, next) => {
+  //   const name = req.params.name;
+
+  //   const postID = await User.searchByName(name);
+
+  //   return res.status(200).send({ message: "UPLOAD_POST_SUCCESS", data: { postID } });
+  // }),
+
   // getUserName: tryCatchBlock(null, async (req, res, next) => {
   //   const userName = await User.getUserName(req.userData.user);
   //   if (!userName)

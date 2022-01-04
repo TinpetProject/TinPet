@@ -52,6 +52,17 @@
     justify-content: space-between;
 }
 
+.card-favorite__info span {
+    display: block;
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-favorite__info--general {
+    transform: translateX(2px);
+}
 
 
 .card-favorite__info--location {
@@ -60,11 +71,14 @@
 
 .card-favorite__info--location svg {
     font-size: 1.4rem;
-    transform: translateY(5px);
+    transform: translateY(2px);
+    position: absolute;
 }
 
 .card-favorite__info--location span {
-    transform: translateY(-1px);
+    transform: translateY(0);
+    transform: translateX(22px);
+
 }
 
 .card-favorite__options {
