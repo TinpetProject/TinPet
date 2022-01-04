@@ -105,6 +105,14 @@ module.exports = {
     return res.status(200).send({ message: "UPLOAD_POST_SUCCESS", data: { postID } });
   }),
 
+  getAllImages: tryCatchBlock(null, async (req, res, next) => {
+    const userID = req.params.userID;
+
+    const user = new User({ userID});
+    const imgs = await user.getAllImages();
+
+    return res.status(200).send({ message: "GET_IMGS_SUCCESS", data: imgs});
+  }),
   // searchByName: tryCatchBlock(null, async (req, res, next) => {
   //   const name = req.params.name;
 
