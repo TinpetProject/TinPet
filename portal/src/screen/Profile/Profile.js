@@ -8,7 +8,8 @@ import { Main } from "../../styled-component/style";
 import Feed from "./Feed";
 import axios from "axios";
 import { PostServices } from "../../services";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Switch, Route, useRouteMatch, Redirect } from "react-router-dom";
+import Gallery from "./Gallery";
 
 const Profile = ({ userID }) => {
   const token = localStorage.getItem("token");
@@ -16,6 +17,10 @@ const Profile = ({ userID }) => {
   const [posts, setPosts] = React.useState([]);
   const location = useLocation();
   const [selectedUser, setSelectedUser] = React.useState(useParams().chosenUserID);
+
+  let { path, url } = useRouteMatch();
+  console.log(path, url);
+
   useEffect(() => {
     if (location && location.pathname) {
       const id = location.pathname.split("/")[2];
@@ -87,10 +92,20 @@ const Profile = ({ userID }) => {
       <Main>
         <ProfileWrapper>
           <ProfileHead user={user} userID={userID} selectedUser={selectedUser} />
-          <InputPost user={user} updatePostList={updatePostList} />
-          <Feed userID={userID} user={user} posts={posts} />
-          <Pictures />
-          <AboutPet user={user} />
+          <Switch>
+            <Route exact path={`${path}/gallery`}>
+              <Gallery />
+            </Route>
+            <Route exact path={path}>
+              <InputPost user={user} updatePostList={updatePostList} />
+              <Feed userID={userID} user={user} posts={posts} />
+              <Pictures />
+              <AboutPet user={user} />
+            </Route>
+            <Route path={`${path}/*`}>
+              <Redirect to={path} />
+            </Route>
+          </Switch>
         </ProfileWrapper>
       </Main>
     </>

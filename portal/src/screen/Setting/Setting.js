@@ -8,50 +8,50 @@ export default function Setting({hideSetting}) {
     const [user, setUser] = React.useState({});
     const [selectedUser, setSelectedUser] = React.useState(useParams().chosenUserID);
     const location = useLocation();
-    React.useEffect(() => {
-        if (location && location.pathname) {
-        const id = location.pathname.split("/")[2];
-        setSelectedUser(id);
-        }
-    }, [location]);
-    // React.useEffect(()=>{
-    // const fetchList = async () => {
-    //   const result = await fetch(`http://localhost:8888/user/:userid/profile`, {
-    //     method: "GET",
-    //     headers: {
-    //       accept: "application/json",
-    //       "Content-Type": "application/json",
-    //       authorization: `Bearer ${token}`,
-    //     },
-    //   });
-    //   console.log(result);
-    // };
-    // token && fetchList();
-    // },[]);
+    // React.useEffect(() => {
+    //     if (location && location.pathname) {
+    //     const id = location.pathname.split("/")[2];
+    //     setSelectedUser(id);
+    //     }
+    // }, [location]);
+    // // React.useEffect(()=>{
+    // // const fetchList = async () => {
+    // //   const result = await fetch(`http://localhost:8888/user/:userid/profile`, {
+    // //     method: "GET",
+    // //     headers: {
+    // //       accept: "application/json",
+    // //       "Content-Type": "application/json",
+    // //       authorization: `Bearer ${token}`,
+    // //     },
+    // //   });
+    // //   console.log(result);
+    // // };
+    // // token && fetchList();
+    // // },[]);
 
-    React.useEffect(() => {
-        // if(selectedUser !== userID) {
-        //   setSelectedUser(userID);
-        // }
-        const getUser = async () => {
-          axios
-            .get(`/user/${selectedUser}/profile`)
-            .then((response) => {
-              console.log(response);
-              setUser({
-                ...response.data.data,
-                avatar:
-                  "https://scontent.fhan5-4.fna.fbcdn.net/v/t39.30808-6/270772893_1567946906894523_1047998408474512960_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=UDouyg3f9X4AX-pmsZd&tn=i1yGCvqKaMsUYmLN&_nc_ht=scontent.fhan5-4.fna&oh=00_AT8z-4gaLISuR7xppz5vpNfe01um66ajORsM6f-vM7pKKg&oe=61D5CA10",
-                email:
-                    "minhtam@gmail.com",
-                name: "Minh Tâm",
-              });
-            })
-            .catch((error) => console.log(error));
-        };
+    // React.useEffect(() => {
+    //     // if(selectedUser !== userID) {
+    //     //   setSelectedUser(userID);
+    //     // }
+    //     const getUser = async () => {
+    //       axios
+    //         .get(`/user/${selectedUser}/profile`)
+    //         .then((response) => {
+    //           console.log(response);
+    //           setUser({
+    //             ...response.data.data,
+    //             avatar:
+    //               "https://scontent.fhan5-4.fna.fbcdn.net/v/t39.30808-6/270772893_1567946906894523_1047998408474512960_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=UDouyg3f9X4AX-pmsZd&tn=i1yGCvqKaMsUYmLN&_nc_ht=scontent.fhan5-4.fna&oh=00_AT8z-4gaLISuR7xppz5vpNfe01um66ajORsM6f-vM7pKKg&oe=61D5CA10",
+    //             email:
+    //                 "minhtam@gmail.com",
+    //             name: "Minh Tâm",
+    //           });
+    //         })
+    //         .catch((error) => console.log(error));
+    //     };
     
-        selectedUser && getUser();
-      }, [selectedUser]);
+    //     selectedUser && getUser();
+    //   }, [selectedUser]);
     const mainMenu = [
         {
             icon: <Icon className="menu__account-icon" icon="mdi:account-circle-outline" />,
@@ -187,9 +187,6 @@ export default function Setting({hideSetting}) {
                         <button className="delete">Permanently delete account</button>
                     </div>
                 </div>
-                            
-
-
             </div>
         </div>
     )

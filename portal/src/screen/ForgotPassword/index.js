@@ -125,8 +125,8 @@ const ForgotPassword = React.memo(() => {
                         </Form>
                     ) : (
                         <>
-                            <div className="title">Please check your email</div>
-                            <div className="content">You're almost there! We sent an email to <span>{email}</span></div>
+                            <div className="title-resend">Please check your email</div>
+                            <div className="content-resent">You're almost there! We sent an email to <span>{email}</span></div>
                             <div className="instruction">Just click on the link in that email to reset your password. If you don't see it, you may need to <span>check your spam</span> folder.</div>
                             <div className="resend-box">
                                 <div className="resend-box-title">Still can't find the email?</div>
