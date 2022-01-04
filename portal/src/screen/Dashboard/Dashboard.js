@@ -7,7 +7,7 @@ import TopContent from "../../components/TopContent/TopContent";
 
 export default function Dashboard() {
     const [cardList, setCardList] = useState([]);
-
+    console.log("in dashboard:::");
     useEffect(() => {
         let token = localStorage.getItem("token");
         console.log(token);

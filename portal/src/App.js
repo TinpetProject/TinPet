@@ -2,7 +2,7 @@ import { HomePage } from "./styled-component/style";
 import Login from "./screen/Login";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import React, { Profiler } from "react";
+import React, { Profiler,useEffect } from "react";
 import Signup from "./screen/Signup";
 import Matches from "./screen/Matches/Matches";
 import Dashboard from "./screen/Dashboard/Dashboard";
@@ -25,7 +25,7 @@ if (typeof window !== "undefined") {
 
 function App({ logInHandler, logOutHandler, userInfo, socket }) {
     const { userID, userAvatar } = userInfo;
-    console.log("here", userInfo);
+
     return (
         <HomePage>
             {userID || (

@@ -49,23 +49,9 @@ const Login = React.memo(({ logInHandler }) => {
         })
         .then((token) => {
           const userInfo = jwt_decode(token);
-          logInHandler({userID:userInfo.userID,userAvatar:userInfo.userAvatar});
-          
-          asyncLocalStorage.setItem("token", token).then(
-            () => {
-              setIsLoading(false);
-              // history.push("/dashboard");
-              window.location.href = "http://localhost:8889/dashboard";
-            }
-          )
-
-          // localStorage.setItem("token", token);
-          // console.log(localStorage.getItem("token"));
-          // if (localStorage.getItem("token"))
-          // {
-          //   setIsLoading(false);
-          //   history.push("/dashboard");
-          // }
+          localStorage.setItem("token", token);
+          logInHandler({ userID: userInfo.userID, userAvatar: userInfo.avatar });
+          history.push("/dashboard");
         })
         .catch((err) => {
           switch (err.response.status) {
@@ -133,7 +119,9 @@ const Login = React.memo(({ logInHandler }) => {
                 <FormInputCheckBox type="checkbox" id="rememberMe" onChange={(e) => setRememberMe(e.currentTarget.checked)}></FormInputCheckBox>{" "}
                 <FormControlLabelCheckBox htmlFor="rememberMe">Keep me logged in</FormControlLabelCheckBox>{" "}
               </FormControlCheckBox>{" "} */}
-              <ForgetPassword onClick={() => history.push("/forgotpassword")}>Forgot Password?</ForgetPassword>
+              <ForgetPassword onClick={() => history.push("/forgotpassword")}>
+                Forgot Password?
+              </ForgetPassword>
             </OptionContainer>
             <ButtonRoot> Sign in </ButtonRoot>{" "}
           </Form>{" "}
