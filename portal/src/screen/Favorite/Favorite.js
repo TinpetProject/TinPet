@@ -63,7 +63,7 @@ export default function PetList({ userID }) {
                 open={openDialog}
                 option="Remove"
                 msg="Are you really want remove this user ?"
-                handleFavorites={removeFavorite}
+                handleRequest={removeFavorite}
                 params={requiredParams}
                 updateList={updateFavoriteList}
             />
