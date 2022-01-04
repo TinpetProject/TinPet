@@ -49,6 +49,7 @@ const Signup = () => {
                     history.push("/complete-profile");
                 })
                 .catch((err) => {
+                    console.log(err.response);
                     switch (err.response.status) {
                         case 400:
                             if (err.response.data.message === "REQUEST_FAIL_INVALID_SCHEMA") {

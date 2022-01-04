@@ -58,7 +58,6 @@ function AuthController(props) {
       localStorage.setItem("token", newToken);
       const decodedData = jwt(newToken);
       setUserID(decodedData.userID);
-      axios.defaults.baseURL = "http://localhost:8888";
       axios.defaults.headers.common["Authorization"] = "Bearer " + newToken;
     };
     checkAndRenewToken();
