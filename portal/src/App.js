@@ -57,7 +57,7 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
                         <Route exact path="/messenger/:chosenUserID">
                             <Messenger userID={userID} socket={socket} />
                         </Route>
-                        <Route exact path="/profile/:chosenUserID">
+                        <Route path="/profile/:chosenUserID">
                             <Profile userID={userID} />
                         </Route>
                         <Route path="/petlist">

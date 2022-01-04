@@ -4,54 +4,31 @@ import { Icon } from "@iconify/react";
 import axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
 
-export default function Setting({hideSetting}) {
+export default function Setting({ userID, hideSetting }) {
     const [user, setUser] = React.useState({});
-    const [selectedUser, setSelectedUser] = React.useState(useParams().chosenUserID);
-    const location = useLocation();
-    React.useEffect(() => {
-        if (location && location.pathname) {
-        const id = location.pathname.split("/")[2];
-        setSelectedUser(id);
-        }
-    }, [location]);
-    // React.useEffect(()=>{
-    // const fetchList = async () => {
-    //   const result = await fetch(`http://localhost:8888/user/:userid/profile`, {
-    //     method: "GET",
-    //     headers: {
-    //       accept: "application/json",
-    //       "Content-Type": "application/json",
-    //       authorization: `Bearer ${token}`,
-    //     },
-    //   });
-    //   console.log(result);
-    // };
-    // token && fetchList();
-    // },[]);
+    // const location = useLocation();
 
     React.useEffect(() => {
-        // if(selectedUser !== userID) {
-        //   setSelectedUser(userID);
-        // }
         const getUser = async () => {
-          axios
-            .get(`/user/${selectedUser}/profile`)
-            .then((response) => {
-              console.log(response);
-              setUser({
-                ...response.data.data,
-                avatar:
-                  "https://scontent.fhan5-4.fna.fbcdn.net/v/t39.30808-6/270772893_1567946906894523_1047998408474512960_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=UDouyg3f9X4AX-pmsZd&tn=i1yGCvqKaMsUYmLN&_nc_ht=scontent.fhan5-4.fna&oh=00_AT8z-4gaLISuR7xppz5vpNfe01um66ajORsM6f-vM7pKKg&oe=61D5CA10",
-                email:
-                    "minhtam@gmail.com",
-                name: "Minh Tâm",
-              });
-            })
-            .catch((error) => console.log(error));
+            axios
+                .get(`/user/${userID}/profile`)
+                .then((response) => {
+                    console.log(response);
+                    setUser(response.data.data);
+                })
+                .catch((error) => console.log(error));
         };
-    
-        selectedUser && getUser();
-      }, [selectedUser]);
+
+        userID && getUser();
+    }, [userID]);
+
+    const getCityCountry = () => {
+        const location = user.location ? user.split(',')
+        // let city;
+        // let country;
+
+    }
+
     const mainMenu = [
         {
             icon: <Icon className="menu__account-icon" icon="mdi:account-circle-outline" />,
@@ -62,7 +39,7 @@ export default function Setting({hideSetting}) {
             title: "General"
         },
         {
-             icon: <Icon className="menu__advance-icon" icon="carbon:audio-console" />,
+            icon: <Icon className="menu__advance-icon" icon="carbon:audio-console" />,
             title: "Advance"
         }
     ];
@@ -95,16 +72,16 @@ export default function Setting({hideSetting}) {
         }
     ];
 
-    
+
     return (
         <div className="container">
             <div className="container-layout" onClick={hideSetting}></div>
             <div className="container-content-wrapper">
-{/* sidebar */}
+                {/* sidebar */}
                 <div className="content-box-sidebar">
                     <div className="content-box-sidebar-user">
-                        <img src={user.avatar} 
-                        className="avatar" alt="Shiba"/>
+                        <img src={user.avatar}
+                            className="avatar" alt="Shiba" />
                         <div className='id'>
                             <div className="name"> {user.name}</div>
                             <div className="email"> {user.email}</div>
@@ -127,13 +104,13 @@ export default function Setting({hideSetting}) {
                         </li>
                     </div>
                 </div>
-{/* main */}
-    {/* Account */}
+                {/* main */}
+                {/* Account */}
                 <div className="content-box-main">
                     <div className="content-box-main-header">
                         <div className="title">Account</div>
                         <div className="close" onClick={hideSetting}>
-                            <Icon className="menu__signout-icon" icon="carbon:close" style={{ fontSize: '2rem' }}/>
+                            <Icon className="menu__signout-icon" icon="carbon:close" style={{ fontSize: '2rem' }} />
                         </div>
                     </div>
                     <div className="content-box-main-mid">
@@ -141,24 +118,24 @@ export default function Setting({hideSetting}) {
                             <div className="user">
                                 <div className="title">Photo</div>
                                 <div className="edit-avatar">
-                                    <img src={user.avatar} 
-                                    className="avatar" alt="Shiba"/>
+                                    <img src={user.avatar}
+                                        className="avatar" alt="Shiba" />
                                     <div className="edit">
                                         <div className="name">{user.name}</div>
                                         <div className="btn">
-                                            <Icon icon="carbon:cloud-upload"/> Upload Photo
+                                            <Icon icon="carbon:cloud-upload" /> Upload Photo
                                         </div>
                                         <div className="note">Pick a photo up to 4MB</div>
                                     </div>
                                 </div>
                             </div>
                             {inputleft.map((item) => (
-                                <div className="detail-edit"  key={item.title}>
+                                <div className="detail-edit" key={item.title}>
                                     <div className="title">{item.title}</div>
-                                    <div className="fieldtext" 
-                                    contentEditable={true} 
-                                    data-text="Type here..."
-                                    > 
+                                    <div className="fieldtext"
+                                        contentEditable={true}
+                                        data-text="Type here..."
+                                    >
                                         {item.field}
                                     </div>
                                 </div>
@@ -166,12 +143,12 @@ export default function Setting({hideSetting}) {
                         </div>
                         <div className="right">
                             {inputright.map((item) => (
-                                <div className="detail-edit"  key={item.title}>
+                                <div className="detail-edit" key={item.title}>
                                     <div className="title">{item.title}</div>
-                                    <div className="fieldtext" 
-                                    contentEditable={true} 
-                                    data-text="Type here..."
-                                    > 
+                                    <div className="fieldtext"
+                                        contentEditable={true}
+                                        data-text="Type here..."
+                                    >
                                         {item.field}
                                     </div>
                                 </div>
@@ -187,9 +164,6 @@ export default function Setting({hideSetting}) {
                         <button className="delete">Permanently delete account</button>
                     </div>
                 </div>
-                            
-
-
             </div>
         </div>
     )
