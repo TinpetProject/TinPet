@@ -1,8 +1,6 @@
 import React from "react";
 import "./Game.css";
-import { Icon } from "@iconify/react";
 import { Main } from "../../styled-component/style";
-import TopContent from "../../components/TopContent/TopContent";
 import GameCanvas from "../../components/GameCanvas/GameCanvas";
 
 export default function Game() {

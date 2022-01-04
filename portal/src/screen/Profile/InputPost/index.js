@@ -13,7 +13,6 @@ import {
 import PermMediaIcon from '@mui/icons-material/PermMedia';
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
 //data
-import { Users } from "../dummyData";
 import CreatePost from "./CreatePost/CreatePost"
 
 

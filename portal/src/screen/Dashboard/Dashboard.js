@@ -37,16 +37,16 @@ export default function Dashboard() {
                 age = currentYear - yearBorn;
             }
 
-            if (el.avatar == "" || el.avatar == undefined) {
+            if (el.avatar === "" || el.avatar === undefined) {
                 el.avatar = "https://res.cloudinary.com/thecodingpanda/image/upload/v1641272668/zoyndaseei9wnbrybwxr.png";
             }
 
-            if (el.avatar && el.avatar.substring(0, 6) == "server") {
+            if (el.avatar && el.avatar.substring(0, 6) === "server") {
                 el.avatar = "https://res.cloudinary.com/thecodingpanda/image/upload/v1641272668/zoyndaseei9wnbrybwxr.png";
             }
 
-            if (el.name == "Default") {
-                return;
+            if (el.name === "Default") {
+                return "";
             }
 
             return (

@@ -62,7 +62,7 @@ const CommentList = React.memo(({ postID, userID, updateCountComment ,userName,u
     PostServices.newComment(userID, postID, content, token)
       .then((data) => {
         // console.log(data);
-        if (data.code == 200) {
+        if (data.code === 200) {
           fetchComment();
         }
       })

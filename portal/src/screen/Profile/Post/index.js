@@ -31,7 +31,7 @@ import axios from "axios";
 // const defaultPostID = "1116301c-477f-2a8f-555f-1885b89fc8fc";
 
 export default function Post({ post, userID, user }) {
-  const [comments, setComments] = useState([]);
+  // const [comments, setComments] = useState([]);
   const token = localStorage.getItem("token");
   const [countLike, setCountLike] = useState(post.like);
   const [countComment, setCountComment] = useState(post.comment);

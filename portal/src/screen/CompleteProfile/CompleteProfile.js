@@ -86,7 +86,7 @@ export default function CompleteProfile() {
                 "Content-Type": "application/json"
             },
         };
-        console.log(name, gender != "" ? gender : 2, birthday, breed , country, city, pictureProfile, localStorage.getItem("email"));
+        console.log(name, gender !== "" ? gender : 2, birthday, breed , country, city, pictureProfile, localStorage.getItem("email"));
         // TBNGOC: Thêm phần lưu thông tin pet
 
         fetch("http://localhost:8888/pet",requestOptions).then((response) => {
