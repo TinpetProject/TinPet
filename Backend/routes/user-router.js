@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/user-controller.js");
 const checkAuth = require("../middleware/check-auth");
+router.get("/:userID/profile", userController.getProfile);
 
 router.use(checkAuth);
 
 router.get("/brief/:targetUserID", userController.getBriefInfo);
 
-router.get("/:userID/profile", userController.getProfile);
 
 router.get("/:userID/recent-imgs", userController.getRecentImgs);
 
