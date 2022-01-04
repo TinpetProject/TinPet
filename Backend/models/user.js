@@ -1,11 +1,11 @@
 const database = require("../util/database");
 const tryCatchBlock = require("../util/function").tryCatchBlockForModule;
 const HttpError = require("../models/http-error");
-
+const md5 = require("md5");
 module.exports = class User {
   constructor(userData) {
     this.email = userData.email;
-    this.password = userData.password;
+    this.password = md5(userData.password);
     this.name = userData.name;
     this.userID = userData.userID;
     // this.address = userData.address;
