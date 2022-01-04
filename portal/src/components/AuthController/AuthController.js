@@ -8,7 +8,7 @@ function AuthController(props) {
   const browserHistory = useHistory();
   const [userInfo, setUserInfo] = useState("");
   const [socket, setSocket] = useState();
-
+  console.log("in AuthController", userInfo, socket);
   useEffect(() => {
     if (userInfo) {
       const newSocket = openSocket("http://localhost:8888");
@@ -50,14 +50,20 @@ function AuthController(props) {
   useEffect(() => {
     const checkAndRenewToken = async () => {
       const token = localStorage.getItem("token");
-      if (!token) return tokenInvalidHandler();
+      if (!token) {
+        console.log("return 1");
+        return tokenInvalidHandler();
+      }
 
       const newToken = await renewToken(token);
-      if (!newToken) return tokenInvalidHandler();
+      if (!newToken) {
+        console.log("return 2");
+        return tokenInvalidHandler();
+      }
 
       localStorage.setItem("token", newToken);
       const decodedData = jwt(newToken);
-      console.log(decodedData);
+
       setUserInfo({ userID: decodedData.userID, userAvatar: decodedData.avatar });
       axios.defaults.headers.common["Authorization"] = "Bearer " + newToken;
     };
@@ -65,6 +71,7 @@ function AuthController(props) {
   }, []);
 
   const logInHandler = (userID) => {
+    console.log("in loginHandler");
     return setUserInfo(userID);
   };
 

@@ -50,8 +50,8 @@ const Login = React.memo(({ logInHandler }) => {
         })
         .then((token) => {
           const userInfo = jwt_decode(token);
-          logInHandler({userID:userInfo.userID,userAvatar:userInfo.userAvatar});
           localStorage.setItem("token", token);
+          logInHandler({ userID: userInfo.userID, userAvatar: userInfo.avatar });
           history.push("/dashboard");
         })
         .catch((err) => {
@@ -120,7 +120,9 @@ const Login = React.memo(({ logInHandler }) => {
                 <FormInputCheckBox type="checkbox" id="rememberMe" onChange={(e) => setRememberMe(e.currentTarget.checked)}></FormInputCheckBox>{" "}
                 <FormControlLabelCheckBox htmlFor="rememberMe">Keep me logged in</FormControlLabelCheckBox>{" "}
               </FormControlCheckBox>{" "} */}
-              <ForgetPassword onClick={() => history.push("/forgotpassword")}>Forgot Password?</ForgetPassword>
+              <ForgetPassword onClick={() => history.push("/forgotpassword")}>
+                Forgot Password?
+              </ForgetPassword>
             </OptionContainer>
             <ButtonRoot> Sign in </ButtonRoot>{" "}
           </Form>{" "}
