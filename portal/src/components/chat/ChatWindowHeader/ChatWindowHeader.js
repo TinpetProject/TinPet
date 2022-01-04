@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Avatar } from "@mui/material";
 import "./ChatWindowHeader.css";
 
-const ChatWindowHeader = ({ chosenUserID, socket }) => {
-  const fakeAvatar = "https://media.travelmag.vn/files/quyensok/2021/02/19/151744159_1858284524329401_8015280447006743040_n-1629.jpg";
+const ChatWindowHeader = ({ chosenUserID, socket ,updateChosenUserInfo }) => {
   const [isOnline, setIsOnline] = useState(false);
   const [chosenUserInfo, setChosenUserInfo] = useState({});
 
@@ -24,9 +23,10 @@ const ChatWindowHeader = ({ chosenUserID, socket }) => {
 
       const userInfo = (await rawData.json()).data;
       setChosenUserInfo(userInfo);
+      updateChosenUserInfo(userInfo);
     };
-    subscribeToSocket();
-    getChosenUserInfo();
+    chosenUserID!=="chats" && subscribeToSocket();
+    chosenUserID!=="chats" && getChosenUserInfo();
 
     //clean up socket
     return () => {
@@ -37,7 +37,7 @@ const ChatWindowHeader = ({ chosenUserID, socket }) => {
   return (
     <div className="chat-window__header">
       <div className="header__avatar">
-        <Avatar alt="user-avatar" src={fakeAvatar} />
+        <Avatar alt="user-avatar" src={chosenUserInfo.avatar} />
         <div className={`header__status--icon ${isOnline ? "online" : ""}`}></div>
       </div>
       <div className="name-status-wrapper">

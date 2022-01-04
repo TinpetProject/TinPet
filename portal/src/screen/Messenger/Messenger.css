@@ -35,6 +35,7 @@
   background-color: #fff;
   height: calc(100vh - 60px - 40px);
   width: 250px;
+  overflow: auto;
 }
 
 .chat-window__skeleton {

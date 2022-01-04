@@ -121,6 +121,10 @@ export default function ProfileHead({ user, userID, selectedUser }) {
   const openChangeCover = () => {
     uploadInputCover.current.click();
   }
+  
+  const goChatHandler = () => {
+    history.push(`/messenger/${selectedUser}`)
+  }
 
   return (
     <div>
@@ -133,7 +137,7 @@ export default function ProfileHead({ user, userID, selectedUser }) {
             <>
               <ButtonPut><AddCircleOutlineIcon /></ButtonPut>
               <ButtonPut><FavoriteBorderIcon /></ButtonPut>
-              <ButtonPut><ChatIcon /></ButtonPut>
+              <ButtonPut onClick = {goChatHandler}><ChatIcon /></ButtonPut>
             </>
           ) : ("")}
         </HeadBar>
@@ -180,4 +184,3 @@ export default function ProfileHead({ user, userID, selectedUser }) {
     </div>
   );
 };
-
