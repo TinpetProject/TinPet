@@ -107,7 +107,7 @@ const NavBar = React.memo(({ userID, socket, showSetting, logOutHandler }) => {
 
   return (
     <NavBarWrapper>
-      <LogoWrapper>
+      <LogoWrapper onClick={() => history.push("/")}>
         <Icon className="nav__logo-icon" icon="icons8:cat-footprint" />
         <AppTitle>Tinpet</AppTitle>
       </LogoWrapper>{" "}
@@ -123,7 +123,7 @@ const NavBar = React.memo(({ userID, socket, showSetting, logOutHandler }) => {
           )}
         </UserNotiWrapper>{" "}
         <UserAvatarWrapper>
-          <Link to="/profile">
+          <Link to={`/profile/${userID}`}>
             <Avatar
               alt="corgi"
               src="https://media.travelmag.vn/files/quyensok/2021/02/19/151744159_1858284524329401_8015280447006743040_n-1629.jpg"

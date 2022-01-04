@@ -10,30 +10,26 @@ import {
   FollowNumber,
   Digit
 } from "./style"
-import { Users } from "../dummyData";
 
-export default function AboutPet() {
+export default function AboutPet({ user }) {
   return (
     <>
       <AboutWrapper>
         <Topic>About Pet</Topic>
         <About>
-        {Users?.map((abt) =>(
-          <div key={abt.userid}>
-            <AboutInfo><Info>Breed: </Info>{abt.Breed}</AboutInfo>
-            <AboutInfo><Info>Age: </Info>{abt.Age}</AboutInfo>
-            <AboutInfo><Info>Location: </Info>{abt.Location}</AboutInfo>
-            <AboutInfo><Info>Gender: </Info>{abt.Gender}</AboutInfo>
-            <Fav><Info>Favorite: </Info>{abt.Favorite}</Fav>
+          <div key={user.userID}>
+            <AboutInfo><Info>Breed: </Info>{user.breed}</AboutInfo>
+            <AboutInfo><Info>Age: </Info>{user.age}</AboutInfo>
+            <AboutInfo><Info>Location: </Info>{user.location}</AboutInfo>
+            <AboutInfo><Info>Gender: </Info>{user.gender}</AboutInfo>
+            <Fav><Info>Favorite: </Info>{user.favourite || ""}</Fav>
           </div>
-        ))}
+        
         </About>
         <Followers>
-        {Users?.map((abt) =>(
-          <div key={abt.userid}>
-            <FollowNumber>{abt.Followers}</FollowNumber>
+          <div>
+            <FollowNumber>{user.followers}</FollowNumber>
           </div>
-        ))}
           <Digit>followers</Digit>
         </Followers>
       </AboutWrapper>
