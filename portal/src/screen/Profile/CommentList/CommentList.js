@@ -5,14 +5,15 @@ import { PostServices } from "../../../services";
 // import { Input } from "antd";
 import { Input } from "@mui/material";
 const NewComment = (props) => {
-    const [comment, setComment] = useState('');
-    const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+  const [comment, setComment] = useState("");
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
       // console.log('do validate');
       props.onComment(e.target.value);
-      setComment('');
+      setComment("");
+      props.updateCountComment();
     }
-  }
+  };
   return (
     <div className="comment__wrapper">
       <img className="comment__user-avatar" src={props.avatar} alt="ava" />
@@ -28,9 +29,9 @@ const NewComment = (props) => {
       </div>
     </div>
   );
-}
+};
 
-const CommentList = React.memo(({ postID, userID }) => {
+const CommentList = React.memo(({ postID, userID, updateCountComment }) => {
   const token = localStorage.getItem("token");
   const [commentList, setCommentList] = useState([]);
   const fetchComment = async () => {
@@ -59,7 +60,9 @@ const CommentList = React.memo(({ postID, userID }) => {
     PostServices.newComment(userID, postID, content, token)
       .then((data) => {
         // console.log(data);
-        if(data.code == 200) {fetchComment();}
+        if (data.code == 200) {
+          fetchComment();
+        }
       })
       .catch(() => console.log())
       .finally(() => {});
@@ -73,7 +76,7 @@ const CommentList = React.memo(({ postID, userID }) => {
         content={"Write a new comment"}
         // avatarUrl={comment.avatar}
       /> */}
-      <NewComment onComment={onComment} />
+      <NewComment onComment={onComment} updateCountComment={updateCountComment} />
       {commentList?.length > 0 &&
         commentList.map((comment) => {
           return (
