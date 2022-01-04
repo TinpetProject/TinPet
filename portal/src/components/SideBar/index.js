@@ -1,12 +1,11 @@
 import React from "react";
 import { SideBarWrapper, SideBarElement, SideBarList, SideBarElementTitle, SideBarElementQuantity, SideBarListTitle } from "./style";
 
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { Icon } from "@iconify/react";
 import "./style.css";
 import styled from "styled-components";
-import zIndex from "@mui/material/styles/zIndex";
 export default function SideBar({ showSetting, logOutHandler }) {
     const mainMenu = [
         {

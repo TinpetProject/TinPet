@@ -271,7 +271,7 @@ export default function CreatePost({ closePostDetail, user , updatePostList}) {
               <img src={user.avatar} className="user-avatar" alt="" />
               <div className="user">
                 <div className="user-name">{user.name}</div>
-                <div className="user-name-belong">vợ Minh Trí</div>
+                <div className="user-name-belong">{user.breed}</div>
               </div>
             </div>
             <div className="content-box-body-input" contentEditable={true} placeholder="What do you think..." onInput={(e) => handlePostContent(e.currentTarget.textContent)}></div>
@@ -290,7 +290,7 @@ export default function CreatePost({ closePostDetail, user , updatePostList}) {
                 </div>
                 <div className={`model ${isPreview ? "open" : ""}`}>
                   {selectedFiles && renderPreviewFiles(preview)}
-                  {selectedFiles && selectedFiles.length > 0 && (
+                  {selectedFiles && selectedFiles.length > 1 && (
                     <>
                       <div className="prev" onClick={handlePreviewPrev}>
                         <Icon icon="grommet-icons:previous" color="white" width="32" height="32" />

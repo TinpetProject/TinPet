@@ -22,22 +22,18 @@ const Profile = ({ userID }) => {
       setSelectedUser(id);
     }
   }, [location]);
+
   useEffect(() => {
-    // if(selectedUser !== userID) {
-    //   setSelectedUser(userID);
-    // }
     const getUser = async () => {
       axios
         .get(`/user/${selectedUser}/profile`)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           setUser({
             ...response.data.data,
-            avatar:
-              "https://scontent.fhan5-4.fna.fbcdn.net/v/t39.30808-6/270772893_1567946906894523_1047998408474512960_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=UDouyg3f9X4AX-pmsZd&tn=i1yGCvqKaMsUYmLN&_nc_ht=scontent.fhan5-4.fna&oh=00_AT8z-4gaLISuR7xppz5vpNfe01um66ajORsM6f-vM7pKKg&oe=61D5CA10",
+            avatar: response.data.data.avatar || "https://res.cloudinary.com/thecodingpanda/image/upload/v1641272668/zoyndaseei9wnbrybwxr.png?fbclid=IwAR2YOBaBi-4FdUEFD_XjI9vgrwHAcfpupP8vnGS7p26Lrq8v3XGzFvD3pxk",
             backgroundImage:
-              "https://scontent.fhan5-4.fna.fbcdn.net/v/t39.30808-6/270772893_1567946906894523_1047998408474512960_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=UDouyg3f9X4AX-pmsZd&tn=i1yGCvqKaMsUYmLN&_nc_ht=scontent.fhan5-4.fna&oh=00_AT8z-4gaLISuR7xppz5vpNfe01um66ajORsM6f-vM7pKKg&oe=61D5CA10",
-            name: "Minh Tâm",
+              "https://res.cloudinary.com/thecodingpanda/image/upload/v1641272668/zoyndaseei9wnbrybwxr.png?fbclid=IwAR2YOBaBi-4FdUEFD_XjI9vgrwHAcfpupP8vnGS7p26Lrq8v3XGzFvD3pxk",
           });
         })
         .catch((error) => console.log(error));
@@ -45,15 +41,12 @@ const Profile = ({ userID }) => {
 
     selectedUser && getUser();
   }, [selectedUser]);
-  // console.log(selectedUser);
 
   useEffect(() => {
     const getPost = async () => {
       const data = await PostServices.getPostByUserID(selectedUser, token);
-      console.log(data);
+      // console.log(data);
       if (!!data && data.code === 200) {
-        // console.log("commentList");
-        // console.log("data", data);
         setPosts(
           data.data.map((post) => {
             if (post.photos) {
@@ -86,8 +79,8 @@ const Profile = ({ userID }) => {
   const updatePostList = (newPost) => {
     setPosts((prev) => [newPost, ...prev]);
   };
-
-  console.log(posts);
+  // console.log("user :::", user);
+  // console.log(posts);
 
   return (
     <>

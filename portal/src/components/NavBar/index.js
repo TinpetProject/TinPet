@@ -18,6 +18,7 @@ import { useHistory } from "react-router-dom";
 import { Button } from "@mui/material";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const StyledButton = styled(Button)`
   text-decoration: none;
@@ -31,6 +32,8 @@ const NavBar = React.memo(({ userID, socket, showSetting, logOutHandler }) => {
   const location = useLocation();
   const [notifications, setNotifications] = useState([]);
   const [openNotification, setOpenNotification] = useState(false);
+  const [user, setUser] = React.useState({});
+
   // console.log(location.pathname);
   useEffect(() => {
     if (socket) {
@@ -56,6 +59,23 @@ const NavBar = React.memo(({ userID, socket, showSetting, logOutHandler }) => {
         }
     }
   }, [location, notifications, socket])
+  useEffect(() => {
+    const getUser = async () => {
+      axios
+        .get(`/user/${userID}/profile`)
+        .then((response) => {
+          setUser({
+            ...response.data.data,
+            avatar: response.data.data.avatar || "https://res.cloudinary.com/thecodingpanda/image/upload/v1641272668/zoyndaseei9wnbrybwxr.png?fbclid=IwAR2YOBaBi-4FdUEFD_XjI9vgrwHAcfpupP8vnGS7p26Lrq8v3XGzFvD3pxk",
+            backgroundImage:
+              "https://res.cloudinary.com/thecodingpanda/image/upload/v1641272668/zoyndaseei9wnbrybwxr.png?fbclid=IwAR2YOBaBi-4FdUEFD_XjI9vgrwHAcfpupP8vnGS7p26Lrq8v3XGzFvD3pxk",
+          });
+        })
+        .catch((error) => console.log(error));
+    };
+
+    userID && getUser();
+  }, [userID]);
 
   // console.log(notifications);
 
@@ -126,7 +146,7 @@ const NavBar = React.memo(({ userID, socket, showSetting, logOutHandler }) => {
           <Link to={`/profile/${userID}`}>
             <Avatar
               alt="corgi"
-              src="https://media.travelmag.vn/files/quyensok/2021/02/19/151744159_1858284524329401_8015280447006743040_n-1629.jpg"
+              src={user.avatar}
             />
           </Link>
           <Menu>

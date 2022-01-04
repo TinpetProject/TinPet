@@ -37,7 +37,7 @@ export const Name = styled.div `
   font-family: Source Sans Pro, sans-serif;
   font-weight: bold;
   font-size: 30px;
-  color: #FFFFFF;
+  color: #fb6b6c;
 `;
 
 export const HeadBar = styled.div `

@@ -31,7 +31,7 @@ import axios from "axios";
 // const defaultPostID = "1116301c-477f-2a8f-555f-1885b89fc8fc";
 
 export default function Post({ post, userID, user }) {
-  const [comments, setComments] = useState([]);
+  // const [comments, setComments] = useState([]);
   const token = localStorage.getItem("token");
   const [countLike, setCountLike] = useState(post.like);
   const [countComment, setCountComment] = useState(post.comment);
@@ -39,7 +39,7 @@ export default function Post({ post, userID, user }) {
   const [isCommenting, setIsCommenting] = useState(false);
   const userAvatar = user.avatar;
   const userName = user.name;
-  const displayTime = !!post.date && `${timeSince(Date.parse(post.date))} ago`;
+  const displayTime = !!post.date && `${timeSince(new Date(post.date))} ago`;
   const [preview, setPreview] = React.useState("");
   const [isPreview, setIsPreview] = React.useState(false);
 
@@ -197,7 +197,7 @@ export default function Post({ post, userID, user }) {
           </div>
           <div className={`model ${isPreview ? "open" : ""}`}>
             {post.photos && renderPreviewFiles(preview)}
-            {post.photos && post.photos.length > 0 && (
+            {post.photos && post.photos.length > 1 && (
               <>
                 <div className="prev" onClick={handlePreviewPrev}>
                   <Icon icon="grommet-icons:previous" color="white" width="32" height="32" />
