@@ -4,9 +4,6 @@ import { Backdrop, BackdropImg } from './style';
 const Modal = ({ setSelectedImg, selectedImg }) => {
 
   const handleClick = (e) => {
-    // if (e.target.classList.contains(Backdrop)) {
-    //   setSelectedImg(null);
-    // }
     setSelectedImg(null);
   }
 
@@ -23,12 +20,4 @@ const Modal = ({ setSelectedImg, selectedImg }) => {
   )
 }
 
-// const Modal = () => {
-
-//     return (
-//       <Backdrop>
-//         <BackdropImg src="" alt="enlarged pic"/>
-//       </Backdrop>
-//     )
-//   }
 export default Modal;

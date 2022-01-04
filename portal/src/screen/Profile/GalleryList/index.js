@@ -7,18 +7,18 @@ import {
 //data
 import { PhotoGal } from "../dummyData";
 
-export default function GalleryList({ userID, setSelectedImg }) {
+export default function GalleryList({ userID, setSelectedImg, images }) {
 
     return (
         <div>
             <PhotosWrapper>
-                {PhotoGal?.map((p) => (
-                    <ImgWrapper key={p.id}
+                {images?.map((image, index) => (
+                    <ImgWrapper key={index}
                         layout
                         whileHover={{ opacity: 1 }} s
-                        onClick={() => setSelectedImg(p.photo)}
+                        onClick={() => setSelectedImg(image.link)}
                     >
-                        <Img src={p.photo}
+                        <Img src={image.link}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 1 }}

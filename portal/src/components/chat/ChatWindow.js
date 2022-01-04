@@ -4,7 +4,7 @@ import ChatInput from "./ChatInput";
 import "./ChatWindow.css";
 import ChatWindowHeader from "./ChatWindowHeader/ChatWindowHeader";
 
-const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceivedHandler, onSeenMessage }) => {
+const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceivedHandler, onSeenMessage,userAvatar ,chosenUserInfo = null,setChosenUserInfo}) => {
   const [conversation, setConversation] = useState([]);
   const [messageOffset, setMessageOffset] = useState(null);
   const [hasMoreMessage, setHasMoreMessage] = useState(true);
@@ -129,7 +129,7 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
 
   return (
     <div className="messenger__chat-window">
-      <ChatWindowHeader chosenUserID={chosenUserID} socket={socket} />
+      <ChatWindowHeader chosenUserID={chosenUserID} socket={socket} updateChosenUserInfo={setChosenUserInfo} />
       <div className="chat-window__messages-wrapper">
         {conversation?.map((message, index) => {
           const isSender = message.userID === userID;
@@ -142,6 +142,8 @@ const ChatWindow = React.memo(({ userID, chosenUserID, socket, newMessageReceive
               message={message.content}
               isSender={isSender}
               isAvarShow={isAvarShow}
+              chosenUserAvatar={chosenUserInfo.avatar}
+              userAvatar={userAvatar}
             />
           );
         })}

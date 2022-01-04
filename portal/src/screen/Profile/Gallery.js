@@ -1,22 +1,21 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { ProfileWrapper } from "./style";
 import ProfileHead from "./ProfileHead";
 import { Main } from "../../styled-component/style";
 import GalleryList from "./GalleryList";
 import Modal from "./GalleryList/Modal";
 
-const Gallery = ({userID}) => {
-  const [selectedImg, setSelectedImg] = useState(null);
+const Gallery = ({ userID, images }) => {
+  const [selectedImg, setSelectedImg] = useState();
+  
   return (
-    <Main>
-      <ProfileWrapper>
-        <ProfileHead />
-        <GalleryList userID={userID} setSelectedImg={setSelectedImg}/>
-        { selectedImg && (
+    <>
+      <GalleryList userID={userID} setSelectedImg={setSelectedImg} images={images} />
+      {selectedImg && (
         <Modal selectedImg={selectedImg} setSelectedImg={setSelectedImg} />
-        )}
-      </ProfileWrapper>
-    </Main>
+      )}
+    </>
+
   );
 };
 

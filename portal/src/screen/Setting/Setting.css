@@ -21,6 +21,7 @@
     background-color: black;
 }
 
+
 /*Setting*/
 
 .container-content-wrapper {
@@ -33,7 +34,9 @@
     display: inline-block;
 }
 
+
 /* Setting sidebar */
+
 .content-box-sidebar {
     height: 100%;
     width: 240px;
@@ -41,10 +44,13 @@
     background-color: #F7F7F7;
     float: left;
 }
+
+
 /* Sidebar user */
-.content-box-sidebar-user{
+
+.content-box-sidebar-user {
     position: relative;
-    background-color: white;
+    background-color: #F7F7F7;
     padding: 10px;
     border-radius: 8px;
     align-items: center;
@@ -52,25 +58,29 @@
     flex-direction: row;
     align-items: center;
 }
+
 .content-box-sidebar-user .avatar {
     width: 40px;
     height: 40px;
     border-radius: 100%;
     object-fit: cover;
 }
-.content-box-sidebar-user .id{
+
+.content-box-sidebar-user .id {
     position: relative;
-    flex-direction: column;   
+    flex-direction: column;
     margin-left: 10px;
-} 
+}
+
 .content-box-sidebar-user .name {
     font-family: sans-serif;
     font-weight: bold;
-    font-size: 17px;
+    font-size: 1.1rem;
     line-height: 19px;
-
     color: #373737;
+    margin-left: 10px;
 }
+
 .content-box-sidebar-user .email {
     font-family: sans-serif;
     font-weight: normal;
@@ -79,18 +89,20 @@
     color: #6e6e6e;
 }
 
+
 /* Sidebar menu */
-.content-box-sidebar-menu{
+
+.content-box-sidebar-menu {
     margin-top: 9px;
     border-top: solid 2px gray;
 }
 
-.sidebar-menu{
+.sidebar-menu {
     position: relative;
     text-decoration: none !important;
 }
 
-.sidebar-element{
+.sidebar-element {
     display: flex;
     margin: 5px 0;
     padding: 10px 10px;
@@ -102,14 +114,16 @@
     line-height: 20px;
     border-radius: 8px;
     cursor: pointer;
-    background-color: #fff;
+    background-color: #F7F7F7;
+    ;
 }
-.sidebar-element:hover{
+
+.sidebar-element:hover {
     background-color: #fb6d6c;
     color: #fff;
 }
 
-.sidebar-element-title{
+.sidebar-element-title {
     padding-left: 12px;
     flex: 1;
 }
@@ -128,7 +142,8 @@
 
 
 /* Sidebar sign out */
-.content-box-sidebar-signout{
+
+.content-box-sidebar-signout {
     position: relative;
     top: 400px;
 }
@@ -137,16 +152,21 @@
     color: var(--main-white-color);
 }
 
+
 /* Setting content */
-.content-box-main{
+
+.content-box-main {
     position: relative;
     margin-left: 240px;
     width: 840px;
     height: 100%;
     padding: 20px;
 }
+
+
 /* content header */
-.content-box-main-header{
+
+.content-box-main-header {
     position: static;
     width: 100%;
     height: 80px;
@@ -156,7 +176,8 @@
     display: flex;
     align-items: center;
 }
-.content-box-main-header .title{
+
+.content-box-main-header .title {
     position: absolute;
     left: 40px;
     font-family: sans-serif;
@@ -164,85 +185,102 @@
     font-weight: bold;
     font-size: 24px;
 }
-.content-box-main-header .close{
-    width:  32px;
+
+.content-box-main-header .close {
+    width: 32px;
     height: 32px;
     border-radius: 50%;
     right: 40px;
     position: absolute;
 }
-.content-box-main-header .close:hover{
+
+.content-box-main-header .close:hover {
     background-color: #c1c1c1;
 }
 
+
 /* content mid */
-.content-box-main-mid{
+
+.content-box-main-mid {
     position: relative;
     width: 100%;
     height: 450px;
     border-bottom: solid 2px #c1c1c1;
-    display:flex;
+    display: flex;
     float: left;
 }
+
+
 /* left column */
-.content-box-main-mid .left{
+
+.content-box-main-mid .left {
     width: 50%;
     padding: 10px;
 }
 
+
 /* avatar upload */
-.content-box-main-mid .left .user{
+
+.content-box-main-mid .left .user {
     position: relative;
     width: 100%;
     padding: 20px 0px 0px 20px;
     display: flex;
     flex-direction: column;
 }
-.content-box-main-mid .left .user .title{
+
+.content-box-main-mid .left .user .title {
     position: relative;
     font-family: sans-serif;
     font-weight: bold;
     line-height: 17px;
 }
-.content-box-main-mid .left .user .edit-avatar{
+
+.content-box-main-mid .left .user .edit-avatar {
     position: relative;
-    padding: 20px 0px 10px 20px;;
+    padding: 20px 0px 10px 20px;
     float: left;
     display: flex;
 }
-.content-box-main-mid .left .user .edit-avatar .avatar{
+
+.content-box-main-mid .left .user .edit-avatar .avatar {
     width: 90px;
     height: 90px;
     border-radius: 50%;
     object-fit: cover;
 }
-.content-box-main-mid .left .user .edit-avatar .edit{
-    margin-left:20px;
+
+.content-box-main-mid .left .user .edit-avatar .edit {
+    margin-left: 20px;
 }
-.content-box-main-mid .left .user .edit-avatar .edit .name{
+
+.content-box-main-mid .left .user .edit-avatar .edit .name {
     font-family: sans-serif;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 17px;
     margin: 10px 0px;
 }
-.content-box-main-mid .left .user .edit-avatar .edit .btn{
+
+.content-box-main-mid .left .user .edit-avatar .edit .btn {
     width: 135px;
-    height: 36px; 
+    height: 36px;
     padding: 5px;
     justify-content: center;
-    align-items: center;  
-    border: solid 1px #333333; 
+    align-items: center;
+    border: solid 1px #333333;
     font-family: sans-serif;
-    font-size: 16px;
-    line-height: 17px;
+    font-size: 14px;
+    line-height: 16px;
     cursor: pointer;
     border-radius: 5px;
 }
-.btn:hover{
+
+.btn:hover {
     opacity: 0.5;
 }
-.content-box-main-mid .left .user .edit-avatar .edit .note{
+
+.content-box-main-mid .left .user .edit-avatar .edit .note {
     font-family: sans-serif;
     font-weight: bold;
     font-size: 10px;
@@ -250,11 +288,15 @@
     margin-bottom: 5px;
     color: #A4A4A4;
 }
+
+
 /* right column */
-.content-box-main-mid .right{
+
+.content-box-main-mid .right {
     width: 50%;
     padding: 10px;
 }
+
 .update-profile-btn {
     position: relative;
     top: 30px;
@@ -262,36 +304,42 @@
     width: fit-content;
     padding: 12px;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
     background-color: #A4A4A4;
     font-family: sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: black;
     cursor: pointer;
     border-radius: 10px;
 }
+
 .update-profile-btn:hover {
     color: #ffffff;
     background-color: #fb6d6c;
 }
+
+
 /* editting fieldtext */
-.detail-edit{
+
+.detail-edit {
     position: relative;
     width: 100%;
     margin-top: 20px;
 }
-.detail-edit .title{
+
+.detail-edit .title {
     font-family: sans-serif;
     font-weight: bold;
     line-height: 17px;
     margin-bottom: 10px;
     margin-left: 20px;
+    font-size: 14px;
 }
 
 .detail-edit .fieldtext {
     width: 320px;
-    height: 34px; 
+    height: 34px;
     margin-left: 20px;
     padding: 5px;
     outline: unset;
@@ -299,27 +347,32 @@
     font-weight: 400;
     border: solid 1px gray;
     border-radius: 5px;
-    align-items: center;  
+    align-items: center;
     color: gray;
     overflow: auto;
 }
-[contentEditable=true]:empty:not(:focus):before{
-    content:attr(data-text);
+
+[contentEditable=true]:empty:not(:focus):before {
+    content: attr(data-text);
     color: rgb(144, 144, 144);
 }
+
 .fieldtext::-webkit-scrollbar {
     display: none;
 }
 
+
 /* content bottom */
-.content-box-main-bottom{
+
+.content-box-main-bottom {
     position: relative;
     padding-left: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
 }
-.content-box-main-bottom .title{
+
+.content-box-main-bottom .title {
     position: relative;
     margin-top: 20px;
     font-family: sans-serif;
@@ -328,22 +381,24 @@
     font-size: 14px;
     line-height: 17px;
 }
-.content-box-main-bottom .content{
+
+.content-box-main-bottom .content {
+    max-width: 300px;
     position: relative;
     margin-top: 10px;
     margin-bottom: 10px;
     font-family: sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 10px;
-    line-height: 12px;
+    font-size: 11px;
+    line-height: 11px;
     color: #BE2B21;
 }
-.content-box-main-bottom .delete{
+
+.content-box-main-bottom .delete {
     display: flex;
     justify-content: center;
     align-items: center;
-
     position: relative;
     width: 220px;
     height: 35px;
@@ -351,12 +406,47 @@
     color: #BE2B21;
     border-radius: 6px;
     cursor: pointer;
-    
     font-family: sans-serif;
     font-size: 14px;
     line-height: 17px;
 }
-.content-box-main-bottom .delete:hover{
+
+.content-box-main-bottom .delete:hover {
     opacity: 0.5;
 }
 
+.selected {
+    background-color: white;
+}
+
+.option-fields {
+    width: 320px;
+    height: 34px;
+    margin-left: 20px;
+    padding: 5px;
+    outline: unset;
+    font-size: 16px;
+    font-weight: 400;
+    border: solid 1px gray;
+    border-radius: 5px;
+    align-items: center;
+    color: gray;
+    overflow: auto;
+}
+
+#root>div>div.container>div.container-content-wrapper>div.content-box-main>div.content-box-main-mid>div.left>div:nth-child(2)>label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+#root>div>div.container>div.container-content-wrapper>div.content-box-main>div.content-box-main-mid>div.left>div:nth-child(3)>label {
+    display: block;
+}
+
+#root>div>div.container>div.container-content-wrapper>div.content-box-main>div.content-box-main-mid>div.right>div:nth-child(4)>label {
+    display: block;
+}
+
+.detail-edit option {
+    height: 100px;
+}

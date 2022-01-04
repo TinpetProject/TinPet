@@ -34,7 +34,7 @@ const ChatBarElement = React.memo(({ conversation, userID }) => {
   return (
     <li className="conversation" onClick={onClickHandler}>
       <div className="conversation__avatar">
-        <Avatar alt="user-avatar" src={fakeAvatar} />
+        <Avatar alt="user-avatar" src={avatar} />
       </div>
       <div className="conversation__content-wrapper">
         <p className="conversation__name">{name}</p>
