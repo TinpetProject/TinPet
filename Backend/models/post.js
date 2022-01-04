@@ -37,7 +37,11 @@ module.exports = class Post {
     // like poss
     const [resultSet] = await database.query(`CALL Proc_GetPost('${userID}');`);
     const postList = resultSet[0].map((post) => {
-      return { ...post, isLike: !!post.isLike };
+      return {
+        ...post,
+        isLike: !!post.isLike,
+        date: new Date(Math.floor((post.date.getTime() + 7 * 60 * 60 * 1000) / 1000) * 1000),
+      };
     });
     return resultSet.length === 0 ? null : postList;
   });

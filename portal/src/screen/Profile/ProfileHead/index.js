@@ -57,6 +57,10 @@ export default function ProfileHead({ user, userID, selectedUser }) {
   }
   // console.log(user);
 
+  const goChatHandler = () => {
+    history.push(`/messenger/${selectedUser}`)
+  }
+
   return (
     <div>
       <HeadWrapper>
@@ -68,7 +72,7 @@ export default function ProfileHead({ user, userID, selectedUser }) {
             <>
               <ButtonPut><AddCircleOutlineIcon /></ButtonPut>
               <ButtonPut><FavoriteBorderIcon /></ButtonPut>
-              <ButtonPut><ChatIcon /></ButtonPut>
+              <ButtonPut onClick = {goChatHandler}><ChatIcon /></ButtonPut>
             </>
           ) : ("")}
         </HeadBar>

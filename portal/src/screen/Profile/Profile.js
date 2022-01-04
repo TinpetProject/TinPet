@@ -37,7 +37,9 @@ const Profile = ({ userID }) => {
           // console.log(response);
           setUser({
             ...response.data.data,
-            avatar: response.data.data.avatar || "https://res.cloudinary.com/thecodingpanda/image/upload/v1641272668/zoyndaseei9wnbrybwxr.png?fbclid=IwAR2YOBaBi-4FdUEFD_XjI9vgrwHAcfpupP8vnGS7p26Lrq8v3XGzFvD3pxk",
+            avatar:
+              response.data.data.avatar ||
+              "https://res.cloudinary.com/thecodingpanda/image/upload/v1641272668/zoyndaseei9wnbrybwxr.png?fbclid=IwAR2YOBaBi-4FdUEFD_XjI9vgrwHAcfpupP8vnGS7p26Lrq8v3XGzFvD3pxk",
             backgroundImage:
               "https://res.cloudinary.com/thecodingpanda/image/upload/v1641272668/zoyndaseei9wnbrybwxr.png?fbclid=IwAR2YOBaBi-4FdUEFD_XjI9vgrwHAcfpupP8vnGS7p26Lrq8v3XGzFvD3pxk",
           });
@@ -62,6 +64,20 @@ const Profile = ({ userID }) => {
 
 
   useEffect(() => {
+    const fetchPosts = async () => {
+      const data = await fetch(`http://localhost:8888/post/${userID}`, {
+        method: "GET",
+        headers: { accept: "application/json", "Content-Type": "application/json", authorization: `Bearer ${token}` },
+      });
+      if (!!data && data.status === 200) {
+        const retval = await data.json();
+        return { code: data.status, data: retval.data };
+      } else {
+        // alert("Error! " + data.message);
+        return { code: data.status, data: undefined };
+      }
+    }
+    
     const getPost = async () => {
       const data = await PostServices.getPostByUserID(selectedUser, token);
       // console.log(data);
