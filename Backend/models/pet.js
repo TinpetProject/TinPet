@@ -70,10 +70,10 @@ module.exports = class Pet {
       if (err.errno == -61)
       {
         const [resultSet] = await database.execute(
-          `SELECT p.*, pe.userID, r.isLiked, r.isMatched, r.isFriend
+          `SELECT p.*, pe.userID, r.isLiked, r.isMatched, r.isFriend, u.avatar
           FROM View_PetInformation p, (Pet pe
           LEFT JOIN (SELECT * FROM Relationship WHERE targetUserID = '${this.userID}') r
-          ON pe.userId = r.userID) 
+          ON pe.userId = r.userID LEFT JOIN User u ON pe.userId = u.userID) 
           WHERE p.petID=pe.petID;`
         );
   
@@ -90,10 +90,10 @@ module.exports = class Pet {
     {
       const petID_str = id_list.slice(start, end).map(a => "'" + a + "'").join(' , ');
       const [resultSet] = await database.execute(
-          `SELECT p.*, pe.userID, r.isLiked, r.isMatched, r.isFriend
+          `SELECT p.*, pe.userID, r.isLiked, r.isMatched, r.isFriend, u.avatar
           FROM View_PetInformation p, (Pet pe
           LEFT JOIN (SELECT * FROM Relationship WHERE targetUserID = '${this.userID}') r
-          ON pe.userId = r.userID) 
+          ON pe.userId = r.userID LEFT JOIN User u ON pe.userId = u.userID) 
           WHERE p.petID IN (${petID_str}) AND p.petID=pe.petID;`
         );
   
@@ -108,10 +108,10 @@ module.exports = class Pet {
       await publisher.publish('new_pet_data', `${petID}`);
 
       const [resultSet] = await database.execute(
-        `SELECT p.*, pe.userID, r.isLiked, r.isMatched, r.isFriend
+        `SELECT p.*, pe.userID, r.isLiked, r.isMatched, r.isFriend, u.avatar
         FROM View_PetInformation p, (Pet pe
         LEFT JOIN (SELECT * FROM Relationship WHERE targetUserID = '${this.userID}') r
-        ON pe.userId = r.userID) 
+        ON pe.userId = r.userID LEFT JOIN User u ON pe.userId = u.userID) 
         WHERE p.petID=pe.petID;`
       );
 
