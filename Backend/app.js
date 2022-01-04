@@ -33,6 +33,13 @@ app.use((error, req, res, next) => {
     res.json({ message: error.message });
 });
 
+// app.use((err, req, res, next) => {
+//     res.locals.error = err;
+//     const status = err.status || 500;
+//     res.status(status);
+//     res.render('error');
+//   });
+
 const server = app.listen(process.env.LISTENING_PORT || 3000);
 
 socket.init(server);
