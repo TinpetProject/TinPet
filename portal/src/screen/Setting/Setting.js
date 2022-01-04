@@ -1,8 +1,42 @@
 import React from 'react';
 import "./Setting.css";
 import { Icon } from "@iconify/react";
+import axios from "axios";
+import { useParams, useLocation } from "react-router-dom";
 
-export default function Setting({userID,hideSetting}) {
+export default function Setting({hideSetting}) {
+    const [user, setUser] = React.useState({});
+    const [selectedUser, setSelectedUser] = React.useState(useParams().chosenUserID);
+    const location = useLocation();
+    React.useEffect(() => {
+        if (location && location.pathname) {
+        const id = location.pathname.split("/")[2];
+        setSelectedUser(id);
+        }
+    }, [location]);
+    React.useEffect(() => {
+        // if(selectedUser !== userID) {
+        //   setSelectedUser(userID);
+        // }
+        const getUser = async () => {
+          axios
+            .get(`/user/${selectedUser}/profile`)
+            .then((response) => {
+              console.log(response);
+              setUser({
+                ...response.data.data,
+                avatar:
+                  "https://scontent.fhan5-4.fna.fbcdn.net/v/t39.30808-6/270772893_1567946906894523_1047998408474512960_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=UDouyg3f9X4AX-pmsZd&tn=i1yGCvqKaMsUYmLN&_nc_ht=scontent.fhan5-4.fna&oh=00_AT8z-4gaLISuR7xppz5vpNfe01um66ajORsM6f-vM7pKKg&oe=61D5CA10",
+                email:
+                    "minhtam@gmail.com",
+                name: "Minh Tâm",
+              });
+            })
+            .catch((error) => console.log(error));
+        };
+    
+        selectedUser && getUser();
+      }, [selectedUser]);
     const mainMenu = [
         {
             icon: <Icon className="menu__account-icon" icon="mdi:account-circle-outline" />,
@@ -54,11 +88,11 @@ export default function Setting({userID,hideSetting}) {
 {/* sidebar */}
                 <div className="content-box-sidebar">
                     <div className="content-box-sidebar-user">
-                        <img src="https://lh6.googleusercontent.com/proxy/TzFjtW4IYw1Ct9IGlUbmq_GNXCjqGfKucN1irkehgc8kKNyIKLm9HEdcbgeoMlL27I5dGrxpslMZttyw6JKGslKObBJ7K1Su50OL3npuVhy5VDFeCC2laqmZcalwMaBQdXaxqCIpj1fPb8HtFJIzxzM" 
+                        <img src={user.avatar} 
                         className="avatar" alt="Shiba"/>
                         <div className='id'>
-                            <div className="name"> Shiba</div>
-                            <div className="email"> Shiba@gmail.com</div>
+                            <div className="name"> {user.name}</div>
+                            <div className="email"> {user.email}</div>
                         </div>
                     </div>
                     <div className="content-box-sidebar-menu">
@@ -92,10 +126,10 @@ export default function Setting({userID,hideSetting}) {
                             <div className="user">
                                 <div className="title">Photo</div>
                                 <div className="edit-avatar">
-                                    <img src="https://lh6.googleusercontent.com/proxy/TzFjtW4IYw1Ct9IGlUbmq_GNXCjqGfKucN1irkehgc8kKNyIKLm9HEdcbgeoMlL27I5dGrxpslMZttyw6JKGslKObBJ7K1Su50OL3npuVhy5VDFeCC2laqmZcalwMaBQdXaxqCIpj1fPb8HtFJIzxzM" 
+                                    <img src={user.avatar} 
                                     className="avatar" alt="Shiba"/>
                                     <div className="edit">
-                                        <div className="name">Shiba</div>
+                                        <div className="name">{user.name}</div>
                                         <div className="btn">
                                             <Icon icon="carbon:cloud-upload"/> Upload Photo
                                         </div>

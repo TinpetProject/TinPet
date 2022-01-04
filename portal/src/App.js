@@ -17,6 +17,7 @@ import { injectStyle } from "react-toastify/dist/inject-style";
 import PetList from "./screen/PetList/PetList";
 import Favorite from "./screen/Favorite/Favorite";
 import Game from "./screen/Game/Game";
+import Gallery from "./screen/Profile/Gallery";
 
 if (typeof window !== "undefined") {
     injectStyle();
