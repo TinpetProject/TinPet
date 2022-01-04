@@ -10,13 +10,8 @@ export default function Card(props) {
     const history = useHistory();
 
     const cardOnClickHandler = () => {
-        history.push(`/profile/${props?.petID}`);
-        // console.log(`May duoc redirect den trang profile cua user ${props?.match?.userID}`);
+        history.push(`/profile/${props?.userID}`);
     };
-
-    // const cardOnClickHandler = () => {
-    //     console.log(props.petID);
-    // };
 
     const heartBtnOnClickHandler = () => {
         setIsHeartClicked(!isHeartClicked);
