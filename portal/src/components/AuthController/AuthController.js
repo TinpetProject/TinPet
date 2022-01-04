@@ -2,6 +2,7 @@ import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import jwt from "jwt-decode";
 import openSocket from "socket.io-client";
+import axios from "axios";
 
 function AuthController(props) {
   const browserHistory = useHistory();
@@ -57,6 +58,8 @@ function AuthController(props) {
       localStorage.setItem("token", newToken);
       const decodedData = jwt(newToken);
       setUserID(decodedData.userID);
+      axios.defaults.baseURL = "http://localhost:8888";
+      axios.defaults.headers.common["Authorization"] = "Bearer " + newToken;
     };
     checkAndRenewToken();
   }, []);
@@ -73,7 +76,10 @@ function AuthController(props) {
     browserHistory.push("/login");
   };
 
-  const AppComponent = { ...props.children, props: { userID, socket, logInHandler, logOutHandler } };
+  const AppComponent = {
+    ...props.children,
+    props: { userID, socket, logInHandler, logOutHandler },
+  };
   return <>{AppComponent}</>;
 }
 

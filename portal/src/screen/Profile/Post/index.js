@@ -30,12 +30,12 @@ import axios from "axios";
 
 // const defaultPostID = "1116301c-477f-2a8f-555f-1885b89fc8fc";
 
-
 export default function Post({ post, userID, user }) {
   const [comments, setComments] = useState([]);
   const token = localStorage.getItem("token");
-  const [like, setLike] = useState(post.like);
-  const [isLiked, setIsLiked] = useState(false);
+  const [countLike, setCountLike] = useState(post.like);
+  const [countComment, setCountComment] = useState(post.comment);
+  const [isLiked, setIsLiked] = useState(post.isLike);
   const [isCommenting, setIsCommenting] = useState(false);
   const userAvatar = user.avatar;
   const userName = user.name;
@@ -44,34 +44,40 @@ export default function Post({ post, userID, user }) {
   const [isPreview, setIsPreview] = React.useState(false);
 
   const likeHandler = () => {
-      axios.post(`/post/${post.id}/like`).then(response => console.log(response))
-    .catch(error => console.log(error));
-    // setLike(like => isLiked ? like - 1 : like + 1);
-    setIsLiked(true);
+    axios
+      .post(`/post/${post.id}/like`)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+    setCountLike((like) => (isLiked ? like - 1 : like + 1));
+    setIsLiked((prev) => !prev);
   };
 
   const commentHandler = () => {
     setIsCommenting((prev) => !prev);
   };
 
+  const updateCountComment = () => {
+    setCountComment(prev => prev += 1);
+  }
+
   const openPreviewFiles = (e) => {
     setIsPreview(true);
     let src;
     if (e.target.src) {
-      src = e.target.src
+      src = e.target.src;
     } else {
       src = e.target.firstChild.src;
     }
     setPreview(src);
-  }
+  };
 
   const closePreviewFiles = () => {
-    setIsPreview(false)
+    setIsPreview(false);
     setPreview("");
-  }
+  };
 
   const renderFiles = (files) => {
-    const previewFiles = (files && files.length > 3) ? files.slice(0, 3) : files;
+    const previewFiles = files && files.length > 3 ? files.slice(0, 3) : files;
     switch (files.length) {
       case 0:
         break;
@@ -79,90 +85,97 @@ export default function Post({ post, userID, user }) {
         return (
           <div className="picture-box">
             <div className="picture-list-1">
-              {previewFiles.map(file => {
+              {previewFiles.map((file) => {
                 return (
                   <div className="picture-sleeve" onClick={openPreviewFiles}>
                     <img className="picture-item" src={file.url} alt={file.name} key={file} />
                   </div>
-                )
+                );
               })}
             </div>
           </div>
-        )
+        );
       case 2:
         return (
           <div className="picture-box">
             <div className="picture-list-2">
-              {previewFiles.map(file => {
+              {previewFiles.map((file) => {
                 return (
                   <div className="picture-sleeve" onClick={openPreviewFiles}>
                     <img className="picture-item" src={file.url} alt={file.name} key={file} />
                   </div>
-                )
+                );
               })}
             </div>
           </div>
-        )
+        );
       case 3:
         return (
           <div className="picture-box">
             <div className="picture-list-3" onClick={openPreviewFiles}>
-              {previewFiles.map(file => {
+              {previewFiles.map((file) => {
                 return (
                   <div className="picture-sleeve">
                     <img className="picture-item" src={file.url} alt={file.name} key={file} />
                   </div>
-                )
+                );
               })}
             </div>
           </div>
-        )
+        );
       default:
         console.log("case default");
         return (
           <div className="picture-box">
             <div className="picture-list">
-              {previewFiles.map(file => {
+              {previewFiles.map((file) => {
                 return (
                   <div className="picture-sleeve" onClick={openPreviewFiles}>
                     <img className="picture-item" src={file.url} alt={file.name} key={file} />
                   </div>
-                )
+                );
               })}
             </div>
           </div>
-        )
+        );
     }
-  }
+  };
 
   const renderPreviewFiles = (source) => {
     return (
       <>
         <img src={source} alt="" />
-        <Icon icon="bi:x-square" color="#fff" width="32" height="32" className="cls" onClick={closePreviewFiles} />
+        <Icon
+          icon="bi:x-square"
+          color="#fff"
+          width="32"
+          height="32"
+          className="cls"
+          onClick={closePreviewFiles}
+        />
       </>
-    )
-  }
+    );
+  };
 
   const handlePreviewPrev = () => {
     const currentTargetSrc = preview;
-    const currentTargetIdx = post.photos.findIndex(file => file.url === currentTargetSrc);
+    const currentTargetIdx = post.photos.findIndex((file) => file.url === currentTargetSrc);
     if (currentTargetIdx === 0) {
-      setPreview(post.photos[post.photos.length - 1].url)
+      setPreview(post.photos[post.photos.length - 1].url);
     } else {
-      setPreview(post.photos[currentTargetIdx - 1].url)
+      setPreview(post.photos[currentTargetIdx - 1].url);
     }
-  }
+  };
 
   const handlePreviewNext = () => {
     const currentTargetSrc = preview;
-    const currentTargetIdx = post.photos.findIndex(file => file.url === currentTargetSrc);
+    const currentTargetIdx = post.photos.findIndex((file) => file.url === currentTargetSrc);
     if (currentTargetIdx === post.photos.length - 1) {
-      setPreview(post.photos[0].url)
+      setPreview(post.photos[0].url);
     } else {
-      setPreview(post.photos[currentTargetIdx + 1].url)
+      setPreview(post.photos[currentTargetIdx + 1].url);
     }
-  }
+  };
 
   return (
     <>
@@ -200,13 +213,11 @@ export default function Post({ post, userID, user }) {
           <PostBottomLeft>
             <PostLikeCounter>
               {/* <Icon icon="ei:like" /> */}
-              <div className="postLikeCounterTitle">{post.like} likes</div>
+              <div className="postLikeCounterTitle">{countLike} likes</div>
             </PostLikeCounter>
             <PostCommentCounter>
               {/* <Icon icon="fa-regular:comment-alt" /> */}
-              <div className="postCommentCounterTitle">
-                {post.comment} comments
-              </div>
+              <div className="postCommentCounterTitle">{countComment} comments</div>
             </PostCommentCounter>
           </PostBottomLeft>
           <PostBottomRight>
@@ -223,7 +234,7 @@ export default function Post({ post, userID, user }) {
             </PostComment>
           </PostBottomRight>
         </PostBottom>
-        {isCommenting && !!post && <CommentList postID={post.id} userID={userID} />}
+        {isCommenting && !!post && <CommentList postID={post.id} userID={userID} updateCountComment={updateCountComment}/>}
       </PostWrapper>
     </>
   );
