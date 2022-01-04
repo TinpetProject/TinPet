@@ -15,9 +15,11 @@ import { Icon } from "@iconify/react";
 
 const headbar = [
   {
+    link: "/profile",
     button: "Profile",
   },
   {
+    link: "/profile/gallery",
     button: "Photos",
   }
 ]

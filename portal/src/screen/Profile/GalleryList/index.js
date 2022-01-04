@@ -7,10 +7,10 @@ import {
 //data
 import { PhotoGal } from "../dummyData";
 
-export default function GalleryList({ setSelectedImg }) {
+export default function GalleryList({ userID,setSelectedImg }) {
     
     return (
-        <div>  
+        <div>
             <PhotosWrapper>
                 {PhotoGal?.map((p) => (
                     <ImgWrapper key={p.id} 

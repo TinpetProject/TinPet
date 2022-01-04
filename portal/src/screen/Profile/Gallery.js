@@ -5,14 +5,13 @@ import { Main } from "../../styled-component/style";
 import GalleryList from "./GalleryList";
 import Modal from "./GalleryList/Modal";
 
-const Gallery = () => {
+const Gallery = ({userID}) => {
   const [selectedImg, setSelectedImg] = useState(null);
-  
   return (
     <Main>
       <ProfileWrapper>
         <ProfileHead />
-        <GalleryList setSelectedImg={setSelectedImg}/>
+        <GalleryList userID={userID} setSelectedImg={setSelectedImg}/>
         { selectedImg && (
         <Modal selectedImg={selectedImg} setSelectedImg={setSelectedImg} />
         )}

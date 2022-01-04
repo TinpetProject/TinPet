@@ -1,33 +1,66 @@
 import React from "react";
+import { useState } from "react";
 import "./Card.css";
 import { Icon } from "@iconify/react";
+import { useHistory } from "react-router-dom";
 
 export default function Card(props) {
+    const [isHeartClicked, setIsHeartClicked] = useState(false);
+    const [isPlusClicked, setIsPlusClicked] = useState(false);
+    const history = useHistory();
+
+    const cardOnClickHandler = () => {
+        history.push(`/profile/${props?.petID}`);
+        // console.log(`May duoc redirect den trang profile cua user ${props?.match?.userID}`);
+    };
+
+    // const cardOnClickHandler = () => {
+    //     console.log(props.petID);
+    // };
+
+    const heartBtnOnClickHandler = () => {
+        setIsHeartClicked(!isHeartClicked);
+    };
+
+    const plusBtnOnClickHandler = () => {
+        setIsPlusClicked(!isPlusClicked);
+        if (!isHeartClicked && isPlusClicked == false) {
+            setIsHeartClicked(true);
+        }
+    };
+
     return (
         <div className="card">
             <div className="card__match">
-                <span>80% Match</span>
+                <span>{props.matchPercentage}% Match</span>
             </div>
 
             <div className="card__info">
                 <div className="info__general">
-                    <span>{props.name}, 2</span>
-                    <Icon className="general__status-icon" icon="bi:circle-fill" />
+                    <span>
+                        {props.name}, {props.age}
+                    </span>
+                    {/* <Icon className="general__status-icon" icon="bi:circle-fill" /> */}
                 </div>
                 <div className="info__location">
                     <Icon className="location__location-icon" icon="ci:location" />
                     <span>Hanoi</span>
                 </div>
                 <div className="info__name"></div>
-                <Icon className="info__heart-btn" icon="bx:bxs-heart-circle" />
-                <Icon className="info__plus-btn" icon="bi:plus-circle-fill" />
+                <Icon
+                    className={`info__heart-btn ${isHeartClicked && "clicked"}  `}
+                    icon="bx:bxs-heart-circle"
+                    onClick={heartBtnOnClickHandler}
+                />
+                <Icon
+                    className={`info__plus-btn ${isPlusClicked && "clicked"}`}
+                    icon="bi:plus-circle-fill"
+                    onClick={plusBtnOnClickHandler}
+                />
             </div>
 
-            <div className="card__bg-img">
-                <img
-                    src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/16/08/gettyimages-464163411.jpg?crop=1.0xw:1xh;center,top&resize=980:*"
-                    alt=""
-                />
+            <div className="card__bg-img" onClick={cardOnClickHandler}>
+                <img src={props.pictureUrl} alt="" />
             </div>
         </div>
     );

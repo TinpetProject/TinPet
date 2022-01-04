@@ -78,9 +78,7 @@ const Profile = ({ userID }) => {
   const updatePostList = (newPost) => {
     setPosts((prev) => [newPost, ...prev]);
   };
-
-  console.log(posts);
-
+  console.log("user :::", user);
   return (
     <>
       <Main>

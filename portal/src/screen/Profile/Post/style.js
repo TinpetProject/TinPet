@@ -34,7 +34,7 @@ export const Time = styled.div `
     opacity: 0.5;
 `;
 
-// Edit post
+// Edit post btn
 export const Setting = styled.button `
     position: absolute;
     left: 540px;
