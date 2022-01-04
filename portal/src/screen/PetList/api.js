@@ -1,14 +1,29 @@
-import axios from "axios"
-import { toast } from "react-toastify"
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export const getPetList = (userID) => {
-    return axios.get(`/user/friend/${userID}`)
-        .then(response => response.data.data)
-        .catch(error => console.log(error));
-}
+    var myHeaders = new Headers();
+    let token = localStorage.getItem("token");
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    var requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+    };
+
+    let url = "http://localhost:8888/user/follow/" + userID;
+    let res;
+
+    return fetch(url, requestOptions)
+        .then((response) => response.json())
+        .then((result) => result)
+        .catch((error) => console.log("error", error));
+};
 
 export const removeFromPetList = ({ userID, targetUserID }) => {
-    return axios.post("/user/friend", { userID, targetUserID })
+    return axios
+        .post("/user/friend", { userID, targetUserID })
         .then((response) => {
             if (response.status === 200) {
                 toast.success(`Remove user ${userID} successfully!`, {
@@ -33,4 +48,4 @@ export const removeFromPetList = ({ userID, targetUserID }) => {
                     break;
             }
         });
-}
+};
