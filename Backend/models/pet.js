@@ -120,13 +120,14 @@ module.exports = class Pet {
   });
 
   like = tryCatchBlock(async (targetUserID) => {
+    console.log(this.userID);
     const result = await database.execute(
       `INSERT INTO tinpet.Relationship 
-      (userID, targetUserID, isLiked)
+      (relationshipID, userID, targetUserID, isLiked)
       VALUES 
-      ('${this.userID}', '${targetUserID}', 1)
+      (uuid(), '${this.userID}', '${targetUserID}', 1)
       ON DUPLICATE KEY UPDATE
-      isLiked = VALUES(isLiked);`
+      isLiked = 1;`
     );
     
     return result[0].affectedRows === 1 ? true : false;
@@ -135,11 +136,11 @@ module.exports = class Pet {
   follow = tryCatchBlock(async (targetUserID) => {
     const result = await database.execute(
         `INSERT INTO tinpet.Relationship 
-        (userID, targetUserID, isMatched)
+        (relationID, userID, targetUserID, isMatched)
         VALUES 
-        ('${this.userID}', '${targetUserID}', 1)
+        (uuid(), '${this.userID}', '${targetUserID}', 1)
         ON DUPLICATE KEY UPDATE
-        isMatched = VALUES(isMatched);`
+        isMatched = 1;`
       );
     
     if (result[0].affectedRows === 1)

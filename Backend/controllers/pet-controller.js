@@ -38,6 +38,7 @@ module.exports = {
 
 
     sendLike: tryCatchBlock(null, async (req, res, next) => {
+        // follow
         const { targetUserID } = req.body;
         const userIDIsExist = await Pet.isUserIDExist(req.userData.userID);
         const targetPetIDIsExist = await Pet.isUserIDExist(targetUserID);
@@ -49,14 +50,18 @@ module.exports = {
     }),
 
     sendFollow: tryCatchBlock(null, async (req, res, next) => {
+        // add friend
+        // return null;
+        console.log('HUHUHUHU')
         const { targetUserID } = req.body;
         const userIDIsExist = await Pet.isUserIDExist(req.userData.userID);
         const targetPetIDIsExist = await Pet.isUserIDExist(targetUserID);
+        console.log('HEHEHEHE')
         if (!userIDIsExist || !targetPetIDIsExist) return next(new HttpError("FOLLOW_PROCESSING_FAIL_USERID_NOT_EXIST", 404));
         
         const pet = new Pet({ userID: req.userData.userID });
         const status = await pet.follow(targetUserID);
-        return res.status(200).send({ message: "FOLLOW_PROCESSING_SUCCESS", status: status });
+        return res.status(200).send({ message: "FOLLOW_PROCESSING_SUCCESS", status: true });
     }),
 
     testRedis: tryCatchBlock(null, async (req, res, next) => {

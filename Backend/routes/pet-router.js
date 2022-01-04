@@ -13,9 +13,12 @@ router.get("/own", petController.getOwnPet);
 
 router.get("/pet-suggestion", petController.getPetSuggestion);
 
+router.put("/follow", petController.sendFollow);
+
 router.put("/like", petController.sendLike);
 
-router.put("/follow", petController.sendFollow);
+// router.put("/add-friend", petController.addFriend);
+// console.log('NOW COME HERE');
 
 router.get("/redis", petController.testRedis);
 
