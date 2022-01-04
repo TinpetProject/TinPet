@@ -12,10 +12,6 @@ export default function CardFavorite(props) {
         setIsOptionVisible(true);
     };
 
-    const close = () => {
-        setIsOptionVisible(false);
-    };
-
     useEffect(() => {
         const checkIfClickedOutside = (e) => {
             // If the menu is open and the clicked target is not within the menu,
@@ -35,14 +31,13 @@ export default function CardFavorite(props) {
 
     return (
         <div className="card-favorite">
-            <img
-                src={props?.favorite?.avatar}
-                alt=""
-            />
+            <img src={props?.favorite?.avatar} alt="" />
 
             <div className="card-favorite__info">
                 <div className="card-favorite__info--general">
-                    <span>{props?.favorite?.name}, {props?.favorite?.age}</span>
+                    <span>
+                        {props?.favorite?.name}, {props?.favorite?.age}
+                    </span>
                 </div>
                 <div className="card-favorite__info--location">
                     <Icon className="location__location-icon" icon="ci:location" />
@@ -59,20 +54,26 @@ export default function CardFavorite(props) {
                 }}
                 ref={ref}
             >
-                <div className="card-favorite__options-item" onClick={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    console.log("Matched")
-                    props.acceptFavorite();
-                }}>
+                <div
+                    className="card-favorite__options-item"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        console.log("Matched");
+                        props.acceptFavorite();
+                    }}
+                >
                     <Icon icon="bx:bx-heart-circle" color="#373737" />
                     <span>Match</span>
                 </div>
-                <div className="card-favorite__options-item" onClick={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    props.removeFavorite(props?.favorite?.userID)
-                }}>
+                <div
+                    className="card-favorite__options-item"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        props.removeFavorite(props?.favorite?.userID);
+                    }}
+                >
                     <Icon icon="feather:x-square" color="#373737" />
                     <span>Remove</span>
                 </div>
