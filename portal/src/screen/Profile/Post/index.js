@@ -87,7 +87,7 @@ export default function Post({ post, userID, user }) {
             <div className="picture-list-1">
               {previewFiles.map((file) => {
                 return (
-                  <div className="picture-sleeve" onClick={openPreviewFiles}>
+                  <div className="picture-sleeve" onClick={openPreviewFiles} key={file.url}>
                     <img className="picture-item" src={file.url} alt={file.name} key={file} />
                   </div>
                 );
@@ -101,7 +101,7 @@ export default function Post({ post, userID, user }) {
             <div className="picture-list-2">
               {previewFiles.map((file) => {
                 return (
-                  <div className="picture-sleeve" onClick={openPreviewFiles}>
+                  <div className="picture-sleeve" onClick={openPreviewFiles} key={file.url}>
                     <img className="picture-item" src={file.url} alt={file.name} key={file} />
                   </div>
                 );
@@ -115,7 +115,7 @@ export default function Post({ post, userID, user }) {
             <div className="picture-list-3" onClick={openPreviewFiles}>
               {previewFiles.map((file) => {
                 return (
-                  <div className="picture-sleeve">
+                  <div className="picture-sleeve" key={file.url}>
                     <img className="picture-item" src={file.url} alt={file.name} key={file} />
                   </div>
                 );
@@ -130,7 +130,7 @@ export default function Post({ post, userID, user }) {
             <div className="picture-list">
               {previewFiles.map((file) => {
                 return (
-                  <div className="picture-sleeve" onClick={openPreviewFiles}>
+                  <div className="picture-sleeve" onClick={openPreviewFiles} key={file.url}>
                     <img className="picture-item" src={file.url} alt={file.name} key={file} />
                   </div>
                 );
