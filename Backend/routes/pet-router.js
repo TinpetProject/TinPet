@@ -17,7 +17,6 @@ router.put("/follow", petController.sendFollow);
 
 router.put("/like", petController.sendLike);
 
-// router.put("/add-friend", petController.addFriend);
 // console.log('NOW COME HERE');
 
 router.get("/redis", petController.testRedis);
