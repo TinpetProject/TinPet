@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   HeadWrapper,
   Wallpaper,
@@ -12,28 +12,35 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatIcon from '@mui/icons-material/Chat';
 import { Icon } from "@iconify/react";
-import { useHistory } from "react-router";
-
-const headbar = [
-  {
-    link: "/profile",
-    button: "Profile",
-  },
-  {
-    link: "/profile/gallery",
-    button: "Photos",
-  }
-]
+import { useHistory,useRouteMatch } from "react-router-dom";
 
 export default function ProfileHead({ user, userID, selectedUser }) {
   const [isPreview, setIsPreview] = React.useState(false);
   const [preview, setPreview] = React.useState("")
-  const browserHistory = useHistory();
+  const history = useHistory();
+  let { path, url } = useRouteMatch();
+
+  const headbar = [
+    {
+      link: `${selectedUser}`,
+      button: "Profile",
+      handler: () => {
+        history.push(url);
+      }
+    },
+    {
+      link: `/profile/${selectedUser}/gallery`,
+      button: "Photos",
+      handler: () => {
+        history.push(`${url}/gallery`);
+      }
+    }
+  ]
 
   const handleOpen = (e) => {
     setIsPreview(true);
     setPreview(e.target.src)
-    console.log(e.target);
+    // console.log(e.target);
   }
 
   const handleClose = () => {
@@ -48,9 +55,10 @@ export default function ProfileHead({ user, userID, selectedUser }) {
       </>
     )
   }
+  // console.log(user);
 
   const goChatHandler = () => {
-    browserHistory.push(`/messenger/${selectedUser}`)
+    history.push(`/messenger/${selectedUser}`)
   }
 
   return (
@@ -58,7 +66,7 @@ export default function ProfileHead({ user, userID, selectedUser }) {
       <HeadWrapper>
         <HeadBar>
           {headbar?.map((btn) => (
-            <Button key={btn.button}>{btn.button}</Button>
+            <Button onClick={btn.handler} key={btn.button}>{btn.button}</Button>
           ))}
           {userID !== selectedUser ? (
             <>

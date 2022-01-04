@@ -38,6 +38,7 @@ module.exports = {
 
 
     sendLike: tryCatchBlock(null, async (req, res, next) => {
+        // follow
         const { targetUserID } = req.body;
         const userIDIsExist = await Pet.isUserIDExist(req.userData.userID);
         const targetPetIDIsExist = await Pet.isUserIDExist(targetUserID);
@@ -49,6 +50,7 @@ module.exports = {
     }),
 
     sendFollow: tryCatchBlock(null, async (req, res, next) => {
+        
         const { targetUserID } = req.body;
         const userIDIsExist = await Pet.isUserIDExist(req.userData.userID);
         const targetPetIDIsExist = await Pet.isUserIDExist(targetUserID);
@@ -68,6 +70,7 @@ module.exports = {
         const result = await pet.testRedis();
         return res.status(200).send({ message: "TEST_REDIS_SUCCESS", data: result });
     }),
+
     getBreeds: tryCatchBlock(null, async (req, res, next) => {
         const pet = new Pet("");
         const petBreeds = await pet.getBreeds();

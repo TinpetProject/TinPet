@@ -120,44 +120,50 @@ module.exports = class Pet {
   });
 
   like = tryCatchBlock(async (targetUserID) => {
+    console.log(this.userID);
     const result = await database.execute(
       `INSERT INTO tinpet.Relationship 
-      (userID, targetUserID, isLiked)
+      (relationshipID, userID, targetUserID, isLiked)
       VALUES 
-      ('${this.userID}', '${targetUserID}', 1)
+      (uuid(), '${this.userID}', '${targetUserID}', 1)
       ON DUPLICATE KEY UPDATE
-      isLiked = VALUES(isLiked);`
+      isLiked = 1;`
     );
     
     return result[0].affectedRows === 1 ? true : false;
   });
 
   follow = tryCatchBlock(async (targetUserID) => {
+    console.log(this.userID);
+    console.log(targetUserID);
     const result = await database.execute(
         `INSERT INTO tinpet.Relationship 
-        (userID, targetUserID, isMatched)
+        (relationshipID, userID, targetUserID, isMatched)
         VALUES 
-        ('${this.userID}', '${targetUserID}', 1)
+        (uuid(), '${this.userID}', '${targetUserID}', 1)
         ON DUPLICATE KEY UPDATE
-        isMatched = VALUES(isMatched);`
+        isMatched = 1;`
       );
     
     if (result[0].affectedRows === 1)
     {
-      const rela = await database.execute(`SELECT isMatched
+      const [rela] = await database.execute(`SELECT isMatched
       FROM Relationship
       WHERE userID = '${targetUserID}'
       AND targetUserID = '${this.userID}';`);
-      const isMatched = rela[0][0].isMatched;
+      
+      console.log(rela);
+      
+      const isMatched = rela[0]?.isMatched;
       if (isMatched === 1)
       {
         const result_friend = await database.execute(
           `INSERT INTO tinpet.Relationship 
-          (userID, targetUserID, isFriend)
+          (relationshipID, userID, targetUserID, isFriend)
           VALUES 
-          ('${this.userID}', '${targetUserID}', 1)
+          (uuid(), '${this.userID}', '${targetUserID}', 1)
           ON DUPLICATE KEY UPDATE
-          isFriend = VALUES(isFriend);`
+          isFriend = 1;`
         );
         return result_friend[0].affectedRows === 1 ? 2 : 1;
       }

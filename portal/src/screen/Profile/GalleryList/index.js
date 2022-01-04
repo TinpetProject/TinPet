@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import React from 'react'
 import {
     PhotosWrapper,
     ImgWrapper,
@@ -7,18 +7,18 @@ import {
 //data
 import { PhotoGal } from "../dummyData";
 
-export default function GalleryList({ userID,setSelectedImg }) {
-    
+export default function GalleryList({ userID, setSelectedImg }) {
+
     return (
         <div>
             <PhotosWrapper>
                 {PhotoGal?.map((p) => (
-                    <ImgWrapper key={p.id} 
-                        layout 
-                        whileHover={{ opacity: 1 }}s 
+                    <ImgWrapper key={p.id}
+                        layout
+                        whileHover={{ opacity: 1 }} s
                         onClick={() => setSelectedImg(p.photo)}
                     >
-                        <Img src={p.photo} 
+                        <Img src={p.photo}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 1 }}

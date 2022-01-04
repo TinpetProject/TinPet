@@ -1,6 +1,5 @@
 import React from "react";
 import "./InputText.css";
-import { useState } from "react";
 
 export default function InputText(props) {
     const inputHandler = (e) => {
