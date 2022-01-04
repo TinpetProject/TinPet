@@ -57,6 +57,7 @@ export default function Dashboard() {
                     pictureUrl={el.avatar}
                     key={index}
                     petID={el.petID}
+                    userID={el.userID}
                     matchPercentage={Math.floor(Math.random() * 100) + 1}
                 />
             );
