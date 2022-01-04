@@ -50,7 +50,7 @@
 
 .content-box-sidebar-user {
     position: relative;
-    background-color: white;
+    background-color: #F7F7F7;
     padding: 10px;
     border-radius: 8px;
     align-items: center;
@@ -75,9 +75,10 @@
 .content-box-sidebar-user .name {
     font-family: sans-serif;
     font-weight: bold;
-    font-size: 17px;
+    font-size: 1.1rem;
     line-height: 19px;
     color: #373737;
+    margin-left: 10px;
 }
 
 .content-box-sidebar-user .email {
@@ -113,7 +114,8 @@
     line-height: 20px;
     border-radius: 8px;
     cursor: pointer;
-    background-color: #fff;
+    background-color: #F7F7F7;
+    ;
 }
 
 .sidebar-element:hover {
@@ -237,7 +239,6 @@
 .content-box-main-mid .left .user .edit-avatar {
     position: relative;
     padding: 20px 0px 10px 20px;
-    ;
     float: left;
     display: flex;
 }
@@ -256,7 +257,7 @@
 .content-box-main-mid .left .user .edit-avatar .edit .name {
     font-family: sans-serif;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 17px;
     margin: 10px 0px;
 }
@@ -269,7 +270,7 @@
     align-items: center;
     border: solid 1px #333333;
     font-family: sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 16px;
     cursor: pointer;
     border-radius: 5px;
@@ -306,7 +307,7 @@
     align-items: center;
     background-color: #A4A4A4;
     font-family: sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: black;
     cursor: pointer;
@@ -333,6 +334,7 @@
     line-height: 17px;
     margin-bottom: 10px;
     margin-left: 20px;
+    font-size: 14px;
 }
 
 .detail-edit .fieldtext {
@@ -411,4 +413,40 @@
 
 .content-box-main-bottom .delete:hover {
     opacity: 0.5;
+}
+
+.selected {
+    background-color: white;
+}
+
+.option-fields {
+    width: 320px;
+    height: 34px;
+    margin-left: 20px;
+    padding: 5px;
+    outline: unset;
+    font-size: 16px;
+    font-weight: 400;
+    border: solid 1px gray;
+    border-radius: 5px;
+    align-items: center;
+    color: gray;
+    overflow: auto;
+}
+
+#root>div>div.container>div.container-content-wrapper>div.content-box-main>div.content-box-main-mid>div.left>div:nth-child(2)>label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+#root>div>div.container>div.container-content-wrapper>div.content-box-main>div.content-box-main-mid>div.left>div:nth-child(3)>label {
+    display: block;
+}
+
+#root>div>div.container>div.container-content-wrapper>div.content-box-main>div.content-box-main-mid>div.right>div:nth-child(4)>label {
+    display: block;
+}
+
+.detail-edit option {
+    height: 100px;
 }
