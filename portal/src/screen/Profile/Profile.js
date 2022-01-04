@@ -83,6 +83,10 @@ const Profile = ({ userID }) => {
     // token && fetchList();
   }, [token, selectedUser]);
 
+  const updatePostList = (newPost) => {
+    setPosts((prev) => [newPost, ...prev]);
+  };
+
   console.log(posts);
 
   return (
@@ -90,7 +94,7 @@ const Profile = ({ userID }) => {
       <Main>
         <ProfileWrapper>
           <ProfileHead user={user} userID={userID} selectedUser={selectedUser} />
-          <InputPost user={user} />
+          <InputPost user={user} updatePostList={updatePostList} />
           <Feed userID={userID} user={user} posts={posts} />
           <Pictures />
           <AboutPet user={user} />

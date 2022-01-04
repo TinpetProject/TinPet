@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import ALertDialog from "../../../../components/Dialog/AlertDialog";
 import axios from "axios";
 
-export default function CreatePost({ closePostDetail, user }) {
+export default function CreatePost({ closePostDetail, user , updatePostList}) {
   //upload or not
   const [isUpload, setIsUpload] = React.useState(false);
   // post
@@ -232,9 +232,24 @@ export default function CreatePost({ closePostDetail, user }) {
       }
     }
     // console.log(photos);
-    // console.log({ title: user.name, content: postContent, links: photos });
+    console.log({ title: user.name, content: postContent, links: photos });
+    const newPost = {
+      comment: 0,
+      content: postContent,
+      date: new Date(),
+      isLike: false,
+      id: null,
+      like: 0,
+      photos: photos.map(photo => ({ url: photo })),
+      tags: null,
+      title: user.name,
+      videos: null,
+    }
     axios.post("/user/post", { title: user.name, content: postContent, links: photos })
-      .then(response => console.log(response))
+      .then(response => {
+        newPost.id = response.data.data.postID;
+        updatePostList(newPost);
+      })
       .catch(error => console.log(error));
     closePostDetail();
     // fetchPost();
