@@ -14,6 +14,21 @@ export default function Setting({hideSetting}) {
         setSelectedUser(id);
         }
     }, [location]);
+    // React.useEffect(()=>{
+    // const fetchList = async () => {
+    //   const result = await fetch(`http://localhost:8888/user/:userid/profile`, {
+    //     method: "GET",
+    //     headers: {
+    //       accept: "application/json",
+    //       "Content-Type": "application/json",
+    //       authorization: `Bearer ${token}`,
+    //     },
+    //   });
+    //   console.log(result);
+    // };
+    // token && fetchList();
+    // },[]);
+
     React.useEffect(() => {
         // if(selectedUser !== userID) {
         //   setSelectedUser(userID);
