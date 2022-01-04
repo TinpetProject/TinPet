@@ -15,11 +15,12 @@ const Profile = ({ userID }) => {
   const token = localStorage.getItem("token");
   const [user, setUser] = React.useState({});
   const [posts, setPosts] = React.useState([]);
+  const [files, setFiles] = React.useState([]);
   const location = useLocation();
   const [selectedUser, setSelectedUser] = React.useState(useParams().chosenUserID);
 
   let { path, url } = useRouteMatch();
-  console.log(path, url);
+  // console.log(path, url);
 
   useEffect(() => {
     if (location && location.pathname) {
@@ -43,9 +44,22 @@ const Profile = ({ userID }) => {
         })
         .catch((error) => console.log(error));
     };
-
+    const getPhotos = async () => {
+      await fetch(`http://localhost:8888/user/${selectedUser}/allImages`, {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      }).then(response => response.json())
+      .then(data => setFiles(data.data))
+      .catch(error => console.log(error));
+    }
     selectedUser && getUser();
+    selectedUser && getPhotos();
   }, [selectedUser]);
+
 
   useEffect(() => {
     const getPost = async () => {
@@ -99,7 +113,7 @@ const Profile = ({ userID }) => {
             <Route exact path={path}>
               <InputPost user={user} updatePostList={updatePostList} />
               <Feed userID={userID} user={user} posts={posts} />
-              <Pictures />
+              <Pictures images={files}/>
               <AboutPet user={user} />
             </Route>
             <Route path={`${path}/*`}>

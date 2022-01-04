@@ -7,20 +7,19 @@ import {
 } from "./style"
 import "./picture.css"
 import { Icon } from '@iconify/react';
-import { itemData } from '../dummyData';
 import { useHistory } from 'react-router-dom';
 
-export default function Pictures({ selectedUser }) {
+export default function Pictures({ selectedUser, images }) {
   const history = useHistory();
   // uploaded files
-  const [selectedFiles, setSelectedFiles] = React.useState([]);
+  // const [selectedFiles, setSelectedFiles] = React.useState([]);
   // selected files for preview mode
   const [preview, setPreview] = React.useState("");
   // go to preview mode
   const [isPreview, setIsPreview] = React.useState(false);
 
   const renderFiles = (files) => {
-    const previewFiles = (files && files.length > 3) ? files.slice(0, 4) : files;
+    const previewFiles = (files && files.length > 4) ? files.slice(0, 4) : files;
     console.log(files.length)
     switch (files.length) {
       case 0:
@@ -38,7 +37,7 @@ export default function Pictures({ selectedUser }) {
             {previewFiles.map(file => {
               return (
                 <div className="picture-sleeve" onClick={openPreviewFiles} key={file}>
-                  <img className="picture-item" src={file.url} alt={file.name} />
+                  <img className="picture-item" src={file.link} alt={file.name} />
                 </div>
               )
             })}
@@ -51,7 +50,7 @@ export default function Pictures({ selectedUser }) {
             {previewFiles.map(file => {
               return (
                 <div className="picture-sleeve" onClick={openPreviewFiles} key={file}>
-                  <img className="picture-item" src={file.url} alt={file.name} />
+                  <img className="picture-item" src={file.link} alt={file.name} />
                 </div>
               )
             })}
@@ -64,7 +63,7 @@ export default function Pictures({ selectedUser }) {
             {previewFiles.map(file => {
               return (
                 <div className="picture-sleeve" key={file}>
-                  <img className="picture-item" src={file.url} alt={file.name} />
+                  <img className="picture-item" src={file.link} alt={file.name} />
                 </div>
               )
             })}
@@ -77,7 +76,7 @@ export default function Pictures({ selectedUser }) {
             {previewFiles.map(file => {
               return (
                 <div className="picture-sleeve" onClick={openPreviewFiles}>
-                  <img className="picture-item" src={file.url} alt={file.name} key={file} />
+                  <img className="picture-item" src={file.link} alt={file.name} key={file} />
                 </div>
               )
             })}
@@ -114,21 +113,21 @@ export default function Pictures({ selectedUser }) {
 
   const handlePreviewPrev = () => {
     const currentTargetSrc = preview;
-    const currentTargetIdx = itemData.findIndex(file => file.url === currentTargetSrc);
+    const currentTargetIdx = images.findIndex(file => file.link === currentTargetSrc);
     if (currentTargetIdx === 0) {
-      setPreview(itemData[itemData.length - 1].url)
+      setPreview(images[images.length - 1].link)
     } else {
-      setPreview(itemData[currentTargetIdx - 1].url)
+      setPreview(images[currentTargetIdx - 1].link)
     }
   }
 
   const handlePreviewNext = () => {
     const currentTargetSrc = preview;
-    const currentTargetIdx = itemData.findIndex(file => file.url === currentTargetSrc);
-    if (currentTargetIdx === itemData.length - 1) {
-      setPreview(itemData[0].url)
+    const currentTargetIdx = images.findIndex(file => file.link === currentTargetSrc);
+    if (currentTargetIdx === images.length - 1) {
+      setPreview(images[0].link)
     } else {
-      setPreview(itemData[currentTargetIdx + 1].url)
+      setPreview(images[currentTargetIdx + 1].link)
     }
   }
 
@@ -139,10 +138,10 @@ export default function Pictures({ selectedUser }) {
         <View onClick={() => history.push(`/profile/${selectedUser}/gallery`)}>View all</View>
         <PictureListWrapper>
           <div className="picture-container">
-            {selectedFiles && renderFiles(itemData)}
+            {images && renderFiles(images)}
             <div className={`model ${isPreview ? "open" : ""}`}>
-              {itemData && renderPreviewFiles(preview)}
-              {itemData && itemData.length > 1 && (
+              {images && renderPreviewFiles(preview)}
+              {images && images.length > 1 && (
                 <>
                   <div className="prev" onClick={handlePreviewPrev}>
                     <Icon icon="grommet-icons:previous" color="white" width="32" height="32" />
