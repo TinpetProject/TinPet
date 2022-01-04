@@ -23,7 +23,7 @@ import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
 import { validate } from "../../utils/validation";
 import "./Login.css";
-
+import asyncLocalStorage from "../../utils/localStorageWrapper";
 const Login = React.memo(({ logInHandler }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -44,15 +44,28 @@ const Login = React.memo(({ logInHandler }) => {
             toast.success("Login success!", {
               position: toast.POSITION.TOP_RIGHT,
             });
-            setIsLoading(false);
           }
           return response.data.data;
         })
         .then((token) => {
           const userInfo = jwt_decode(token);
           logInHandler({userID:userInfo.userID,userAvatar:userInfo.userAvatar});
-          localStorage.setItem("token", token);
-          history.push("/dashboard");
+          
+          asyncLocalStorage.setItem("token", token).then(
+            () => {
+              setIsLoading(false);
+              // history.push("/dashboard");
+              window.location.href = "http://localhost:8889/dashboard";
+            }
+          )
+
+          // localStorage.setItem("token", token);
+          // console.log(localStorage.getItem("token"));
+          // if (localStorage.getItem("token"))
+          // {
+          //   setIsLoading(false);
+          //   history.push("/dashboard");
+          // }
         })
         .catch((err) => {
           switch (err.response.status) {
