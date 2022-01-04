@@ -23,9 +23,6 @@ const Profile = ({ userID }) => {
     }
   }, [location]);
   useEffect(() => {
-    // if(selectedUser !== userID) {
-    //   setSelectedUser(userID);
-    // }
     const getUser = async () => {
       axios
         .get(`/user/${selectedUser}/profile`)
@@ -45,15 +42,12 @@ const Profile = ({ userID }) => {
 
     selectedUser && getUser();
   }, [selectedUser]);
-  // console.log(selectedUser);
 
   useEffect(() => {
     const getPost = async () => {
       const data = await PostServices.getPostByUserID(selectedUser, token);
       console.log(data);
       if (!!data && data.code === 200) {
-        // console.log("commentList");
-        // console.log("data", data);
         setPosts(
           data.data.map((post) => {
             if (post.photos) {
