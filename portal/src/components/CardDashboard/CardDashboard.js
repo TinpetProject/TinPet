@@ -14,7 +14,27 @@ export default function Card(props) {
     };
 
     const heartBtnOnClickHandler = () => {
+        let token = localStorage.getItem("token");
         setIsHeartClicked(!isHeartClicked);
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${token}`);
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            targetUserID: props.userID,
+        });
+
+        var requestOptions = {
+            method: "PUT",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow",
+        };
+
+        fetch("http://localhost:8888/pet/like", requestOptions)
+            .then((response) => response.text())
+            .then((result) => console.log(result))
+            .catch((error) => console.log("error", error));
     };
 
     const plusBtnOnClickHandler = () => {
@@ -22,6 +42,26 @@ export default function Card(props) {
         if (!isHeartClicked && isPlusClicked == false) {
             setIsHeartClicked(true);
         }
+        let token = localStorage.getItem("token");
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${token}`);
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            targetUserID: props.userID,
+        });
+
+        var requestOptions = {
+            method: "PUT",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow",
+        };
+
+        fetch("http://localhost:8888/pet/follow", requestOptions)
+            .then((response) => response.text())
+            .then((result) => console.log(result))
+            .catch((error) => console.log("error", error));
     };
 
     return (
