@@ -234,7 +234,7 @@ export default function Post({ post, userID, user }) {
             </PostComment>
           </PostBottomRight>
         </PostBottom>
-        {isCommenting && !!post && <CommentList postID={post.id} userID={userID} updateCountComment={updateCountComment}/>}
+        {isCommenting && !!post && <CommentList postID={post.id} userID={userID} updateCountComment={updateCountComment} userName={userName} userAvatar={userAvatar}/>}
       </PostWrapper>
     </>
   );

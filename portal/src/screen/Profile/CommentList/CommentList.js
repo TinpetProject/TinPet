@@ -16,12 +16,13 @@ const NewComment = (props) => {
   };
   return (
     <div className="comment__wrapper">
-      <img className="comment__user-avatar" src={props.avatar} alt="ava" />
+      <img className="comment__user-avatar" src={props.userAvatar} alt="ava" />
       <div className="comment__content__wrapper">
         <Input
           placeholder="Write a comment"
           onKeyDown={handleKeyDown}
           value={comment}
+          style={{ width: "490px" }}
           onChange={(e) => setComment(e.target.value)}
         />
         {/* <p className="comment__content">{props.content}</p>
@@ -31,7 +32,8 @@ const NewComment = (props) => {
   );
 };
 
-const CommentList = React.memo(({ postID, userID, updateCountComment }) => {
+
+const CommentList = React.memo(({ postID, userID, updateCountComment ,userName,userAvatar}) => {
   const token = localStorage.getItem("token");
   const [commentList, setCommentList] = useState([]);
   const fetchComment = async () => {
@@ -76,7 +78,7 @@ const CommentList = React.memo(({ postID, userID, updateCountComment }) => {
         content={"Write a new comment"}
         // avatarUrl={comment.avatar}
       /> */}
-      <NewComment onComment={onComment} updateCountComment={updateCountComment} />
+      <NewComment onComment={onComment} updateCountComment={updateCountComment} userAvatar={userAvatar} userName={userName} />
       {commentList?.length > 0 &&
         commentList.map((comment) => {
           return (
@@ -84,7 +86,7 @@ const CommentList = React.memo(({ postID, userID, updateCountComment }) => {
               key={comment.commentID}
               name={comment.name}
               content={comment.content}
-              avatarUrl={comment.avatar}
+              avatar={comment.avatar}
             />
           );
         })}

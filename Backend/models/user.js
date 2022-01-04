@@ -5,7 +5,7 @@ const md5 = require("md5");
 module.exports = class User {
   constructor(userData) {
     this.email = userData.email;
-    this.password = md5(userData.password);
+    this.password = userData.password? md5(userData.password) : "";
     this.name = userData.name;
     this.userID = userData.userID;
     // this.address = userData.address;
