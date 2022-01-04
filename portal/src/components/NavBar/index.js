@@ -64,11 +64,11 @@ const NavBar = React.memo(({ userID, socket, showSetting, logOutHandler }) => {
       axios
         .get(`/user/${userID}/profile`)
         .then((response) => {
-          console.log(response);
           setUser({
             ...response.data.data,
+            avatar: response.data.data.avatar || "https://res.cloudinary.com/thecodingpanda/image/upload/v1641272668/zoyndaseei9wnbrybwxr.png?fbclid=IwAR2YOBaBi-4FdUEFD_XjI9vgrwHAcfpupP8vnGS7p26Lrq8v3XGzFvD3pxk",
             backgroundImage:
-              "https://scontent.fhan5-2.fna.fbcdn.net/v/t39.30808-6/s600x600/266220855_1555547244801156_1721467570560311439_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=KZX_ckYYgoAAX9rQ2Mf&_nc_ht=scontent.fhan5-2.fna&oh=00_AT_PT-eDMv1zBDyOnOebOfN9V-4j36SY5wkJZ0wGCcodTQ&oe=61D7E84E",
+              "https://res.cloudinary.com/thecodingpanda/image/upload/v1641272668/zoyndaseei9wnbrybwxr.png?fbclid=IwAR2YOBaBi-4FdUEFD_XjI9vgrwHAcfpupP8vnGS7p26Lrq8v3XGzFvD3pxk",
           });
         })
         .catch((error) => console.log(error));
@@ -146,7 +146,7 @@ const NavBar = React.memo(({ userID, socket, showSetting, logOutHandler }) => {
           <Link to={`/profile/${userID}`}>
             <Avatar
               alt="corgi"
-              src={user.avatar || "https://res.cloudinary.com/thecodingpanda/image/upload/v1641272668/zoyndaseei9wnbrybwxr.png?fbclid=IwAR2YOBaBi-4FdUEFD_XjI9vgrwHAcfpupP8vnGS7p26Lrq8v3XGzFvD3pxk"}
+              src={user.avatar}
             />
           </Link>
           <Menu>

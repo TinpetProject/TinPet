@@ -22,12 +22,13 @@ const Profile = ({ userID }) => {
       setSelectedUser(id);
     }
   }, [location]);
+
   useEffect(() => {
     const getUser = async () => {
       axios
         .get(`/user/${selectedUser}/profile`)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           setUser({
             ...response.data.data,
             avatar: response.data.data.avatar || "https://res.cloudinary.com/thecodingpanda/image/upload/v1641272668/zoyndaseei9wnbrybwxr.png?fbclid=IwAR2YOBaBi-4FdUEFD_XjI9vgrwHAcfpupP8vnGS7p26Lrq8v3XGzFvD3pxk",
@@ -44,7 +45,7 @@ const Profile = ({ userID }) => {
   useEffect(() => {
     const getPost = async () => {
       const data = await PostServices.getPostByUserID(selectedUser, token);
-      console.log(data);
+      // console.log(data);
       if (!!data && data.code === 200) {
         setPosts(
           data.data.map((post) => {
@@ -78,7 +79,9 @@ const Profile = ({ userID }) => {
   const updatePostList = (newPost) => {
     setPosts((prev) => [newPost, ...prev]);
   };
-  console.log("user :::", user);
+  // console.log("user :::", user);
+  // console.log(posts);
+
   return (
     <>
       <Main>

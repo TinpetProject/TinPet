@@ -1,5 +1,3 @@
-import { Icon } from "@iconify/react";
-
 const rules = {
     isRequired: (value) => {
         return value?.length > 0 ? "" : "this field is required";

@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import "./InputSelection.css";
 
 export default function InputSelection(props) {

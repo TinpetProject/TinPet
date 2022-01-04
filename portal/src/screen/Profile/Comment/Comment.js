@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Comment.css";
 import { timeSince } from "../../../utils/datetime";
 const Comment = (props) => {

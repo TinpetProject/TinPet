@@ -4,7 +4,6 @@ import { Main } from "../../styled-component/style";
 import TopContent from "../../components/TopContent/TopContent";
 import "./PetList.css";
 import CardPetList from "../../components/CardPetList/CardPetList";
-import OptionDialog from "../../components/Dialog/OptionDialog"
 import { getPetList, removeFromPetList } from "./api"
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -35,7 +34,7 @@ export default function PetList({ userID }) {
     console.log(petList);
 
     const removePetList = (targetUserID) => {
-        setOpenDialog(true);
+        handleOpenDialog();
         setRequiredParam({
             userID,
             targetUserID,
