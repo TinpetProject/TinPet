@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require("../controllers/user-controller.js");
 const checkAuth = require("../middleware/check-auth");
 router.get("/:userID/profile", userController.getProfile);
+router.get("/:userID/allImages", userController.getAllImages);
 
 router.use(checkAuth);
 
