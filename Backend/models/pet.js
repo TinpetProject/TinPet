@@ -70,7 +70,7 @@ module.exports = class Pet {
       if (err.errno == -61)
       {
         const [resultSet] = await database.execute(
-          `SELECT p.*, pe.userID, r.isLiked, r.isMatched, r.isFriend, u.avatar
+          `SELECT p.*, pe.userID, r.isLiked, r.isMatched, r.isFriend, u.avatar, u.address
           FROM View_PetInformation p, (Pet pe
           LEFT JOIN (SELECT * FROM Relationship WHERE targetUserID = '${this.userID}') r
           ON pe.userId = r.userID LEFT JOIN User u ON pe.userId = u.userID) 
