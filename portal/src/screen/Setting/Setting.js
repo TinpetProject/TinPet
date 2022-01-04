@@ -20,14 +20,19 @@ export default function Setting({ userID, hideSetting }) {
         };
 
         userID && getUser();
+        const getCityCountry = () => {
+            if(user.location) {
+                const location = user.location ? user.split(',') : "";
+                if(location) {
+                    const city = location[2];
+                    const country = location[1];
+                    setUser({...user, city, country});
+                }
+            }
+        };
+        user && getCityCountry();
     }, [userID]);
 
-    const getCityCountry = () => {
-        const location = user.location ? user.split(',')
-        // let city;
-        // let country;
-
-    }
 
     const mainMenu = [
         {
@@ -84,7 +89,7 @@ export default function Setting({ userID, hideSetting }) {
                             className="avatar" alt="Shiba" />
                         <div className='id'>
                             <div className="name"> {user.name}</div>
-                            <div className="email"> {user.email}</div>
+                            <div className="email"> {user.mail}</div>
                         </div>
                     </div>
                     <div className="content-box-sidebar-menu">

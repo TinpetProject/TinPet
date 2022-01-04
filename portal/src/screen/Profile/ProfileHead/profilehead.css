@@ -1,0 +1,43 @@
+.uploadInput {
+    display: none;
+}
+
+.profile-head {
+    position: relative;
+}
+
+.profile-head .btn-change-img {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+
+.profile-head .btn-change-img .btn-change-icon:hover {
+    box-shadow: 0 0 2px #555;
+}
+
+.profile-head .btn-change-img .option-box {
+    position: absolute;
+    top: 36;
+    right: 0;
+    width: 150px;
+    border-radius: 6px;
+    box-shadow: 0 0 4px #555;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.profile-head .btn-change-img .option-box .option:hover {
+    background-color: #ccc;
+}
+
+.profile-head .btn-change-img .option-box .option-change-avatar,
+.profile-head .btn-change-img .option-box .option-change-cover {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+}
+
+.profile-head .btn-change-img .option-box .option .option-icon {
+    margin-right: 4px;
+}

@@ -12,13 +12,20 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatIcon from '@mui/icons-material/Chat';
 import { Icon } from "@iconify/react";
-import { useHistory,useRouteMatch } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
+import "./profilehead.css"
+import { toast } from "react-toastify"
 
 export default function ProfileHead({ user, userID, selectedUser }) {
   const [isPreview, setIsPreview] = React.useState(false);
-  const [preview, setPreview] = React.useState("")
+  const [preview, setPreview] = React.useState("");
   const history = useHistory();
+  const [selectedAvatar, setSelectedAvatar] = React.useState("");
+  const [selectedCover, setSelectedCover] = React.useState("");
   let { path, url } = useRouteMatch();
+  const uploadInput = React.useState(null);
+  const [isAvatar, setIsAvatar] = React.useState(false);
+  const [openOption, setOpenOption] = React.useState(false);
 
   const headbar = [
     {
@@ -57,6 +64,59 @@ export default function ProfileHead({ user, userID, selectedUser }) {
   }
   // console.log(user);
 
+  const handleOpenOption = () => {
+    setOpenOption(!openOption);
+  }
+
+  const handleChangeFile = (e) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
+      if (file) {
+        let formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "iiyjshqb");
+        let requestOptions = {
+          method: "POST",
+          body: formData,
+          redirect: "follow",
+        };
+
+        fetch("https://api.cloudinary.com/v1_1/thecodingpanda/upload", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {
+            if(isAvatar) {
+              setSelectedAvatar(result.url);
+            } else {
+              setSelectedCover(result.url);
+            }
+          })
+          .catch((error) => console.log(error));
+
+        let configOptions = {
+          method: "POST",
+          redirect: "follow",
+          body: JSON.stringify(isAvatar ? { ...user, avatar: selectedAvatar } : {...user, backgroundImage: selectedCover}),
+          headers: {
+            "Content-Type": "application/json"
+          },
+        };
+        fetch("http://localhost:8888/pet", configOptions)
+          .then((response) => {
+            if (response.status === 200) {
+              toast.success(`Change ${isAvatar ? "avatar" : "cover"} success!`, {
+                position: toast.POSITION.TOP_RIGHT,
+              });
+            }
+          })
+      }
+    }
+  }
+
+
+  const openChangeImg = () => {
+    uploadInput.current.click();
+  }
+
   return (
     <div>
       <HeadWrapper>
@@ -72,7 +132,37 @@ export default function ProfileHead({ user, userID, selectedUser }) {
             </>
           ) : ("")}
         </HeadBar>
-        <div key={user.userID}>
+        <div className="profile-head" key={user.userID}>
+          {userID === selectedUser ? (
+            <>
+              <input type="file" ref={uploadInput} onChange={handleChangeFile} accept="image/*" className="uploadInput" />
+              <div className="btn-change-img" onClick={handleOpenOption}>
+                <Icon icon="bx:bxs-edit" color="white" width="32" height="32" className="btn-change-icon" />
+                {
+                  openOption && (
+                    <div className="option-box">
+                      <div className="option option-change-avatar" onClick={() => {
+                        setIsAvatar(true);
+                        setOpenOption(false);
+                        openChangeImg();
+                      }}>
+                        <Icon icon="carbon:user-avatar" className="option-icon" />
+                        Change avatar
+                      </div>
+                      <div className="option option-change-cover" onClick={() => {
+                        setIsAvatar(false);
+                        setOpenOption(false);
+                        openChangeImg();
+                      }}>
+                        <Icon icon="bx:bx-edit" className="option-icon" />
+                        Change cover
+                      </div>
+                    </div>
+                  )
+                }
+              </div>
+            </>
+          ) : ""}
           <Wallpaper src={user.backgroundImage} onClick={handleOpen} />
           <Avatar src={user.avatar} onClick={handleOpen} />
           <Name>{user.name}</Name>
