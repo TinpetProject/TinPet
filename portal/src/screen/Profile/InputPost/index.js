@@ -18,7 +18,7 @@ import CreatePost from "./CreatePost/CreatePost"
 
 
 
-export default function InputPost({ user, setReload }) {
+export default function InputPost({ user, setReload,updatePostList }) {
     const [isOpen, setIsOpen] = React.useState(false);
     const openPostDetail = () => {
         setIsOpen(true);
@@ -58,7 +58,7 @@ export default function InputPost({ user, setReload }) {
                 </InputPostAdd>
                 <InputPostButton onClick={openPostDetail}>Post</InputPostButton>
             </InputPostWrapper>
-            {isOpen ? <CreatePost closePostDetail={closePostDetail} user={user} /> : ""}
+            {isOpen ? <CreatePost closePostDetail={closePostDetail} user={user} updatePostList={updatePostList} /> : ""}
         </div>
     )
 
