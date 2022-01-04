@@ -102,7 +102,7 @@ const Profile = ({ userID }) => {
         <ProfileWrapper>
           <ProfileHead user={user} userID={userID} selectedUser={selectedUser} />
           <InputPost user={user} updatePostList={updatePostList} />
-          <Feed userID={userID} user={user} posts={posts} />
+          <Feed userID={selectedUser} user={user} posts={posts} />
           <Pictures />
           <AboutPet user={user} />
         </ProfileWrapper>

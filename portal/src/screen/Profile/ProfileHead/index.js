@@ -12,6 +12,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatIcon from '@mui/icons-material/Chat';
 import { Icon } from "@iconify/react";
+import { useHistory } from "react-router";
 
 const headbar = [
   {
@@ -27,7 +28,7 @@ const headbar = [
 export default function ProfileHead({ user, userID, selectedUser }) {
   const [isPreview, setIsPreview] = React.useState(false);
   const [preview, setPreview] = React.useState("")
-
+  const browserHistory = useHistory();
 
   const handleOpen = (e) => {
     setIsPreview(true);
@@ -48,6 +49,10 @@ export default function ProfileHead({ user, userID, selectedUser }) {
     )
   }
 
+  const goChatHandler = () => {
+    browserHistory.push(`/messenger/${selectedUser}`)
+  }
+
   return (
     <div>
       <HeadWrapper>
@@ -59,7 +64,7 @@ export default function ProfileHead({ user, userID, selectedUser }) {
             <>
               <ButtonPut><AddCircleOutlineIcon /></ButtonPut>
               <ButtonPut><FavoriteBorderIcon /></ButtonPut>
-              <ButtonPut><ChatIcon /></ButtonPut>
+              <ButtonPut onClick = {goChatHandler}><ChatIcon /></ButtonPut>
             </>
           ) : ("")}
         </HeadBar>

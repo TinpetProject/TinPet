@@ -23,7 +23,9 @@ if (typeof window !== "undefined") {
     injectStyle();
 }
 
-function App({ logInHandler, logOutHandler, userID, socket }) {
+function App({ logInHandler, logOutHandler, userInfo, socket }) {
+    const { userID, userAvatar } = userInfo;
+    console.log("here", userInfo);
     return (
         <HomePage>
             {userID || (
@@ -49,13 +51,13 @@ function App({ logInHandler, logOutHandler, userID, socket }) {
                 <Layout logOutHandler={logOutHandler} userID={userID} socket={socket}>
                     <Switch>
                         <Route exact path="/dashboard">
-                            <Dashboard />
+                            <Dashboard userID={userID}/>
                         </Route>
                         <Route exact path="/matches">
                             <Matches userID={userID} />
                         </Route>
                         <Route exact path="/messenger/:chosenUserID">
-                            <Messenger userID={userID} socket={socket} />
+                            <Messenger userID={userID} socket={socket} userAvatar={userAvatar} />
                         </Route>
                         <Route exact path="/profile/:chosenUserID">
                             <Profile userID={userID} />

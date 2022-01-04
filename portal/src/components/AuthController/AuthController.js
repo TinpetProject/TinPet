@@ -6,16 +6,16 @@ import axios from "axios";
 
 function AuthController(props) {
   const browserHistory = useHistory();
-  const [userID, setUserID] = useState("");
+  const [userInfo, setUserInfo] = useState("");
   const [socket, setSocket] = useState();
 
   useEffect(() => {
-    if (userID) {
+    if (userInfo) {
       const newSocket = openSocket("http://localhost:8888");
-      newSocket.emit("login", { socketID: newSocket.id, userID });
+      newSocket.emit("login", { socketID: newSocket.id, userID: userInfo.userID });
       setSocket(newSocket);
     }
-  }, [userID]);
+  }, [userInfo]);
 
   const renewToken = async (token) => {
     const response = await fetch(`http://localhost:8888/auth/renew-token`, {
@@ -32,7 +32,7 @@ function AuthController(props) {
 
   const tokenInvalidHandler = () => {
     localStorage.removeItem("token");
-    setUserID("");
+    setUserInfo("");
 
     const currentURL = browserHistory.location.pathname;
     if (
@@ -57,19 +57,20 @@ function AuthController(props) {
 
       localStorage.setItem("token", newToken);
       const decodedData = jwt(newToken);
-      setUserID(decodedData.userID);
+      console.log(decodedData);
+      setUserInfo({ userID: decodedData.userID, userAvatar: decodedData.avatar });
       axios.defaults.headers.common["Authorization"] = "Bearer " + newToken;
     };
     checkAndRenewToken();
   }, []);
 
   const logInHandler = (userID) => {
-    return setUserID(userID);
+    return setUserInfo(userID);
   };
 
   const logOutHandler = () => {
-    socket.emit("logout", { userID });
-    setUserID("");
+    socket.emit("logout", { userID: userInfo.userID });
+    setUserInfo("");
     setSocket("");
     localStorage.removeItem("token");
     browserHistory.push("/login");
@@ -77,7 +78,7 @@ function AuthController(props) {
 
   const AppComponent = {
     ...props.children,
-    props: { userID, socket, logInHandler, logOutHandler },
+    props: { userInfo, socket, logInHandler, logOutHandler },
   };
   return <>{AppComponent}</>;
 }
