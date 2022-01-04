@@ -23,7 +23,8 @@ export default function ProfileHead({ user, userID, selectedUser }) {
   const [selectedAvatar, setSelectedAvatar] = React.useState("");
   const [selectedCover, setSelectedCover] = React.useState("");
   let { path, url } = useRouteMatch();
-  const uploadInput = React.useState(null);
+  const uploadInputAva = React.useState(null);
+  const uploadInputCover = React.useState(null);
   const [isAvatar, setIsAvatar] = React.useState(false);
   const [openOption, setOpenOption] = React.useState(false);
 
@@ -84,7 +85,7 @@ export default function ProfileHead({ user, userID, selectedUser }) {
         fetch("https://api.cloudinary.com/v1_1/thecodingpanda/upload", requestOptions)
           .then((response) => response.json())
           .then((result) => {
-            if(isAvatar) {
+            if (isAvatar) {
               setSelectedAvatar(result.url);
             } else {
               setSelectedCover(result.url);
@@ -95,7 +96,7 @@ export default function ProfileHead({ user, userID, selectedUser }) {
         let configOptions = {
           method: "POST",
           redirect: "follow",
-          body: JSON.stringify(isAvatar ? { ...user, avatar: selectedAvatar } : {...user, backgroundImage: selectedCover}),
+          body: JSON.stringify(isAvatar ? { ...user, avatar: selectedAvatar } : { ...user, backgroundImage: selectedCover }),
           headers: {
             "Content-Type": "application/json"
           },
@@ -109,12 +110,16 @@ export default function ProfileHead({ user, userID, selectedUser }) {
             }
           })
       }
+      console.log(file);
     }
   }
 
 
-  const openChangeImg = () => {
-    uploadInput.current.click();
+  const openChangeAva = () => {
+    uploadInputAva.current.click();
+  }
+  const openChangeCover = () => {
+    uploadInputCover.current.click();
   }
 
   return (
@@ -135,7 +140,8 @@ export default function ProfileHead({ user, userID, selectedUser }) {
         <div className="profile-head" key={user.userID}>
           {userID === selectedUser ? (
             <>
-              <input type="file" ref={uploadInput} onChange={handleChangeFile} accept="image/*" className="uploadInput" />
+              <input type="file" ref={uploadInputCover} onChange={handleChangeFile} accept="image/*" className="uploadInput" />
+              <input type="file" ref={uploadInputAva} onChange={handleChangeFile} accept="image/*" className="uploadInput" />
               <div className="btn-change-img" onClick={handleOpenOption}>
                 <Icon icon="bx:bxs-edit" color="white" width="32" height="32" className="btn-change-icon" />
                 {
@@ -144,7 +150,7 @@ export default function ProfileHead({ user, userID, selectedUser }) {
                       <div className="option option-change-avatar" onClick={() => {
                         setIsAvatar(true);
                         setOpenOption(false);
-                        openChangeImg();
+                        openChangeAva();
                       }}>
                         <Icon icon="carbon:user-avatar" className="option-icon" />
                         Change avatar
@@ -152,7 +158,7 @@ export default function ProfileHead({ user, userID, selectedUser }) {
                       <div className="option option-change-cover" onClick={() => {
                         setIsAvatar(false);
                         setOpenOption(false);
-                        openChangeImg();
+                        openChangeCover();
                       }}>
                         <Icon icon="bx:bx-edit" className="option-icon" />
                         Change cover
@@ -163,8 +169,8 @@ export default function ProfileHead({ user, userID, selectedUser }) {
               </div>
             </>
           ) : ""}
-          <Wallpaper src={user.backgroundImage} onClick={handleOpen} />
-          <Avatar src={user.avatar} onClick={handleOpen} />
+          <Wallpaper src={selectedCover || user.backgroundImage} onClick={handleOpen} />
+          <Avatar src={selectedAvatar || user.avatar} onClick={handleOpen} />
           <Name>{user.name}</Name>
         </div>
       </HeadWrapper>
