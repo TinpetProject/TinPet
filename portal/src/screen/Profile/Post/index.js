@@ -39,7 +39,7 @@ export default function Post({ post, userID, user }) {
   const [isCommenting, setIsCommenting] = useState(false);
   const userAvatar = user.avatar;
   const userName = user.name;
-  const displayTime = !!post.date && `${timeSince(Date.parse(post.date))} ago`;
+  const displayTime = !!post.date && `${timeSince(new Date(post.date))} ago`;
   const [preview, setPreview] = React.useState("");
   const [isPreview, setIsPreview] = React.useState(false);
 
@@ -197,7 +197,7 @@ export default function Post({ post, userID, user }) {
           </div>
           <div className={`model ${isPreview ? "open" : ""}`}>
             {post.photos && renderPreviewFiles(preview)}
-            {post.photos && post.photos.length > 0 && (
+            {post.photos && post.photos.length > 1 && (
               <>
                 <div className="prev" onClick={handlePreviewPrev}>
                   <Icon icon="grommet-icons:previous" color="white" width="32" height="32" />
