@@ -7,7 +7,7 @@ import {
 } from "./style"
 import "./picture.css"
 import { Icon } from '@iconify/react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 export default function Pictures({ selectedUser, images }) {
   const history = useHistory();
@@ -17,6 +17,8 @@ export default function Pictures({ selectedUser, images }) {
   const [preview, setPreview] = React.useState("");
   // go to preview mode
   const [isPreview, setIsPreview] = React.useState(false);
+
+  let { path, url } = useRouteMatch();
 
   const renderFiles = (files) => {
     const previewFiles = (files && files.length > 4) ? files.slice(0, 4) : files;
@@ -135,7 +137,7 @@ export default function Pictures({ selectedUser, images }) {
     <>
       <PictureWrapper>
         <Topic>Pictures</Topic>
-        <View onClick={() => history.push(`/profile/${selectedUser}/gallery`)}>View all</View>
+        <View onClick={() => history.push(`${url}/gallery`)}>View all</View>
         <PictureListWrapper>
           <div className="picture-container">
             {images && renderFiles(images)}
