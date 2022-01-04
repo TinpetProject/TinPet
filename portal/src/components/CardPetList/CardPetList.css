@@ -52,7 +52,15 @@
     justify-content: space-between;
 }
 
-.card-pet-list__info--general {}
+.card-pet-list__info span {
+    display: inline-block;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    top: 3px;
+}
 
 .card-pet-list__info--location {
     transform: translateX(-4px);
@@ -60,7 +68,7 @@
 
 .card-pet-list__info--location svg {
     font-size: 1.4rem;
-    transform: translateY(5px);
+    transform: translateY(4px);
 }
 
 .card-pet-list__info--location span {
