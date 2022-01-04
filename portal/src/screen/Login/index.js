@@ -23,7 +23,7 @@ import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
 import { validate } from "../../utils/validation";
 import "./Login.css";
-
+import asyncLocalStorage from "../../utils/localStorageWrapper";
 const Login = React.memo(({ logInHandler }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -44,7 +44,6 @@ const Login = React.memo(({ logInHandler }) => {
             toast.success("Login success!", {
               position: toast.POSITION.TOP_RIGHT,
             });
-            setIsLoading(false);
           }
           return response.data.data;
         })

@@ -10,6 +10,7 @@ export default function Dashboard() {
     console.log("in dashboard:::");
     useEffect(() => {
         let token = localStorage.getItem("token");
+        console.log(token);
 
         var myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${token}`);

@@ -106,7 +106,7 @@ const Profile = ({ userID }) => {
     //       authorization: `Bearer ${token}`,
     //     },
     //   });
-    //   console.log(result);
+    //   console.log(result);W
     // };
     // token && fetchList();
   }, [token, selectedUser]);
@@ -124,7 +124,7 @@ const Profile = ({ userID }) => {
           <ProfileHead user={user} userID={userID} selectedUser={selectedUser} />
           <Switch>
             <Route exact path={`${path}/gallery`}>
-              <Gallery />
+              <Gallery images={files}/>
             </Route>
             <Route exact path={path}>
               <InputPost user={user} updatePostList={updatePostList} />

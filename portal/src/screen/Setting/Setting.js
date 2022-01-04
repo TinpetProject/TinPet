@@ -9,22 +9,27 @@ export default function Setting({ userID, hideSetting }) {
     const [breedList, setBreedList] = useState([]);
     const [countryList, setCountryList] = useState([]);
     const [cityList, setCityList] = useState([]);
-    const [country, setCountry] = useState("");
-    const [city, setCity] = useState("");
+    // const [country, setCountry] = useState("");
+    // const [city, setCity] = useState("");
+    const [currentCity, setCurrentCity] = useState("");
+    const [currentCountry, setCurrentCountry] = useState("");
     // const location = useLocation();
 
     React.useEffect(() => {
         const getUser = async () => {
-            axios
+            await axios
                 .get(`/user/${userID}/profile`)
                 .then((response) => {
-                    setUser(response.data.data);
+                    setUser({ ...response.data.data, breed: response.data.data.breed.charAt(0).toUpperCase() + response.data.data.breed.slice(1) });
                 })
                 .catch((error) => console.log(error));
         };
 
         userID && getUser();
     }, [userID]);
+
+    // console.log(user);
+    console.log("current", currentCity, currentCountry)
 
     useEffect(() => {
         const getData = async () => {
@@ -48,15 +53,32 @@ export default function Setting({ userID, hideSetting }) {
     }, []);
 
     useEffect(() => {
-        const found = countryList.find((element) => element.country === country);
-        setCity("");
+        const found = countryList.find((element) => element.country === currentCountry);
+        // setCurrentCity("");
 
         if (found === undefined) {
             setCityList([]);
         } else {
             setCityList(found.cities);
         }
-    }, [country]);
+
+    }, [currentCountry]);
+
+    useEffect(() => {
+        const getCityCountry = () => {
+            if (user.location) {
+                const location = user.location ? user.location.split(', ') : "";
+                if (location) {
+                    const curCity = location[0];
+                    const curCountry = location[1];
+                    setCurrentCity(curCity);
+                    setCurrentCountry(curCountry);
+                    // console.log(curCity, curCountry)
+                }
+            }
+        };
+        user && getCityCountry();
+    }, [user])
 
     const renderOptions = (p) => {
         let countryOptionsList = countryList.map((el, index) => {
@@ -112,35 +134,7 @@ export default function Setting({ userID, hideSetting }) {
             title: "Advance",
         },
     ];
-    const inputleft = [
-        {
-            title: "Country",
-            placeholder: "",
-        },
-        {
-            title: "City",
-            placeholder: "",
-        },
-    ];
-    const inputright = [
-        {
-            title: "Name",
-            field: "",
-        },
-        {
-            title: "Date of Birth",
-            field: "",
-        },
-        {
-            title: "Gender",
-            field: "",
-        },
-        {
-            title: "Breed",
-            field: "",
-        },
-    ];
-
+    
     return (
         <div className="container">
             <div className="container-layout" onClick={hideSetting}></div>
@@ -151,7 +145,7 @@ export default function Setting({ userID, hideSetting }) {
                         <img src={user.avatar} className="avatar" alt="Shiba" />
                         <div className="id">
                             <div className="name"> {user.name}</div>
-                            <div className="email"> {user.email}</div>
+                            <div className="email"> {user.mail}</div>
                         </div>
                     </div>
                     <div className="content-box-sidebar-menu">
@@ -195,45 +189,56 @@ export default function Setting({ userID, hideSetting }) {
                                     </div>
                                 </div>
                             </div>
-                            {inputleft.map((item) => (
-                                <div className="detail-edit" key={item.title}>
-                                    <label className="title">{item.title}</label>
-                                    <select
-                                        className="option-fields"
-                                        onChange={(e) => {
-                                            console.log(e.target.value);
-                                            if (item.title === "Country") {
-                                                setCountry(e.target.value);
-                                            }
-                                            if (item.title === "City") {
-                                                setCity(e.target.value);
-                                            }
-                                        }}
-                                    >
-                                        {renderOptions(item.title)}
-                                    </select>
-                                </div>
-                            ))}
+
+                            <div className="detail-edit" >
+                                <label className="title">Country</label>
+                                <select
+                                    className="option-fields"
+                                    onChange={(e) => {
+                                        setCurrentCountry(e.target.value);
+                                    }}
+                                    value={currentCountry}
+                                >
+                                    {renderOptions("Country")}
+                                </select>
+                            </div>
+                            <div className="detail-edit">
+                                <label className="title">City</label>
+                                <select
+                                    className="option-fields"
+                                    onChange={(e) => {
+                                        setCurrentCity(e.target.value);
+                                    }}
+                                    value={currentCity}
+                                >
+                                    {renderOptions("City")}
+                                </select>
+                            </div>
                         </div>
                         <div className="right">
-                            {inputright.map((item) => {
-                                if (item.title !== "Breed") {
-                                    return (
-                                        <div className="detail-edit" key={item.title}>
-                                            <div className="title">{item.title}</div>
-                                            <div className="fieldtext" contentEditable={true} data-text="Type here...">
-                                                {item.field}
-                                            </div>
-                                        </div>
-                                    );
-                                }
-                                return (
-                                    <div className="detail-edit" key={item.title}>
-                                        <label className="title">{item.title}</label>
-                                        <select className="option-fields">{renderOptions(item.title)}</select>
-                                    </div>
-                                );
-                            })}
+                            <div className="detail-edit">
+                                <div className="title">Name</div>
+                                <div className="fieldtext" contentEditable={true} data-text="Type here...">
+                                    {user.name}
+                                </div>
+                            </div>
+                            <div className="detail-edit">
+                                <div className="title">Date of Birth</div>
+                                <div className="fieldtext" contentEditable={true} data-text="Type here...">
+
+                                </div>
+                            </div>
+                            <div className="detail-edit">
+                                <div className="title">Gender</div>
+                                <div className="fieldtext" contentEditable={true} data-text="Type here...">
+                                    {user.gender}
+                                </div>
+                            </div>
+                            <div className="detail-edit">
+                                <label className="title">Breed</label>
+                                <select className="option-fields" value={user.breed}>{renderOptions("Breed")}</select>
+                            </div>
+
                             <div className="update-profile-btn">Update profile</div>
                         </div>
                     </div>
