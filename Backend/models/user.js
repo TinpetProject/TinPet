@@ -178,7 +178,7 @@ module.exports = class User {
     return resultSet.length === 0 ? null : resultSet[1][0]["@returnValue"];
   });
 
-  getAllImgs = tryCatchBlock(async () => {
+  getAllImages = tryCatchBlock(async () => {
     const [resultSet] = await database.query(`CALL Proc_GetAllImages('${this.userID}');`);
     return resultSet.length === 0 ? null : resultSet[0];
   });
