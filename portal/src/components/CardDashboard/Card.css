@@ -126,6 +126,10 @@
 
 .info__general span {
     margin-right: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 120px;
 }
 
 .info__heart-btn-liked {
