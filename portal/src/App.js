@@ -2,7 +2,7 @@ import { HomePage } from "./styled-component/style";
 import Login from "./screen/Login";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import React, { Profiler,useEffect } from "react";
+import React, { Profiler, useEffect } from "react";
 import Signup from "./screen/Signup";
 import Matches from "./screen/Matches/Matches";
 import Dashboard from "./screen/Dashboard/Dashboard";
@@ -51,7 +51,7 @@ function App({ logInHandler, logOutHandler, userInfo, socket }) {
                 <Layout logOutHandler={logOutHandler} userID={userID} socket={socket}>
                     <Switch>
                         <Route exact path="/dashboard">
-                            <Dashboard userID={userID}/>
+                            <Dashboard userID={userID} />
                         </Route>
                         <Route exact path="/matches">
                             <Matches userID={userID} />
